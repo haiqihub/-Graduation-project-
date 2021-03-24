@@ -1,0 +1,16 @@
+F:\work\dz\1000\相册相关文件\相册排版界面\bin\Debug\相册排版界面.exe.config
+F:\work\dz\1000\相册相关文件\相册排版界面\bin\Debug\相册排版界面.exe
+F:\work\dz\1000\相册相关文件\相册排版界面\bin\Debug\相册排版界面.pdb
+F:\work\dz\1000\相册相关文件\相册排版界面\obj\Debug\相册排版界面.Layout.resources
+F:\work\dz\1000\相册相关文件\相册排版界面\obj\Debug\相册排版界面.Read.resources
+F:\work\dz\1000\相册相关文件\相册排版界面\obj\Debug\相册排版界面.Start.resources
+F:\work\dz\1000\相册相关文件\相册排版界面\obj\Debug\相册排版界面.Properties.Resources.resources
+F:\work\dz\1000\相册相关文件\相册排版界面\obj\Debug\相册排版界面.csproj.GenerateResource.Cache
+F:\work\dz\1000\相册相关文件\相册排版界面\obj\Debug\相册排版界面.exe
+F:\work\dz\1000\相册相关文件\相册排版界面\obj\Debug\相册排版界面.pdb
+F:\work\dz\1000\相册相关文件\相册排版界面\obj\Debug\相册排版界面.Scanner.resources
+F:\work\dz\1000\相册相关文件\相册排版界面\obj\Debug\相册排版界面.FirstDlg.resources
+F:\work\dz\1000\相册相关文件\相册排版界面\obj\Debug\相册排版界面.Setting.resources
+F:\work\dz\1000\相册相关文件\相册排版界面\obj\Debug\相册排版界面.csprojResolveAssemblyReference.cache
+F:\work\dz\1000\相册相关文件\相册排版界面\obj\Debug\相册排版界面.FontSelect.resources
+F:\work\dz\1000\相册相关文件\相册排版界面\obj\Debug\相册排版界面.TextInput.resources
