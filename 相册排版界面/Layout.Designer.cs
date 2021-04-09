@@ -45,7 +45,7 @@
             this.两张合并ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.两张合并转90度ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.四张合并ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.四行合并转90度ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.四张合并转90度ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.八张合并ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.八张合并转90度ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,7 +55,7 @@
             this.两张合并ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.两张合并转90度ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.四张合并ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.四张合并转90度ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.四张合并转90度ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.加入文字ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.调整图片大小ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.更换图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -159,7 +159,7 @@
             this.两张合并ToolStripMenuItem,
             this.两张合并转90度ToolStripMenuItem,
             this.四张合并ToolStripMenuItem,
-            this.四行合并转90度ToolStripMenuItem,
+            this.四张合并转90度ToolStripMenuItem,
             this.八张合并ToolStripMenuItem,
             this.八张合并转90度ToolStripMenuItem});
             this.批量处理ToolStripMenuItem.Name = "批量处理ToolStripMenuItem";
@@ -201,12 +201,12 @@
             this.四张合并ToolStripMenuItem.Text = "四张合并";
             this.四张合并ToolStripMenuItem.Click += new System.EventHandler(this.四张合并ToolStripMenuItem_Click);
             // 
-            // 四行合并转90度ToolStripMenuItem
+            // 四张合并转90度ToolStripMenuItem
             // 
-            this.四行合并转90度ToolStripMenuItem.Name = "四行合并转90度ToolStripMenuItem";
-            this.四行合并转90度ToolStripMenuItem.Size = new System.Drawing.Size(230, 26);
-            this.四行合并转90度ToolStripMenuItem.Text = "四张合并（转90度）";
-            this.四行合并转90度ToolStripMenuItem.Click += new System.EventHandler(this.四行合并转90度ToolStripMenuItem_Click);
+            this.四张合并转90度ToolStripMenuItem.Name = "四张合并转90度ToolStripMenuItem";
+            this.四张合并转90度ToolStripMenuItem.Size = new System.Drawing.Size(230, 26);
+            this.四张合并转90度ToolStripMenuItem.Text = "四张合并（转90度）";
+            this.四张合并转90度ToolStripMenuItem.Click += new System.EventHandler(this.四张合并转90度ToolStripMenuItem_Click);
             // 
             // 八张合并ToolStripMenuItem
             // 
@@ -473,7 +473,7 @@
         private System.Windows.Forms.ToolStripMenuItem 两张合并ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 两张合并转90度ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 四张合并ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 四行合并转90度ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 四张合并转90度ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 单张ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 单张转90度ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 两张合并ToolStripMenuItem1;

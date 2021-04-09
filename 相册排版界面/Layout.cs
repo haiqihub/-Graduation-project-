@@ -389,11 +389,6 @@ namespace 相册排版界面
             select_index2 = -1;
             StartSetting(106);
         }
-        private void 四行合并转90度ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            select_index2 = -1;
-            StartSetting(106);
-        }
         private void 八张合并ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             select_index2 = -1;
