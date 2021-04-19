@@ -23,6 +23,7 @@ namespace 相册排版界面
         private List<ImageBean> listAll = new List<ImageBean>();
         private List<string> listCur = new List<string>();
         private List<string> listDone = new List<string>();
+        private List<string> listDone1 = new List<string>();
 
         Setting setting;
 
@@ -58,19 +59,30 @@ namespace 相册排版界面
             {
                 string label = (i + 1) + " - " + listDone.Count;
 
-                //if (!string.IsNullOrEmpty(listDone[i]))
-                //{
-                //    imageList1.Images.Add(GetImage(listDone[i]));
-                //    listView1.Items.Add(label);
-                //    listView1.Items[i - cur_start].ImageIndex = i - cur_start;
-                //}
-
                 imageList1.Images.Add(GetImage(listDone[i]));
                 listView1.Items.Add(label);
                 listView1.Items[i - cur_start].ImageIndex = i - cur_start;
+    
             }
 
             loadImage();
+        }
+        private void updateTopShow1()
+        {
+            listView1.Items.Clear();
+            imageList1.Images.Clear();
+
+            for (int i = cur_start; i < cur_start + item_size && i < listDone1.Count; i++)
+            {
+                string label = (i + 1) + " - " + listDone1.Count;
+
+                imageList1.Images.Add(GetImage(listDone1[i]));
+                listView1.Items.Add(label);
+                listView1.Items[i - cur_start].ImageIndex = i - cur_start;
+     
+            }
+
+            loadImage1();
         }
 
         int select_index2 = -1;
@@ -93,6 +105,34 @@ namespace 相册排版界面
 
             select_index2 = cur_pos - cur_start;
             ChangeForeColor(listView1.Items[select_index2], true);
+        }
+        private void loadImage1()
+        {
+            if (cur_pos < listDone1.Count)
+            {
+                scaleImage(pictureBox1, listDone1[cur_pos]);
+            }
+
+            if (cur_pos - cur_start == 0 && cur_pos != 0)
+            {
+                select_index2 = -1;
+            }
+
+            if (select_index2 != -1)
+            {
+                ChangeForeColor(listView1.Items[select_index2], false);
+            }
+
+            select_index2 = cur_pos - cur_start;
+            try
+            {
+                ChangeForeColor(listView1.Items[select_index2], true);
+            }
+            catch(System.ArgumentOutOfRangeException)
+            {
+
+            }
+            
         }
 
         private void ChangeForeColor(ListViewItem item, bool bFont)
@@ -282,6 +322,7 @@ namespace 相册排版界面
         private void StartSetting(int index)
         {
             bool clearDone = true;
+            /*
             if (index >= 101 && index <= 108)
             {
                 listCur.Clear();
@@ -290,6 +331,86 @@ namespace 相册排版界面
                     listCur.Add(listAll[i].name);
                 }
             }
+            */
+            
+            if (index == 101||index==102)
+            {
+                listCur.Clear();
+                for (int i = 0; i < listAll.Count; i++)
+                {
+                    listCur.Add(listAll[i].name);
+                }
+            }
+            if (index == 103||index==104)
+            {
+                listCur.Clear();
+                for (int i = 0; i < listAll.Count; i+=2)
+                {
+                    listCur.Add(listAll[i].name);
+                    if (i + 1 < listAll.Count)
+                    {
+                        listCur.Add(listAll[i + 1].name);
+                    }
+                }
+            }
+            if (index == 105 || index == 106)
+            {
+                listCur.Clear();
+                for (int i = 0; i < listAll.Count; i+=4)
+                {
+                    listCur.Add(listAll[i].name);
+                    if (i + 1 < listAll.Count)
+                    {
+                        listCur.Add(listAll[i + 1].name);
+                    }
+                    if (i + 2 < listAll.Count)
+                    {
+                        listCur.Add(listAll[i + 2].name);
+                    }
+                    if (i + 3 < listAll.Count)
+                    {
+                        listCur.Add(listAll[i + 3].name);
+                    }
+                }
+            }
+            if (index == 107 || index == 108)
+            {
+                listCur.Clear();
+                for (int i = 0; i < listAll.Count; i+=8)
+                {
+                    listCur.Add(listAll[i].name);
+                    if (i + 1 < listAll.Count)
+                    {
+                        listCur.Add(listAll[i + 1].name);
+                    }
+                    if (i + 2 < listAll.Count)
+                    {
+                        listCur.Add(listAll[i + 2].name);
+                    }
+                    if (i + 3 < listAll.Count)
+                    {
+                        listCur.Add(listAll[i + 3].name);
+                    }
+                    if (i + 4 < listAll.Count)
+                    {
+                        listCur.Add(listAll[i + 4].name);
+                    }
+                    if (i + 5 < listAll.Count)
+                    {
+                        listCur.Add(listAll[i + 5].name);
+                    }
+                    if (i + 6 < listAll.Count)
+                    {
+                        listCur.Add(listAll[i + 6].name);
+                    }
+                    if (i + 7 < listAll.Count)
+                    {
+                        listCur.Add(listAll[i + 7].name);
+                    }
+                }
+            }
+            
+
             if (index == 3 || index == 4)
             {
                 clearDone = false;
@@ -307,16 +428,34 @@ namespace 相册排版界面
         
         private void loadImageAfterDeal(int type, int index)
         {
-            try
+            //获取用户选择的文件夹路径
+            string folderDirPath = System.Environment.CurrentDirectory + "\\done";
+
+            //获取目录与子目录
+            DirectoryInfo dir = new DirectoryInfo(folderDirPath);
+            //获取当前目录JPG文件列表 GetFiles获取指定目录中文件的名称(包括其路径)
+            FileInfo[] fileInfo = dir.GetFiles("*.jpg");
+
+            if (index >= 101 && index <= 108)
+            {
+                listAll.Clear();
+                listDone1.Clear();
+
+                for (int i = 0; i < fileInfo.Length; i++)
+                {
+                                    
+                    listDone1.Add(fileInfo[i].FullName);
+                        
+                }
+
+                updateTopShow1();
+
+            }
+            else
             {
                 if (index == 1 || index == 2)
                 {
                     listDone.Clear();
-                }
-
-                if (index >= 101 && index <= 108)
-                {
-                    listAll.Clear();
                 }
 
                 for (int i = 0; i < listCur.Count; i++)
@@ -327,13 +466,8 @@ namespace 相册排版界面
                     listAll.Add(bean);
                 }
 
-                //获取用户选择的文件夹路径
-                string folderDirPath = System.Environment.CurrentDirectory + "\\done";
+                //move up
 
-                //获取目录与子目录
-                DirectoryInfo dir = new DirectoryInfo(folderDirPath);
-                //获取当前目录JPG文件列表 GetFiles获取指定目录中文件的名称(包括其路径)
-                FileInfo[] fileInfo = dir.GetFiles("*.jpg");
                 for (int i = 0; i < fileInfo.Length; i++)
                 {
                     if (!listDone.Contains(fileInfo[i].FullName))
@@ -341,16 +475,20 @@ namespace 相册排版界面
                         listDone.Add(fileInfo[i].FullName);
                     }
                 }
-            }
-            catch (Exception msg)
-            {
-                //报错提示 未将对象引用设置到对象的实例
-                throw msg;
+
+                //catch (Exception msg)
+                //{
+                //    //报错提示 未将对象引用设置到对象的实例
+                //    throw msg;
+                //}
+
+                cur_pos = 0;
+                cur_start = 0;
+                updateTopShow();
+
             }
 
-            cur_pos = 0;
-            cur_start = 0;
-            updateTopShow();
+                
         }
 
         private void 单张ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -702,14 +840,7 @@ namespace 相册排版界面
                         {
                             listCur.Add(listAll[i + 1].name);
                         }
-                        if (i + 2 < listAll.Count)
-                        {
-                            listCur.Add(listAll[i + 2].name);
-                        }
-                        if (i + 3 < listAll.Count)
-                        {
-                            listCur.Add(listAll[i + 3].name);
-                        }
+                        
                         if (StartSetting2(101) == 1)
                         {
                             if (i + 1 < listAll.Count)
@@ -718,17 +849,66 @@ namespace 相册排版界面
                                 //string fileName= (i + 1) + " - " + listDone.Count;
                                 listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
                             }
+                        }
+                        break;
+                    case 7:
+                    case 8:
+                        listCur.Clear();
+                        listCur.Add(listAll[i].name);
+                        if (i + 1 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 1].name);
+                        }
+                        if (i + 2 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 2].name);
+                        }
+                        if (i + 3 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 3].name);
+                        }
+                        if (i + 4 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 4].name);
+                        }
+                        if (i + 5 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 5].name);
+                        }
+                        if (i + 6 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 6].name);
+                        }
+                        if (i + 7 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 7].name);
+                        }
+                        if (StartSetting2(101) == 1)
+                        {
+                            if (i + 1 < listAll.Count)
+                            {
+                            }
                             if (i + 2 < listAll.Count)
                             {
-                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[2 + 1].name);
-                                //string fileName = (i + 2) + " - " + listDone.Count;
-                                listDone.Insert(cur_pos + 2, folderDirPath + fileName + "done.jpg");
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 2].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
                             }
                             if (i + 3 < listAll.Count)
                             {
-                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[3 + 1].name);
-                                //string fileName = (i + 3) + " - " + listDone.Count;
-                                listDone.Insert(cur_pos + 3, folderDirPath + fileName + "done.jpg");
+                            }
+                            if (i + 4 < listAll.Count)
+                            {
+                            }
+                            if (i + 5 < listAll.Count)
+                            {
+                            }
+                            if (i + 6 < listAll.Count)
+                            {
+                            }
+                            if (i + 7 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 7].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
                             }
                         }
                         break;
@@ -827,6 +1007,67 @@ namespace 相册排版界面
                             }
                         }
                         break;
+                    case 7:
+                    case 8:
+                        listCur.Clear();
+                        listCur.Add(listAll[i].name);
+                        if (i + 1 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 1].name);
+                        }
+                        if (i + 2 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 2].name);
+                        }
+                        if (i + 3 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 3].name);
+                        }
+                        if (i + 4 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 4].name);
+                        }
+                        if (i + 5 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 5].name);
+                        }
+                        if (i + 6 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 6].name);
+                        }
+                        if (i + 7 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 7].name);
+                        }
+                        if (StartSetting2(102) == 1)
+                        {
+                            if (i + 1 < listAll.Count)
+                            {
+                            }
+                            if (i + 2 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 2].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
+                            }
+                            if (i + 3 < listAll.Count)
+                            {
+                            }
+                            if (i + 4 < listAll.Count)
+                            {
+                            }
+                            if (i + 5 < listAll.Count)
+                            {
+                            }
+                            if (i + 6 < listAll.Count)
+                            {
+                            }
+                            if (i + 7 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 7].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
+                            }
+                        }
+                        break;
                 }
                 bean.type = 2;
                 updateTopShow();
@@ -920,6 +1161,67 @@ namespace 相册排版界面
                             }
                         }
                         break;
+                    case 7:
+                    case 8:
+                        listCur.Clear();
+                        listCur.Add(listAll[i].name);
+                        if (i + 1 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 1].name);
+                        }
+                        if (i + 2 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 2].name);
+                        }
+                        if (i + 3 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 3].name);
+                        }
+                        if (i + 4 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 4].name);
+                        }
+                        if (i + 5 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 5].name);
+                        }
+                        if (i + 6 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 6].name);
+                        }
+                        if (i + 7 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 7].name);
+                        }
+                        if (StartSetting2(103) == 1)
+                        {
+                            if (i + 1 < listAll.Count)
+                            {
+                            }
+                            if (i + 2 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 2].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
+                            }
+                            if (i + 3 < listAll.Count)
+                            {
+                            }
+                            if (i + 4 < listAll.Count)
+                            {
+                            }
+                            if (i + 5 < listAll.Count)
+                            {
+                            }
+                            if (i + 6 < listAll.Count)
+                            {
+                            }
+                            if (i + 7 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 7].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
+                            }
+                        }
+                        break;
                 }
                 bean.type = 3;
                 updateTopShow();
@@ -957,6 +1259,163 @@ namespace 相册排版界面
                         if (i == listAll.Count - 1)
                         {
                             MessageBox.Show("当前选择最后一张无法合并");
+                            return;
+                        }
+                        listCur.Clear();
+                        listCur.Add(listAll[i].name);
+                        listCur.Add(listAll[i + 1].name);
+                        
+                        if (StartSetting2(104) == 1)
+                        {
+                            listDone.RemoveAt(i + 1);
+                           
+                        }
+                        break;
+                    case 3:
+                    case 4:
+                        MessageBox.Show("相同类型无需转换");
+                        return;
+                    case 5:
+                        listCur.Clear();
+                        listCur.Add(listAll[i].name);
+                        if (i + 1 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 1].name);
+                        }
+                        if (StartSetting2(104) == 1)
+                        {
+                            ;
+                        }
+                        break;
+                    case 6:
+                        listCur.Clear();
+                        listCur.Add(listAll[i].name);
+                        if (i + 1 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 1].name);
+                        }
+                        if (i + 2 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 2].name);
+                        }
+                        if (i + 3 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 3].name);
+                        }
+                        if (StartSetting2(104) == 1)
+                        {
+                            if (i + 1 < listAll.Count)
+                            {
+                            }
+                            if (i + 2 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 2].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
+                            }
+                            if (i + 3 < listAll.Count)
+                            {
+                            }
+                        }
+                        break;
+                    case 7:
+                    case 8:
+                        listCur.Clear();
+                        listCur.Add(listAll[i].name);
+                        if (i + 1 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 1].name);
+                        }
+                        if (i + 2 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 2].name);
+                        }
+                        if (i + 3 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 3].name);
+                        }
+                        if (i + 4 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 4].name);
+                        }
+                        if (i + 5 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 5].name);
+                        }
+                        if (i + 6 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 6].name);
+                        }
+                        if (i + 7 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 7].name);
+                        }
+                        if (StartSetting2(104) == 1)
+                        {
+                            if (i + 1 < listAll.Count)
+                            {
+                            }
+                            if (i + 2 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 2].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
+                            }
+                            if (i + 3 < listAll.Count)
+                            {
+                            }
+                            if (i + 4 < listAll.Count)
+                            {
+                            }
+                            if (i + 5 < listAll.Count)
+                            {
+                            }
+                            if (i + 6 < listAll.Count)
+                            {
+                            }
+                            if (i + 7 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 7].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
+                            }
+                        }
+                        break;
+                }
+                bean.type = 4;
+                updateTopShow();
+            }
+        }
+
+        private void 四张合并ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            
+            if (listDone.Count > 0)
+            {
+                string folderDirPath = System.Environment.CurrentDirectory + "\\done\\";
+
+                string fullPath = listDone[cur_pos];
+
+                //string filename = System.IO.Path.GetFileName(fullPath);//文件名  “Default.aspx”
+                string extension = System.IO.Path.GetExtension(fullPath);//扩展名 “.aspx”
+                char[] MyChar = { 'd', 'o', 'n', 'e' };
+                string fileNameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(fullPath).TrimEnd(MyChar);// 没有扩展名的文件名 “Default”
+
+                int i = 0;
+                for (; i < listAll.Count; i++)
+                {
+                    string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i].name);
+                    if (fileNameWithoutExtension == fileName)
+                    {
+                        break;
+                    }
+                }
+
+                ImageBean bean = listAll[i];
+                switch (bean.type)
+                {
+                    case 1:
+                    case 2:
+                        if (i > listAll.Count - 4)
+                        {
+                            MessageBox.Show("后续张数不足，无法合并");
                             return;
                         }
                         listCur.Clear();
@@ -1002,7 +1461,7 @@ namespace 相册排版界面
                         {
                             listCur.Add(listAll[i + 3].name);
                         }
-                        if (StartSetting2(104) == 1)
+                        if (StartSetting2(105) == 1)
                         {
                             if (i + 1 < listAll.Count)
                             {
@@ -1017,71 +1476,8 @@ namespace 相册排版界面
                             }
                         }
                         break;
-                }
-                bean.type = 4;
-                updateTopShow();
-            }
-        }
-
-        private void 四张合并ToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            /*
-            if (listDone.Count > 0)
-            {
-                string folderDirPath = System.Environment.CurrentDirectory + "\\done\\";
-
-                string fullPath = listDone[cur_pos];
-
-                //string filename = System.IO.Path.GetFileName(fullPath);//文件名  “Default.aspx”
-                string extension = System.IO.Path.GetExtension(fullPath);//扩展名 “.aspx”
-                char[] MyChar = { 'd', 'o', 'n', 'e' };
-                string fileNameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(fullPath).TrimEnd(MyChar);// 没有扩展名的文件名 “Default”
-
-                int i = 0;
-                for (; i < listAll.Count; i++)
-                {
-                    string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i].name);
-                    if (fileNameWithoutExtension == fileName)
-                    {
-                        break;
-                    }
-                }
-
-                ImageBean bean = listAll[i];
-                switch (bean.type)
-                {
-                    case 1:
-                    case 2:
-                        if (i > listAll.Count - 4)
-                        {
-                            MessageBox.Show("后续张数不足，无法合并");
-                            return;
-                        }
-                        listCur.Clear();
-                        listCur.Add(listAll[i].name);
-                        listCur.Add(listAll[i + 1].name);
-                        if (StartSetting2(105) == 1)
-                        {
-                            listDone.RemoveAt(i + 1);
-                        }
-                        break;
-                    case 3:
-                        listCur.Clear();
-                        listCur.Add(listAll[i].name);
-                        if (i + 1 < listAll.Count)
-                        {
-                            listCur.Add(listAll[i + 1].name);
-                        }
-                        if (StartSetting2(104) == 1)
-                        {
-                            ;
-                        }
-                        break;
-                    case 4:
-                        MessageBox.Show("相同类型无需转换");
-                        return;
-                    case 5:
-                    case 6:
+                    case 7:
+                    case 8:
                         listCur.Clear();
                         listCur.Add(listAll[i].name);
                         if (i + 1 < listAll.Count)
@@ -1096,7 +1492,23 @@ namespace 相册排版界面
                         {
                             listCur.Add(listAll[i + 3].name);
                         }
-                        if (StartSetting2(104) == 1)
+                        if (i + 4 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 4].name);
+                        }
+                        if (i + 5 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 5].name);
+                        }
+                        if (i + 6 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 6].name);
+                        }
+                        if (i + 7 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 7].name);
+                        }
+                        if (StartSetting2(105) == 1)
                         {
                             if (i + 1 < listAll.Count)
                             {
@@ -1109,18 +1521,32 @@ namespace 相册排版界面
                             if (i + 3 < listAll.Count)
                             {
                             }
+                            if (i + 4 < listAll.Count)
+                            {
+                            }
+                            if (i + 5 < listAll.Count)
+                            {
+                            }
+                            if (i + 6 < listAll.Count)
+                            {
+                            }
+                            if (i + 7 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 7].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
+                            }
                         }
                         break;
                 }
-                bean.type = 4;
+                bean.type = 5;
                 updateTopShow();
             }
-            */
+            
         }
 
         private void 四张合并转90度ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            /*
+            
             if (listDone.Count > 0)
             {
                 string folderDirPath = System.Environment.CurrentDirectory + "\\done\\";
@@ -1155,9 +1581,13 @@ namespace 相册排版界面
                         listCur.Clear();
                         listCur.Add(listAll[i].name);
                         listCur.Add(listAll[i + 1].name);
-                        if (StartSetting2(105) == 1)
+                        listCur.Add(listAll[i + 2].name);
+                        listCur.Add(listAll[i + 3].name);
+                        if (StartSetting2(106) == 1)
                         {
                             listDone.RemoveAt(i + 1);
+                            listDone.RemoveAt(i + 2);
+                            listDone.RemoveAt(i + 3);
                         }
                         break;
                     case 3:
@@ -1167,14 +1597,235 @@ namespace 相册排版界面
                         {
                             listCur.Add(listAll[i + 1].name);
                         }
-                        if (StartSetting2(104) == 1)
+                        if (StartSetting2(106) == 1)
                         {
                             ;
                         }
                         break;
                     case 4:
+                        listCur.Clear();
+                        listCur.Add(listAll[i].name);
+                        if (i + 1 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 1].name);
+                        }
+                        if (i + 2 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 2].name);
+                        }
+                        if (i + 3 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 3].name);
+                        }
+                        if (StartSetting2(106) == 1)
+                        {
+                            if (i + 1 < listAll.Count)
+                            {
+                            }
+                            if (i + 2 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 2].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
+                            }
+                            if (i + 3 < listAll.Count)
+                            {
+                            }
+                        }
+                        break;
+                    case 5:
+                        listCur.Clear();
+                        listCur.Add(listAll[i].name);
+                        listCur.Add(listAll[i + 1].name);
+                        listCur.Add(listAll[i + 2].name);
+                        listCur.Add(listAll[i + 3].name);
+                    
+                        if (StartSetting2(106) == 1)
+                        {
+                            ;
+                        }
+                        break;
+                    case 6:
                         MessageBox.Show("相同类型无需转换");
                         return;
+                    case 7:
+                    case 8:
+                        listCur.Clear();
+                        listCur.Add(listAll[i].name);
+                        if (i + 1 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 1].name);
+                        }
+                        if (i + 2 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 2].name);
+                        }
+                        if (i + 3 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 3].name);
+                        }
+                        if (i + 4 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 4].name);
+                        }
+                        if (i + 5 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 5].name);
+                        }
+                        if (i + 6 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 6].name);
+                        }
+                        if (i + 7 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 7].name);
+                        }
+                        if (StartSetting2(106) == 1)
+                        {
+                            if (i + 1 < listAll.Count)
+                            {
+                            }
+                            if (i + 2 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 2].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
+                            }
+                            if (i + 3 < listAll.Count)
+                            {
+                            }
+                            if (i + 4 < listAll.Count)
+                            {
+                            }
+                            if (i + 5 < listAll.Count)
+                            {
+                            }
+                            if (i + 6 < listAll.Count)
+                            {
+                            }
+                            if (i + 7 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 7].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
+                            }
+                        }
+                        break;
+
+                }
+                bean.type = 6;
+                updateTopShow();
+            }
+            
+        }
+        private void 八张合并ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (listDone.Count > 0)
+            {
+                string folderDirPath = System.Environment.CurrentDirectory + "\\done\\";
+
+                string fullPath = listDone[cur_pos];
+
+                //string filename = System.IO.Path.GetFileName(fullPath);//文件名  “Default.aspx”
+                string extension = System.IO.Path.GetExtension(fullPath);//扩展名 “.aspx”
+                char[] MyChar = { 'd', 'o', 'n', 'e' };
+                string fileNameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(fullPath).TrimEnd(MyChar);// 没有扩展名的文件名 “Default”
+
+                int i = 0;
+                for (; i < listAll.Count; i++)
+                {
+                    string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i].name);
+                    if (fileNameWithoutExtension == fileName)
+                    {
+                        break;
+                    }
+                }
+
+                ImageBean bean = listAll[i];
+                switch (bean.type)
+                {
+                    case 1:
+                    case 2:
+                        if (i == listAll.Count - 1)
+                        {
+                            MessageBox.Show("当前选择最后一张无法合并");
+                            return;
+                        }
+                        listCur.Clear();
+                        listCur.Add(listAll[i].name);
+                        if (i + 1 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 1].name);
+                        }
+                        if (i + 2 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 2].name);
+                        }
+                        if (i + 3 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 3].name);
+                        }
+                        if (i + 4 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 4].name);
+                        }
+                        if (i + 5 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 5].name);
+                        }
+                        if (i + 6 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 6].name);
+                        }
+                        if (i + 7 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 7].name);
+                        }
+                        if (StartSetting2(107) == 1)
+                        {
+                            listDone.RemoveAt(i + 1);
+                            listDone.RemoveAt(i + 2);
+                            listDone.RemoveAt(i + 3);
+                            listDone.RemoveAt(i + 4);
+                            listDone.RemoveAt(i + 5);
+                            listDone.RemoveAt(i + 6);
+                            listDone.RemoveAt(i + 7);
+                        }
+                        break;
+                    case 3:  
+                    case 4:
+                        listCur.Clear();
+                        listCur.Add(listAll[i].name);
+                        if (i + 1 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 1].name);
+                        }
+                        if (i + 2 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 2].name);
+                        }
+                        if (i + 3 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 3].name);
+                        }
+                        if (i + 4 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 4].name);
+                        }
+                        if (i + 5 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 5].name);
+                        }
+                        if (i + 6 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 6].name);
+                        }
+                        if (i + 7 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 7].name);
+                        }
+                        if (StartSetting2(107) == 1)
+                        {
+                            ;
+                        }
+                        break;
                     case 5:
                     case 6:
                         listCur.Clear();
@@ -1191,7 +1842,23 @@ namespace 相册排版界面
                         {
                             listCur.Add(listAll[i + 3].name);
                         }
-                        if (StartSetting2(104) == 1)
+                        if (i + 4 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 4].name);
+                        }
+                        if (i + 5 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 5].name);
+                        }
+                        if (i + 6 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 6].name);
+                        }
+                        if (i + 7 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 7].name);
+                        }
+                        if (StartSetting2(107) == 1)
                         {
                             if (i + 1 < listAll.Count)
                             {
@@ -1204,22 +1871,95 @@ namespace 相册排版界面
                             if (i + 3 < listAll.Count)
                             {
                             }
+                            if (i + 4 < listAll.Count)
+                            {
+                            }
+                            if (i + 5 < listAll.Count)
+                            {
+                            }
+                            if (i + 6 < listAll.Count)
+                            {
+                            }
+                            if (i + 7 < listAll.Count)
+                            {
+                            }
+                           
                         }
                         break;
+                    case 7:
+                        MessageBox.Show("相同类型无需转换");
+                        return;
+                    case 8:
+                        listCur.Clear();
+                        listCur.Add(listAll[i].name);
+                        if (i + 1 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 1].name);
+                        }
+                        if (i + 2 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 2].name);
+                        }
+                        if (i + 3 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 3].name);
+                        }
+                        if (i + 4 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 4].name);
+                        }
+                        if (i + 5 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 5].name);
+                        }
+                        if (i + 6 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 6].name);
+                        }
+                        if (i + 7 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 7].name);
+                        }
+                        if (StartSetting2(107) == 1)
+                        {
+                            if (i + 1 < listAll.Count)
+                            {
+                            }
+                            if (i + 2 < listAll.Count)
+                            {
+                                /*
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 2].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
+                            */
+                                }
+                            if (i + 3 < listAll.Count)
+                            {
+                            }
+                            if (i + 4 < listAll.Count)
+                            {
+                            }
+                            if (i + 5 < listAll.Count)
+                            {
+                            }
+                            if (i + 6 < listAll.Count)
+                            {
+                            }
+                            if (i + 7 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 7].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
+                            }
+                        }
+                        break;
+
                 }
-                bean.type = 4;
+                bean.type = 7;
                 updateTopShow();
             }
-            */
-        }
-        private void 八张合并ToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void 八张合并转90度ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            /*
             if (listDone.Count > 0)
             {
                 string folderDirPath = System.Environment.CurrentDirectory + "\\done\\";
@@ -1246,35 +1986,158 @@ namespace 相册排版界面
                 {
                     case 1:
                     case 2:
-                        if (i > listAll.Count - 4)
+                        if (i == listAll.Count - 1)
                         {
-                            MessageBox.Show("后续张数不足，无法合并");
+                            MessageBox.Show("当前选择最后一张无法合并");
                             return;
                         }
                         listCur.Clear();
                         listCur.Add(listAll[i].name);
-                        listCur.Add(listAll[i + 1].name);
-                        if (StartSetting2(105) == 1)
+
+                        if (i + 1 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 1].name);
+                        }
+                        if (i + 2 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 2].name);
+                        }
+                        if (i + 3 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 3].name);
+                        }
+                        if (i + 4 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 4].name);
+                        }
+                        if (i + 5 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 5].name);
+                        }
+                        if (i + 6 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 6].name);
+                        }
+                        if (i + 7 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 7].name);
+                        }
+
+                       
+                        if (StartSetting2(108) == 1)
                         {
                             listDone.RemoveAt(i + 1);
+                            listDone.RemoveAt(i + 2);
+                            listDone.RemoveAt(i + 3);
+                            listDone.RemoveAt(i + 4);
+                            listDone.RemoveAt(i + 5);
+                            listDone.RemoveAt(i + 6);
+                            listDone.RemoveAt(i + 7);
+                            /*
+                             if (i + 1 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 1].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
+                            }
+                            if (i + 2 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 2].name);
+                                listDone.Insert(cur_pos + 2, folderDirPath + fileName + "done.jpg");
+                            }
+                            if (i + 3 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 3].name);
+                                listDone.Insert(cur_pos + 3, folderDirPath + fileName + "done.jpg");
+                            }
+                             */
+
                         }
                         break;
                     case 3:
+                    case 4:
                         listCur.Clear();
                         listCur.Add(listAll[i].name);
                         if (i + 1 < listAll.Count)
                         {
                             listCur.Add(listAll[i + 1].name);
                         }
-                        if (StartSetting2(104) == 1)
+                        if (i + 2 < listAll.Count)
                         {
-                            ;
+                            listCur.Add(listAll[i + 2].name);
+                        }
+                        if (i + 3 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 3].name);
+                        }
+                        if (i + 4 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 4].name);
+                        }
+                        if (i + 5 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 5].name);
+                        }
+                        if (i + 6 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 6].name);
+                        }
+                        if (i + 7 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 7].name);
+                        }
+                        if (StartSetting2(108) == 1)
+                        {
+
+                             if (i + 1 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 1].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
+                            }
+                            if (i + 2 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 2].name);
+                                listDone.Insert(cur_pos + 2, folderDirPath + fileName + "done.jpg");
+                            }
+                            if (i + 3 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 3].name);
+                                listDone.Insert(cur_pos + 3, folderDirPath + fileName + "done.jpg");
+                            }
+                            if (i + 4 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 4].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
+                            }
+                            if (i + 5 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 5].name);
+                                listDone.Insert(cur_pos + 2, folderDirPath + fileName + "done.jpg");
+                            }
+                            if (i + 6 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 6].name);
+                                listDone.Insert(cur_pos + 3, folderDirPath + fileName + "done.jpg");
+                            }
+                            if (i + 7 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 7].name);
+                                listDone.Insert(cur_pos + 3, folderDirPath + fileName + "done.jpg");
+                            }
+
+                            /*
+                            listDone.RemoveAt(i + 1);
+                            listDone.RemoveAt(i + 2);
+                            listDone.RemoveAt(i + 3);
+                            listDone.RemoveAt(i + 4);
+                            listDone.RemoveAt(i + 5);
+                            listDone.RemoveAt(i + 6);
+                            listDone.RemoveAt(i + 7);
+                            */
                         }
                         break;
-                    case 4:
+                    case 5:
                         MessageBox.Show("相同类型无需转换");
                         return;
-                    case 5:
                     case 6:
                         listCur.Clear();
                         listCur.Add(listAll[i].name);
@@ -1290,26 +2153,108 @@ namespace 相册排版界面
                         {
                             listCur.Add(listAll[i + 3].name);
                         }
-                        if (StartSetting2(104) == 1)
+                        if (i + 4 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 4].name);
+                        }
+                        if (i + 5 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 5].name);
+                        }
+                        if (i + 6 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 6].name);
+                        }
+                        if (i + 7 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 7].name);
+                        }
+
+                        if (StartSetting2(108) == 1)
                         {
                             if (i + 1 < listAll.Count)
                             {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 1].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
                             }
                             if (i + 2 < listAll.Count)
                             {
+                               
                                 string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 2].name);
                                 listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
+                               
                             }
                             if (i + 3 < listAll.Count)
                             {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 3].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
+                            }
+                            if (i + 4 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 4].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
+                            }
+                            if (i + 5 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 5].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
+                            }
+                            if (i + 6 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 6].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
+                            }
+                            if (i + 7 < listAll.Count)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i + 7].name);
+                                listDone.Insert(cur_pos + 1, folderDirPath + fileName + "done.jpg");
                             }
                         }
                         break;
+                    case 7:
+                        listCur.Clear();
+                        listCur.Add(listAll[i].name);
+                        if (i + 1 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 1].name);
+                        }
+                        if (i + 2 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 2].name);
+                        }
+                        if (i + 3 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 3].name);
+                        }
+                        if (i + 4 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 4].name);
+                        }
+                        if (i + 5 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 5].name);
+                        }
+                        if (i + 6 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 6].name);
+                        }
+                        if (i + 7 < listAll.Count)
+                        {
+                            listCur.Add(listAll[i + 7].name);
+                        }
+
+                        if (StartSetting2(108) == 1)
+                        {
+                            ;
+                        }
+                        break;
+                    case 8:
+                        MessageBox.Show("相同类型无需转换");
+                        return;
                 }
-                bean.type = 4;
+                bean.type = 8;
                 updateTopShow();
             }
-            */
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
