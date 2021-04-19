@@ -441,13 +441,22 @@ namespace 相册排版界面
                 listAll.Clear();
                 listDone1.Clear();
 
+                for (int i = 0; i < listCur.Count; i++)
+                {
+                    ImageBean bean = new ImageBean();
+                    bean.name = listCur[i];
+                    bean.type = type;
+                    listAll.Add(bean);
+                }
+
                 for (int i = 0; i < fileInfo.Length; i++)
                 {
                                     
                     listDone1.Add(fileInfo[i].FullName);
                         
                 }
-
+                cur_pos = 0;
+                cur_start = 0;
                 updateTopShow1();
 
             }
@@ -466,7 +475,7 @@ namespace 相册排版界面
                     listAll.Add(bean);
                 }
 
-                //move up
+                //move up dir...
 
                 for (int i = 0; i < fileInfo.Length; i++)
                 {
