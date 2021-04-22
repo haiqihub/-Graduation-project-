@@ -13,6 +13,8 @@ namespace 相册排版界面
     两张合并（转90度）
     四张合并 
     四张合并（转90度）
+    八张合并 
+    八张合并（转90度）
     */
     public class ImageBean
     {

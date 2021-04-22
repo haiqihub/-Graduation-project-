@@ -32,10 +32,13 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            //
+            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
@@ -46,6 +49,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            //
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
@@ -67,7 +72,7 @@
             "八张合并 ",
             "八张合并（转90度）"});
             this.comboBox1.Location = new System.Drawing.Point(49, 27);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(423, 23);
             this.comboBox1.TabIndex = 1;
@@ -76,7 +81,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(374, 110);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(97, 27);
             this.button2.TabIndex = 2;
@@ -87,7 +92,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(49, 65);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(422, 29);
             this.button1.TabIndex = 3;
@@ -97,10 +102,13 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.button3);
+            //
+            this.panel1.Controls.Add(this.numericUpDown6);
             this.panel1.Controls.Add(this.numericUpDown5);
             this.panel1.Controls.Add(this.numericUpDown4);
             this.panel1.Controls.Add(this.numericUpDown3);
@@ -111,11 +119,21 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(632, 310);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(505, 147);
             this.panel1.TabIndex = 4;
             this.panel1.Visible = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(390, 80);
+            this.label7.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(172, 23);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "所有单位（mm）";
             // 
             // label6
             // 
@@ -125,7 +143,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(113, 15);
             this.label6.TabIndex = 12;
-            this.label6.Text = "所有单位（mm）";
+            this.label6.Text = "垂直中间边距";
             // 
             // label5
             // 
@@ -135,12 +153,12 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(67, 15);
             this.label5.TabIndex = 11;
-            this.label5.Text = "中间边距";
+            this.label5.Text = "水平中间边距";
             // 
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(265, 102);
-            this.button4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(100, 29);
             this.button4.TabIndex = 10;
@@ -151,18 +169,28 @@
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(128, 102);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(100, 29);
             this.button3.TabIndex = 9;
             this.button3.Text = "确定";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
+            //
+            // 
+            // numericUpDown6
+            // 
+            this.numericUpDown6.Location = new System.Drawing.Point(400, 46);
+            this.numericUpDown6.Margin = new System.Windows.Forms.Padding(4);
+            this.numericUpDown6.Name = "numericUpDown6";
+            this.numericUpDown6.Size = new System.Drawing.Size(53, 25);
+            this.numericUpDown6.TabIndex = 9;
+
             // 
             // numericUpDown5
             // 
-            this.numericUpDown5.Location = new System.Drawing.Point(373, 12);
-            this.numericUpDown5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown5.Location = new System.Drawing.Point(400, 12);
+            this.numericUpDown5.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown5.Name = "numericUpDown5";
             this.numericUpDown5.Size = new System.Drawing.Size(53, 25);
             this.numericUpDown5.TabIndex = 8;
@@ -170,7 +198,7 @@
             // numericUpDown4
             // 
             this.numericUpDown4.Location = new System.Drawing.Point(220, 46);
-            this.numericUpDown4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown4.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown4.Name = "numericUpDown4";
             this.numericUpDown4.Size = new System.Drawing.Size(53, 25);
             this.numericUpDown4.TabIndex = 7;
@@ -178,7 +206,7 @@
             // numericUpDown3
             // 
             this.numericUpDown3.Location = new System.Drawing.Point(220, 12);
-            this.numericUpDown3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown3.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(53, 25);
             this.numericUpDown3.TabIndex = 6;
@@ -186,7 +214,7 @@
             // numericUpDown2
             // 
             this.numericUpDown2.Location = new System.Drawing.Point(80, 46);
-            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(53, 25);
             this.numericUpDown2.TabIndex = 5;
@@ -194,7 +222,7 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(80, 12);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(53, 25);
             this.numericUpDown1.TabIndex = 4;
@@ -248,7 +276,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.comboBox1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Setting";
@@ -258,6 +286,8 @@
             this.Shown += new System.EventHandler(this.Setting_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            //
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
@@ -276,6 +306,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.NumericUpDown numericUpDown6;
         private System.Windows.Forms.NumericUpDown numericUpDown5;
         private System.Windows.Forms.NumericUpDown numericUpDown4;
         private System.Windows.Forms.NumericUpDown numericUpDown3;
@@ -286,5 +317,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
     }
 }
