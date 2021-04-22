@@ -56,6 +56,8 @@
             this.两张合并转90度ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.四张合并ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.四张合并转90度ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.八张合并ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.八张合并转90度ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.加入文字ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.调整图片大小ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.更换图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,8 +70,7 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.八张合并ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.八张合并转90度ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.listView2 = new System.Windows.Forms.ListView();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -245,86 +246,83 @@
             this.八张合并ToolStripMenuItem1,
             this.八张合并转90度ToolStripMenuItem1});
             this.更换当前模板ToolStripMenuItem.Name = "更换当前模板ToolStripMenuItem";
-            this.更换当前模板ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.更换当前模板ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.更换当前模板ToolStripMenuItem.Text = "更换当前模板";
             // 
             // 单张ToolStripMenuItem1
             // 
             this.单张ToolStripMenuItem1.Name = "单张ToolStripMenuItem1";
-            this.单张ToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.单张ToolStripMenuItem1.Size = new System.Drawing.Size(200, 26);
             this.单张ToolStripMenuItem1.Text = "单张";
             this.单张ToolStripMenuItem1.Click += new System.EventHandler(this.单张ToolStripMenuItem1_Click);
             // 
             // 单张转90度ToolStripMenuItem1
             // 
             this.单张转90度ToolStripMenuItem1.Name = "单张转90度ToolStripMenuItem1";
-            this.单张转90度ToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.单张转90度ToolStripMenuItem1.Size = new System.Drawing.Size(200, 26);
             this.单张转90度ToolStripMenuItem1.Text = "单张转90度";
             this.单张转90度ToolStripMenuItem1.Click += new System.EventHandler(this.单张转90度ToolStripMenuItem1_Click);
             // 
             // 两张合并ToolStripMenuItem1
             // 
             this.两张合并ToolStripMenuItem1.Name = "两张合并ToolStripMenuItem1";
-            this.两张合并ToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.两张合并ToolStripMenuItem1.Size = new System.Drawing.Size(200, 26);
             this.两张合并ToolStripMenuItem1.Text = "两张合并";
             this.两张合并ToolStripMenuItem1.Click += new System.EventHandler(this.两张合并ToolStripMenuItem1_Click);
             // 
             // 两张合并转90度ToolStripMenuItem1
             // 
             this.两张合并转90度ToolStripMenuItem1.Name = "两张合并转90度ToolStripMenuItem1";
-            this.两张合并转90度ToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.两张合并转90度ToolStripMenuItem1.Size = new System.Drawing.Size(200, 26);
             this.两张合并转90度ToolStripMenuItem1.Text = "两张合并转90度";
             this.两张合并转90度ToolStripMenuItem1.Click += new System.EventHandler(this.两张合并转90度ToolStripMenuItem1_Click);
             // 
             // 四张合并ToolStripMenuItem1
             // 
             this.四张合并ToolStripMenuItem1.Name = "四张合并ToolStripMenuItem1";
-            this.四张合并ToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.四张合并ToolStripMenuItem1.Size = new System.Drawing.Size(200, 26);
             this.四张合并ToolStripMenuItem1.Text = "四张合并";
             this.四张合并ToolStripMenuItem1.Click += new System.EventHandler(this.四张合并ToolStripMenuItem1_Click);
             // 
             // 四张合并转90度ToolStripMenuItem1
             // 
-            this.四张合并转90度ToolStripMenuItem1.Name = "四张合并转90度ToolStripMenuItem";
-            this.四张合并转90度ToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.四张合并转90度ToolStripMenuItem1.Name = "四张合并转90度ToolStripMenuItem1";
+            this.四张合并转90度ToolStripMenuItem1.Size = new System.Drawing.Size(200, 26);
             this.四张合并转90度ToolStripMenuItem1.Text = "四张合并转90度";
             this.四张合并转90度ToolStripMenuItem1.Click += new System.EventHandler(this.四张合并转90度ToolStripMenuItem1_Click);
             // 
             // 八张合并ToolStripMenuItem1
             // 
             this.八张合并ToolStripMenuItem1.Name = "八张合并ToolStripMenuItem1";
-            this.八张合并ToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.八张合并ToolStripMenuItem1.Size = new System.Drawing.Size(200, 26);
             this.八张合并ToolStripMenuItem1.Text = "八张合并";
             this.八张合并ToolStripMenuItem1.Click += new System.EventHandler(this.八张合并ToolStripMenuItem1_Click);
             // 
-            // 
             // 八张合并转90度ToolStripMenuItem1
             // 
-            this.八张合并转90度ToolStripMenuItem1.Name = "八张合并转90度ToolStripMenuItem";
-            this.八张合并转90度ToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.八张合并转90度ToolStripMenuItem1.Name = "八张合并转90度ToolStripMenuItem1";
+            this.八张合并转90度ToolStripMenuItem1.Size = new System.Drawing.Size(200, 26);
             this.八张合并转90度ToolStripMenuItem1.Text = "八张合并转90度";
             this.八张合并转90度ToolStripMenuItem1.Click += new System.EventHandler(this.八张合并转90度ToolStripMenuItem1_Click);
             // 
-
-
             // 加入文字ToolStripMenuItem
             // 
             this.加入文字ToolStripMenuItem.Name = "加入文字ToolStripMenuItem";
-            this.加入文字ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.加入文字ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.加入文字ToolStripMenuItem.Text = "加入文字";
             this.加入文字ToolStripMenuItem.Click += new System.EventHandler(this.加入文字ToolStripMenuItem_Click);
             // 
             // 调整图片大小ToolStripMenuItem
             // 
             this.调整图片大小ToolStripMenuItem.Name = "调整图片大小ToolStripMenuItem";
-            this.调整图片大小ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.调整图片大小ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.调整图片大小ToolStripMenuItem.Text = "调整图片";
             this.调整图片大小ToolStripMenuItem.Click += new System.EventHandler(this.调整图片大小ToolStripMenuItem_Click);
             // 
             // 更换图片ToolStripMenuItem
             // 
             this.更换图片ToolStripMenuItem.Name = "更换图片ToolStripMenuItem";
-            this.更换图片ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.更换图片ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.更换图片ToolStripMenuItem.Text = "更换图片";
             this.更换图片ToolStripMenuItem.Click += new System.EventHandler(this.更换图片ToolStripMenuItem_Click);
             // 
@@ -355,9 +353,9 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(68, 194);
+            this.pictureBox1.Location = new System.Drawing.Point(307, 194);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1175, 650);
+            this.pictureBox1.Size = new System.Drawing.Size(936, 650);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -367,9 +365,9 @@
             this.left.BackColor = System.Drawing.SystemColors.Menu;
             this.left.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("left.BackgroundImage")));
             this.left.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.left.Location = new System.Drawing.Point(9, 451);
+            this.left.Location = new System.Drawing.Point(254, 465);
             this.left.Name = "left";
-            this.left.Size = new System.Drawing.Size(53, 74);
+            this.left.Size = new System.Drawing.Size(47, 60);
             this.left.TabIndex = 3;
             this.left.UseVisualStyleBackColor = false;
             this.left.Click += new System.EventHandler(this.left_Click);
@@ -381,7 +379,7 @@
             this.right.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.right.Location = new System.Drawing.Point(1249, 451);
             this.right.Name = "right";
-            this.right.Size = new System.Drawing.Size(53, 74);
+            this.right.Size = new System.Drawing.Size(47, 60);
             this.right.TabIndex = 4;
             this.right.UseVisualStyleBackColor = false;
             this.right.Click += new System.EventHandler(this.right_Click);
@@ -391,13 +389,14 @@
             this.listView1.BackColor = System.Drawing.SystemColors.Control;
             this.listView1.HideSelection = false;
             this.listView1.LargeImageList = this.imageList1;
-            this.listView1.Location = new System.Drawing.Point(68, 39);
+            this.listView1.Location = new System.Drawing.Point(307, 39);
             this.listView1.Margin = new System.Windows.Forms.Padding(13, 0, 0, 0);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(1175, 145);
+            this.listView1.Size = new System.Drawing.Size(936, 145);
             this.listView1.TabIndex = 5;
             this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             this.listView1.Click += new System.EventHandler(this.listView1_Click);
             // 
             // imageList1
@@ -406,17 +405,15 @@
             this.imageList1.ImageSize = new System.Drawing.Size(80, 90);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // 八张合并ToolStripMenuItem1
+            // listView2
             // 
-            this.八张合并ToolStripMenuItem1.Name = "八张合并ToolStripMenuItem1";
-            this.八张合并ToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
-            this.八张合并ToolStripMenuItem1.Text = "八张合并";
-            // 
-            // 八张合并转90度ToolStripMenuItem1
-            // 
-            this.八张合并转90度ToolStripMenuItem1.Name = "八张合并转90度ToolStripMenuItem1";
-            this.八张合并转90度ToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
-            this.八张合并转90度ToolStripMenuItem1.Text = "八张合并转90度";
+            this.listView2.BackColor = System.Drawing.SystemColors.Control;
+            this.listView2.HideSelection = false;
+            this.listView2.Location = new System.Drawing.Point(30, 39);
+            this.listView2.Name = "listView2";
+            this.listView2.Size = new System.Drawing.Size(206, 668);
+            this.listView2.TabIndex = 6;
+            this.listView2.UseCompatibleStateImageBehavior = false;
             // 
             // Layout
             // 
@@ -424,12 +421,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1316, 719);
+            this.Controls.Add(this.listView2);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.right);
             this.Controls.Add(this.left);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Layout";
             this.RightToLeftLayout = true;
@@ -486,5 +485,6 @@
         private System.Windows.Forms.ToolStripMenuItem 八张合并转90度ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 八张合并ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 八张合并转90度ToolStripMenuItem1;
+        private System.Windows.Forms.ListView listView2;
     }
 }

@@ -2276,5 +2276,9 @@ namespace 相册排版界面
 
         }
 
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

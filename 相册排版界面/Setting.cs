@@ -15,11 +15,12 @@ namespace 相册排版界面
 {
     public partial class Setting : Form
     {
-        int shang = 0;
-        int xia = 0;
-        int zuo = 0;
-        int you = 0;
-        int zhong = 0;
+        int up = 0;
+        int down = 0;
+        int left = 0;
+        int right = 0;
+        int v_middle = 0;
+        int h_middle = 0;
         FirstDlg modelDlg = new FirstDlg();
         int index = 1;
 
@@ -306,8 +307,8 @@ namespace 相册排版界面
                 // 将画布涂为白色(底部颜色可自行设置);
                 g1.FillRectangle(Brushes.White, 0, 0, width, height);
 
-                float width_xs = (CC.A4CHANG - zuo - you) * CC.A4GBILV;
-                float height_xs = (CC.A4GAO - shang - xia) * CC.A4GBILV;
+                float width_xs = (CC.A4CHANG - left - right) * CC.A4GBILV;
+                float height_xs = (CC.A4GAO - up - down) * CC.A4GBILV;
 
                 float xs = 0.0f;
                 float x_xs = width_xs / img1.Width;
@@ -317,8 +318,8 @@ namespace 相册排版界面
                 {
                     xs = x_xs;
                     g1.DrawImage(img1,
-                            zuo * CC.A4GBILV,
-                            shang * CC.A4GBILV + (height_xs - img1.Height * xs) / 2,
+                            left * CC.A4GBILV,
+                            up * CC.A4GBILV + (height_xs - img1.Height * xs) / 2,
                             width_xs,
                             img1.Height * xs);
                 }
@@ -326,8 +327,8 @@ namespace 相册排版界面
                 {
                     xs = y_xs;
                     g1.DrawImage(img1,
-                            zuo * CC.A4GBILV + (width_xs - img1.Width * xs) / 2,
-                            shang * CC.A4GBILV,
+                            left * CC.A4GBILV + (width_xs - img1.Width * xs) / 2,
+                            up * CC.A4GBILV,
                             img1.Width * xs,
                             height_xs);
                 }
@@ -417,8 +418,8 @@ namespace 相册排版界面
                 // 将画布涂为白色(底部颜色可自行设置)
                 g1.FillRectangle(Brushes.White, new Rectangle(0, 0, width, height));
 
-                float width_xs = (CC.A4CHANG - zuo - you) * CC.A4GBILV;
-                float height_xs = (CC.A4GAO - shang - xia) * CC.A4GBILV;
+                float width_xs = (CC.A4CHANG - left - right) * CC.A4GBILV;
+                float height_xs = (CC.A4GAO - up - down) * CC.A4GBILV;
 
                 float xs = 0.0f;
                 float x_xs = width_xs / img1.Width;
@@ -427,12 +428,12 @@ namespace 相册排版界面
                 if (x_xs < y_xs)
                 {
                     xs = x_xs;
-                    g1.DrawImage(img1, zuo * CC.A4GBILV, shang * CC.A4GBILV + (height_xs - img1.Height * xs) / 2, width_xs, img1.Height * xs);
+                    g1.DrawImage(img1, left * CC.A4GBILV, up * CC.A4GBILV + (height_xs - img1.Height * xs) / 2, width_xs, img1.Height * xs);
                 }
                 else
                 {
                     xs = y_xs;
-                    g1.DrawImage(img1, zuo * CC.A4GBILV + (width_xs - img1.Width * xs) / 2, shang * CC.A4GBILV, img1.Width * xs, height_xs);
+                    g1.DrawImage(img1, left * CC.A4GBILV + (width_xs - img1.Width * xs) / 2, up * CC.A4GBILV, img1.Width * xs, height_xs);
                 }
 
                 var vv = System.IO.Path.GetFileNameWithoutExtension(item);
@@ -520,8 +521,8 @@ namespace 相册排版界面
                 // 将画布涂为白色(底部颜色可自行设置)
                 g1.FillRectangle(Brushes.White, new Rectangle(0, 0, width, height));
 
-                float width_xs = (CC.A4CHANG - zuo - you) * CC.A4GBILV;
-                float height_xs = (CC.A4GAO / 2 - shang - zhong / 2) * CC.A4GBILV;
+                float width_xs = (CC.A4CHANG - left - right) * CC.A4GBILV;
+                float height_xs = (CC.A4GAO / 2 - up - v_middle / 2) * CC.A4GBILV;
 
                 float xs = 0.0f;
                 float x_xs = width_xs / img1.Width;
@@ -533,30 +534,30 @@ namespace 相册排版界面
                 {
                     xs = x_xs;
                     g1.DrawImage(img1,
-                            zuo * CC.A4GBILV,
-                            shang * CC.A4GBILV + height_xs - img1.Height * xs,
+                            left * CC.A4GBILV,
+                            up * CC.A4GBILV + height_xs - img1.Height * xs,
                             width_xs,
                             img1.Height * xs);
 
-                    top_half = shang * CC.A4GBILV + height_xs - img1.Height * xs + img1.Height * xs;
+                    top_half = up * CC.A4GBILV + height_xs - img1.Height * xs + img1.Height * xs;
                 }
                 else
                 {
                     xs = y_xs;
                     g1.DrawImage(img1,
-                            zuo * CC.A4GBILV + (width_xs - img1.Width * xs) / 2,
-                            shang * CC.A4GBILV,
+                            left * CC.A4GBILV + (width_xs - img1.Width * xs) / 2,
+                            up * CC.A4GBILV,
                             img1.Width * xs,
                             height_xs);
 
-                    top_half = shang * CC.A4GBILV + height_xs;
+                    top_half = up * CC.A4GBILV + height_xs;
                 }
 
                 //2
                 if (img2 != null)
                 {
-                    float width_xs2 = (CC.A4CHANG - zuo - you) * CC.A4GBILV;
-                    float height_xs2 = (CC.A4GAO / 2 - xia - zhong / 2) * CC.A4GBILV;
+                    float width_xs2 = (CC.A4CHANG - left - right) * CC.A4GBILV;
+                    float height_xs2 = (CC.A4GAO / 2 - down - v_middle / 2) * CC.A4GBILV;
 
                     float xs2 = 0.0f;
                     float x_xs2 = width_xs2 / img2.Width;
@@ -566,9 +567,9 @@ namespace 相册排版界面
                     {
                         xs2 = x_xs2;
                         g1.DrawImage(img2,
-                                zuo * CC.A4GBILV,
-                                //CC.A4GAO_XS / 2 + zhong / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
-                                top_half + zhong * CC.A4GBILV,
+                                left * CC.A4GBILV,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
+                                top_half + v_middle * CC.A4GBILV,
                                 width_xs2,
                                 img2.Height * xs2);
                     }
@@ -576,9 +577,9 @@ namespace 相册排版界面
                     {
                         xs2 = y_xs2;
                         g1.DrawImage(img2,
-                                zuo * CC.A4GBILV + (width_xs2 - img2.Width * xs2) / 2,
-                                //CC.A4GAO_XS / 2 + zhong / 2 * CC.A4GBILV,
-                                top_half + zhong * CC.A4GBILV,
+                                left * CC.A4GBILV + (width_xs2 - img2.Width * xs2) / 2,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV,
+                                top_half + v_middle * CC.A4GBILV,
                                 img2.Width * xs2,
                                 height_xs2);
                     }
@@ -656,8 +657,8 @@ namespace 相册排版界面
 
                 if (img2 == null)
                 {
-                    float width_xs = (CC.A4CHANG - zuo - you) * CC.A4GBILV;
-                    float height_xs = (CC.A4GAO / 2 - shang - zhong / 2) * CC.A4GBILV;
+                    float width_xs = (CC.A4CHANG - left - right) * CC.A4GBILV;
+                    float height_xs = (CC.A4GAO / 2 - up - v_middle / 2) * CC.A4GBILV;
 
                     float xs = 0.0f;
                     float x_xs = width_xs / img1.Width;
@@ -667,8 +668,8 @@ namespace 相册排版界面
                     {
                         xs = x_xs;
                         g1.DrawImage(img1,
-                                zuo * CC.A4GBILV,
-                                CC.A4GAO_XS - xia * CC.A4GBILV - img1.Height * xs,
+                                left * CC.A4GBILV,
+                                CC.A4GAO_XS - down * CC.A4GBILV - img1.Height * xs,
                                 width_xs,
                                 img1.Height * xs);
                     }
@@ -676,16 +677,16 @@ namespace 相册排版界面
                     {
                         xs = y_xs;
                         g1.DrawImage(img1,
-                                zuo * CC.A4GBILV + (width_xs - img1.Width * xs) / 2,
-                                CC.A4GAO_XS - xia * CC.A4GBILV - height_xs,
+                                left * CC.A4GBILV + (width_xs - img1.Width * xs) / 2,
+                                CC.A4GAO_XS - down * CC.A4GBILV - height_xs,
                                 img1.Width * xs,
                                 height_xs);
                     }
                 }
                 else
                 {
-                    float width_xs = (CC.A4CHANG - zuo - you) * CC.A4GBILV;
-                    float height_xs = (CC.A4GAO / 2 - shang - zhong / 2) * CC.A4GBILV;
+                    float width_xs = (CC.A4CHANG - left - right) * CC.A4GBILV;
+                    float height_xs = (CC.A4GAO / 2 - up - v_middle / 2) * CC.A4GBILV;
 
                     float xs = 0.0f;
                     float x_xs = width_xs / img2.Width;
@@ -695,31 +696,31 @@ namespace 相册排版界面
                     {
                         xs = x_xs;
                         g1.DrawImage(img2,
-                                zuo * CC.A4GBILV,
-                                shang * CC.A4GBILV + height_xs - img2.Height * xs,
+                                left * CC.A4GBILV,
+                                up * CC.A4GBILV + height_xs - img2.Height * xs,
                                 width_xs,
                                 img2.Height * xs);
 
-                        top_half = shang * CC.A4GBILV + height_xs - img2.Height * xs + img2.Height * xs;
+                        top_half = up * CC.A4GBILV + height_xs - img2.Height * xs + img2.Height * xs;
                     }
                     else
                     {
                         xs = y_xs;
                         g1.DrawImage(img2,
-                                zuo * CC.A4GBILV + (width_xs - img2.Width * xs) / 2,
-                                shang * CC.A4GBILV,
+                                left * CC.A4GBILV + (width_xs - img2.Width * xs) / 2,
+                                up * CC.A4GBILV,
                                 img2.Width * xs,
                                 height_xs);
 
-                        top_half = shang * CC.A4GBILV + height_xs;
+                        top_half = up * CC.A4GBILV + height_xs;
                     }
                 }
 
                 //2
                 if (img2 != null)
                 {
-                    float width_xs2 = (CC.A4CHANG - zuo - you) * CC.A4GBILV;
-                    float height_xs2 = (CC.A4GAO / 2 - xia - zhong / 2) * CC.A4GBILV;
+                    float width_xs2 = (CC.A4CHANG - left - right) * CC.A4GBILV;
+                    float height_xs2 = (CC.A4GAO / 2 - down - v_middle / 2) * CC.A4GBILV;
 
                     float xs2 = 0.0f;
                     float x_xs2 = width_xs2 / img1.Width;
@@ -729,8 +730,8 @@ namespace 相册排版界面
                     {
                         xs2 = x_xs2;
                         g1.DrawImage(img1,
-                                zuo * CC.A4GBILV,
-                                top_half + zhong * CC.A4GBILV,
+                                left * CC.A4GBILV,
+                                top_half + v_middle * CC.A4GBILV,
                                 width_xs2,
                                 img1.Height * xs2);
                     }
@@ -738,8 +739,8 @@ namespace 相册排版界面
                     {
                         xs2 = y_xs2;
                         g1.DrawImage(img1,
-                                zuo * CC.A4GBILV + (width_xs2 - img1.Width * xs2) / 2,
-                                top_half + zhong * CC.A4GBILV,
+                                left * CC.A4GBILV + (width_xs2 - img1.Width * xs2) / 2,
+                                top_half + v_middle * CC.A4GBILV,
                                 img1.Width * xs2,
                                 height_xs2);
                     }
@@ -836,8 +837,8 @@ namespace 相册排版界面
                 // 将画布涂为白色(底部颜色可自行设置)
                 g1.FillRectangle(Brushes.White, new Rectangle(0, 0, width, height));
 
-                float width_xs = (CC.A4CHANG - zuo - you) * CC.A4GBILV;
-                float height_xs = ((CC.A4GAO - shang - 3 * zhong - xia) / 4) * CC.A4GBILV;
+                float width_xs = (CC.A4CHANG - left - right) * CC.A4GBILV;
+                float height_xs = ((CC.A4GAO - up - 3 * v_middle - down) / 4) * CC.A4GBILV;
 
                 float xs = 0.0f;
                 float x_xs = width_xs / img1.Width;
@@ -852,23 +853,23 @@ namespace 相册排版界面
                 {
                     xs = x_xs;
                     g1.DrawImage(img1,
-                            zuo * CC.A4GBILV,
-                            shang * CC.A4GBILV + height_xs - img1.Height * xs,
+                            left * CC.A4GBILV,
+                            up * CC.A4GBILV + height_xs - img1.Height * xs,
                             width_xs,
                             img1.Height * xs);
 
-                    top_1 = shang * CC.A4GBILV + height_xs - img1.Height * xs + img1.Height * xs;
+                    top_1 = up * CC.A4GBILV + height_xs - img1.Height * xs + img1.Height * xs;
                 }
                 else
                 {
                     xs = y_xs;
                     g1.DrawImage(img1,
-                            zuo * CC.A4GBILV + (width_xs - img1.Width * xs) / 2,
-                            shang * CC.A4GBILV,
+                            left * CC.A4GBILV + (width_xs - img1.Width * xs) / 2,
+                            up * CC.A4GBILV,
                             img1.Width * xs,
                             height_xs);
 
-                    top_1 = shang * CC.A4GBILV + height_xs;
+                    top_1 = up * CC.A4GBILV + height_xs;
                 }
 
                 //2
@@ -881,14 +882,14 @@ namespace 相册排版界面
                     float x_xs2 = width_xs2 / img2.Width;
                     float y_xs2 = height_xs2 / img2.Height;
 
-                    top_2 = top_1 + zhong * CC.A4GBILV;
+                    top_2 = top_1 + v_middle * CC.A4GBILV;
 
                     if (x_xs2 < y_xs2)
                     {
                         xs2 = x_xs2;
                         g1.DrawImage(img2,
-                                zuo * CC.A4GBILV,
-                                //CC.A4GAO_XS / 2 + zhong / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
+                                left * CC.A4GBILV,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
                                 top_2,
                                 width_xs2,
                                 img2.Height * xs2);
@@ -897,8 +898,8 @@ namespace 相册排版界面
                     {
                         xs2 = y_xs2;
                         g1.DrawImage(img2,
-                                zuo * CC.A4GBILV + (width_xs2 - img2.Width * xs2) / 2,
-                                //CC.A4GAO_XS / 2 + zhong / 2 * CC.A4GBILV,
+                                left * CC.A4GBILV + (width_xs2 - img2.Width * xs2) / 2,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV,
                                 top_2,
                                 img2.Width * xs2,
                                 height_xs2);
@@ -915,14 +916,14 @@ namespace 相册排版界面
                     float x_xs3 = width_xs / img3.Width;
                     float y_xs3 = height_xs / img3.Height;
 
-                    top_3 = top_2 + zhong * CC.A4GBILV;
+                    top_3 = top_2 + v_middle * CC.A4GBILV;
 
                     if (x_xs3 < y_xs3)
                     {
                         xs3 = x_xs3;
                         g1.DrawImage(img3,
-                                zuo * CC.A4GBILV,
-                                //CC.A4GAO_XS / 2 + zhong / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
+                                left * CC.A4GBILV,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
                                 top_3,
                                 width_xs,
                                 img3.Height * xs3);
@@ -931,8 +932,8 @@ namespace 相册排版界面
                     {
                         xs3 = y_xs3;
                         g1.DrawImage(img3,
-                                zuo * CC.A4GBILV + (width_xs - img3.Width * xs3) / 2,
-                                //CC.A4GAO_XS / 2 + zhong / 2 * CC.A4GBILV,
+                                left * CC.A4GBILV + (width_xs - img3.Width * xs3) / 2,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV,
                                 top_3,
                                 img3.Width * xs3,
                                 height_xs);
@@ -949,14 +950,14 @@ namespace 相册排版界面
                     float x_xs4 = width_xs / img4.Width;
                     float y_xs4 = height_xs / img4.Height;
 
-                    top_4 = top_3 + zhong * CC.A4GBILV;
+                    top_4 = top_3 + v_middle * CC.A4GBILV;
 
                     if (x_xs4 < y_xs4)
                     {
                         xs4 = x_xs4;
                         g1.DrawImage(img4,
-                                zuo * CC.A4GBILV,
-                                //CC.A4GAO_XS / 2 + zhong / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
+                                left * CC.A4GBILV,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
                                 top_4,
                                 width_xs,
                                 img4.Height * xs4);
@@ -965,8 +966,8 @@ namespace 相册排版界面
                     {
                         xs4 = y_xs4;
                         g1.DrawImage(img4,
-                                zuo * CC.A4GBILV + (width_xs - img4.Width * xs4) / 2,
-                                //CC.A4GAO_XS / 2 + zhong / 2 * CC.A4GBILV,
+                                left * CC.A4GBILV + (width_xs - img4.Width * xs4) / 2,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV,
                                 top_4,
                                 img4.Width * xs4,
                                 height_xs);
@@ -1073,8 +1074,8 @@ namespace 相册排版界面
                 float top_half = 0.0f;
 
                 //1
-                float width_xs = (CC.A4CHANG - zuo - you) * CC.A4GBILV;
-                float height_xs = ((CC.A4GAO - shang - 3 * zhong - xia) / 4) * CC.A4GBILV;
+                float width_xs = (CC.A4CHANG - left - right) * CC.A4GBILV;
+                float height_xs = ((CC.A4GAO - up - 3 * v_middle - down) / 4) * CC.A4GBILV;
 
                 float xs = 0.0f;
                 float x_xs = width_xs / img1.Width;
@@ -1084,8 +1085,8 @@ namespace 相册排版界面
                 {
                     xs = x_xs;
                     g1.DrawImage(img1,
-                            zuo * CC.A4GBILV,
-                            CC.A4GAO_XS - xia * CC.A4GBILV - height_xs + img1.Height * xs,
+                            left * CC.A4GBILV,
+                            CC.A4GAO_XS - down * CC.A4GBILV - height_xs + img1.Height * xs,
                             width_xs,
                             img1.Height * xs);
                 }
@@ -1093,116 +1094,116 @@ namespace 相册排版界面
                 {
                     xs = y_xs;
                     g1.DrawImage(img1,
-                            zuo * CC.A4GBILV + (width_xs - img1.Width * xs) / 2,
-                            CC.A4GAO_XS - xia * CC.A4GBILV - height_xs,
+                            left * CC.A4GBILV + (width_xs - img1.Width * xs) / 2,
+                            CC.A4GAO_XS - down * CC.A4GBILV - height_xs,
                             img1.Width * xs,
                             height_xs);
                 }
-                top_half = CC.A4GAO_XS - xia * CC.A4GBILV - height_xs;
+                top_half = CC.A4GAO_XS - down * CC.A4GBILV - height_xs;
                 //2
                 if (img2 != null)
                 {
-                    //float width_xs = (CC.A4CHANG - zuo - you) * CC.A4GBILV;
-                    //float height_xs = ((CC.A4GAO - shang - 3 * zhong - xia)/4) * CC.A4GBILV;
+                    //float width_xs = (CC.A4CHANG - left - right) * CC.A4GBILV;
+                    //float height_xs = ((CC.A4GAO - up - 3 * v_middle - down)/4) * CC.A4GBILV;
 
                     xs = 0.0f;
                     x_xs = width_xs / img2.Width;
                     y_xs = height_xs / img2.Height;
 
-                    top_half = top_half - height_xs - zhong * CC.A4GBILV;
+                    top_half = top_half - height_xs - v_middle * CC.A4GBILV;
 
                     if (x_xs < y_xs)
                     {
                         xs = x_xs;
                         g1.DrawImage(img2,
-                                zuo * CC.A4GBILV,
+                                left * CC.A4GBILV,
                                 top_half + img2.Height * xs,
                                 width_xs,
                                 img2.Height * xs);
 
-                        //top_half = top_half - height_xs - zhong;
+                        //top_half = top_half - height_xs - v_middle;
                     }
                     else
                     {
                         xs = y_xs;
                         g1.DrawImage(img2,
-                                zuo * CC.A4GBILV + (width_xs - img2.Width * xs) / 2,
+                                left * CC.A4GBILV + (width_xs - img2.Width * xs) / 2,
                                 top_half,
                                 img2.Width * xs,
                                 height_xs);
 
-                        //top_half = shang * CC.A4GBILV + height_xs;
+                        //top_half = up * CC.A4GBILV + height_xs;
                     }
 
                 }
                 //3
                 if (img3 != null)
                 {
-                    //float width_xs = (CC.A4CHANG - zuo - you) * CC.A4GBILV;
-                    //float height_xs = ((CC.A4GAO - shang - 3 * zhong - xia)/4) * CC.A4GBILV;
+                    //float width_xs = (CC.A4CHANG - left - right) * CC.A4GBILV;
+                    //float height_xs = ((CC.A4GAO - up - 3 * v_middle - down)/4) * CC.A4GBILV;
 
                     xs = 0.0f;
                     x_xs = width_xs / img3.Width;
                     y_xs = height_xs / img3.Height;
 
-                    top_half = top_half - height_xs - zhong * CC.A4GBILV;
+                    top_half = top_half - height_xs - v_middle * CC.A4GBILV;
 
                     if (x_xs < y_xs)
                     {
                         xs = x_xs;
                         g1.DrawImage(img3,
-                                zuo * CC.A4GBILV,
+                                left * CC.A4GBILV,
                                 top_half + img3.Height * xs,
                                 width_xs,
                                 img3.Height * xs);
 
-                        //top_half = top_half - height_xs - zhong;
+                        //top_half = top_half - height_xs - v_middle;
                     }
                     else
                     {
                         xs = y_xs;
                         g1.DrawImage(img3,
-                                zuo * CC.A4GBILV + (width_xs - img3.Width * xs) / 2,
+                                left * CC.A4GBILV + (width_xs - img3.Width * xs) / 2,
                                 top_half,
                                 img3.Width * xs,
                                 height_xs);
 
-                        //top_half = shang * CC.A4GBILV + height_xs;
+                        //top_half = up * CC.A4GBILV + height_xs;
                     }
 
                 }
                 if (img4 != null)
                 {
-                    //float width_xs = (CC.A4CHANG - zuo - you) * CC.A4GBILV;
-                    //float height_xs = ((CC.A4GAO - shang - 3 * zhong - xia)/4) * CC.A4GBILV;
+                    //float width_xs = (CC.A4CHANG - left - right) * CC.A4GBILV;
+                    //float height_xs = ((CC.A4GAO - up - 3 * v_middle - down)/4) * CC.A4GBILV;
 
                     xs = 0.0f;
                     x_xs = width_xs / img4.Width;
                     y_xs = height_xs / img4.Height;
 
-                    top_half = top_half - height_xs - zhong * CC.A4GBILV;
+                    top_half = top_half - height_xs - v_middle * CC.A4GBILV;
 
                     if (x_xs < y_xs)
                     {
                         xs = x_xs;
                         g1.DrawImage(img4,
-                                zuo * CC.A4GBILV,
+                                left * CC.A4GBILV,
                                 top_half + img4.Height * xs,
                                 width_xs,
                                 img4.Height * xs);
 
-                        //top_half = top_half - height_xs - zhong;
+                        //top_half = top_half - height_xs - v_middle;
                     }
                     else
                     {
                         xs = y_xs;
                         g1.DrawImage(img4,
-                                zuo * CC.A4GBILV + (width_xs - img4.Width * xs) / 2,
+                                left * CC.A4GBILV + (width_xs - img4.Width * xs) / 2,
                                 top_half,
                                 img4.Width * xs,
                                 height_xs);
 
-                        //top_half = shang * CC.A4GBILV + height_xs;
+                        //top_half = up * CC.A4GBILV + height_xs;
                     }
 
                 }
@@ -1351,8 +1352,8 @@ namespace 相册排版界面
                 // 将画布涂为白色(底部颜色可自行设置)
                 g1.FillRectangle(Brushes.White, new Rectangle(0, 0, width, height));
 
-                float width_xs = (CC.A4CHANG - zuo - you) * CC.A4GBILV;
-                float height_xs = ((CC.A4GAO - shang - 7 * zhong - xia) / 8) * CC.A4GBILV;
+                float width_xs = (CC.A4CHANG - left - right) * CC.A4GBILV;
+                float height_xs = ((CC.A4GAO - up - 7 * v_middle - down) / 8) * CC.A4GBILV;
 
                 float xs = 0.0f;
                 float x_xs = width_xs / img1.Width;
@@ -1371,23 +1372,23 @@ namespace 相册排版界面
                 {
                     xs = x_xs;
                     g1.DrawImage(img1,
-                            zuo * CC.A4GBILV,
-                            shang * CC.A4GBILV + height_xs - img1.Height * xs,
+                            left * CC.A4GBILV,
+                            up * CC.A4GBILV + height_xs - img1.Height * xs,
                             width_xs,
                             img1.Height * xs);
 
-                    top_1 = shang * CC.A4GBILV + height_xs - img1.Height * xs + img1.Height * xs;
+                    top_1 = up * CC.A4GBILV + height_xs - img1.Height * xs + img1.Height * xs;
                 }
                 else
                 {
                     xs = y_xs;
                     g1.DrawImage(img1,
-                            zuo * CC.A4GBILV + (width_xs - img1.Width * xs) / 2,
-                            shang * CC.A4GBILV,
+                            left * CC.A4GBILV + (width_xs - img1.Width * xs) / 2,
+                            up * CC.A4GBILV,
                             img1.Width * xs,
                             height_xs);
 
-                    top_1 = shang * CC.A4GBILV + height_xs;
+                    top_1 = up * CC.A4GBILV + height_xs;
                 }
 
                 //2
@@ -1400,14 +1401,14 @@ namespace 相册排版界面
                     float x_xs2 = width_xs2 / img2.Width;
                     float y_xs2 = height_xs2 / img2.Height;
 
-                    top_2 = top_1 + zhong * CC.A4GBILV;
+                    top_2 = top_1 + v_middle * CC.A4GBILV;
 
                     if (x_xs2 < y_xs2)
                     {
                         xs2 = x_xs2;
                         g1.DrawImage(img2,
-                                zuo * CC.A4GBILV,
-                                //CC.A4GAO_XS / 2 + zhong / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
+                                left * CC.A4GBILV,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
                                 top_2,
                                 width_xs2,
                                 img2.Height * xs2);
@@ -1416,8 +1417,8 @@ namespace 相册排版界面
                     {
                         xs2 = y_xs2;
                         g1.DrawImage(img2,
-                                zuo * CC.A4GBILV + (width_xs2 - img2.Width * xs2) / 2,
-                                //CC.A4GAO_XS / 2 + zhong / 2 * CC.A4GBILV,
+                                left * CC.A4GBILV + (width_xs2 - img2.Width * xs2) / 2,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV,
                                 top_2,
                                 img2.Width * xs2,
                                 height_xs2);
@@ -1434,14 +1435,14 @@ namespace 相册排版界面
                     float x_xs3 = width_xs / img3.Width;
                     float y_xs3 = height_xs / img3.Height;
 
-                    top_3 = top_2 + zhong * CC.A4GBILV;
+                    top_3 = top_2 + v_middle * CC.A4GBILV;
 
                     if (x_xs3 < y_xs3)
                     {
                         xs3 = x_xs3;
                         g1.DrawImage(img3,
-                                zuo * CC.A4GBILV,
-                                //CC.A4GAO_XS / 2 + zhong / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
+                                left * CC.A4GBILV,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
                                 top_3,
                                 width_xs,
                                 img3.Height * xs3);
@@ -1450,8 +1451,8 @@ namespace 相册排版界面
                     {
                         xs3 = y_xs3;
                         g1.DrawImage(img3,
-                                zuo * CC.A4GBILV + (width_xs - img3.Width * xs3) / 2,
-                                //CC.A4GAO_XS / 2 + zhong / 2 * CC.A4GBILV,
+                                left * CC.A4GBILV + (width_xs - img3.Width * xs3) / 2,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV,
                                 top_3,
                                 img3.Width * xs3,
                                 height_xs);
@@ -1468,14 +1469,14 @@ namespace 相册排版界面
                     float x_xs4 = width_xs / img4.Width;
                     float y_xs4 = height_xs / img4.Height;
 
-                    top_4 = top_3 + zhong * CC.A4GBILV;
+                    top_4 = top_3 + v_middle * CC.A4GBILV;
 
                     if (x_xs4 < y_xs4)
                     {
                         xs4 = x_xs4;
                         g1.DrawImage(img4,
-                                zuo * CC.A4GBILV,
-                                //CC.A4GAO_XS / 2 + zhong / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
+                                left * CC.A4GBILV,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
                                 top_4,
                                 width_xs,
                                 img4.Height * xs4);
@@ -1484,8 +1485,8 @@ namespace 相册排版界面
                     {
                         xs4 = y_xs4;
                         g1.DrawImage(img4,
-                                zuo * CC.A4GBILV + (width_xs - img4.Width * xs4) / 2,
-                                //CC.A4GAO_XS / 2 + zhong / 2 * CC.A4GBILV,
+                                left * CC.A4GBILV + (width_xs - img4.Width * xs4) / 2,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV,
                                 top_4,
                                 img4.Width * xs4,
                                 height_xs);
@@ -1502,14 +1503,14 @@ namespace 相册排版界面
                     float x_xs5 = width_xs / img5.Width;
                     float y_xs5 = height_xs / img5.Height;
 
-                    top_5 = top_4 + zhong * CC.A4GBILV;
+                    top_5 = top_4 + v_middle * CC.A4GBILV;
 
                     if (x_xs5 < y_xs5)
                     {
                         xs5 = x_xs5;
                         g1.DrawImage(img5,
-                                zuo * CC.A4GBILV,
-                                //CC.A4GAO_XS / 2 + zhong / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
+                                left * CC.A4GBILV,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
                                 top_4,
                                 width_xs,
                                 img5.Height * xs5);
@@ -1518,8 +1519,8 @@ namespace 相册排版界面
                     {
                         xs5 = y_xs5;
                         g1.DrawImage(img5,
-                                zuo * CC.A4GBILV + (width_xs - img5.Width * xs5) / 2,
-                                //CC.A4GAO_XS / 2 + zhong / 2 * CC.A4GBILV,
+                                left * CC.A4GBILV + (width_xs - img5.Width * xs5) / 2,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV,
                                 top_5,
                                 img5.Width * xs5,
                                 height_xs);
@@ -1536,14 +1537,14 @@ namespace 相册排版界面
                     float x_xs6 = width_xs / img6.Width;
                     float y_xs6 = height_xs / img6.Height;
 
-                    top_6 = top_5 + zhong * CC.A4GBILV;
+                    top_6 = top_5 + v_middle * CC.A4GBILV;
 
                     if (x_xs6 < y_xs6)
                     {
                         xs6 = x_xs6;
                         g1.DrawImage(img6,
-                                zuo * CC.A4GBILV,
-                                //CC.A4GAO_XS / 2 + zhong / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
+                                left * CC.A4GBILV,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
                                 top_6,
                                 width_xs,
                                 img6.Height * xs6);
@@ -1552,8 +1553,8 @@ namespace 相册排版界面
                     {
                         xs6 = y_xs6;
                         g1.DrawImage(img6,
-                                zuo * CC.A4GBILV + (width_xs - img6.Width * xs6) / 2,
-                                //CC.A4GAO_XS / 2 + zhong / 2 * CC.A4GBILV,
+                                left * CC.A4GBILV + (width_xs - img6.Width * xs6) / 2,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV,
                                 top_6,
                                 img6.Width * xs6,
                                 height_xs);
@@ -1570,14 +1571,14 @@ namespace 相册排版界面
                     float x_xs7 = width_xs / img7.Width;
                     float y_xs7 = height_xs / img7.Height;
 
-                    top_7 = top_6 + zhong * CC.A4GBILV;
+                    top_7 = top_6 + v_middle * CC.A4GBILV;
 
                     if (x_xs7 < y_xs7)
                     {
                         xs7 = x_xs7;
                         g1.DrawImage(img7,
-                                zuo * CC.A4GBILV,
-                                //CC.A4GAO_XS / 2 + zhong / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
+                                left * CC.A4GBILV,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
                                 top_7,
                                 width_xs,
                                 img7.Height * xs7);
@@ -1586,8 +1587,8 @@ namespace 相册排版界面
                     {
                         xs7 = y_xs7;
                         g1.DrawImage(img7,
-                                zuo * CC.A4GBILV + (width_xs - img7.Width * xs7) / 2,
-                                //CC.A4GAO_XS / 2 + zhong / 2 * CC.A4GBILV,
+                                left * CC.A4GBILV + (width_xs - img7.Width * xs7) / 2,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV,
                                 top_7,
                                 img7.Width * xs7,
                                 height_xs);
@@ -1604,14 +1605,14 @@ namespace 相册排版界面
                     float x_xs8 = width_xs / img8.Width;
                     float y_xs8 = height_xs / img8.Height;
 
-                    top_8 = top_7 + zhong * CC.A4GBILV;
+                    top_8 = top_7 + v_middle * CC.A4GBILV;
 
                     if (x_xs8 < y_xs8)
                     {
                         xs8 = x_xs8;
                         g1.DrawImage(img8,
-                                zuo * CC.A4GBILV,
-                                //CC.A4GAO_XS / 2 + zhong / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
+                                left * CC.A4GBILV,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
                                 top_8,
                                 width_xs,
                                 img8.Height * xs8);
@@ -1620,8 +1621,8 @@ namespace 相册排版界面
                     {
                         xs8 = y_xs8;
                         g1.DrawImage(img8,
-                                zuo * CC.A4GBILV + (width_xs - img8.Width * xs8) / 2,
-                                //CC.A4GAO_XS / 2 + zhong / 2 * CC.A4GBILV,
+                                left * CC.A4GBILV + (width_xs - img8.Width * xs8) / 2,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV,
                                 top_8,
                                 img8.Width * xs8,
                                 height_xs);
@@ -1756,8 +1757,8 @@ namespace 相册排版界面
                 float top_half = 0.0f;
 
                 //1
-                float width_xs = (CC.A4CHANG - zuo - you) * CC.A4GBILV;
-                float height_xs = ((CC.A4GAO - shang - 7 * zhong - xia) / 8) * CC.A4GBILV;
+                float width_xs = (CC.A4CHANG - left - right) * CC.A4GBILV;
+                float height_xs = ((CC.A4GAO - up - 7 * v_middle - down) / 8) * CC.A4GBILV;
 
                 float xs = 0.0f;
                 float x_xs = width_xs / img1.Width;
@@ -1767,8 +1768,8 @@ namespace 相册排版界面
                 {
                     xs = x_xs;
                     g1.DrawImage(img1,
-                            zuo * CC.A4GBILV,
-                            CC.A4GAO_XS - xia * CC.A4GBILV - height_xs + img1.Height * xs,
+                            left * CC.A4GBILV,
+                            CC.A4GAO_XS - down * CC.A4GBILV - height_xs + img1.Height * xs,
                             width_xs,
                             img1.Height * xs);
                 }
@@ -1776,261 +1777,261 @@ namespace 相册排版界面
                 {
                     xs = y_xs;
                     g1.DrawImage(img1,
-                            zuo * CC.A4GBILV + (width_xs - img1.Width * xs) / 2,
-                            CC.A4GAO_XS - xia * CC.A4GBILV - height_xs,
+                            left * CC.A4GBILV + (width_xs - img1.Width * xs) / 2,
+                            CC.A4GAO_XS - down * CC.A4GBILV - height_xs,
                             img1.Width * xs,
                             height_xs);
                 }
-                top_half = CC.A4GAO_XS - xia * CC.A4GBILV - height_xs;
+                top_half = CC.A4GAO_XS - down * CC.A4GBILV - height_xs;
                 //2
                 if (img2 != null)
                 {
-                    //float width_xs = (CC.A4CHANG - zuo - you) * CC.A4GBILV;
-                    //float height_xs = ((CC.A4GAO - shang - 3 * zhong - xia)/4) * CC.A4GBILV;
+                    //float width_xs = (CC.A4CHANG - left - right) * CC.A4GBILV;
+                    //float height_xs = ((CC.A4GAO - up - 3 * v_middle - down)/4) * CC.A4GBILV;
 
                     xs = 0.0f;
                     x_xs = width_xs / img2.Width;
                     y_xs = height_xs / img2.Height;
 
-                    top_half = top_half - height_xs - zhong * CC.A4GBILV;
+                    top_half = top_half - height_xs - v_middle * CC.A4GBILV;
 
                     if (x_xs < y_xs)
                     {
                         xs = x_xs;
                         g1.DrawImage(img2,
-                                zuo * CC.A4GBILV,
+                                left * CC.A4GBILV,
                                 top_half + img2.Height * xs,
                                 width_xs,
                                 img2.Height * xs);
 
-                        //top_half = top_half - height_xs - zhong;
+                        //top_half = top_half - height_xs - v_middle;
                     }
                     else
                     {
                         xs = y_xs;
                         g1.DrawImage(img2,
-                                zuo * CC.A4GBILV + (width_xs - img2.Width * xs) / 2,
+                                left * CC.A4GBILV + (width_xs - img2.Width * xs) / 2,
                                 top_half,
                                 img2.Width * xs,
                                 height_xs);
 
-                        //top_half = shang * CC.A4GBILV + height_xs;
+                        //top_half = up * CC.A4GBILV + height_xs;
                     }
 
                 }
                 //3
                 if (img3 != null)
                 {
-                    //float width_xs = (CC.A4CHANG - zuo - you) * CC.A4GBILV;
-                    //float height_xs = ((CC.A4GAO - shang - 3 * zhong - xia)/4) * CC.A4GBILV;
+                    //float width_xs = (CC.A4CHANG - left - right) * CC.A4GBILV;
+                    //float height_xs = ((CC.A4GAO - up - 3 * v_middle - down)/4) * CC.A4GBILV;
 
                     xs = 0.0f;
                     x_xs = width_xs / img3.Width;
                     y_xs = height_xs / img3.Height;
 
-                    top_half = top_half - height_xs - zhong * CC.A4GBILV;
+                    top_half = top_half - height_xs - v_middle * CC.A4GBILV;
 
                     if (x_xs < y_xs)
                     {
                         xs = x_xs;
                         g1.DrawImage(img3,
-                                zuo * CC.A4GBILV,
+                                left * CC.A4GBILV,
                                 top_half + img3.Height * xs,
                                 width_xs,
                                 img3.Height * xs);
 
-                        //top_half = top_half - height_xs - zhong;
+                        //top_half = top_half - height_xs - v_middle;
                     }
                     else
                     {
                         xs = y_xs;
                         g1.DrawImage(img3,
-                                zuo * CC.A4GBILV + (width_xs - img3.Width * xs) / 2,
+                                left * CC.A4GBILV + (width_xs - img3.Width * xs) / 2,
                                 top_half,
                                 img3.Width * xs,
                                 height_xs);
 
-                        //top_half = shang * CC.A4GBILV + height_xs;
+                        //top_half = up * CC.A4GBILV + height_xs;
                     }
 
                 }
                 //4
                 if (img4 != null)
                 {
-                    //float width_xs = (CC.A4CHANG - zuo - you) * CC.A4GBILV;
-                    //float height_xs = ((CC.A4GAO - shang - 3 * zhong - xia)/4) * CC.A4GBILV;
+                    //float width_xs = (CC.A4CHANG - left - right) * CC.A4GBILV;
+                    //float height_xs = ((CC.A4GAO - up - 3 * v_middle - down)/4) * CC.A4GBILV;
 
                     xs = 0.0f;
                     x_xs = width_xs / img4.Width;
                     y_xs = height_xs / img4.Height;
 
-                    top_half = top_half - height_xs - zhong * CC.A4GBILV;
+                    top_half = top_half - height_xs - v_middle * CC.A4GBILV;
 
                     if (x_xs < y_xs)
                     {
                         xs = x_xs;
                         g1.DrawImage(img4,
-                                zuo * CC.A4GBILV,
+                                left * CC.A4GBILV,
                                 top_half + img4.Height * xs,
                                 width_xs,
                                 img4.Height * xs);
 
-                        //top_half = top_half - height_xs - zhong;
+                        //top_half = top_half - height_xs - v_middle;
                     }
                     else
                     {
                         xs = y_xs;
                         g1.DrawImage(img4,
-                                zuo * CC.A4GBILV + (width_xs - img4.Width * xs) / 2,
+                                left * CC.A4GBILV + (width_xs - img4.Width * xs) / 2,
                                 top_half,
                                 img4.Width * xs,
                                 height_xs);
 
-                        //top_half = shang * CC.A4GBILV + height_xs;
+                        //top_half = up * CC.A4GBILV + height_xs;
                     }
 
                 }
                 //5
                 if (img5 != null)
                 {
-                    //float width_xs = (CC.A4CHANG - zuo - you) * CC.A4GBILV;
-                    //float height_xs = ((CC.A4GAO - shang - 3 * zhong - xia)/4) * CC.A4GBILV;
+                    //float width_xs = (CC.A4CHANG - left - right) * CC.A4GBILV;
+                    //float height_xs = ((CC.A4GAO - up - 3 * v_middle - down)/4) * CC.A4GBILV;
 
                     xs = 0.0f;
                     x_xs = width_xs / img5.Width;
                     y_xs = height_xs / img5.Height;
 
-                    top_half = top_half - height_xs - zhong * CC.A4GBILV;
+                    top_half = top_half - height_xs - v_middle * CC.A4GBILV;
 
                     if (x_xs < y_xs)
                     {
                         xs = x_xs;
                         g1.DrawImage(img5,
-                                zuo * CC.A4GBILV,
+                                left * CC.A4GBILV,
                                 top_half + img5.Height * xs,
                                 width_xs,
                                 img5.Height * xs);
 
-                        //top_half = top_half - height_xs - zhong;
+                        //top_half = top_half - height_xs - v_middle;
                     }
                     else
                     {
                         xs = y_xs;
                         g1.DrawImage(img5,
-                                zuo * CC.A4GBILV + (width_xs - img5.Width * xs) / 2,
+                                left * CC.A4GBILV + (width_xs - img5.Width * xs) / 2,
                                 top_half,
                                 img5.Width * xs,
                                 height_xs);
 
-                        //top_half = shang * CC.A4GBILV + height_xs;
+                        //top_half = up * CC.A4GBILV + height_xs;
                     }
 
                 }
                 //6
                 if (img6 != null)
                 {
-                    //float width_xs = (CC.A4CHANG - zuo - you) * CC.A4GBILV;
-                    //float height_xs = ((CC.A4GAO - shang - 3 * zhong - xia)/4) * CC.A4GBILV;
+                    //float width_xs = (CC.A4CHANG - left - right) * CC.A4GBILV;
+                    //float height_xs = ((CC.A4GAO - up - 3 * v_middle - down)/4) * CC.A4GBILV;
 
                     xs = 0.0f;
                     x_xs = width_xs / img6.Width;
                     y_xs = height_xs / img6.Height;
 
-                    top_half = top_half - height_xs - zhong * CC.A4GBILV;
+                    top_half = top_half - height_xs - v_middle * CC.A4GBILV;
 
                     if (x_xs < y_xs)
                     {
                         xs = x_xs;
                         g1.DrawImage(img6,
-                                zuo * CC.A4GBILV,
+                                left * CC.A4GBILV,
                                 top_half + img6.Height * xs,
                                 width_xs,
                                 img6.Height * xs);
 
-                        //top_half = top_half - height_xs - zhong;
+                        //top_half = top_half - height_xs - v_middle;
                     }
                     else
                     {
                         xs = y_xs;
                         g1.DrawImage(img6,
-                                zuo * CC.A4GBILV + (width_xs - img6.Width * xs) / 2,
+                                left * CC.A4GBILV + (width_xs - img6.Width * xs) / 2,
                                 top_half,
                                 img6.Width * xs,
                                 height_xs);
 
-                        //top_half = shang * CC.A4GBILV + height_xs;
+                        //top_half = up * CC.A4GBILV + height_xs;
                     }
 
                 }
                 //7
                 if (img7 != null)
                 {
-                    //float width_xs = (CC.A4CHANG - zuo - you) * CC.A4GBILV;
-                    //float height_xs = ((CC.A4GAO - shang - 3 * zhong - xia)/4) * CC.A4GBILV;
+                    //float width_xs = (CC.A4CHANG - left - right) * CC.A4GBILV;
+                    //float height_xs = ((CC.A4GAO - up - 3 * v_middle - down)/4) * CC.A4GBILV;
 
                     xs = 0.0f;
                     x_xs = width_xs / img7.Width;
                     y_xs = height_xs / img7.Height;
 
-                    top_half = top_half - height_xs - zhong * CC.A4GBILV;
+                    top_half = top_half - height_xs - v_middle * CC.A4GBILV;
 
                     if (x_xs < y_xs)
                     {
                         xs = x_xs;
                         g1.DrawImage(img7,
-                                zuo * CC.A4GBILV,
+                                left * CC.A4GBILV,
                                 top_half + img7.Height * xs,
                                 width_xs,
                                 img7.Height * xs);
 
-                        //top_half = top_half - height_xs - zhong;
+                        //top_half = top_half - height_xs - v_middle;
                     }
                     else
                     {
                         xs = y_xs;
                         g1.DrawImage(img7,
-                                zuo * CC.A4GBILV + (width_xs - img7.Width * xs) / 2,
+                                left * CC.A4GBILV + (width_xs - img7.Width * xs) / 2,
                                 top_half,
                                 img7.Width * xs,
                                 height_xs);
 
-                        //top_half = shang * CC.A4GBILV + height_xs;
+                        //top_half = up * CC.A4GBILV + height_xs;
                     }
 
                 }
                 //8
                 if (img8 != null)
                 {
-                    //float width_xs = (CC.A4CHANG - zuo - you) * CC.A4GBILV;
-                    //float height_xs = ((CC.A4GAO - shang - 3 * zhong - xia)/4) * CC.A4GBILV;
+                    //float width_xs = (CC.A4CHANG - left - right) * CC.A4GBILV;
+                    //float height_xs = ((CC.A4GAO - up - 3 * v_middle - down)/4) * CC.A4GBILV;
 
                     xs = 0.0f;
                     x_xs = width_xs / img8.Width;
                     y_xs = height_xs / img8.Height;
 
-                    top_half = top_half - height_xs - zhong * CC.A4GBILV;
+                    top_half = top_half - height_xs - v_middle * CC.A4GBILV;
 
                     if (x_xs < y_xs)
                     {
                         xs = x_xs;
                         g1.DrawImage(img8,
-                                zuo * CC.A4GBILV,
+                                left * CC.A4GBILV,
                                 top_half + img8.Height * xs,
                                 width_xs,
                                 img8.Height * xs);
 
-                        //top_half = top_half - height_xs - zhong;
+                        //top_half = top_half - height_xs - v_middle;
                     }
                     else
                     {
                         xs = y_xs;
                         g1.DrawImage(img8,
-                                zuo * CC.A4GBILV + (width_xs - img8.Width * xs) / 2,
+                                left * CC.A4GBILV + (width_xs - img8.Width * xs) / 2,
                                 top_half,
                                 img8.Width * xs,
                                 height_xs);
 
-                        //top_half = shang * CC.A4GBILV + height_xs;
+                        //top_half = up * CC.A4GBILV + height_xs;
                     }
 
                 }
@@ -2149,19 +2150,19 @@ namespace 相册排版界面
             if (file != "")
             {
                 var files = file.Split('-');
-                shang = int.Parse(files[0]);
-                xia = int.Parse(files[1]);
-                zuo = int.Parse(files[2]);
-                you = int.Parse(files[3]);
-                zhong = int.Parse(files[4]);
+                up = int.Parse(files[0]);
+                down = int.Parse(files[1]);
+                left = int.Parse(files[2]);
+                right = int.Parse(files[3]);
+                v_middle = int.Parse(files[4]);
             }
             else
             {
-                shang = 8;
-                xia = 8;
-                zuo = 8;
-                you = 8;
-                zhong = 8;
+                up = 8;
+                down = 8;
+                left = 8;
+                right = 8;
+                v_middle = 8;
             }
             panel1.Visible = false;
             this.panel1.Location = new System.Drawing.Point(12, 12);
@@ -2175,11 +2176,11 @@ namespace 相册排版界面
                          numericUpDown4.Value.ToString() + "-" +
                          numericUpDown5.Value.ToString());
 
-            shang = int.Parse(numericUpDown1.Value.ToString());
-            xia = int.Parse(numericUpDown2.Value.ToString());
-            zuo = int.Parse(numericUpDown3.Value.ToString());
-            you = int.Parse(numericUpDown4.Value.ToString());
-            zhong = int.Parse(numericUpDown5.Value.ToString());
+            up = int.Parse(numericUpDown1.Value.ToString());
+            down = int.Parse(numericUpDown2.Value.ToString());
+            left = int.Parse(numericUpDown3.Value.ToString());
+            right = int.Parse(numericUpDown4.Value.ToString());
+            v_middle = int.Parse(numericUpDown5.Value.ToString());
 
             if (panel1.Visible)
             {
