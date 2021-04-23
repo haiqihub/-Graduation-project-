@@ -11,18 +11,19 @@ using System.Windows.Forms;
 
 namespace 相册排版界面
 {
-    public partial class FontSelect : Form
+    public partial class TextDescription : Form
     {
         public string fontName = "宋体";
         public int fontSize = 12;
         public string content = "";
         public string location = "图片上方";
 
-        public FontSelect()
+        Boolean textboxHasText = false;
+
+        public TextDescription()
         {
             InitializeComponent();
         }
-
         //获取系统字体方法
         public void GetFontNames()
         {
@@ -50,7 +51,7 @@ namespace 相册排版界面
 
         private void button1_Click(object sender, EventArgs e)
         {
-            fontName = (string) comboBox1.SelectedItem;
+            fontName = (string)comboBox1.SelectedItem;
             fontSize = (int)comboBox2.SelectedItem;
             content = this.textBox1.Text;
             location = (string)comboBox3.SelectedItem;
@@ -61,12 +62,43 @@ namespace 相册排版界面
         private void FontSelect_Shown(object sender, EventArgs e)
         {
             GetFontNames();
-            this.textBox1.Text = "";
+            //this.textBox1.Text = "";
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            //textBox1.Text = "";
+        }
+
+        private void TextDescription_Load(object sender, EventArgs e)
+        {
 
         }
+
+        private void textBox1_Enter(object sender, EventArgs e)
+        {
+            if(textboxHasText==false)
+            {
+                textBox1.Text = "";
+            }
+            textBox1.ForeColor = Color.Black;
+        }
+
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
+            if(textBox1.Text == "")
+            {
+                textBox1.Text = "请输入照片描述";
+                textBox1.ForeColor = Color.LightGray;
+                textboxHasText = false;
+
+            }
+            else
+            {
+                textboxHasText = true;
+            }
+        }
+
+       
     }
 }

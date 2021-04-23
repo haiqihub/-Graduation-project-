@@ -58,3 +58,4 @@ E:\Education\毕设相关\相册排版制作\相册排版界面last\相册排版
 E:\Education\毕设相关\相册排版制作\相册排版界面last\相册排版界面\obj\Debug\123.csproj.CopyComplete
 E:\Education\毕设相关\相册排版制作\相册排版界面last\相册排版界面\obj\Debug\相册排版制作.exe
 E:\Education\毕设相关\相册排版制作\相册排版界面last\相册排版界面\obj\Debug\相册排版制作.pdb
+E:\Education\毕设相关\相册排版制作\相册排版界面last\相册排版界面\obj\Debug\相册排版界面.TextDescription.resources

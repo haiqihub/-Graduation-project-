@@ -21,6 +21,7 @@ namespace 相册排版界面
         int right = 0;
         int v_middle = 0;
         int h_middle = 0;
+        int text_photo = 0;
         FirstDlg modelDlg = new FirstDlg();
         int index = 1;
 
@@ -207,6 +208,10 @@ namespace 相册排版界面
             {
                 //单张
                 HechengA1();
+                if (checkBox1.Checked)
+                {
+                    AddDescription(index);
+                }
             }
             else if (index == 2)
             {
@@ -275,6 +280,12 @@ namespace 相册排版界面
             return null;
         }
 
+        //照片的描述textbox绘制
+        public void AddDescription(int index)
+        {
+
+        }
+
         public void HechengA1()
         {
             Image img1 = null;
@@ -313,7 +324,7 @@ namespace 相册排版界面
                 float xs = 0.0f;
                 float x_xs = width_xs / img1.Width;
                 float y_xs = height_xs / img1.Height;
-
+                //1
                 if (x_xs < y_xs)
                 {
                     xs = x_xs;
@@ -2098,6 +2109,7 @@ namespace 相册排版界面
                 numericUpDown4.Value = int.Parse(files[3]);
                 numericUpDown5.Value = int.Parse(files[4]);
                 numericUpDown6.Value = int.Parse(files[5]);
+                numericUpDown7.Value = int.Parse(files[6]);
             }
             else
             {
@@ -2105,8 +2117,9 @@ namespace 相册排版界面
                 numericUpDown2.Value = 8;
                 numericUpDown3.Value = 8;
                 numericUpDown4.Value = 8;
-                numericUpDown5.Value = 8;
-                numericUpDown6.Value = 8;
+                numericUpDown5.Value = 7;
+                numericUpDown6.Value = 5;
+                numericUpDown7.Value = 2;
             }
             if (!panel1.Visible)
             {
@@ -2126,6 +2139,7 @@ namespace 相册排版界面
                 right = int.Parse(files[3]);
                 v_middle = int.Parse(files[4]);
                 h_middle = int.Parse(files[5]);
+                text_photo = int.Parse(files[6]);
             }
             else
             {
@@ -2133,8 +2147,9 @@ namespace 相册排版界面
                 down = 8;
                 left = 8;
                 right = 8;
-                v_middle = 8;
-                h_middle = 8;
+                v_middle = 7;
+                h_middle = 5;
+                text_photo = 2;
             }
             panel1.Visible = false;
             this.panel1.Location = new System.Drawing.Point(12, 12);
@@ -2147,7 +2162,8 @@ namespace 相册排版界面
                          numericUpDown3.Value.ToString() + "-" +
                          numericUpDown4.Value.ToString() + "-" +
                          numericUpDown5.Value.ToString() + "-" +
-                         numericUpDown6.Value.ToString());
+                         numericUpDown6.Value.ToString() + "-" +
+                         numericUpDown7.Value.ToString());
 
             up = int.Parse(numericUpDown1.Value.ToString());
             down = int.Parse(numericUpDown2.Value.ToString());
@@ -2155,6 +2171,7 @@ namespace 相册排版界面
             right = int.Parse(numericUpDown4.Value.ToString());
             v_middle = int.Parse(numericUpDown5.Value.ToString());
             h_middle = int.Parse(numericUpDown6.Value.ToString());
+            text_photo = int.Parse(numericUpDown7.Value.ToString());
 
             if (panel1.Visible)
             {
@@ -2182,5 +2199,16 @@ namespace 相册排版界面
         {
 
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                相册排版界面.TextDescription textDescription = new 相册排版界面.TextDescription();
+                textDescription.ShowDialog();
+            } 
+        }
+
+
     }
 }
