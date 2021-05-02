@@ -39,6 +39,8 @@
             this.添加图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.从文件夹ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.从图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.插入ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.插入照片到照片夹ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.批量处理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.单张ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.单张转90度ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,6 +73,7 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.listView2 = new System.Windows.Forms.ListView();
+            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -89,6 +92,7 @@
             this.toolStripMenuItem1,
             this.打开ToolStripMenuItem,
             this.添加图片ToolStripMenuItem,
+            this.插入ToolStripMenuItem,
             this.批量处理ToolStripMenuItem,
             this.编辑ToolStripMenuItem,
             this.导出ToolStripMenuItem});
@@ -151,6 +155,21 @@
             this.从图片ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
             this.从图片ToolStripMenuItem.Text = "图片";
             this.从图片ToolStripMenuItem.Click += new System.EventHandler(this.从图片ToolStripMenuItem_Click);
+            // 
+            // 插入ToolStripMenuItem
+            // 
+            this.插入ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.插入照片到照片夹ToolStripMenuItem});
+            this.插入ToolStripMenuItem.Name = "插入ToolStripMenuItem";
+            this.插入ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.插入ToolStripMenuItem.Text = "插入";
+            // 
+            // 插入照片到照片夹ToolStripMenuItem
+            // 
+            this.插入照片到照片夹ToolStripMenuItem.Name = "插入照片到照片夹ToolStripMenuItem";
+            this.插入照片到照片夹ToolStripMenuItem.Size = new System.Drawing.Size(212, 26);
+            this.插入照片到照片夹ToolStripMenuItem.Text = "插入照片到照片夹";
+            this.插入照片到照片夹ToolStripMenuItem.Click += new System.EventHandler(this.插入照片到照片夹ToolStripMenuItem_Click);
             // 
             // 批量处理ToolStripMenuItem
             // 
@@ -359,6 +378,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // left
             // 
@@ -409,11 +429,22 @@
             // 
             this.listView2.BackColor = System.Drawing.SystemColors.Control;
             this.listView2.HideSelection = false;
+            this.listView2.LargeImageList = this.imageList2;
             this.listView2.Location = new System.Drawing.Point(30, 39);
+            this.listView2.Margin = new System.Windows.Forms.Padding(13, 0, 0, 0);
+            this.listView2.MultiSelect = false;
             this.listView2.Name = "listView2";
             this.listView2.Size = new System.Drawing.Size(206, 668);
             this.listView2.TabIndex = 6;
             this.listView2.UseCompatibleStateImageBehavior = false;
+            this.listView2.SelectedIndexChanged += new System.EventHandler(this.listView2_SelectedIndexChanged);
+            this.listView2.Click += new System.EventHandler(this.listView2_Click);
+            // 
+            // imageList2
+            // 
+            this.imageList2.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.imageList2.ImageSize = new System.Drawing.Size(80, 90);
+            this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // Layout
             // 
@@ -486,5 +517,8 @@
         private System.Windows.Forms.ToolStripMenuItem 八张合并ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 八张合并转90度ToolStripMenuItem1;
         private System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.ToolStripMenuItem 插入ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 插入照片到照片夹ToolStripMenuItem;
+        private System.Windows.Forms.ImageList imageList2;
     }
 }

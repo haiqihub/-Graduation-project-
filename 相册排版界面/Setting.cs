@@ -15,13 +15,15 @@ namespace 相册排版界面
 {
     public partial class Setting : Form
     {
-        int up = 0;
-        int down = 0;
-        int left = 0;
-        int right = 0;
-        int v_middle = 0;
-        int h_middle = 0;
-        int text_photo = 0;
+        public int up = 0;
+        public int down = 0;
+        public int left = 0;
+        public int right = 0;
+        public int v_middle = 0;
+        public int h_middle = 0;
+        public int text_photo = 0;
+
+        bool checkFlag = false;
         FirstDlg modelDlg = new FirstDlg();
         int index = 1;
 
@@ -33,7 +35,7 @@ namespace 相册排版界面
 
         int result = 0;
         bool bClearDone = false;
-        private Layout layout;
+        public Layout layout;
 
         public int getResult()
         {
@@ -48,6 +50,7 @@ namespace 相册排版界面
         public Setting(Layout layout)
         {
             InitializeComponent();
+            Control.CheckForIllegalCrossThreadCalls = false;
             this.comboBox1.SelectedIndex = 0;
             Path1 = System.Environment.CurrentDirectory + "\\done";
             this.layout = layout;
@@ -150,6 +153,12 @@ namespace 相册排版界面
                 Directory.CreateDirectory(Path1);
             DelectDir(Path1);
 
+            //添加文字描述：TextDescription
+            if (checkBox1.Checked)
+            {
+                checkFlag = true;
+            }
+
             if (comboBox1.SelectedIndex == 0)
             {
                 index = 1;
@@ -208,15 +217,21 @@ namespace 相册排版界面
             {
                 //单张
                 HechengA1();
-                if (checkBox1.Checked)
-                {
-                    AddDescription(index);
-                }
+                //if (checkFlag)
+                //{
+                //    Layout layout = new Layout();
+                //    layout.AddDescription(index);
+                //}
             }
             else if (index == 2)
             {
                 //单张转90
                 HechengA2();
+                //if (checkFlag)
+                //{
+                //    Layout layout = new Layout();
+                //    layout.AddDescription(index);
+                //}
             }
             else if (index == 3)
             {
@@ -249,6 +264,13 @@ namespace 相册排版界面
                 HechengD2();
             }
 
+            // 勾选添加文字框并点击最后确认后，进行文字渲染 ：TextDescription
+            //if (checkFlag)
+            //{
+            //    Layout layout = new Layout();
+            //    layout.AddDescription(index);
+            //}
+
             bw.ReportProgress(100);
         }
 
@@ -280,11 +302,46 @@ namespace 相册排版界面
             return null;
         }
 
-        //照片的描述textbox绘制
-        public void AddDescription(int index)
-        {
+        //照片的描述textbox绘制： layout加入文字ToolStripMenuItem_Click
+        //public void AddDescription(int index)
+        //{
+        //    fontSelect.ShowDialog(this);
 
-        }
+        //    string fontName = fontSelect.fontName;
+        //    int fontSize = fontSelect.fontSize;
+        //    string content = fontSelect.content;
+        //    string location = fontSelect.location;
+
+        //    Bitmap bmp = new Bitmap(listDone[cur_pos]);
+        //    Graphics g = Graphics.FromImage(bmp);
+        //    Font font = new Font(fontName, fontSize);
+        //    SolidBrush sbrush = new SolidBrush(Color.Black);
+        //    //g.DrawString(content, font, sbrush, new PointF(10, 10));
+
+        //    if (location == "图片上方")
+        //    {
+        //        g.DrawString(content, font, sbrush, new PointF(810, 200));
+        //    }
+        //    else if (location == "图片中间")
+        //    {
+        //        g.DrawString(content, font, sbrush, new PointF(810, 1600));
+        //    }
+        //    if (location == "图片下方")
+        //    {
+        //        g.DrawString(content, font, sbrush, new PointF(810, 3100));
+        //    }
+        //    //MemoryStream ms = new MemoryStream();
+        //    //bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+
+        //    string name = listDone[cur_pos];
+        //    name += fontIndex;
+
+        //    bmp.Save(name);
+
+        //    string path = name;
+        //    listDone[cur_pos] = path;
+        //    updateTopShow();
+        //}
 
         public void HechengA1()
         {
@@ -343,9 +400,13 @@ namespace 相册排版界面
                             img1.Width * xs,
                             height_xs);
                 }
+                //加入TextBox绘制
+                if (checkFlag)
+                {
+                    this.layout.AddDescription(index);
+                  
+                }
 
-                //在x=0，y在图一往下10像素处画上图二
-                //map1.Dispose();
 
                 var vv = System.IO.Path.GetFileNameWithoutExtension(item);
                 var vv2 = System.IO.Path.GetExtension(item);

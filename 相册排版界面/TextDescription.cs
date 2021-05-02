@@ -8,25 +8,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Web;
+
+using iTextSharp.text;
 
 namespace 相册排版界面
 {
     public partial class TextDescription : Form
     {
         public string fontName = "宋体";
-        public int fontSize = 12;
+        public int fontSize = 10;
         public string content = "";
-        public string location = "图片上方";
+        public string fontColor = "Black";
 
-        Boolean textboxHasText = false;
-
+        bool textboxHasText = false;
+       
         public TextDescription()
         {
             InitializeComponent();
+            
         }
-        //获取系统字体方法
+        
         public void GetFontNames()
         {
+            //获取系统字体
             FontFamily[] fontFamilies;
             InstalledFontCollection installedFontCollection = new InstalledFontCollection();
             fontFamilies = installedFontCollection.Families;
@@ -36,17 +41,20 @@ namespace 相册排版界面
             }
             this.comboBox1.SelectionStart = 1;
             fontName = fontFamilies[0].Name;
-
+            //字体大小
             for (int i = 7; i < 60; i++)
             {
                 this.comboBox2.Items.Add(i);
             }
             this.comboBox2.SelectionStart = 5;
-
-            this.comboBox3.Items.Add("图片上方");
-            this.comboBox3.Items.Add("图片中间");
-            this.comboBox3.Items.Add("图片下方");
-
+            //获取系统字体颜色
+            Array colors = System.Enum.GetValues(typeof(System.Drawing.KnownColor));
+            foreach (object colorName in colors)
+            {
+                this.comboBox3.Items.Add(colorName.ToString());
+            }
+            this.comboBox3.SelectionStart = 7;
+          
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -54,7 +62,7 @@ namespace 相册排版界面
             fontName = (string)comboBox1.SelectedItem;
             fontSize = (int)comboBox2.SelectedItem;
             content = this.textBox1.Text;
-            location = (string)comboBox3.SelectedItem;
+            fontColor = (string)comboBox3.SelectedItem;
 
             this.Hide();
         }

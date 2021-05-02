@@ -30,7 +30,9 @@ namespace 相册排版界面
         public Layout()
         {
             InitializeComponent();
+            //Control.CheckForIllegalCrossThreadCalls = false;
             setting = new Setting(this);
+            
         }
 
         private Image GetImage(string fileName)
@@ -173,7 +175,7 @@ namespace 相册排版界面
         {
             if (cur_pos <= 0)
             {
-                MessageBox.Show("当前第一张");
+                MessageBox.Show("当前是第一张");
                 return;
             }
 
@@ -190,7 +192,7 @@ namespace 相册排版界面
         {
             if (cur_pos >= listDone.Count - 1)
             {
-                MessageBox.Show("当前最后一张");
+                MessageBox.Show("当前是最后一张");
                 return;
             }
 
@@ -318,7 +320,11 @@ namespace 相册排版界面
                 StartSetting(4);
             }
         }
+        //插入文件夹中的图片到左侧照片夹
+        private void 插入照片到照片夹ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
+        }
         private void StartSetting(int index)
         {
             bool clearDone = true;
@@ -548,8 +554,82 @@ namespace 相册排版界面
             StartSetting(108);
         }
 
-
+        
         int fontIndex = 0;
+        TextDescription textDescription = new TextDescription();
+
+        //照片的描述 textbox绘制： layout加入文字ToolStripMenuItem_Click
+        public void AddDescription(int num)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new MethodInvoker(delegate { AddDescription(num); }));
+                return;
+            }
+            string fontName = textDescription.fontName;
+            int fontSize = textDescription.fontSize;
+            string content = textDescription.content;
+            string fontColor = textDescription.fontColor;
+            //颜色 string转为system.drawing.color
+            Color sfontColor = System.Drawing.ColorTranslator.FromHtml(fontColor);
+
+            //// Bitmap bmp = new Bitmap(listDone[cur_pos]);
+            //Bitmap bmp = null;
+            //try
+            //{
+            //    bmp = new Bitmap(CC.A4CHANG_XS, CC.A4GAO_XS);
+            //}
+            //catch (Exception)
+            //{
+            //}
+
+            //Graphics g = Graphics.FromImage(bmp);
+            //Font font = new Font(fontName, fontSize);
+            //SolidBrush sbrush = new SolidBrush(sfontColor);
+            ////g.DrawString(content, font, sbrush, new PointF(10, 10));
+
+            //TextBox 绘制
+            int up = setting.up;
+            int down = setting.down;
+            int left = setting.left;
+            int right = setting.right;
+            int v_middle = setting.v_middle;
+            int h_middle = setting.h_middle;
+            int text_photo = setting.text_photo;
+            float x = 0;
+            float y = 0;
+            float width_xs = (CC.A4CHANG - left - right) * CC.A4GBILV;
+            float height_xs = (CC.A4GAO - up - down) * CC.A4GBILV;
+
+            if (num == 1 | num == 2)
+            { 
+
+                TextBox tb1 = new TextBox();
+                tb1.Name  = "textBox" + 3;
+                tb1.Text = "aaaaaaaaaaaaaaaaaaaaaaaa";
+                x = left * CC.A4GBILV;
+                y = up * CC.A4GBILV + height_xs + text_photo * CC.A4GBILV;
+                tb1.Location= new Point((int)x,(int)y);
+                tb1.Size = new Size(400,50);
+                tb1.BringToFront();
+                this.Controls.Add(tb1);
+
+                //g.DrawString(content, font, sbrush, new PointF(x, y));
+            }
+    
+
+
+            //string name = listDone[cur_pos];
+            //name += fontIndex;
+
+            //bmp.Save(name);
+
+            //string path = name;
+            //listDone[cur_pos] = path;
+            //updateTopShow();
+        }
+
+        
         FontSelect fontSelect = new FontSelect();
         private void 加入文字ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -637,6 +717,10 @@ namespace 相册排版界面
             }
 
             loadImage();
+
+        }
+        private void listView2_Click(object sender, EventArgs e)
+        {
 
         }
 
@@ -2277,6 +2361,18 @@ namespace 相册排版界面
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
+
+        private void listView2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
