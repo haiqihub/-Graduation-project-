@@ -136,7 +136,7 @@
             this.checkBox1.Location = new System.Drawing.Point(240, 70);
             this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(113, 18);
+            this.checkBox1.Size = new System.Drawing.Size(119, 19);
             this.checkBox1.TabIndex = 17;
             this.checkBox1.Text = "是否添加文字";
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
@@ -313,7 +313,7 @@
             this.MinimizeBox = false;
             this.Name = "Setting";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "请选择方式并确定";
+            this.Text = "66";
             this.Load += new System.EventHandler(this.Setting_Load);
             this.Shown += new System.EventHandler(this.Setting_Shown);
             this.panel1.ResumeLayout(false);
@@ -326,7 +326,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

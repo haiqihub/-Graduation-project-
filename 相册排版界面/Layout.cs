@@ -20,10 +20,14 @@ namespace 相册排版界面
         private int cur_pos = 0;
         private int cur_start = 0;
         //private List<string> listAll = new List<string>();
+
         private List<ImageBean> listAll = new List<ImageBean>();
+        private List<ImageBean> listLeftAll = new List<ImageBean>();
         private List<string> listCur = new List<string>();
         private List<string> listDone = new List<string>();
         private List<string> listDone1 = new List<string>();
+        private List<string> listLeft = new List<string>();
+        private List<string> listLeftDone = new List<string>();
 
         Setting setting;
 
@@ -85,6 +89,24 @@ namespace 相册排版界面
             }
 
             loadImage1();
+        }
+        //左侧照片夹列表更新
+        private void updateLeftShow()
+        {
+            listView2.Items.Clear();
+            imageList2.Images.Clear();
+
+            for (int i = cur_start;  i < listLeft.Count; i++)
+            {
+                string label = (i + 1) + " - " + listLeft.Count;
+
+                imageList2.Images.Add(GetImage(listLeft[i]));
+                listView2.Items.Add(label);
+                listView2.Items[i - cur_start].ImageIndex = i - cur_start;
+
+            }
+
+            //loadImage();
         }
 
         int select_index2 = -1;
@@ -266,7 +288,7 @@ namespace 相册排版界面
             }
             //updateTopShow();
         }
-
+       
         //添加文件夹
         private void 从文件夹ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -320,11 +342,129 @@ namespace 相册排版界面
                 StartSetting(4);
             }
         }
-        //插入文件夹中的图片到左侧照片夹
-        private void 插入照片到照片夹ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
 
+        //打开文件夹到左侧照片夹
+        private void 打开文件夹ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //打开选择文件夹对话框
+                FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+                DialogResult result = folderBrowserDialog.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    
+                    listLeft.Clear();
+                    listLeftAll.Clear();
+                    //获取用户选择的文件夹路径
+                    string folderDirPath = folderBrowserDialog.SelectedPath;
+
+                    //获取目录与子目录
+                    DirectoryInfo dir = new DirectoryInfo(folderDirPath);
+                    //获取当前目录JPG文件列表 GetFiles获取指定目录中文件的名称(包括其路径)
+                    FileInfo[] fileInfo = dir.GetFiles("*.jpg");
+                    for (int i = 0; i < fileInfo.Length; i++)
+                    {
+                        listLeft.Add(fileInfo[i].FullName);
+                        //listCur.Add(fileInfo[i].FullName);
+                        //listAll.Add(fileInfo[i].FullName);
+                    }
+
+                    //StartSetting(5);
+                    updateLeftShow();
+
+                }
+            }
+            catch (Exception msg)
+            {
+                //报错提示 未将对象引用设置到对象的实例
+                throw msg;
+            }
         }
+        //打开图片到左侧照片夹
+        private void 照片夹打开照片ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Multiselect = true;//等于true表示可以选择多个文件
+            dlg.DefaultExt = ".jpg";
+            dlg.Filter = "图片|*.jpg";
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                //listCur.Clear();
+                listLeft.Clear();
+                listLeftAll.Clear();
+                //listAll.Clear();
+                foreach (string file in dlg.FileNames)
+                {
+                    listLeft.Add(file);
+                    //listAll.Add(file);
+                }
+                select_index2 = -1;
+                //StartSetting(2);
+                updateLeftShow();
+            }
+            //updateTopShow();
+        }
+
+        //照片夹：添加文件夹
+        private void 照片夹添加文件夹ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //打开选择文件夹对话框
+                FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+                DialogResult result = folderBrowserDialog.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    //listLeft.Clear();
+                    //获取用户选择的文件夹路径
+                    string folderDirPath = folderBrowserDialog.SelectedPath;
+
+                    //获取目录与子目录
+                    DirectoryInfo dir = new DirectoryInfo(folderDirPath);
+                    //获取当前目录JPG文件列表 GetFiles获取指定目录中文件的名称(包括其路径)
+                    FileInfo[] fileInfo = dir.GetFiles("*.jpg");
+                    for (int i = 0; i < fileInfo.Length; i++)
+                    {
+                        listLeft.Add(fileInfo[i].FullName);
+                        //listAll.Add(fileInfo[i].FullName);
+                    }
+
+                    //StartSetting(3);
+                    updateLeftShow();
+                    
+                }
+            }
+            catch (Exception msg)
+            {
+                //报错提示 未将对象引用设置到对象的实例
+                throw msg;
+            }
+        }
+
+        //照片夹：添加图片
+        private void 照片夹添加图片ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Multiselect = true;//等于true表示可以选择多个文件
+            dlg.DefaultExt = ".jpg";
+            dlg.Filter = "图片|*.jpg";
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                //listLeft.Clear();
+                foreach (string file in dlg.FileNames)
+                {
+                    listLeft.Add(file);
+                    //listAll.Add(file);
+                }
+
+                //StartSetting(4);
+                updateLeftShow();
+                //StartLeftSetting(6);
+            }
+        }
+
+
         private void StartSetting(int index)
         {
             bool clearDone = true;
@@ -416,7 +556,7 @@ namespace 相册排版界面
                 }
             }
             
-
+            //3 添加文件夹 ；4 添加图片 
             if (index == 3 || index == 4)
             {
                 clearDone = false;
@@ -431,7 +571,28 @@ namespace 相册排版界面
                 loadImageAfterDeal(type, index);
             }
         }
-        
+
+        //private void StartLeftSetting(int index)
+        //{
+        //    bool clearDone = true;
+        //    //5 添加文件夹到照片夹 ；6 添加图片到照片夹
+        //    if ( index == 5 || index == 6)
+        //    {
+        //        clearDone = false;
+        //    }
+
+        //    setting.postData(listCur, index, clearDone);
+        //    //setting.ShowDialog(this);
+        //    int result = setting.getResult();
+        //    if (result == 1)
+        //    {
+        //        int type = setting.getType();
+        //        loadLeftImageAfterDeal(type, index);
+        //    }
+
+        //}
+
+
         private void loadImageAfterDeal(int type, int index)
         {
             //获取用户选择的文件夹路径
@@ -461,6 +622,7 @@ namespace 相册排版界面
                     listDone1.Add(fileInfo[i].FullName);
                         
                 }
+                
                 cur_pos = 0;
                 cur_start = 0;
                 updateTopShow1();
@@ -504,6 +666,42 @@ namespace 相册排版界面
             }
 
                 
+        }
+        //左侧照片夹处理添加暂存
+        private void loadLeftImageAfterDeal(int type, int index)
+        {
+            //获取用户选择的文件夹路径
+            string folderDirPath = System.Environment.CurrentDirectory + "\\left";
+
+            //获取目录与子目录
+            DirectoryInfo dir = new DirectoryInfo(folderDirPath);
+            //获取当前目录JPG文件列表 GetFiles获取指定目录中文件的名称(包括其路径)
+            FileInfo[] fileInfo = dir.GetFiles("*.jpg");
+
+            for (int i = 0; i < listLeft.Count; i++)
+            {
+                ImageBean beanL = new ImageBean();
+                beanL.name = listLeft[i];
+                beanL.type = type;
+                listLeftAll.Add(beanL);
+            }
+
+            //move up dir...
+
+            for (int i = 0; i < fileInfo.Length; i++)
+            {
+                if (!listLeftDone.Contains(fileInfo[i].FullName))
+                {
+                    listLeftDone.Add(fileInfo[i].FullName);
+                }
+            }
+
+            cur_pos = 0;
+            cur_start = 0;
+            updateLeftShow();
+
+            
+
         }
 
         private void 单张ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -721,7 +919,17 @@ namespace 相册排版界面
         }
         private void listView2_Click(object sender, EventArgs e)
         {
+            int select_index_left = 0;
+            ListView.SelectedIndexCollection left_indexes = this.listView2.SelectedIndices;
+            if (left_indexes.Count > 0)
+            {
+                select_index_left = left_indexes[0];
+            }
+            //写一个可以出现大光标的函数 并记录大光标的位置 然后在插入图片时可以插入到该位置
 
+            //loadImage(); 这个是最后把照片夹内容导入右侧picturebox可用
+            //要写一个可以把listLeft写入listview里的imageview的函数
+            //updateLeftShow();
         }
 
         private void 更换图片ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2376,5 +2584,7 @@ namespace 相册排版界面
         {
 
         }
+
+        
     }
 }

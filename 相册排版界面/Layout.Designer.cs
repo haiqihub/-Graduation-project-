@@ -40,7 +40,13 @@
             this.从文件夹ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.从图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.插入ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.插入照片到照片夹ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.照片夹打开ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.照片夹打开文件夹ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.照片夹打开照片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.照片夹添加ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.照片夹添加文件夹ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.照片夹添加图片ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.照片夹排版ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.批量处理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.单张ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.单张转90度ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -159,17 +165,64 @@
             // 插入ToolStripMenuItem
             // 
             this.插入ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.插入照片到照片夹ToolStripMenuItem});
+            this.照片夹打开ToolStripMenuItem,
+            this.照片夹添加ToolStripMenuItem,
+            this.照片夹排版ToolStripMenuItem});
             this.插入ToolStripMenuItem.Name = "插入ToolStripMenuItem";
-            this.插入ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
-            this.插入ToolStripMenuItem.Text = "插入";
+            this.插入ToolStripMenuItem.Size = new System.Drawing.Size(68, 24);
+            this.插入ToolStripMenuItem.Text = "照片夹";
             // 
-            // 插入照片到照片夹ToolStripMenuItem
+            // 照片夹打开ToolStripMenuItem
             // 
-            this.插入照片到照片夹ToolStripMenuItem.Name = "插入照片到照片夹ToolStripMenuItem";
-            this.插入照片到照片夹ToolStripMenuItem.Size = new System.Drawing.Size(212, 26);
-            this.插入照片到照片夹ToolStripMenuItem.Text = "插入照片到照片夹";
-            this.插入照片到照片夹ToolStripMenuItem.Click += new System.EventHandler(this.插入照片到照片夹ToolStripMenuItem_Click);
+            this.照片夹打开ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.照片夹打开文件夹ToolStripMenuItem,
+            this.照片夹打开照片ToolStripMenuItem});
+            this.照片夹打开ToolStripMenuItem.Name = "照片夹打开ToolStripMenuItem";
+            this.照片夹打开ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.照片夹打开ToolStripMenuItem.Text = "打开";
+            // 
+            // 照片夹打开文件夹ToolStripMenuItem
+            // 
+            this.照片夹打开文件夹ToolStripMenuItem.Name = "照片夹打开文件夹ToolStripMenuItem";
+            this.照片夹打开文件夹ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.照片夹打开文件夹ToolStripMenuItem.Text = "打开文件夹";
+            this.照片夹打开文件夹ToolStripMenuItem.Click += new System.EventHandler(this.打开文件夹ToolStripMenuItem_Click);
+            // 
+            // 照片夹打开照片ToolStripMenuItem
+            // 
+            this.照片夹打开照片ToolStripMenuItem.Name = "照片夹打开照片ToolStripMenuItem";
+            this.照片夹打开照片ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.照片夹打开照片ToolStripMenuItem.Text = "打开照片";
+            this.照片夹打开照片ToolStripMenuItem.Click += new System.EventHandler(this.照片夹打开照片ToolStripMenuItem_Click);
+            // 
+            // 照片夹添加ToolStripMenuItem
+            // 
+            this.照片夹添加ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.照片夹添加文件夹ToolStripMenuItem,
+            this.照片夹添加图片ToolStripMenuItem1});
+            this.照片夹添加ToolStripMenuItem.Name = "照片夹添加ToolStripMenuItem";
+            this.照片夹添加ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.照片夹添加ToolStripMenuItem.Text = "添加";
+            // 
+            // 照片夹添加文件夹ToolStripMenuItem
+            // 
+            this.照片夹添加文件夹ToolStripMenuItem.Name = "照片夹添加文件夹ToolStripMenuItem";
+            this.照片夹添加文件夹ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.照片夹添加文件夹ToolStripMenuItem.Text = "添加文件夹";
+            this.照片夹添加文件夹ToolStripMenuItem.Click += new System.EventHandler(this.照片夹添加文件夹ToolStripMenuItem_Click);
+            // 
+            // 照片夹添加图片ToolStripMenuItem1
+            // 
+            this.照片夹添加图片ToolStripMenuItem1.Name = "照片夹添加图片ToolStripMenuItem1";
+            this.照片夹添加图片ToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.照片夹添加图片ToolStripMenuItem1.Text = "添加图片";
+            this.照片夹添加图片ToolStripMenuItem1.Click += new System.EventHandler(this.照片夹添加图片ToolStripMenuItem1_Click);
+            // 
+            // 照片夹排版ToolStripMenuItem
+            // 
+            this.照片夹排版ToolStripMenuItem.Name = "照片夹排版ToolStripMenuItem";
+            this.照片夹排版ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.照片夹排版ToolStripMenuItem.Text = "排版";
             // 
             // 批量处理ToolStripMenuItem
             // 
@@ -430,11 +483,11 @@
             this.listView2.BackColor = System.Drawing.SystemColors.Control;
             this.listView2.HideSelection = false;
             this.listView2.LargeImageList = this.imageList2;
-            this.listView2.Location = new System.Drawing.Point(30, 39);
+            this.listView2.Location = new System.Drawing.Point(22, 54);
             this.listView2.Margin = new System.Windows.Forms.Padding(13, 0, 0, 0);
             this.listView2.MultiSelect = false;
             this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(206, 668);
+            this.listView2.Size = new System.Drawing.Size(206, 726);
             this.listView2.TabIndex = 6;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.SelectedIndexChanged += new System.EventHandler(this.listView2_SelectedIndexChanged);
@@ -442,7 +495,7 @@
             // 
             // imageList2
             // 
-            this.imageList2.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.imageList2.ColorDepth = System.Windows.Forms.ColorDepth.Depth16Bit;
             this.imageList2.ImageSize = new System.Drawing.Size(80, 90);
             this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
             // 
@@ -518,7 +571,13 @@
         private System.Windows.Forms.ToolStripMenuItem 八张合并转90度ToolStripMenuItem1;
         private System.Windows.Forms.ListView listView2;
         private System.Windows.Forms.ToolStripMenuItem 插入ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 插入照片到照片夹ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 照片夹打开ToolStripMenuItem;
         private System.Windows.Forms.ImageList imageList2;
+        private System.Windows.Forms.ToolStripMenuItem 照片夹打开文件夹ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 照片夹打开照片ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 照片夹添加ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 照片夹添加文件夹ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 照片夹添加图片ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 照片夹排版ToolStripMenuItem;
     }
 }
