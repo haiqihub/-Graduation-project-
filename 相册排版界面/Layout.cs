@@ -426,8 +426,16 @@ namespace 相册排版界面
                     FileInfo[] fileInfo = dir.GetFiles("*.jpg");
                     for (int i = 0; i < fileInfo.Length; i++)
                     {
-                        listLeft.Add(fileInfo[i].FullName);
-                        //listAll.Add(fileInfo[i].FullName);
+                        if (select_index_left > -1)
+                        {
+                            listLeft.Insert(select_index_left+1, fileInfo[i].FullName);
+                        }
+                        else
+                        {
+                            listLeft.Add(fileInfo[i].FullName);
+                            //listAll.Add(fileInfo[i].FullName);
+                        }
+
                     }
 
                     //StartSetting(3);
@@ -454,8 +462,17 @@ namespace 相册排版界面
                 //listLeft.Clear();
                 foreach (string file in dlg.FileNames)
                 {
-                    listLeft.Add(file);
-                    //listAll.Add(file);
+
+                    if (select_index_left > -1)
+                    {
+                        listLeft.Insert(select_index_left+1, file);
+                    }
+                    else
+                    {
+                        listLeft.Add(file);
+                        //listAll.Add(file);
+                    }
+
                 }
 
                 //StartSetting(4);
@@ -463,7 +480,6 @@ namespace 相册排版界面
                 //StartLeftSetting(6);
             }
         }
-
 
         private void StartSetting(int index)
         {
@@ -917,19 +933,20 @@ namespace 相册排版界面
             loadImage();
 
         }
+        //左侧照片夹的index
+        int select_index_left = -1;
         private void listView2_Click(object sender, EventArgs e)
         {
-            int select_index_left = 0;
+           
             ListView.SelectedIndexCollection left_indexes = this.listView2.SelectedIndices;
-            if (left_indexes.Count > 0)
+            if (left_indexes.Count > -1)
             {
                 select_index_left = left_indexes[0];
             }
             //写一个可以出现大光标的函数 并记录大光标的位置 然后在插入图片时可以插入到该位置
 
             //loadImage(); 这个是最后把照片夹内容导入右侧picturebox可用
-            //要写一个可以把listLeft写入listview里的imageview的函数
-            //updateLeftShow();
+           
         }
 
         private void 更换图片ToolStripMenuItem_Click(object sender, EventArgs e)
