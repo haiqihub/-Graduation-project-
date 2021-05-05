@@ -61,3 +61,11 @@ E:\Education\毕设相关\相册排版制作\相册排版界面last\相册排版
 E:\Education\毕设相关\相册排版制作\相册排版界面last\相册排版界面\obj\Debug\相册排版界面.TextDescription.resources
 E:\Education\毕设相关\相册排版制作\相册排版界面last\相册排版界面\obj\Debug\相册排版界面.Form1.resources
 E:\Education\毕设相关\相册排版制作\相册排版界面last\相册排版界面\obj\Debug\相册排版界面.Form2.resources
+E:\Education\毕设相关\相册排版制作\相册排版界面last\相册排版界面\bin\Debug\Awesomium.Core.dll
+E:\Education\毕设相关\相册排版制作\相册排版界面last\相册排版界面\bin\Debug\Awesomium.Windows.Forms.dll
+E:\Education\毕设相关\相册排版制作\相册排版界面last\相册排版界面\bin\Debug\Awesomium.Core.xml
+E:\Education\毕设相关\相册排版制作\相册排版界面last\相册排版界面\bin\Debug\Awesomium.Windows.Forms.xml
+E:\Education\毕设相关\相册排版制作\相册排版界面last\相册排版界面\bin\Debug\en-US.dll
+E:\Education\毕设相关\相册排版制作\相册排版界面last\相册排版界面\bin\Debug\AwesomiumProcess
+E:\Education\毕设相关\相册排版制作\相册排版界面last\相册排版界面\bin\Debug\Awesomium.dll
+E:\Education\毕设相关\相册排版制作\相册排版界面last\相册排版界面\bin\Debug\icudt42.dll

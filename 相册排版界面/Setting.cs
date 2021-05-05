@@ -25,7 +25,7 @@ namespace 相册排版界面
 
         bool checkFlag = false;
         FirstDlg modelDlg = new FirstDlg();
-        int index = 1;
+        public int index = 1;
 
         //string Path2 = "";
         string Path1 = "";

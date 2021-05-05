@@ -15,7 +15,7 @@ namespace 相册排版界面
 {
     public partial class Layout : Form
     {
-        private int item_size = 7;
+        private int item_size = 5;
 
         private int cur_pos = 0;
         private int cur_start = 0;
@@ -28,7 +28,6 @@ namespace 相册排版界面
         private List<string> listDone1 = new List<string>();
         private List<string> listLeft = new List<string>();
         private List<string> listLeftDone = new List<string>();
-
         Setting setting;
 
         public Layout()
@@ -193,6 +192,40 @@ namespace 相册排版界面
             pictureBox.LoadAsync(sPicPaht);
         }
 
+
+        private void up_left_Click(object sender, EventArgs e)
+        {
+            if (cur_pos < item_size)
+            {
+                MessageBox.Show("当前是第一个版面");
+                return;
+            }
+            cur_pos -= item_size;
+            if (cur_pos > -1 && cur_pos < cur_start+1)
+            {
+                cur_start = cur_pos - (item_size - 1);
+                updateTopShow();
+            }
+            loadImage();
+        }
+
+        private void up_right_Click(object sender, EventArgs e)
+        {
+            if (cur_pos >= listDone.Count - item_size)
+            {
+                MessageBox.Show("当前是最后一个版面");
+                return;
+            }
+
+            cur_pos+=item_size;
+            if (cur_pos >= cur_start + item_size - 1)
+            {
+                cur_start = cur_pos;
+                updateTopShow();
+            }
+            loadImage();
+        }
+
         private void left_Click(object sender, EventArgs e)
         {
             if (cur_pos <= 0)
@@ -224,6 +257,7 @@ namespace 相册排版界面
                 cur_start = cur_pos;
                 updateTopShow();
             }
+            //loadImage1();
             loadImage();
         }
 
@@ -480,6 +514,75 @@ namespace 相册排版界面
                 //StartLeftSetting(6);
             }
         }
+        
+        //照片夹 排版 
+        private void 照片夹排版ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listLeft.Count == 0)
+            {
+                MessageBox.Show("请先在照片夹中添加照片，再进行排版操作");
+            }
+            else
+            {
+                
+                //listDone1.Clear();
+            }
+
+            //左边图片少
+            if (listCur.Count > listLeft.Count || listCur.Count == listLeft.Count)
+            {
+                listCur.Clear();
+                //listAll.Clear();
+                for (int i = 0; i < listLeft.Count; i++)
+                {
+                    
+                    listCur.Add(listLeft[i]);
+                }
+
+                StartLeftSetting(100 + setting.index);
+            }
+            //左边图片多
+            else
+            {
+                listCur.Clear();
+                //listAll.Clear();
+                for (int i = 0; i < listLeft.Count; i++)
+                {
+                    
+                    listCur.Add(listLeft[i]);
+                }
+                StartLeftSetting(100 + setting.index);
+            }
+        }
+
+        private void StartLeftSetting(int index)
+        {
+            bool clearDone = true;
+            
+            if (index >= 101 && index <= 108)
+            {
+                listCur.Clear();
+                for (int i = 0; i < listLeft.Count; i++)
+                {
+                    listCur.Add(listLeft[i]);
+                }
+            }
+  
+            //3 添加文件夹 ；4 添加图片 
+            if (index == 3 || index == 4)
+            {
+                clearDone = false;
+            }
+      
+            setting.postData(listCur, index, clearDone);
+            setting.ShowDialog(this);
+            int result = setting.getResult();
+            if (result == 1)
+            {
+                int type = setting.getType();
+                loadImageAfterDeal(type, index);
+            }
+        }
 
         private void StartSetting(int index)
         {
@@ -494,8 +597,8 @@ namespace 相册排版界面
                 }
             }
             */
-            
-            if (index == 101||index==102)
+
+            if (index == 101 || index == 102)
             {
                 listCur.Clear();
                 for (int i = 0; i < listAll.Count; i++)
@@ -503,10 +606,10 @@ namespace 相册排版界面
                     listCur.Add(listAll[i].name);
                 }
             }
-            if (index == 103||index==104)
+            if (index == 103 || index == 104)
             {
                 listCur.Clear();
-                for (int i = 0; i < listAll.Count; i+=2)
+                for (int i = 0; i < listAll.Count; i += 2)
                 {
                     listCur.Add(listAll[i].name);
                     if (i + 1 < listAll.Count)
@@ -518,7 +621,7 @@ namespace 相册排版界面
             if (index == 105 || index == 106)
             {
                 listCur.Clear();
-                for (int i = 0; i < listAll.Count; i+=4)
+                for (int i = 0; i < listAll.Count; i += 4)
                 {
                     listCur.Add(listAll[i].name);
                     if (i + 1 < listAll.Count)
@@ -538,7 +641,7 @@ namespace 相册排版界面
             if (index == 107 || index == 108)
             {
                 listCur.Clear();
-                for (int i = 0; i < listAll.Count; i+=8)
+                for (int i = 0; i < listAll.Count; i += 8)
                 {
                     listCur.Add(listAll[i].name);
                     if (i + 1 < listAll.Count)
@@ -571,7 +674,7 @@ namespace 相册排版界面
                     }
                 }
             }
-            
+
             //3 添加文件夹 ；4 添加图片 
             if (index == 3 || index == 4)
             {
@@ -587,6 +690,8 @@ namespace 相册排版界面
                 loadImageAfterDeal(type, index);
             }
         }
+
+
 
         //private void StartLeftSetting(int index)
         //{
@@ -683,42 +788,7 @@ namespace 相册排版界面
 
                 
         }
-        //左侧照片夹处理添加暂存
-        private void loadLeftImageAfterDeal(int type, int index)
-        {
-            //获取用户选择的文件夹路径
-            string folderDirPath = System.Environment.CurrentDirectory + "\\left";
-
-            //获取目录与子目录
-            DirectoryInfo dir = new DirectoryInfo(folderDirPath);
-            //获取当前目录JPG文件列表 GetFiles获取指定目录中文件的名称(包括其路径)
-            FileInfo[] fileInfo = dir.GetFiles("*.jpg");
-
-            for (int i = 0; i < listLeft.Count; i++)
-            {
-                ImageBean beanL = new ImageBean();
-                beanL.name = listLeft[i];
-                beanL.type = type;
-                listLeftAll.Add(beanL);
-            }
-
-            //move up dir...
-
-            for (int i = 0; i < fileInfo.Length; i++)
-            {
-                if (!listLeftDone.Contains(fileInfo[i].FullName))
-                {
-                    listLeftDone.Add(fileInfo[i].FullName);
-                }
-            }
-
-            cur_pos = 0;
-            cur_start = 0;
-            updateLeftShow();
-
-            
-
-        }
+        
 
         private void 单张ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -930,6 +1000,7 @@ namespace 相册排版界面
                 disImage1.Dispose();
             }
 
+            //loadImage1();
             loadImage();
 
         }
@@ -2602,6 +2673,9 @@ namespace 相册排版界面
 
         }
 
-        
+        private void webControl1_OpenExternalLink(object sender, Awesomium.Core.OpenExternalLinkEventArgs e)
+        {
+
+        }
     }
 }

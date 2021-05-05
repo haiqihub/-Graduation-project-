@@ -75,6 +75,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.left = new System.Windows.Forms.Button();
             this.right = new System.Windows.Forms.Button();
+            this.up_left = new System.Windows.Forms.Button();
+            this.up_right = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -106,10 +108,9 @@
             this.menuStrip1.Margin = new System.Windows.Forms.Padding(0, 4, 0, 4);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(1316, 26);
+            this.menuStrip1.Size = new System.Drawing.Size(1316, 30);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // toolStripMenuItem1
             // 
@@ -178,20 +179,20 @@
             this.照片夹打开文件夹ToolStripMenuItem,
             this.照片夹打开照片ToolStripMenuItem});
             this.照片夹打开ToolStripMenuItem.Name = "照片夹打开ToolStripMenuItem";
-            this.照片夹打开ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.照片夹打开ToolStripMenuItem.Size = new System.Drawing.Size(122, 26);
             this.照片夹打开ToolStripMenuItem.Text = "打开";
             // 
             // 照片夹打开文件夹ToolStripMenuItem
             // 
             this.照片夹打开文件夹ToolStripMenuItem.Name = "照片夹打开文件夹ToolStripMenuItem";
-            this.照片夹打开文件夹ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.照片夹打开文件夹ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.照片夹打开文件夹ToolStripMenuItem.Text = "打开文件夹";
             this.照片夹打开文件夹ToolStripMenuItem.Click += new System.EventHandler(this.打开文件夹ToolStripMenuItem_Click);
             // 
             // 照片夹打开照片ToolStripMenuItem
             // 
             this.照片夹打开照片ToolStripMenuItem.Name = "照片夹打开照片ToolStripMenuItem";
-            this.照片夹打开照片ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.照片夹打开照片ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.照片夹打开照片ToolStripMenuItem.Text = "打开照片";
             this.照片夹打开照片ToolStripMenuItem.Click += new System.EventHandler(this.照片夹打开照片ToolStripMenuItem_Click);
             // 
@@ -201,28 +202,29 @@
             this.照片夹添加文件夹ToolStripMenuItem,
             this.照片夹添加图片ToolStripMenuItem1});
             this.照片夹添加ToolStripMenuItem.Name = "照片夹添加ToolStripMenuItem";
-            this.照片夹添加ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.照片夹添加ToolStripMenuItem.Size = new System.Drawing.Size(122, 26);
             this.照片夹添加ToolStripMenuItem.Text = "添加";
             // 
             // 照片夹添加文件夹ToolStripMenuItem
             // 
             this.照片夹添加文件夹ToolStripMenuItem.Name = "照片夹添加文件夹ToolStripMenuItem";
-            this.照片夹添加文件夹ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.照片夹添加文件夹ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.照片夹添加文件夹ToolStripMenuItem.Text = "添加文件夹";
             this.照片夹添加文件夹ToolStripMenuItem.Click += new System.EventHandler(this.照片夹添加文件夹ToolStripMenuItem_Click);
             // 
             // 照片夹添加图片ToolStripMenuItem1
             // 
             this.照片夹添加图片ToolStripMenuItem1.Name = "照片夹添加图片ToolStripMenuItem1";
-            this.照片夹添加图片ToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.照片夹添加图片ToolStripMenuItem1.Size = new System.Drawing.Size(167, 26);
             this.照片夹添加图片ToolStripMenuItem1.Text = "添加图片";
             this.照片夹添加图片ToolStripMenuItem1.Click += new System.EventHandler(this.照片夹添加图片ToolStripMenuItem1_Click);
             // 
             // 照片夹排版ToolStripMenuItem
             // 
             this.照片夹排版ToolStripMenuItem.Name = "照片夹排版ToolStripMenuItem";
-            this.照片夹排版ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.照片夹排版ToolStripMenuItem.Size = new System.Drawing.Size(122, 26);
             this.照片夹排版ToolStripMenuItem.Text = "排版";
+            this.照片夹排版ToolStripMenuItem.Click += new System.EventHandler(this.照片夹排版ToolStripMenuItem_Click);
             // 
             // 批量处理ToolStripMenuItem
             // 
@@ -457,6 +459,30 @@
             this.right.UseVisualStyleBackColor = false;
             this.right.Click += new System.EventHandler(this.right_Click);
             // 
+            // up_left
+            // 
+            this.up_left.BackColor = System.Drawing.SystemColors.Menu;
+            this.up_left.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("up_left.BackgroundImage")));
+            this.up_left.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.up_left.Location = new System.Drawing.Point(254, 110);
+            this.up_left.Name = "up_left";
+            this.up_left.Size = new System.Drawing.Size(47, 60);
+            this.up_left.TabIndex = 8;
+            this.up_left.UseVisualStyleBackColor = false;
+            this.up_left.Click += new System.EventHandler(this.up_left_Click);
+            // 
+            // up_right
+            // 
+            this.up_right.BackColor = System.Drawing.SystemColors.Menu;
+            this.up_right.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("up_right.BackgroundImage")));
+            this.up_right.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.up_right.Location = new System.Drawing.Point(1249, 110);
+            this.up_right.Name = "up_right";
+            this.up_right.Size = new System.Drawing.Size(47, 60);
+            this.up_right.TabIndex = 7;
+            this.up_right.UseVisualStyleBackColor = false;
+            this.up_right.Click += new System.EventHandler(this.up_right_Click);
+            // 
             // listView1
             // 
             this.listView1.BackColor = System.Drawing.SystemColors.Control;
@@ -509,6 +535,8 @@
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.right);
             this.Controls.Add(this.left);
+            this.Controls.Add(this.up_right);
+            this.Controls.Add(this.up_left);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
@@ -538,6 +566,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button left;
         private System.Windows.Forms.Button right;
+        private System.Windows.Forms.Button up_left;
+        private System.Windows.Forms.Button up_right;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ToolStripMenuItem 批量处理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 编辑ToolStripMenuItem;

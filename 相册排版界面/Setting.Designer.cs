@@ -313,7 +313,7 @@
             this.MinimizeBox = false;
             this.Name = "Setting";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "66";
+            this.Text = "Setting";
             this.Load += new System.EventHandler(this.Setting_Load);
             this.Shown += new System.EventHandler(this.Setting_Shown);
             this.panel1.ResumeLayout(false);
