@@ -195,7 +195,7 @@ namespace 相册排版界面
 
         private void up_left_Click(object sender, EventArgs e)
         {
-            if (cur_pos < item_size)
+            if (cur_pos < item_size|| cur_pos < 0)
             {
                 MessageBox.Show("当前是第一个版面");
                 return;
@@ -983,9 +983,10 @@ namespace 相册排版界面
             loadImageAfterDeal(3, 1);
         }
 
+        int select_index = 0;
         private void listView1_Click(object sender, EventArgs e)
         {
-            int select_index = 0;
+            
             ListView.SelectedIndexCollection indexes = this.listView1.SelectedIndices;
             if (indexes.Count > 0)
             {
@@ -1004,13 +1005,16 @@ namespace 相册排版界面
             loadImage();
 
         }
-        //左侧照片夹的index
+
+        //左侧照片夹listView2的index
         int select_index_left = -1;
+
         private void listView2_Click(object sender, EventArgs e)
         {
            
             ListView.SelectedIndexCollection left_indexes = this.listView2.SelectedIndices;
-            if (left_indexes.Count > -1)
+            
+            if (left_indexes.Count > 0)
             {
                 select_index_left = left_indexes[0];
             }
@@ -2673,9 +2677,111 @@ namespace 相册排版界面
 
         }
 
-        private void webControl1_OpenExternalLink(object sender, Awesomium.Core.OpenExternalLinkEventArgs e)
-        {
+        /*
+         * 以下皆是ContextMenuTrip 
+         * 复制剪切粘贴删除
+         * 功能
+         */
 
+        //左侧listview 右键 菜单栏 复制粘贴删除剪切
+        private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListView.SelectedIndexCollection left_indexes = this.listView2.SelectedIndices;
+            if (left_indexes.Count == 0)
+            {
+                return;
+            }
+            select_index_left = left_indexes[0];
+            listLeft.RemoveAt(select_index_left);
+            updateLeftShow();
+
+        }
+
+        string img_buff;
+        private void 复制ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListView.SelectedIndexCollection left_indexes = this.listView2.SelectedIndices;
+            if (left_indexes.Count == 0)
+            {
+                return;
+            }
+            select_index_left = left_indexes[0];
+            img_buff = listLeft[select_index_left];
+        }
+
+        private void 剪切ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListView.SelectedIndexCollection left_indexes = this.listView2.SelectedIndices;
+            if (left_indexes.Count == 0)
+            {
+                return;
+            }
+            select_index_left = left_indexes[0];
+            img_buff = listLeft[select_index_left];
+            listLeft.RemoveAt(select_index_left);
+            updateLeftShow();
+        }
+
+        private void 粘贴ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListView.SelectedIndexCollection left_indexes = this.listView2.SelectedIndices;
+            if (left_indexes.Count == 0)
+            {
+                return;
+            }
+            select_index_left = left_indexes[0];
+            listLeft.Insert(select_index_left+1, img_buff);
+            updateLeftShow();
+        }
+
+        //上方 listview 右键 菜单栏 复制粘贴删除剪切
+        private void 删除ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
+            if (up_indexes.Count == 0)
+            {
+                return;
+            }
+            select_index = up_indexes[0];
+            listDone.RemoveAt(select_index);
+            updateTopShow();
+        }
+
+        private void 复制ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
+            if (up_indexes.Count == 0)
+            {
+                return;
+            }
+            select_index = up_indexes[0];
+            img_buff = listCur[select_index];
+        }
+
+        private void 剪切ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
+            if (up_indexes.Count == 0)
+            {
+                return;
+            }
+            select_index = up_indexes[0];
+            img_buff = listCur[select_index];
+            listDone.RemoveAt(select_index);
+            updateTopShow();
+
+        }
+
+        private void 粘贴ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
+            if (up_indexes.Count == 0)
+            {
+                return;
+            }
+            select_index = up_indexes[0];
+            listDone.Insert(select_index+1, img_buff);
+            updateTopShow();
         }
     }
 }
