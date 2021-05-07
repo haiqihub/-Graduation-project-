@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
@@ -29,6 +30,14 @@ namespace 相册排版界面
         private List<string> listLeft = new List<string>();
         private List<string> listLeftDone = new List<string>();
         Setting setting;
+
+        private Point point1, point2;
+        private bool m_bDown = false;
+        private Size size;
+        private Rectangle rectSmall;
+        private System.Drawing.Image image = null;
+
+        public static string path_url;
 
         public Layout()
         {
@@ -143,7 +152,9 @@ namespace 相册排版界面
 
             if (select_index2 != -1)
             {
+                
                 ChangeForeColor(listView1.Items[select_index2], false);
+                
             }
 
             select_index2 = cur_pos - cur_start;
@@ -983,6 +994,7 @@ namespace 相册排版界面
             loadImageAfterDeal(3, 1);
         }
 
+        //上方listView1的index
         int select_index = 0;
         private void listView1_Click(object sender, EventArgs e)
         {
@@ -1018,23 +1030,24 @@ namespace 相册排版界面
             {
                 select_index_left = left_indexes[0];
             }
-            //写一个可以出现大光标的函数 并记录大光标的位置 然后在插入图片时可以插入到该位置
-
-            //loadImage(); 这个是最后把照片夹内容导入右侧picturebox可用
-           
+         
         }
-
+        
         private void 更换图片ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Multiselect = false;//等于true表示可以选择多个文件
             dlg.DefaultExt = ".jpg";
             dlg.Filter = "图片|*.jpg";
+
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 string path = dlg.FileNames[0];
                 listDone[cur_pos] = path;
+                //listCur[cur_pos] = path;
                 updateTopShow();
+
+               
             }
         }
 
@@ -2664,26 +2677,96 @@ namespace 相册排版界面
         {
 
         }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        
-
         private void listView2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+        
+
+        
+        //鼠标拖拽移动 中展示出来的框体大小  待修改
+        public void AcquireRectangleImage(Image source, Rectangle rect)
+        {
+            if (source == null || rect.IsEmpty) return;
+
+            Bitmap bmSmall = new Bitmap(CC.A4CHANG_XS, CC.A4GAO_XS, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+            rectSmall = new Rectangle(0, 0, CC.A4CHANG_XS, CC.A4GAO_XS);
+
+            using (Graphics grSmall = Graphics.FromImage(bmSmall))
+            {
+                grSmall.FillRectangle(Brushes.White, 0, 0, CC.A4CHANG_XS, CC.A4GAO_XS);
+                //grSmall.Clear(color_back);
+                grSmall.DrawImage(source,
+                                  rectSmall,
+                                  rect.Left, rect.Top, rect.Right - rect.Left, rect.Bottom - rect.Top,
+                                  GraphicsUnit.Pixel);
+
+                this.pictureBox1.Image = bmSmall;
+
+            }
+        }
+
+        public Image GetImageFromServer(string fileName)
+        {
+            Image img = null;
+            string filePath = fileName;// Application.StartupPath + "\\Image\\" + fileName;
+            try
+            {
+                FileStream fs = File.OpenRead(filePath);
+                img = Image.FromStream(fs);
+                fs.Close();
+            }
+            catch (IOException ie)
+            {
+                MessageBox.Show(ie.Message);
+            }
+            return img;
+        }
+
         /*
-         * 以下皆是ContextMenuTrip 
+         * pictureBox1 中的鼠标移动
+         * 事件
+         */
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (m_bDown == true)
+            {
+                point2.X -= e.X - point1.X;
+                point2.Y -= e.Y - point1.Y;
+
+                AcquireRectangleImage(image, new Rectangle(point2, size));
+
+                point1.X = e.X;
+                point1.Y = e.Y;
+            }
+        }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            m_bDown = true;
+            point1.X = e.X;
+            point1.Y = e.Y;
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            m_bDown = false;
+        }
+
+        
+
+        /*
+         * ContextMenuTrip 
          * 复制剪切粘贴删除
          * 功能
          */
 
-        //左侧listview 右键 菜单栏 复制粘贴删除剪切
+        //左侧listview2 右键 菜单栏 复制粘贴删除剪切
         private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ListView.SelectedIndexCollection left_indexes = this.listView2.SelectedIndices;
@@ -2734,7 +2817,7 @@ namespace 相册排版界面
             updateLeftShow();
         }
 
-        //上方 listview 右键 菜单栏 复制粘贴删除剪切
+        //上方 listview1 右键 菜单栏 复制粘贴删除剪切
         private void 删除ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
@@ -2744,6 +2827,7 @@ namespace 相册排版界面
             }
             select_index = up_indexes[0];
             listDone.RemoveAt(select_index);
+            listCur.RemoveAt(select_index);
             updateTopShow();
         }
 
@@ -2755,7 +2839,7 @@ namespace 相册排版界面
                 return;
             }
             select_index = up_indexes[0];
-            img_buff = listCur[select_index];
+            img_buff = listDone[select_index];
         }
 
         private void 剪切ToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -2766,12 +2850,13 @@ namespace 相册排版界面
                 return;
             }
             select_index = up_indexes[0];
-            img_buff = listCur[select_index];
+            img_buff = listDone[select_index];
             listDone.RemoveAt(select_index);
+            listCur.RemoveAt(select_index);
             updateTopShow();
 
         }
-
+        
         private void 粘贴ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
@@ -2783,5 +2868,150 @@ namespace 相册排版界面
             listDone.Insert(select_index+1, img_buff);
             updateTopShow();
         }
+
+        /*
+         * 拖拽事件
+         * 左边 listview2 -> picturebox1
+         */
+        private void listView2_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            //在listView的ItemDrag里把摄像机名字传送
+
+            ListView.SelectedIndexCollection left_indexes = this.listView2.SelectedIndices;
+
+            if (left_indexes.Count > 0)
+            {
+                select_index_left = left_indexes[0];
+            }
+
+            //string path1 = e.Item.ToString(); 获取的是label
+            //path_url = path1;
+            path_url = listLeft[select_index_left];
+            DoDragDrop(path_url, DragDropEffects.Copy);
+        }
+
+        private void left_DragDrop(object sender, DragEventArgs e)
+        {
+            //处理dragdrop事件
+
+            ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
+            if (up_indexes.Count == 0)
+            {
+                return;
+            }
+            select_index = up_indexes[0];
+          
+
+            if (e.Data.Equals(typeof(string)))
+            {
+                //左侧图片 path_url = listLeft[select_index_left]
+                path_url = e.Data.GetData(typeof(string)).ToString();
+            }
+
+            if (path_url.Length > 0)
+            {
+                listDone[select_index] = path_url;
+                listCur[select_index] = path_url;
+                listAll[select_index].name = path_url;
+                
+                m_bDown = false;
+                
+                //point2.X = (pictureBox1.Width- CC.A4CHANG_XS)/2;
+                //point2.Y = 0;
+
+                image = GetImageFromServer(path_url);
+                //image = Image.FromFile(path_url);
+                //----------------------------------------------------------------
+                var width = CC.A4CHANG_XS;
+                var height = CC.A4GAO_XS;
+
+                Bitmap bmSmall = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+                Graphics grSmall = Graphics.FromImage(bmSmall);
+                grSmall.FillRectangle(Brushes.White, 0, 0, width, height);
+
+                float width_xs = (CC.A4CHANG - setting.left - setting.right) * CC.A4GBILV;
+                float height_xs = (CC.A4GAO - setting.up - setting.down) * CC.A4GBILV;
+
+                float xs = 0.0f;
+                float x_xs = width_xs / image.Width;
+                float y_xs = height_xs / image.Height;
+                //1
+                if (x_xs < y_xs)
+                {
+                    xs = x_xs;
+                    grSmall.DrawImage(image,
+                            setting.left * CC.A4GBILV,
+                            setting.up * CC.A4GBILV + (height_xs - image.Height * xs) / 2,
+                            width_xs,
+                            image.Height * xs);
+                }
+                else
+                {
+                    xs = y_xs;
+                    grSmall.DrawImage(image,
+                            setting.left * CC.A4GBILV + (width_xs - image.Width * xs) / 2,
+                            setting.up * CC.A4GBILV,
+                            image.Width * xs,
+                            height_xs);
+                }
+
+
+
+                this.pictureBox1.Image = bmSmall;
+
+                var vv = System.IO.Path.GetFileNameWithoutExtension(listDone[select_index]);
+                var vv2 = System.IO.Path.GetExtension(path_url);
+                vv2 = ".jpg";
+
+                Bitmap im = bmSmall;
+                im.SetResolution(300, 300);
+                //转成jpg
+
+                var eps = new EncoderParameters(1);
+                var ep = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, 100L);
+                eps.Param[0] = ep;
+
+                var jpsEncodeer = GetEncoder(ImageFormat.Jpeg);
+                //保存图片
+                String imgurl = setting.Path1 + "\\" + vv + "drag_done" + vv2;
+                im.Save(imgurl, jpsEncodeer, eps);
+
+                //-------------------------------------------------------------------
+
+                //size = new Size(CC.A4CHANG_XS, CC.A4GAO_XS);
+                //AcquireRectangleImage(image, new Rectangle(point2, size));
+
+                //一调用就图片填充满picturebox1  ?????！！！！
+                updateTopShow();
+               
+                //pictureBox1.Load(path);
+
+                
+            }
+
+        }
+
+        private void left_DragEnter(object sender, DragEventArgs e)
+        {
+            //判断是不是可以接收的数据类型  
+            //DataFormats.FileDrop  typeof(string)
+            if (e.Data.GetDataPresent(typeof(string)))
+                e.Effect = DragDropEffects.Copy;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+
+        public static ImageCodecInfo GetEncoder(ImageFormat format)
+        {
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                    return codec;
+            }
+            return null;
+        }
+
+
     }
 }

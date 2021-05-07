@@ -28,7 +28,7 @@ namespace 相册排版界面
         public int index = 1;
 
         //string Path2 = "";
-        string Path1 = "";
+        public string Path1 = "";
 
         List<string> list;
         int indexDeal;
