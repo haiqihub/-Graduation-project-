@@ -1101,8 +1101,71 @@ namespace 相册排版界面
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 string path = dlg.FileNames[0];
-                listDone[cur_pos] = path;
+                //listDone[cur_pos] = path;
                 //listCur[cur_pos] = path;
+
+                image = GetImageFromServer(path);
+
+                //----------------------------------------------------------------
+                var width = CC.A4CHANG_XS;
+                var height = CC.A4GAO_XS;
+
+                Bitmap bmSmall = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+                Graphics grSmall = Graphics.FromImage(bmSmall);
+                grSmall.FillRectangle(Brushes.White, 0, 0, width, height);
+
+                float width_xs = (CC.A4CHANG - setting.left - setting.right) * CC.A4GBILV;
+                float height_xs = (CC.A4GAO - setting.up - setting.down) * CC.A4GBILV;
+
+                float xs = 0.0f;
+                float x_xs = width_xs / image.Width;
+                float y_xs = height_xs / image.Height;
+                //1
+                if (x_xs < y_xs)
+                {
+                    xs = x_xs;
+                    grSmall.DrawImage(image,
+                            setting.left * CC.A4GBILV,
+                            setting.up * CC.A4GBILV + (height_xs - image.Height * xs) / 2,
+                            width_xs,
+                            image.Height * xs);
+                }
+                else
+                {
+                    xs = y_xs;
+                    grSmall.DrawImage(image,
+                            setting.left * CC.A4GBILV + (width_xs - image.Width * xs) / 2,
+                            setting.up * CC.A4GBILV,
+                            image.Width * xs,
+                            height_xs);
+                }
+
+                this.pictureBox1.Image = bmSmall;
+
+                var vv = System.IO.Path.GetFileNameWithoutExtension(listDone[cur_pos]);
+                var vv2 = System.IO.Path.GetExtension(path);
+                vv2 = ".jpg";
+
+                Bitmap im = bmSmall;
+                im.SetResolution(300, 300);
+                //转成jpg
+
+                var eps = new EncoderParameters(1);
+                var ep = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, 100L);
+                eps.Param[0] = ep;
+
+                var jpsEncodeer = GetEncoder(ImageFormat.Jpeg);
+                //保存图片
+                String imgurl = setting.Path1 + "\\" + vv + "replace_done" + vv2;
+                im.Save(imgurl, jpsEncodeer, eps);
+
+                //-------------------------------------------------------------------
+
+                listDone[cur_pos] = imgurl;
+                listCur[cur_pos] = imgurl;
+                listAll[cur_pos].name = imgurl;
+
+
                 updateTopShow();
 
                
