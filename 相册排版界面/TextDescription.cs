@@ -59,11 +59,24 @@ namespace 相册排版界面
 
         private void button1_Click(object sender, EventArgs e)
         {
-            fontName = (string)comboBox1.SelectedItem;
-            fontSize = (int)comboBox2.SelectedItem;
+            Layout layout = new Layout();
+            layout.Owner = this;
+            if (comboBox1.SelectedItem != null)
+            {
+                fontName = (string)comboBox1.SelectedItem;
+            }
+            if (comboBox2.SelectedItem != null)
+            {
+                fontSize = (int)comboBox2.SelectedItem;
+            }
             content = this.textBox1.Text;
-            fontColor = (string)comboBox3.SelectedItem;
+            if (comboBox3.SelectedItem != null)
+            {
+                fontColor = (string)comboBox3.SelectedItem;
+            }
+            
 
+            (this.Owner as Layout).textBox_X.Visible = true;
             this.Hide();
         }
 

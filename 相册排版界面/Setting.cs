@@ -403,7 +403,7 @@ namespace 相册排版界面
                 //加入TextBox绘制
                 if (checkFlag)
                 {
-                    this.layout.AddDescription(index);
+                    //this.layout.AddDescription(index);
                   
                 }
 

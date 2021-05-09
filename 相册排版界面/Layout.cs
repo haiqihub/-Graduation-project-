@@ -856,11 +856,11 @@ namespace 相册排版界面
         //照片的描述 textbox绘制： layout加入文字ToolStripMenuItem_Click
         public void AddDescription(int num)
         {
-            if (this.InvokeRequired)
-            {
-                this.Invoke(new MethodInvoker(delegate { AddDescription(num); }));
-                return;
-            }
+            //if (this.InvokeRequired)
+            //{
+              //  this.Invoke(new MethodInvoker(delegate { AddDescription(num); }));
+               // return;
+           // }
             string fontName = textDescription.fontName;
             int fontSize = textDescription.fontSize;
             string content = textDescription.content;
@@ -900,14 +900,15 @@ namespace 相册排版界面
             { 
 
                 TextBox tb1 = new TextBox();
-                tb1.Name  = "textBox" + 3;
+                tb1.Name  = "textBox" ;
                 tb1.Text = "aaaaaaaaaaaaaaaaaaaaaaaa";
                 x = left * CC.A4GBILV;
                 y = up * CC.A4GBILV + height_xs + text_photo * CC.A4GBILV;
                 tb1.Location= new Point((int)x,(int)y);
                 tb1.Size = new Size(400,50);
-                tb1.BringToFront();
+                tb1.Visible = true;
                 this.Controls.Add(tb1);
+                tb1.BringToFront();
 
                 //g.DrawString(content, font, sbrush, new PointF(x, y));
             }
@@ -965,7 +966,64 @@ namespace 相册排版界面
             listDone[cur_pos] = path;
             updateTopShow();
         }
+        
+        private void 添加文本框ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            textDescription.ShowDialog(this);
+            Point ab = new Point();
+            ab.X = 0;
+            ab.Y = 0;
+            //----------------------------
+            string fontName = textDescription.fontName;
+            int fontSize = textDescription.fontSize;
+            string content = textDescription.content;
+            string fontColor = textDescription.fontColor;
+          
+            Bitmap bmp = new Bitmap(listDone[cur_pos]);
+            Graphics g = Graphics.FromImage(bmp);
+            Font font = new Font(fontName, fontSize);
+            SolidBrush sbrush = new SolidBrush(Color.FromName(fontColor));
+            
+            //动态添加 textbox ：tb1
+            //TextBox tb1 = new TextBox();
+            //tb1.Name = "textBox";
+            //tb1.Text = content;
+            //tb1.ForeColor = Color.FromName(fontColor);
+            //tb1.Font = new Font(fontName, fontSize);
+            //tb1.Location = new Point(400, 200);
+            ////tb1.Size = new Size(400, 50);
+            //tb1.Visible = true;
+            //tb1.TextChanged += new System.EventHandler(this.textChange);
+            //this.Controls.Add(tb1);
+            //tb1.BringToFront();
 
+            textBox_X.Name = "textBox";
+            textBox_X.Text = content;
+            textBox_X.ForeColor = Color.FromName(fontColor);
+            textBox_X.Font = new Font(fontName, fontSize);
+            //留存字体绘制保存，目前有问题 计划根据picturebox坐标进行 
+            g.DrawString(content, font, sbrush, new PointF(10, 10));
+
+            string name = listDone[cur_pos];
+            name += fontIndex;
+
+            bmp.Save(name);
+
+            string path = name;
+            listDone[cur_pos] = path;
+            updateTopShow();
+
+        }
+        //textbox 适应文本长度
+        private void textChange(object sender, EventArgs e)
+        {
+            if (textBox_X.Visible)
+            {
+                int k = textBox_X.Text.Length;
+                textBox_X.Width = k * 12;
+            }
+            
+        }
         private void 调整图片大小ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string folderDirPath = System.Environment.CurrentDirectory + "\\done\\";
@@ -1128,17 +1186,18 @@ namespace 相册排版界面
         private void pdf格式ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.saveFileDialog1.Filter = "PDF(*.pdf)|*.pdf";//设置文件类型
-            saveFileDialog1.FileName = "相册";//设置默认文件名
+            saveFileDialog1.FileName = "相册 "+ DateTime.Now.ToLongDateString().ToString();//设置默认文件名
             saveFileDialog1.DefaultExt = "pdf";//设置默认格式（可以不设）
             saveFileDialog1.AddExtension = true;//设置自动在文件名中添加扩展名
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 toPdf(saveFileDialog1.FileName);
+                MessageBox.Show("导出成功");
+                this.Dispose();
+                string localFilePath = saveFileDialog1.FileName.ToString();
+                System.Diagnostics.Process.Start(localFilePath);
             }
-            MessageBox.Show("导出成功");
-            this.Dispose();
-            string localFilePath = saveFileDialog1.FileName.ToString();
-            System.Diagnostics.Process.Start(localFilePath);
+            
 
         }
         private void toPdf(string fileName)
@@ -2875,8 +2934,7 @@ namespace 相册排版界面
          */
         private void listView2_ItemDrag(object sender, ItemDragEventArgs e)
         {
-            //在listView的ItemDrag里把摄像机名字传送
-
+            //左边 listview2 的数据传送
             ListView.SelectedIndexCollection left_indexes = this.listView2.SelectedIndices;
 
             if (left_indexes.Count > 0)
@@ -2890,10 +2948,9 @@ namespace 相册排版界面
             DoDragDrop(path_url, DragDropEffects.Copy);
         }
 
+        //处理 drag drop 事件
         private void left_DragDrop(object sender, DragEventArgs e)
         {
-            //处理dragdrop事件
-
             ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
             if (up_indexes.Count == 0)
             {
@@ -2910,17 +2967,10 @@ namespace 相册排版界面
 
             if (path_url.Length > 0)
             {
-                listDone[select_index] = path_url;
-                listCur[select_index] = path_url;
-                listAll[select_index].name = path_url;
-                
                 m_bDown = false;
                 
-                //point2.X = (pictureBox1.Width- CC.A4CHANG_XS)/2;
-                //point2.Y = 0;
-
                 image = GetImageFromServer(path_url);
-                //image = Image.FromFile(path_url);
+                
                 //----------------------------------------------------------------
                 var width = CC.A4CHANG_XS;
                 var height = CC.A4GAO_XS;
@@ -2978,15 +3028,12 @@ namespace 相册排版界面
 
                 //-------------------------------------------------------------------
 
-                //size = new Size(CC.A4CHANG_XS, CC.A4GAO_XS);
-                //AcquireRectangleImage(image, new Rectangle(point2, size));
+                listDone[select_index] = imgurl;
+                listCur[select_index] = imgurl;
+                listAll[select_index].name = imgurl;
 
-                //一调用就图片填充满picturebox1  ?????！！！！
                 updateTopShow();
                
-                //pictureBox1.Load(path);
-
-                
             }
 
         }
@@ -3001,6 +3048,7 @@ namespace 相册排版界面
                 e.Effect = DragDropEffects.None;
         }
 
+        
         public static ImageCodecInfo GetEncoder(ImageFormat format)
         {
             ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();

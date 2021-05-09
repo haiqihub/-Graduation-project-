@@ -71,6 +71,7 @@
             this.八张合并ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.八张合并转90度ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.加入文字ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.添加文本框ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.调整图片大小ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.更换图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,6 +92,7 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.listView2 = new System.Windows.Forms.ListView();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
+            this.textBox_X = new System.Windows.Forms.TextBox();
             this.contextMenuStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -152,14 +154,14 @@
             this.menuStrip1.Margin = new System.Windows.Forms.Padding(0, 4, 0, 4);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(1316, 26);
+            this.menuStrip1.Size = new System.Drawing.Size(1316, 30);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(14, 24);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(14, 28);
             // 
             // 打开ToolStripMenuItem
             // 
@@ -167,7 +169,7 @@
             this.文件夹ToolStripMenuItem,
             this.图片ToolStripMenuItem});
             this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
-            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(53, 28);
             this.打开ToolStripMenuItem.Text = "打开";
             // 
             // 文件夹ToolStripMenuItem
@@ -190,7 +192,7 @@
             this.从文件夹ToolStripMenuItem,
             this.从图片ToolStripMenuItem});
             this.添加图片ToolStripMenuItem.Name = "添加图片ToolStripMenuItem";
-            this.添加图片ToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
+            this.添加图片ToolStripMenuItem.Size = new System.Drawing.Size(83, 28);
             this.添加图片ToolStripMenuItem.Text = "添加图片";
             // 
             // 从文件夹ToolStripMenuItem
@@ -214,7 +216,7 @@
             this.照片夹添加ToolStripMenuItem,
             this.照片夹排版ToolStripMenuItem});
             this.插入ToolStripMenuItem.Name = "插入ToolStripMenuItem";
-            this.插入ToolStripMenuItem.Size = new System.Drawing.Size(68, 24);
+            this.插入ToolStripMenuItem.Size = new System.Drawing.Size(68, 28);
             this.插入ToolStripMenuItem.Text = "照片夹";
             // 
             // 照片夹打开ToolStripMenuItem
@@ -282,7 +284,7 @@
             this.八张合并ToolStripMenuItem,
             this.八张合并转90度ToolStripMenuItem});
             this.批量处理ToolStripMenuItem.Name = "批量处理ToolStripMenuItem";
-            this.批量处理ToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
+            this.批量处理ToolStripMenuItem.Size = new System.Drawing.Size(83, 28);
             this.批量处理ToolStripMenuItem.Text = "批量更改";
             // 
             // 单张ToolStripMenuItem
@@ -346,10 +348,11 @@
             this.编辑ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.更换当前模板ToolStripMenuItem,
             this.加入文字ToolStripMenuItem,
+            this.添加文本框ToolStripMenuItem,
             this.调整图片大小ToolStripMenuItem,
             this.更换图片ToolStripMenuItem});
             this.编辑ToolStripMenuItem.Name = "编辑ToolStripMenuItem";
-            this.编辑ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.编辑ToolStripMenuItem.Size = new System.Drawing.Size(53, 28);
             this.编辑ToolStripMenuItem.Text = "编辑";
             // 
             // 更换当前模板ToolStripMenuItem
@@ -430,6 +433,13 @@
             this.加入文字ToolStripMenuItem.Text = "加入水印";
             this.加入文字ToolStripMenuItem.Click += new System.EventHandler(this.加入文字ToolStripMenuItem_Click);
             // 
+            // 添加文本框ToolStripMenuItem
+            // 
+            this.添加文本框ToolStripMenuItem.Name = "添加文本框ToolStripMenuItem";
+            this.添加文本框ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
+            this.添加文本框ToolStripMenuItem.Text = "添加文本框";
+            this.添加文本框ToolStripMenuItem.Click += new System.EventHandler(this.添加文本框ToolStripMenuItem_Click);
+            // 
             // 调整图片大小ToolStripMenuItem
             // 
             this.调整图片大小ToolStripMenuItem.Name = "调整图片大小ToolStripMenuItem";
@@ -450,7 +460,7 @@
             this.jpg格式ToolStripMenuItem,
             this.pdf格式ToolStripMenuItem});
             this.导出ToolStripMenuItem.Name = "导出ToolStripMenuItem";
-            this.导出ToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
+            this.导出ToolStripMenuItem.Size = new System.Drawing.Size(83, 28);
             this.导出ToolStripMenuItem.Text = "导出相册";
             // 
             // jpg格式ToolStripMenuItem
@@ -617,12 +627,22 @@
             this.imageList2.ImageSize = new System.Drawing.Size(80, 90);
             this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // textBox_X
+            // 
+            this.textBox_X.Location = new System.Drawing.Point(708, 234);
+            this.textBox_X.Name = "textBox_X";
+            this.textBox_X.Size = new System.Drawing.Size(100, 25);
+            this.textBox_X.TabIndex = 9;
+            this.textBox_X.Visible = false;
+            this.textBox_X.TextChanged += new System.EventHandler(this.textChange);
+            // 
             // Layout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1316, 719);
+            this.Controls.Add(this.textBox_X);
             this.Controls.Add(this.listView2);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.right);
@@ -712,5 +732,7 @@
         private System.Windows.Forms.ToolStripMenuItem 复制ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 剪切ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 粘贴ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 添加文本框ToolStripMenuItem;
+        public System.Windows.Forms.TextBox textBox_X;
     }
 }

@@ -42,5 +42,17 @@ namespace 相册排版界面
             this.form2.Controls.Add(tb1);
 
         }
+
+        private void textChange(object sender, EventArgs e)
+        {
+            label1.AutoSize = true;
+            label1.Text = textBox1.Text;
+            textBox1.Width = label1.Width;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
