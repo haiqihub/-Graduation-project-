@@ -68,7 +68,7 @@ namespace 相册排版界面
         {
             listView1.Items.Clear();
             imageList1.Images.Clear();
-
+            //原  int i = cur_start
             for (int i = cur_start; i < cur_start + item_size && i < listDone.Count; i++)
             {
                 string label = (i + 1) + " - " + listDone.Count;
@@ -211,29 +211,39 @@ namespace 相册排版界面
                 MessageBox.Show("当前是第一个版面");
                 return;
             }
-            cur_pos -= item_size;
-            if (cur_pos > -1 && cur_pos < cur_start+1)
+            cur_pos = (cur_pos / item_size - 1) * item_size;
+            if (cur_pos >= 0 && cur_pos < cur_start)
             {
-                cur_start = cur_pos - (item_size - 1);
+                //原 cur_pos > -1 && cur_pos < cur_start+1
+                cur_start = (cur_pos / item_size ) * item_size;
                 updateTopShow();
             }
+
+
+            
             loadImage();
         }
 
         private void up_right_Click(object sender, EventArgs e)
         {
-            if (cur_pos >= listDone.Count - item_size)
+            //原 cur_pos > listDone.Count - item_size - 1
+            if (cur_pos >= (listDone.Count / item_size) * item_size && cur_pos < (listDone.Count / item_size + 1) * item_size)
             {
                 MessageBox.Show("当前是最后一个版面");
                 return;
             }
 
-            cur_pos+=item_size;
-            if (cur_pos >= cur_start + item_size - 1)
-            {
-                cur_start = cur_pos;
-                updateTopShow();
-            }
+            //cur_pos += item_size;
+            cur_pos = (cur_pos / item_size + 1) * item_size;
+            //if (cur_pos > cur_start + item_size - 1)
+            //{
+            //    cur_start = (cur_pos / item_size) * item_size;
+            //    updateTopShow();
+            //}
+            
+            cur_start = (cur_pos / item_size) * item_size;
+            updateTopShow();
+            
             loadImage();
         }
 
@@ -1026,6 +1036,12 @@ namespace 相册排版界面
         }
         private void 调整图片大小ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (listDone.Count == 0)
+            {
+                MessageBox.Show("请先选择图片，再进行操作");
+                return;
+                
+            }
             string folderDirPath = System.Environment.CurrentDirectory + "\\done\\";
 
             string fullPath = listDone[cur_pos];
@@ -2861,7 +2877,7 @@ namespace 相册排版界面
                 point2.X -= e.X - point1.X;
                 point2.Y -= e.Y - point1.Y;
 
-                AcquireRectangleImage(image, new Rectangle(point2, size));
+                //AcquireRectangleImage(image, new Rectangle(point2, size));
 
                 point1.X = e.X;
                 point1.Y = e.Y;
@@ -2894,6 +2910,7 @@ namespace 相册排版界面
             ListView.SelectedIndexCollection left_indexes = this.listView2.SelectedIndices;
             if (left_indexes.Count == 0)
             {
+                MessageBox.Show("请先选择图片，再进行操作");
                 return;
             }
             select_index_left = left_indexes[0];
@@ -2902,12 +2919,14 @@ namespace 相册排版界面
 
         }
 
-        string img_buff;
+        string img_buff = null;
+
         private void 复制ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ListView.SelectedIndexCollection left_indexes = this.listView2.SelectedIndices;
             if (left_indexes.Count == 0)
             {
+                MessageBox.Show("请先选择图片，再进行操作");
                 return;
             }
             select_index_left = left_indexes[0];
@@ -2919,6 +2938,7 @@ namespace 相册排版界面
             ListView.SelectedIndexCollection left_indexes = this.listView2.SelectedIndices;
             if (left_indexes.Count == 0)
             {
+                MessageBox.Show("请先选择图片，再进行操作");
                 return;
             }
             select_index_left = left_indexes[0];
@@ -2929,9 +2949,15 @@ namespace 相册排版界面
 
         private void 粘贴ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (img_buff == null)
+            {
+               // MessageBox.Show("无可粘贴图片");
+                return;
+            }
             ListView.SelectedIndexCollection left_indexes = this.listView2.SelectedIndices;
             if (left_indexes.Count == 0)
             {
+                MessageBox.Show("请先选择图片，再进行操作");
                 return;
             }
             select_index_left = left_indexes[0];
@@ -2945,6 +2971,7 @@ namespace 相册排版界面
             ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
             if (up_indexes.Count == 0)
             {
+                MessageBox.Show("请先选择图片，再进行操作");
                 return;
             }
             select_index = up_indexes[0];
@@ -2958,6 +2985,7 @@ namespace 相册排版界面
             ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
             if (up_indexes.Count == 0)
             {
+                MessageBox.Show("请先选择图片，再进行操作");
                 return;
             }
             select_index = up_indexes[0];
@@ -2969,6 +2997,7 @@ namespace 相册排版界面
             ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
             if (up_indexes.Count == 0)
             {
+                MessageBox.Show("请先选择图片，再进行操作");
                 return;
             }
             select_index = up_indexes[0];
@@ -2981,9 +3010,15 @@ namespace 相册排版界面
         
         private void 粘贴ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            if (img_buff == null)
+            {
+                // MessageBox.Show("无可粘贴图片");
+                return;
+            }
             ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
             if (up_indexes.Count == 0)
             {
+                MessageBox.Show("请先选择图片，再进行操作");
                 return;
             }
             select_index = up_indexes[0];
