@@ -21,6 +21,9 @@ namespace 相册排版界面
         private double m_scale = 1.0;
         private int m_rotate = 0;
 
+        private int index = 0;
+        private int cur_area = 0;
+
         private Point point1, point2;
         private Rectangle rectSmall;
 
@@ -47,44 +50,101 @@ namespace 相册排版界面
 
 
 
-        public SingleDeal(List<string>listChange ,int index,int cur_area)
+        public SingleDeal(List<string>listChange ,int num,int area)
         {
             InitializeComponent();
-
+            index = num;
+            cur_area = area;
             for(int i = 0; i < listChange.Count; i++)
             {
-                imgpath1 = listChange[i];
-                imgpath2 = null;
-                imgpath3 = null;
-                imgpath4 = null;
-                imgpath5 = null;
-                imgpath6 = null;
-                imgpath7 = null;
-                imgpath8 = null;
-                if (i + 1 < listChange.Count)
+                if (index == 1)
                 {
-                    imgpath2= listChange[i+1];
+                    imgpath1 = listChange[i];
+                    
                 }
+                if (index == 2)
+                {
+                    imgpath1 = listChange[i];
+                    imgpath2 = null;
+                    if (i + 1 < listChange.Count)
+                    {
+                        imgpath2 = listChange[i + 1];
+                    }
+                }
+                if (index == 4)
+                {
+                    imgpath1 = listChange[i];
+                    imgpath2 = null;
+                    imgpath3 = null;
+                    imgpath4 = null;
+                    if (i + 1 < listChange.Count)
+                    {
+                        imgpath2 = listChange[i + 1];
+                    }
+                    if (i + 2 < listChange.Count)
+                    {
+                        imgpath3 = listChange[i + 2];
+                    }
+                    if (i + 3 < listChange.Count)
+                    {
+                        imgpath4 = listChange[i + 3];
+                    }
+                }
+                if (index == 8)
+                {
+                    imgpath1 = listChange[i];
+                    imgpath2 = null;
+                    imgpath3 = null;
+                    imgpath4 = null;
+                    imgpath5 = null;
+                    imgpath6 = null;
+                    imgpath7 = null;
+                    imgpath8 = null;
+                    if (i + 1 < listChange.Count)
+                    {
+                        imgpath2 = listChange[i + 1];
+                    }
+                    if (i + 2 < listChange.Count)
+                    {
+                        imgpath3 = listChange[i + 2];
+                    }
+                    if (i + 3 < listChange.Count)
+                    {
+                        imgpath4 = listChange[i + 3];
+                    }
+                    if (i + 4 < listChange.Count)
+                    {
+                        imgpath5 = listChange[i + 4];
+                    }
+                    if (i + 5 < listChange.Count)
+                    {
+                        imgpath6 = listChange[i + 5];
+                    }
+                    if (i + 6 < listChange.Count)
+                    {
+                        imgpath7 = listChange[i + 6];
+                    }
+                    if (i + 7 < listChange.Count)
+                    {
+                        imgpath8 = listChange[i + 7];
+                    }
+                }
+                
+                
             }
-            imgpath2 = listChange[1];
-            imgpath3 = null;
-            imgpath4 = null;
-            imgpath5 = null;
-            imgpath6 = null;
-            imgpath7 = null;
-            imgpath8 = null;
-            //1
+            
+            //picb 1
             size = new Size(pictureBox1.Width, pictureBox1.Height);
             //可调整坐标和矩形宽高达到鼠标位置的选择
             rectSmall = new Rectangle(0, 0, pictureBox1.Width, pictureBox1.Height);
 
-            ////2
+            ////picb 2
             //size2 = new Size(pictureBox2.Width, pictureBox2.Height);
             ////可调整坐标和矩形宽高达到鼠标位置的选择
             //rectSmall2 = new Rectangle(0, 0, pictureBox2.Width, pictureBox2.Height);
             //dateTime = DateTime.Now;
 
-            //1
+            //picb 1
             m_bDown = false;
             point1.X = point1.Y = 0;
             point2.X = point2.Y = 0;
@@ -92,7 +152,7 @@ namespace 相册排版界面
             image3 = GetImageFromServer(imgpath1);
             scaleImage(pictureBox1, imgpath1);
             AcquireRectangleImage(image, new Rectangle(point2, size));
-            //2
+            //picb 2
             //m_bDown11 = false;
             //point111.X = point111.Y = 0;
             //point112.X = point112.Y = 0;
@@ -434,13 +494,16 @@ namespace 相册排版界面
         //    AcquireRectangleImage11(image11, new Rectangle(point112, size2));
         //}
 
+
+        //照片组
         List<string> list = new List<string>();
         FirstDlg modelDlg = new FirstDlg();
         int up = 8;
         int down = 8;
         int left = 8;
         int right = 8;
-        int v_middle = 8;
+        int v_middle = 7;
+        int h_middle = 5;
 
         //保存
         private void button11_Click(object sender, EventArgs e)
@@ -451,8 +514,35 @@ namespace 相册排版界面
             
             //图片list -----------
             list.Clear();
-            list.Add(folderDirPath + "a.jpg");
-            list.Add(imgpath2);
+            if (index == 1)
+            {
+                list.Add(folderDirPath + "a.jpg");
+            }
+            
+            if (index == 2)
+            {
+                list.Add(imgpath2);
+                list.Insert(cur_area - 1,folderDirPath + "a.jpg");
+            }
+            if (index == 4)
+            { 
+                list.Add(imgpath2);
+                list.Add(imgpath3);
+                list.Add(imgpath4);
+                list.Insert(cur_area - 1, folderDirPath + "a.jpg");
+            }
+            if (index == 8)
+            {
+                list.Add(imgpath2);
+                list.Add(imgpath3);
+                list.Add(imgpath4);
+                list.Add(imgpath5);
+                list.Add(imgpath6);
+                list.Add(imgpath7);
+                list.Add(imgpath8);
+                list.Insert(cur_area - 1, folderDirPath + "a.jpg");
+            }
+           
 
             using (BackgroundWorker bw = new BackgroundWorker())
             {
@@ -477,8 +567,22 @@ namespace 相册排版界面
             // 这里是真正做事的工作线程
             // 可以在这里做一些费时的，复杂的操作
             BackgroundWorker bw = sender as BackgroundWorker;
-
-            HechengB1();
+            if (index == 1)
+            {
+                HechengA1();
+            }
+            if (index == 2)
+            {
+                HechengB1();
+            }
+            if (index == 4)
+            {
+                HechengC1();
+            }
+            if (index == 8)
+            {
+                HechengD1();
+            }
 
             bw.ReportProgress(100);
         }
@@ -499,6 +603,106 @@ namespace 相册排版界面
             //这时后台线程已经完成，并返回了主线程，所以可以直接使用UI控件了 
         }
 
+        public void HechengA1()
+        {
+            string Path1 = System.Environment.CurrentDirectory + "\\done";
+            Image img1 = null;
+            Bitmap bitMap = null;
+            Graphics g1;
+
+            var width = CC.A4CHANG_XS;
+            var height = CC.A4GAO_XS;
+            // 初始化画布(最终的拼图画布)并设置宽高
+            try
+            {
+                bitMap = new Bitmap(width, height);
+            }
+            catch (Exception)
+            {
+            }
+            // 初始化画板
+            g1 = Graphics.FromImage(bitMap);
+
+            var eps = new EncoderParameters(1);
+            var ep = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, 100L);
+            eps.Param[0] = ep;
+
+            int i = 1;
+            foreach (var item in list)
+            {
+                Console.WriteLine(i++);
+
+                img1 = Image.FromFile(item);
+                // 将画布涂为白色(底部颜色可自行设置);
+                g1.FillRectangle(Brushes.White, 0, 0, width, height);
+
+                float width_xs = (CC.A4CHANG - left - right) * CC.A4GBILV;
+                float height_xs = (CC.A4GAO - up - down) * CC.A4GBILV;
+
+                float xs = 0.0f;
+                float x_xs = width_xs / img1.Width;
+                float y_xs = height_xs / img1.Height;
+                //1
+                if (x_xs < y_xs)
+                {
+                    xs = x_xs;
+                    g1.DrawImage(img1,
+                            left * CC.A4GBILV,
+                            up * CC.A4GBILV + (height_xs - img1.Height * xs) / 2,
+                            width_xs,
+                            img1.Height * xs);
+                }
+                else
+                {
+                    xs = y_xs;
+                    g1.DrawImage(img1,
+                            left * CC.A4GBILV + (width_xs - img1.Width * xs) / 2,
+                            up * CC.A4GBILV,
+                            img1.Width * xs,
+                            height_xs);
+                }
+                
+
+                var vv = System.IO.Path.GetFileNameWithoutExtension(item);
+                var vv2 = System.IO.Path.GetExtension(item);
+                vv2 = ".jpg";
+
+                Bitmap im = bitMap;
+                im.SetResolution(300, 300);
+                //转成jpg
+
+                /*
+                var eps = new EncoderParameters(1);
+                var ep = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, 100L);
+                eps.Param[0] = ep;
+                */
+
+                var jpsEncodeer = GetEncoder(ImageFormat.Jpeg);
+                //保存图片
+                String imgurl = Path1 + "\\" + vv + "done" + vv2;
+                im.Save(imgurl, jpsEncodeer, eps);
+                //释放资源
+                //im.Dispose();
+                //ep.Dispose();
+                //eps.Dispose();
+
+                img1.Dispose();
+
+                //bitMap.Dispose();
+
+                //Image img = bitMap;
+                ////保存
+                //var vv = System.IO.Path.GetFileNameWithoutExtension(item);
+                //var vv2 = System.IO.Path.GetExtension(item);
+                //vv2 = ".png";
+
+                //img.Save(Path1 + "\\" + vv + "done" + vv2);
+            }
+            ep.Dispose();
+            eps.Dispose();
+
+            bitMap.Dispose();
+        }
         public void HechengB1()
         {
             string Path1 = System.Environment.CurrentDirectory + "\\done";
@@ -636,7 +840,657 @@ namespace 相册排版界面
 
             bitMap.Dispose();
         }
+        public void HechengC1()
+        {
+            string Path1 = System.Environment.CurrentDirectory + "\\done";
+            Image img1 = null;
+            Image img2 = null;
+            Image img3 = null;
+            Image img4 = null;
 
+            Graphics g1;
+            var width = CC.A4CHANG_XS;
+            var height = CC.A4GAO_XS;
+            // 初始化画布(最终的拼图画布)并设置宽高
+
+            Bitmap bitMap = null;
+            try
+            {
+                bitMap = new Bitmap(width, height);
+            }
+            catch (Exception)
+            {
+            }
+            // 初始化画板
+            g1 = Graphics.FromImage(bitMap);
+
+            var eps = new EncoderParameters(1);
+            var ep = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, 100L);
+            eps.Param[0] = ep;
+            var jpsEncodeer = GetEncoder(ImageFormat.Jpeg);
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                String item = list[i];
+
+                img1 = Image.FromFile(list[i]);
+                img2 = null;
+                img3 = null;
+                img4 = null;
+                if (i + 1 < list.Count)
+                {
+                    img2 = Image.FromFile(list[i + 1]);
+                }
+                else
+                {
+                    //break;
+                }
+                if (i + 2 < list.Count)
+                {
+                    img3 = Image.FromFile(list[i + 2]);
+                }
+                else
+                {
+                    //break;
+                }
+                if (i + 3 < list.Count)
+                {
+                    img4 = Image.FromFile(list[i + 3]);
+                }
+                else
+                {
+                    //break;
+                }
+                // 将画布涂为白色(底部颜色可自行设置)
+                g1.FillRectangle(Brushes.White, new Rectangle(0, 0, width, height));
+
+                float width_xs = ((CC.A4CHANG - left - right - h_middle) / 2) * CC.A4GBILV;
+                float height_xs = ((CC.A4GAO - up - v_middle - down) / 2) * CC.A4GBILV;
+
+                float xs = 0.0f;
+                float x_xs = width_xs / img1.Width;
+                float y_xs = height_xs / img1.Height;
+
+                float top_1 = 0.0f;
+                float top_2 = 0.0f;
+                float top_3 = 0.0f;
+                float top_4 = 0.0f;
+
+                if (x_xs < y_xs)
+                {
+                    xs = x_xs;
+                    g1.DrawImage(img1,
+                            left * CC.A4GBILV,
+                            up * CC.A4GBILV + height_xs - img1.Height * xs,
+                            width_xs,
+                            img1.Height * xs);
+
+                    top_1 = up * CC.A4GBILV + height_xs - img1.Height * xs + img1.Height * xs;
+                }
+                else
+                {
+                    xs = y_xs;
+                    g1.DrawImage(img1,
+                            left * CC.A4GBILV + width_xs - img1.Width * xs,
+                            up * CC.A4GBILV,
+                            img1.Width * xs,
+                            height_xs);
+
+                    top_1 = up * CC.A4GBILV + height_xs;
+                }
+
+                //2
+                if (img2 != null)
+                {
+                    float width_xs2 = width_xs;
+                    float height_xs2 = height_xs;
+
+                    float xs2 = 0.0f;
+                    float x_xs2 = width_xs2 / img2.Width;
+                    float y_xs2 = height_xs2 / img2.Height;
+
+                    //top_2 = top_1 + v_middle * CC.A4GBILV;
+                    //top_2 = top_1 ;
+
+                    if (x_xs2 < y_xs2)
+                    {
+                        xs2 = x_xs2;
+                        g1.DrawImage(img2,
+                                left * CC.A4GBILV + width_xs2 + h_middle * CC.A4GBILV,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
+                                up * CC.A4GBILV + height_xs - img2.Height * xs2,
+                                width_xs2,
+                                img2.Height * xs2);
+                    }
+                    else
+                    {
+                        xs2 = y_xs2;
+                        g1.DrawImage(img2,
+                                left * CC.A4GBILV + width_xs2 + h_middle * CC.A4GBILV,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV,
+                                up * CC.A4GBILV,
+                                img2.Width * xs2,
+                                height_xs2);
+                    }
+                    //top_2 = top_2 + height_xs2;
+                    top_2 = top_1;
+                }
+                //3
+                if (img3 != null)
+                {
+
+
+                    float xs3 = 0.0f;
+                    float x_xs3 = width_xs / img3.Width;
+                    float y_xs3 = height_xs / img3.Height;
+
+                    top_3 = top_1 + v_middle * CC.A4GBILV;
+
+                    if (x_xs3 < y_xs3)
+                    {
+                        xs3 = x_xs3;
+                        g1.DrawImage(img3,
+                                left * CC.A4GBILV,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
+                                top_3,
+                                width_xs,
+                                img3.Height * xs3);
+                    }
+                    else
+                    {
+                        xs3 = y_xs3;
+                        g1.DrawImage(img3,
+                                left * CC.A4GBILV + width_xs - img3.Width * xs3,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV,
+                                top_3,
+                                img3.Width * xs3,
+                                height_xs);
+                    }
+                    // top_3 = top_3 + height_xs;
+                }
+                //4
+                if (img4 != null)
+                {
+
+                    float xs4 = 0.0f;
+                    float x_xs4 = width_xs / img4.Width;
+                    float y_xs4 = height_xs / img4.Height;
+
+                    //top_4 = top_3 + v_middle * CC.A4GBILV;
+
+                    if (x_xs4 < y_xs4)
+                    {
+                        xs4 = x_xs4;
+                        g1.DrawImage(img4,
+                                left * CC.A4GBILV + width_xs + h_middle * CC.A4GBILV,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
+                                top_3,
+                                width_xs,
+                                img4.Height * xs4);
+                    }
+                    else
+                    {
+                        xs4 = y_xs4;
+                        g1.DrawImage(img4,
+                                left * CC.A4GBILV + width_xs + h_middle * CC.A4GBILV,
+                                //CC.A4GAO_XS / 2 + v_middle / 2 * CC.A4GBILV + height_xs2 - img2.Height * xs2,
+                                top_3,
+                                img4.Width * xs4,
+                                height_xs);
+                    }
+
+                }
+
+                var vv = System.IO.Path.GetFileNameWithoutExtension(item);
+                var vv2 = System.IO.Path.GetExtension(item);
+                vv2 = ".jpg";
+
+                Bitmap im = bitMap;
+                im.SetResolution(300, 300);
+                //转成jpg
+
+                //保存图片
+                String imgurl = Path1 + "\\" + vv + "done" + vv2;
+                im.Save(imgurl, jpsEncodeer, eps);
+                //释放资源
+                img1.Dispose();
+                if (img2 != null)
+                {
+                    img2.Dispose();
+                    i++;
+                }
+
+                if (img3 != null)
+                {
+                    img3.Dispose();
+                    i++;
+                }
+
+                if (img4 != null)
+                {
+                    img4.Dispose();
+                    i++;
+                }
+
+
+            }
+
+            ep.Dispose();
+            eps.Dispose();
+
+            bitMap.Dispose();
+        }
+        public void HechengD1()
+        {
+            string Path1 = System.Environment.CurrentDirectory + "\\done";
+            Image img1 = null;
+            Image img2 = null;
+            Image img3 = null;
+            Image img4 = null;
+            Image img5 = null;
+            Image img6 = null;
+            Image img7 = null;
+            Image img8 = null;
+
+            Graphics g1;
+            var width = CC.A4CHANG_XS;
+            var height = CC.A4GAO_XS;
+            // 初始化画布(最终的拼图画布)并设置宽高
+
+            Bitmap bitMap = null;
+            try
+            {
+                bitMap = new Bitmap(width, height);
+            }
+            catch (Exception)
+            {
+            }
+            // 初始化画板
+            g1 = Graphics.FromImage(bitMap);
+
+            var eps = new EncoderParameters(1);
+            var ep = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, 100L);
+            eps.Param[0] = ep;
+            var jpsEncodeer = GetEncoder(ImageFormat.Jpeg);
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                String item = list[i];
+
+                img1 = Image.FromFile(list[i]);
+                img2 = null;
+                img3 = null;
+                img4 = null;
+                img5 = null;
+                img6 = null;
+                img7 = null;
+                img8 = null;
+                if (i + 1 < list.Count)
+                {
+                    img2 = Image.FromFile(list[i + 1]);
+                }
+                else
+                {
+                    //break;
+                }
+                if (i + 2 < list.Count)
+                {
+                    img3 = Image.FromFile(list[i + 2]);
+                }
+                else
+                {
+                    //break;
+                }
+                if (i + 3 < list.Count)
+                {
+                    img4 = Image.FromFile(list[i + 3]);
+                }
+                else
+                {
+                    //break;
+                }
+                if (i + 4 < list.Count)
+                {
+                    img5 = Image.FromFile(list[i + 4]);
+                }
+                else
+                {
+                    //break;
+                }
+                if (i + 5 < list.Count)
+                {
+                    img6 = Image.FromFile(list[i + 5]);
+                }
+                else
+                {
+                    //break;
+                }
+                if (i + 6 < list.Count)
+                {
+                    img7 = Image.FromFile(list[i + 6]);
+                }
+                else
+                {
+                    //break;
+                }
+                if (i + 7 < list.Count)
+                {
+                    img8 = Image.FromFile(list[i + 7]);
+                }
+                else
+                {
+                    //break;
+                }
+                // 将画布涂为白色(底部颜色可自行设置)
+                g1.FillRectangle(Brushes.White, new Rectangle(0, 0, width, height));
+
+                float width_xs = ((CC.A4CHANG - left - right - h_middle) / 2) * CC.A4GBILV;
+                float height_xs = ((CC.A4GAO - up - 3 * v_middle - down) / 4) * CC.A4GBILV;
+
+                float xs = 0.0f;
+                float x_xs = width_xs / img1.Width;
+                float y_xs = height_xs / img1.Height;
+
+                float top_1 = 0.0f;
+                //float top_2 = 0.0f;
+                float top_3 = 0.0f;
+                //float top_4 = 0.0f;
+                float top_5 = 0.0f;
+                //float top_6 = 0.0f;
+                float top_7 = 0.0f;
+                //float top_8 = 0.0f;
+
+                //1
+                if (x_xs < y_xs)
+                {
+                    xs = x_xs;
+                    g1.DrawImage(img1,
+                            left * CC.A4GBILV,
+                            up * CC.A4GBILV + height_xs - img1.Height * xs,
+                            width_xs,
+                            img1.Height * xs);
+
+                    top_1 = up * CC.A4GBILV;
+                }
+                else
+                {
+                    xs = y_xs;
+                    g1.DrawImage(img1,
+                            left * CC.A4GBILV + width_xs - img1.Width * xs,
+                            up * CC.A4GBILV,
+                            img1.Width * xs,
+                            height_xs);
+
+                    //top_1 = up * CC.A4GBILV + height_xs;
+                }
+
+                //2
+                if (img2 != null)
+                {
+                    float width_xs2 = width_xs;
+                    float height_xs2 = height_xs;
+
+                    float xs2 = 0.0f;
+                    float x_xs2 = width_xs2 / img2.Width;
+                    float y_xs2 = height_xs2 / img2.Height;
+
+                    //top_2 = top_1 + v_middle * CC.A4GBILV;
+
+                    if (x_xs2 < y_xs2)
+                    {
+                        xs2 = x_xs2;
+                        g1.DrawImage(img2,
+                                left * CC.A4GBILV + width_xs2 + h_middle * CC.A4GBILV,
+                                top_1 + height_xs2 - img2.Height * xs2,
+                                width_xs2,
+                                img2.Height * xs2);
+                    }
+                    else
+                    {
+                        xs2 = y_xs2;
+                        g1.DrawImage(img2,
+                                left * CC.A4GBILV + width_xs2 + h_middle * CC.A4GBILV,
+                                top_1,
+                                img2.Width * xs2,
+                                height_xs2);
+                    }
+                    //top_3 = top_1 + height_xs2 + v_middle * CC.A4GBILV;
+                }
+                //3
+                if (img3 != null)
+                {
+                    float xs3 = 0.0f;
+                    float x_xs3 = width_xs / img3.Width;
+                    float y_xs3 = height_xs / img3.Height;
+
+                    top_3 = top_1 + height_xs + v_middle * CC.A4GBILV;
+
+                    if (x_xs3 < y_xs3)
+                    {
+                        xs3 = x_xs3;
+                        g1.DrawImage(img3,
+                                left * CC.A4GBILV,
+                                top_3 + height_xs - img3.Height * xs3,
+                                width_xs,
+                                img3.Height * xs3);
+                    }
+                    else
+                    {
+                        xs3 = y_xs3;
+                        g1.DrawImage(img3,
+                                left * CC.A4GBILV + width_xs - img3.Width * xs3,
+                                top_3,
+                                img3.Width * xs3,
+                                height_xs);
+                    }
+                    // top_3 = top_3 + height_xs;
+                }
+                //4
+                if (img4 != null)
+                {
+                    float xs4 = 0.0f;
+                    float x_xs4 = width_xs / img4.Width;
+                    float y_xs4 = height_xs / img4.Height;
+
+                    //top_4 = top_3 + v_middle * CC.A4GBILV;
+
+                    if (x_xs4 < y_xs4)
+                    {
+                        xs4 = x_xs4;
+                        g1.DrawImage(img4,
+                                left * CC.A4GBILV + width_xs + h_middle * CC.A4GBILV,
+                                top_3 + height_xs - img4.Height * xs4,
+                                width_xs,
+                                img4.Height * xs4);
+                    }
+                    else
+                    {
+                        xs4 = y_xs4;
+                        g1.DrawImage(img4,
+                                left * CC.A4GBILV + width_xs + h_middle * CC.A4GBILV,
+                                top_3,
+                                img4.Width * xs4,
+                                height_xs);
+                    }
+                    //top_5 = top_3 + height_xs + v_middle * CC.A4GBILV;
+                }
+                //5
+                if (img5 != null)
+                {
+                    float xs5 = 0.0f;
+                    float x_xs5 = width_xs / img5.Width;
+                    float y_xs5 = height_xs / img5.Height;
+
+                    top_5 = top_3 + height_xs + v_middle * CC.A4GBILV;
+
+                    if (x_xs5 < y_xs5)
+                    {
+                        xs5 = x_xs5;
+                        g1.DrawImage(img5,
+                                left * CC.A4GBILV,
+                                top_5,
+                                width_xs,
+                                img5.Height * xs5);
+                    }
+                    else
+                    {
+                        xs5 = y_xs5;
+                        g1.DrawImage(img5,
+                                left * CC.A4GBILV + width_xs - img5.Width * xs5,
+                                top_5,
+                                img5.Width * xs5,
+                                height_xs);
+                    }
+                    //top_5 = top_5 + height_xs;
+                }
+                //6
+                if (img6 != null)
+                {
+                    float xs6 = 0.0f;
+                    float x_xs6 = width_xs / img6.Width;
+                    float y_xs6 = height_xs / img6.Height;
+
+                    //top_6 = top_5 + v_middle * CC.A4GBILV;
+
+                    if (x_xs6 < y_xs6)
+                    {
+                        xs6 = x_xs6;
+                        g1.DrawImage(img6,
+                                left * CC.A4GBILV + width_xs + h_middle * CC.A4GBILV,
+                                top_5,
+                                width_xs,
+                                img6.Height * xs6);
+                    }
+                    else
+                    {
+                        xs6 = y_xs6;
+                        g1.DrawImage(img6,
+                                left * CC.A4GBILV + width_xs + h_middle * CC.A4GBILV,
+                                top_5,
+                                img6.Width * xs6,
+                                height_xs);
+                    }
+                    top_7 = top_5 + height_xs + v_middle * CC.A4GBILV;
+                }
+                //7
+                if (img7 != null)
+                {
+
+                    float xs7 = 0.0f;
+                    float x_xs7 = width_xs / img7.Width;
+                    float y_xs7 = height_xs / img7.Height;
+
+                    //top_7 = top_6 + v_middle * CC.A4GBILV;
+
+                    if (x_xs7 < y_xs7)
+                    {
+                        xs7 = x_xs7;
+                        g1.DrawImage(img7,
+                                left * CC.A4GBILV,
+                                top_7,
+                                width_xs,
+                                img7.Height * xs7);
+                    }
+                    else
+                    {
+                        xs7 = y_xs7;
+                        g1.DrawImage(img7,
+                                left * CC.A4GBILV + width_xs - img7.Width * xs7,
+                                top_7,
+                                img7.Width * xs7,
+                                height_xs);
+                    }
+                    //top_7 = top_7 + height_xs;
+                }
+                //8
+                if (img8 != null)
+                {
+                    float xs8 = 0.0f;
+                    float x_xs8 = width_xs / img8.Width;
+                    float y_xs8 = height_xs / img8.Height;
+
+                    //top_8 = top_7 + v_middle * CC.A4GBILV;
+
+                    if (x_xs8 < y_xs8)
+                    {
+                        xs8 = x_xs8;
+                        g1.DrawImage(img8,
+                                left * CC.A4GBILV + width_xs + h_middle * CC.A4GBILV,
+                                top_7,
+                                width_xs,
+                                img8.Height * xs8);
+                    }
+                    else
+                    {
+                        xs8 = y_xs8;
+                        g1.DrawImage(img8,
+                                left * CC.A4GBILV + width_xs + h_middle * CC.A4GBILV,
+                                top_7,
+                                img8.Width * xs8,
+                                height_xs);
+                    }
+                    //top_8 = top_8 + height_xs;
+                }
+
+                var vv = System.IO.Path.GetFileNameWithoutExtension(item);
+                var vv2 = System.IO.Path.GetExtension(item);
+                vv2 = ".jpg";
+
+                Bitmap im = bitMap;
+                im.SetResolution(300, 300);
+                //转成jpg
+
+                //保存图片
+                String imgurl = Path1 + "\\" + vv + "done" + vv2;
+                im.Save(imgurl, jpsEncodeer, eps);
+                //释放资源
+                img1.Dispose();
+                if (img2 != null)
+                {
+                    img2.Dispose();
+                    i++;
+                }
+
+                if (img3 != null)
+                {
+                    img3.Dispose();
+                    i++;
+                }
+
+                if (img4 != null)
+                {
+                    img4.Dispose();
+                    i++;
+                }
+                if (img5 != null)
+                {
+                    img5.Dispose();
+                    i++;
+                }
+                if (img6 != null)
+                {
+                    img6.Dispose();
+                    i++;
+                }
+                if (img7 != null)
+                {
+                    img7.Dispose();
+                    i++;
+                }
+                if (img8 != null)
+                {
+                    img8.Dispose();
+                    i++;
+                }
+
+
+            }
+
+            ep.Dispose();
+            eps.Dispose();
+
+            bitMap.Dispose();
+        }
         public static ImageCodecInfo GetEncoder(ImageFormat format)
         {
             ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
