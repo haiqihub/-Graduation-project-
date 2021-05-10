@@ -220,7 +220,6 @@ namespace 相册排版界面
             }
 
 
-            
             loadImage();
         }
 
@@ -1063,9 +1062,11 @@ namespace 相册排版界面
 
             string img1 = listAll[i].name;
             string img2 = listAll[i+1].name;
+
+            //调整窗口
             相册排版界面.SingleDeal singleDeal = new 相册排版界面.SingleDeal(img1,img2);
             singleDeal.ShowDialog();
-            loadImageAfterDeal(3, 1);
+            loadImageAfterDeal(3 , 1);
         }
 
         //上方listView1的index
@@ -2894,6 +2895,12 @@ namespace 相册排版界面
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             m_bDown = false;
+        }
+
+        //判断 picturebox1 中的坐标来判断所处图片的矩形区域
+        private void blockWhere()
+        {
+            
         }
 
         

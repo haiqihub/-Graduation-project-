@@ -127,6 +127,12 @@
     <Compile Include="SingleDeal.Designer.cs">
       <DependentUpon>SingleDeal.cs</DependentUpon>
     </Compile>
+    <Compile Include="SingleTodo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SingleTodo.Designer.cs">
+      <DependentUpon>SingleTodo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Start.cs">
       <SubType>Form</SubType>
     </Compile>

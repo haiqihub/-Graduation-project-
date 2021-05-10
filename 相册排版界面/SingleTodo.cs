@@ -12,10 +12,11 @@ using System.Windows.Forms;
 
 namespace 相册排版界面
 {
-    public partial class SingleDeal : Form
+    
+    public partial class SingleTodo : Form
     {
         private string file1;
-        //private string file2;
+        private string file2;
 
         private Size size;
         private double m_scale = 1.0;
@@ -29,41 +30,38 @@ namespace 相册排版界面
 
         private bool m_bDown = false;
 
-        private string imgpath1;
-        private string imgpath2;
-        //private Size size2;
-        //private double m_scale11 = 1.0;
-        //private int m_rotate11 = 0;
+        private Size size2;
+        private double m_scale11 = 1.0;
+        private int m_rotate11 = 0;
 
-        //private Point point111, point112;
-        //private Rectangle rectSmall2;
+        private Point point111, point112;
+        private Rectangle rectSmall2;
 
-        //private System.Drawing.Image image11 = null;
-        //private System.Drawing.Image image113 = null;
+        private System.Drawing.Image image11 = null;
+        private System.Drawing.Image image113 = null;
 
-        //private bool m_bDown11 = false;
+        private bool m_bDown11 = false;
 
-        //private DateTime dateTime;
+        private DateTime dateTime;
+
+        private string imgpath;
 
 
 
-        public SingleDeal(string img1, string img2)
+        public SingleTodo(string img1, string img2)
         {
             InitializeComponent();
 
-            imgpath1 = img1;
-            imgpath2 = img2;
+            imgpath = img1;
             //1
             size = new Size(pictureBox1.Width, pictureBox1.Height);
-            //可调整坐标和矩形宽高达到鼠标位置的选择
             rectSmall = new Rectangle(0, 0, pictureBox1.Width, pictureBox1.Height);
 
-            ////2
-            //size2 = new Size(pictureBox2.Width, pictureBox2.Height);
-            ////可调整坐标和矩形宽高达到鼠标位置的选择
-            //rectSmall2 = new Rectangle(0, 0, pictureBox2.Width, pictureBox2.Height);
+            //2
+            size2 = new Size(pictureBox2.Width, pictureBox2.Height);
+            rectSmall2 = new Rectangle(0, 0, pictureBox2.Width, pictureBox2.Height);
 
-            //dateTime = DateTime.Now;
+            dateTime = DateTime.Now;
 
             //1
             m_bDown = false;
@@ -74,17 +72,17 @@ namespace 相册排版界面
             scaleImage(pictureBox1, img1);
             AcquireRectangleImage(image, new Rectangle(point2, size));
             //2
-            //m_bDown11 = false;
-            //point111.X = point111.Y = 0;
-            //point112.X = point112.Y = 0;
-            //image11 = GetImageFromServer(img2);
-            //image113 = GetImageFromServer(img2);
-            //scaleImage(pictureBox2, img2);
-            //AcquireRectangleImage11(image11, new Rectangle(point112, size2));
+            m_bDown11 = false;
+            point111.X = point111.Y = 0;
+            point112.X = point112.Y = 0;
+            image11 = GetImageFromServer(img2);
+            image113 = GetImageFromServer(img2);
+            scaleImage(pictureBox2, img2);
+            AcquireRectangleImage11(image11, new Rectangle(point112, size2));
 
 
         }
-        //在picturebox 里加载照片
+
         private void scaleImage(PictureBox pictureBox, string sPicPaht)
         {
             Bitmap bmPic = new Bitmap(sPicPaht);
@@ -102,8 +100,8 @@ namespace 相册排版界面
             pictureBox.LoadAsync(sPicPaht);
         }
 
-        //放大缩小
-        public Image ReduceImage(Image originalImage, int toWidth, int toHeight)
+        //缩小
+        public Image ReduceImage(Image originalImage, int toWidth, int toHeight)//放大缩小
         {
             Console.WriteLine(toWidth + "," + toHeight);
             Image toBitmap = new Bitmap(toWidth, toHeight);
@@ -116,11 +114,11 @@ namespace 相册排版界面
                 //   image:
                 //     要绘制的 System.Drawing.Image。
                 //
-                //   destRect:    ！ 这里应该可以得到坐标 绘制在坐标处 ！
+                //   destRect:
                 //     System.Drawing.Rectangle 结构，它指定所绘制图像的位置和大小。 将图像进行缩放以适合该矩形。
                 //
                 //   srcRect:
-                //                 
+                //这里应该可以得到坐标 绘制在坐标处 
                 //     System.Drawing.Rectangle 结构，它指定 image 对象中要绘制的部分。
                 //
                 //   srcUnit:
@@ -132,8 +130,8 @@ namespace 相册排版界面
                 return toBitmap;
             }
         }
-        //旋转
-        public Image RotateImg(Image b, int angle)
+
+        public Image RotateImg(Image b, int angle)//旋转
         {
             angle = angle % 360;
             //弧度转换 
@@ -168,7 +166,7 @@ namespace 相册排版界面
             //dsImage.Save(@"D:\img\" + Path.GetFileNameWithoutExtension(file) + "\\" + angle + ".png", System.Drawing.Imaging.ImageFormat.Png);
             return dsImage;
         }
-       
+
         public Image GetImageFromServer(string fileName)
         {
             Image img = null;
@@ -185,14 +183,10 @@ namespace 相册排版界面
             }
             return img;
         }
-        
-        //把图片绘制在规定大小规定位置的矩形内
+
         public void AcquireRectangleImage(Image source, Rectangle rect)
         {
-            if (source == null || rect.IsEmpty)
-            {
-                return;
-            }
+            if (source == null || rect.IsEmpty) return;
 
             Bitmap bmSmall = new Bitmap(pictureBox1.Width, pictureBox1.Height, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
 
@@ -203,42 +197,30 @@ namespace 相册排版界面
                                   rectSmall,
                                   rect.Left, rect.Top, rect.Right - rect.Left, rect.Bottom - rect.Top,
                                   GraphicsUnit.Pixel);
-                                    //第三行参数
-                                    //   srcX:
-                                    //     要绘制的源图像部分的左上角的 x 坐标。
-                                    //
-                                    //   srcY:
-                                    //     要绘制的源图像部分的左上角的 y 坐标。
-                                    //
-                                    //   srcWidth:
-                                    //     要绘制的源图像部分的宽度。
-                                    //
-                                    //   srcHeight:
-                                    //     要绘制的源图像部分的高度。
 
                 this.pictureBox1.Image = bmSmall;
-                
+
             }
         }
 
-        //public void AcquireRectangleImage11(Image source, Rectangle rect)
-        //{
-        //    if (source == null || rect.IsEmpty) return;
+        public void AcquireRectangleImage11(Image source, Rectangle rect)
+        {
+            if (source == null || rect.IsEmpty) return;
 
-        //    Bitmap bmSmall = new Bitmap(pictureBox1.Width, pictureBox1.Height, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+            Bitmap bmSmall = new Bitmap(pictureBox1.Width, pictureBox1.Height, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
 
-        //    using (Graphics grSmall = Graphics.FromImage(bmSmall))
-        //    {
-        //        //grSmall.Clear(color_back);
-        //        grSmall.DrawImage(source,
-        //                          rectSmall2,
-        //                          rect.Left, rect.Top, rect.Right - rect.Left, rect.Bottom - rect.Top,
-        //                          GraphicsUnit.Pixel);
+            using (Graphics grSmall = Graphics.FromImage(bmSmall))
+            {
+                //grSmall.Clear(color_back);
+                grSmall.DrawImage(source,
+                                  rectSmall2,
+                                  rect.Left, rect.Top, rect.Right - rect.Left, rect.Bottom - rect.Top,
+                                  GraphicsUnit.Pixel);
 
-        //        this.pictureBox2.Image = bmSmall;
+                this.pictureBox2.Image = bmSmall;
 
-        //    }
-        //}
+            }
+        }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -266,7 +248,6 @@ namespace 相册排版界面
             m_bDown = false;
         }
 
-        //更换图片
         private void button1_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
@@ -287,7 +268,7 @@ namespace 相册排版界面
                 }
             }
         }
-        //左旋
+
         private void button2_Click(object sender, EventArgs e)
         {
             m_rotate -= 90;
@@ -296,7 +277,7 @@ namespace 相册排版界面
             image = tmp3;
             AcquireRectangleImage(image, new Rectangle(point2, size));
         }
-        //右旋
+
         private void button3_Click(object sender, EventArgs e)
         {
             m_rotate += 90;
@@ -305,7 +286,7 @@ namespace 相册排版界面
             image = tmp3;
             AcquireRectangleImage(image, new Rectangle(point2, size));
         }
-        //放大
+
         private void button4_Click(object sender, EventArgs e)
         {
             m_scale += 0.1;
@@ -316,7 +297,7 @@ namespace 相册排版界面
             image = tmp3;
             AcquireRectangleImage(image, new Rectangle(point2, size));
         }
-        //缩小
+
         private void button5_Click(object sender, EventArgs e)
         {
             m_scale -= 0.1;
@@ -327,93 +308,93 @@ namespace 相册排版界面
             image = tmp3;
             AcquireRectangleImage(image, new Rectangle(point2, size));
         }
-        
-        //private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
-        //{
-        //    if (m_bDown11 == true)
-        //    {
-        //        point112.X -= e.X - point111.X;
-        //        point112.Y -= e.Y - point111.Y;
 
-        //        AcquireRectangleImage11(image11, new Rectangle(point112, size2));
+        private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (m_bDown11 == true)
+            {
+                point112.X -= e.X - point111.X;
+                point112.Y -= e.Y - point111.Y;
 
-        //        point111.X = e.X;
-        //        point111.Y = e.Y;
-        //    }
-        //}
+                AcquireRectangleImage11(image11, new Rectangle(point112, size2));
 
-        //private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
-        //{
-        //    m_bDown11 = true;
-        //    point111.X = e.X;
-        //    point111.Y = e.Y;
-        //}
+                point111.X = e.X;
+                point111.Y = e.Y;
+            }
+        }
 
-        //private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
-        //{
-        //    m_bDown11 = false;
-        //}
+        private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
+        {
+            m_bDown11 = true;
+            point111.X = e.X;
+            point111.Y = e.Y;
+        }
 
-        //private void button10_Click(object sender, EventArgs e)
-        //{
-        //    OpenFileDialog dlg = new OpenFileDialog();
-        //    dlg.Multiselect = false;//等于true表示可以选择多个文件
-        //    dlg.DefaultExt = ".jpg";
-        //    dlg.Filter = "图片|*.jpg";
-        //    if (dlg.ShowDialog() == DialogResult.OK)
-        //    {
-        //        foreach (string file in dlg.FileNames)
-        //        {
-        //            m_bDown11 = false;
-        //            point111.X = point111.Y = 0;
-        //            point112.X = point112.Y = 0;
+        private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
+        {
+            m_bDown11 = false;
+        }
 
-        //            image11 = GetImageFromServer(file);
-        //            image113 = GetImageFromServer(file);
-        //            AcquireRectangleImage11(image11, new Rectangle(point112, size2));
-        //        }
-        //    }
-        //}
+        private void button10_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Multiselect = false;//等于true表示可以选择多个文件
+            dlg.DefaultExt = ".jpg";
+            dlg.Filter = "图片|*.jpg";
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                foreach (string file in dlg.FileNames)
+                {
+                    m_bDown11 = false;
+                    point111.X = point111.Y = 0;
+                    point112.X = point112.Y = 0;
 
-        //private void button9_Click(object sender, EventArgs e)
-        //{
-        //    m_rotate11 -= 90;
-        //    Image tmp112 = this.ReduceImage(image113, (int)(m_scale11 * image113.Width), (int)(m_scale11 * image113.Height));
-        //    Image tmp113 = this.RotateImg(tmp112, m_rotate11);
-        //    image11 = tmp113;
-        //    AcquireRectangleImage11(image11, new Rectangle(point112, size2));
-        //}
+                    image11 = GetImageFromServer(file);
+                    image113 = GetImageFromServer(file);
+                    AcquireRectangleImage11(image11, new Rectangle(point112, size2));
+                }
+            }
+        }
 
-        //private void button8_Click(object sender, EventArgs e)
-        //{
-        //    m_rotate11 += 90;
-        //    Image tmp112 = this.ReduceImage(image113, (int)(m_scale11 * image113.Width), (int)(m_scale11 * image113.Height));
-        //    Image tmp113 = this.RotateImg(tmp112, m_rotate11);
-        //    image11 = tmp113;
-        //    AcquireRectangleImage11(image11, new Rectangle(point112, size2));
-        //}
+        private void button9_Click(object sender, EventArgs e)
+        {
+            m_rotate11 -= 90;
+            Image tmp112 = this.ReduceImage(image113, (int)(m_scale11 * image113.Width), (int)(m_scale11 * image113.Height));
+            Image tmp113 = this.RotateImg(tmp112, m_rotate11);
+            image11 = tmp113;
+            AcquireRectangleImage11(image11, new Rectangle(point112, size2));
+        }
 
-        //private void button7_Click(object sender, EventArgs e)
-        //{
-        //    m_scale11 += 0.05;
-        //    if (m_scale11 < 0.1)
-        //        return;
-        //    Image tmp112 = this.ReduceImage(image113, (int)(m_scale11 * image113.Width), (int)(m_scale11 * image113.Height));
-        //    Image tmp113 = this.RotateImg(tmp112, m_rotate11);
-        //    image11 = tmp113;
-        //    AcquireRectangleImage11(image11, new Rectangle(point112, size2));
-        //}
+        private void button8_Click(object sender, EventArgs e)
+        {
+            m_rotate11 += 90;
+            Image tmp112 = this.ReduceImage(image113, (int)(m_scale11 * image113.Width), (int)(m_scale11 * image113.Height));
+            Image tmp113 = this.RotateImg(tmp112, m_rotate11);
+            image11 = tmp113;
+            AcquireRectangleImage11(image11, new Rectangle(point112, size2));
+        }
 
-        //private void button6_Click(object sender, EventArgs e)
-        //{
-        //    m_scale11 -= 0.05;
-        //    if (m_scale11 < 0.1)
-        //        return;
-        //    Image tmp112 = this.ReduceImage(image113, (int)(m_scale11 * image113.Width), (int)(m_scale11 * image113.Height));
-        //    Image tmp113 = this.RotateImg(tmp112, m_rotate11);
-        //    image11 = tmp113;
-        //    AcquireRectangleImage11(image11, new Rectangle(point112, size2));
-        //}
+        private void button7_Click(object sender, EventArgs e)
+        {
+            m_scale11 += 0.05;
+            if (m_scale11 < 0.1)
+                return;
+            Image tmp112 = this.ReduceImage(image113, (int)(m_scale11 * image113.Width), (int)(m_scale11 * image113.Height));
+            Image tmp113 = this.RotateImg(tmp112, m_rotate11);
+            image11 = tmp113;
+            AcquireRectangleImage11(image11, new Rectangle(point112, size2));
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            m_scale11 -= 0.05;
+            if (m_scale11 < 0.1)
+                return;
+            Image tmp112 = this.ReduceImage(image113, (int)(m_scale11 * image113.Width), (int)(m_scale11 * image113.Height));
+            Image tmp113 = this.RotateImg(tmp112, m_rotate11);
+            image11 = tmp113;
+            AcquireRectangleImage11(image11, new Rectangle(point112, size2));
+        }
 
         List<string> list = new List<string>();
         FirstDlg modelDlg = new FirstDlg();
@@ -422,19 +403,16 @@ namespace 相册排版界面
         int left = 8;
         int right = 8;
         int v_middle = 8;
-
-        //保存
         private void button11_Click(object sender, EventArgs e)
         {
             string folderDirPath = System.Environment.CurrentDirectory + "\\";
 
             this.pictureBox1.Image.Save(folderDirPath + "a.jpg");
-            //this.pictureBox2.Image.Save(folderDirPath + "b.jpg");
-            
-            //图片list -----------
+            this.pictureBox2.Image.Save(folderDirPath + "b.jpg");
+
             list.Clear();
             list.Add(folderDirPath + "a.jpg");
-            list.Add(imgpath2);
+            list.Add(folderDirPath + "b.jpg");
 
             using (BackgroundWorker bw = new BackgroundWorker())
             {
@@ -449,7 +427,7 @@ namespace 相册排版界面
             modelDlg.label1.Text = "图片处理中，请稍后......";
             modelDlg.ShowDialog(this);
             File.Delete(folderDirPath + "a.jpg");
-            //File.Delete(imgpath2);
+            File.Delete(folderDirPath + "b.jpg");
         }
 
 
@@ -518,8 +496,6 @@ namespace 相册排版界面
                 if (i + 1 < list.Count)
                 {
                     img2 = Image.FromFile(list[i + 1]);
-                    
-                    
                 }
                 else
                 {
@@ -592,8 +568,8 @@ namespace 相册排版界面
                     }
                 }
 
-                var vv = System.IO.Path.GetFileNameWithoutExtension(imgpath1);
-                //var vv2 = System.IO.Path.GetExtension(imgpath1);
+                var vv = System.IO.Path.GetFileNameWithoutExtension(imgpath);
+                //var vv2 = System.IO.Path.GetExtension(imgpath);
                 var vv2 = ".jpg";
 
                 Bitmap im = bitMap;
@@ -602,7 +578,7 @@ namespace 相册排版界面
 
                 //保存图片
                 String imgurl = Path1 + "\\" + vv + "done" + vv2;
-                //String imgurl = imgpath1;
+                //String imgurl = imgpath;
                 im.Save(imgurl, jpsEncodeer, eps);
                 //释放资源
                 img1.Dispose();

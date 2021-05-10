@@ -36,6 +36,7 @@ namespace 相册排版界面
         int result = 0;
         bool bClearDone = false;
         public Layout layout;
+        public SingleDeal singleDeal;
 
         public int getResult()
         {
@@ -55,7 +56,13 @@ namespace 相册排版界面
             Path1 = System.Environment.CurrentDirectory + "\\done";
             this.layout = layout;
         }
-        
+
+        public Setting()
+        {
+            InitializeComponent();
+            
+        }
+
         public void postData(List<string> list2, int index2, bool clearDone)
         {
             bClearDone = clearDone;
