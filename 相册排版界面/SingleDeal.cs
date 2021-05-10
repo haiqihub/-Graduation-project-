@@ -29,8 +29,8 @@ namespace 相册排版界面
 
         private bool m_bDown = false;
 
-        private string imgpath1;
-        private string imgpath2;
+        private string imgpath1, imgpath2, imgpath3, imgpath4,imgpath5,imgpath6,imgpath7, imgpath8;
+        
         //private Size size2;
         //private double m_scale11 = 1.0;
         //private int m_rotate11 = 0;
@@ -47,12 +47,32 @@ namespace 相册排版界面
 
 
 
-        public SingleDeal(string img1, string img2)
+        public SingleDeal(List<string>listChange ,int index,int cur_area)
         {
             InitializeComponent();
 
-            imgpath1 = img1;
-            imgpath2 = img2;
+            for(int i = 0; i < listChange.Count; i++)
+            {
+                imgpath1 = listChange[i];
+                imgpath2 = null;
+                imgpath3 = null;
+                imgpath4 = null;
+                imgpath5 = null;
+                imgpath6 = null;
+                imgpath7 = null;
+                imgpath8 = null;
+                if (i + 1 < listChange.Count)
+                {
+                    imgpath2= listChange[i+1];
+                }
+            }
+            imgpath2 = listChange[1];
+            imgpath3 = null;
+            imgpath4 = null;
+            imgpath5 = null;
+            imgpath6 = null;
+            imgpath7 = null;
+            imgpath8 = null;
             //1
             size = new Size(pictureBox1.Width, pictureBox1.Height);
             //可调整坐标和矩形宽高达到鼠标位置的选择
@@ -62,16 +82,15 @@ namespace 相册排版界面
             //size2 = new Size(pictureBox2.Width, pictureBox2.Height);
             ////可调整坐标和矩形宽高达到鼠标位置的选择
             //rectSmall2 = new Rectangle(0, 0, pictureBox2.Width, pictureBox2.Height);
-
             //dateTime = DateTime.Now;
 
             //1
             m_bDown = false;
             point1.X = point1.Y = 0;
             point2.X = point2.Y = 0;
-            image = GetImageFromServer(img1);
-            image3 = GetImageFromServer(img1);
-            scaleImage(pictureBox1, img1);
+            image = GetImageFromServer(imgpath1);
+            image3 = GetImageFromServer(imgpath1);
+            scaleImage(pictureBox1, imgpath1);
             AcquireRectangleImage(image, new Rectangle(point2, size));
             //2
             //m_bDown11 = false;
@@ -82,8 +101,8 @@ namespace 相册排版界面
             //scaleImage(pictureBox2, img2);
             //AcquireRectangleImage11(image11, new Rectangle(point112, size2));
 
-
         }
+
         //在picturebox 里加载照片
         private void scaleImage(PictureBox pictureBox, string sPicPaht)
         {
@@ -429,7 +448,6 @@ namespace 相册排版界面
             string folderDirPath = System.Environment.CurrentDirectory + "\\";
 
             this.pictureBox1.Image.Save(folderDirPath + "a.jpg");
-            //this.pictureBox2.Image.Save(folderDirPath + "b.jpg");
             
             //图片list -----------
             list.Clear();

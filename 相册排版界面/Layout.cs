@@ -39,6 +39,14 @@ namespace 相册排版界面
 
         public static string path_url;
 
+        // 这个是鼠标点击地点 layout根据不同的setting.index分别判断cur_area =1,2,3,4,5,6,7,8
+        //然后把这个值传给SingleDeal 在SingleDeal中把list[cur_area]对应上，只有list[cur_area]才变，其余不动
+        //在SingleDeal中根据cur_area以及index（1248） 的情况，来判断调用HechengXXX（）
+        public int cur_area = 0;
+        public int index = 0;
+        private List<string> listChange = new List<string>();
+
+
         public Layout()
         {
             InitializeComponent();
@@ -1033,14 +1041,16 @@ namespace 相册排版界面
             }
             
         }
-        private void 调整图片大小ToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void 调整图片大小ToolStripMenuItem_Click2(object sender, EventArgs e)
         {
             if (listDone.Count == 0)
             {
                 MessageBox.Show("请先选择图片，再进行操作");
                 return;
-                
+
             }
+
             string folderDirPath = System.Environment.CurrentDirectory + "\\done\\";
 
             string fullPath = listDone[cur_pos];
@@ -1049,6 +1059,7 @@ namespace 相册排版界面
             string extension = System.IO.Path.GetExtension(fullPath);//扩展名 “.aspx”
             char[] MyChar = { 'd', 'o', 'n', 'e' };
             string fileNameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(fullPath).TrimEnd(MyChar);// 没有扩展名的文件名 “Default”
+
 
             int i = 0;
             for (; i < listAll.Count; i++)
@@ -1061,10 +1072,154 @@ namespace 相册排版界面
             }
 
             string img1 = listAll[i].name;
-            string img2 = listAll[i+1].name;
+            string img2 = null;
+            string img3 = null;
+            string img4 = null;
+            string img5 = null;
+            string img6 = null;
+            string img7 = null;
+            string img8 = null;
 
-            //调整窗口
-            相册排版界面.SingleDeal singleDeal = new 相册排版界面.SingleDeal(img1,img2);
+            listChange.Clear();
+
+            listChange.Add(img1);
+
+            if (i + 1 < listAll.Count)
+            {
+                img2 = listAll[i + 1].name;
+                listChange.Add(img2);
+            }
+            if (i + 2 < listAll.Count)
+            {
+                img3 = listAll[i + 2].name;
+                listChange.Add(img3);
+            }
+            if (i + 3 < listAll.Count)
+            {
+                img4 = listAll[i + 3].name;
+                listChange.Add(img4);
+            }
+            if (i + 4 < listAll.Count)
+            {
+                img5 = listAll[i + 4].name;
+                listChange.Add(img5);
+            }
+            if (i + 5 < listAll.Count)
+            {
+                img6 = listAll[i + 5].name;
+                listChange.Add(img6);
+            }
+            if (i + 6 < listAll.Count)
+            {
+                img7 = listAll[i + 6].name;
+                listChange.Add(img7);
+            }
+            if (i + 7 < listAll.Count)
+            {
+                img8 = listAll[i + 7].name;
+                listChange.Add(img8);
+            }
+            
+            //调 “调整”  窗口    index=0   cur_area=0
+            相册排版界面.SingleDeal singleDeal = new 相册排版界面.SingleDeal(listChange, index, cur_area);
+            singleDeal.ShowDialog();
+            loadImageAfterDeal(3, 1);
+        }
+
+        //调整 “该张” 图片
+        private void 调整图片大小ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listDone.Count == 0)
+            {
+                MessageBox.Show("请先选择图片，再进行操作");
+                return; 
+            }
+            
+            string folderDirPath = System.Environment.CurrentDirectory + "\\done\\";
+
+            string fullPath = listDone[cur_pos];
+
+            //string filename = System.IO.Path.GetFileName(fullPath);//文件名  “Default.aspx”
+            string extension = System.IO.Path.GetExtension(fullPath);//扩展名 “.aspx”
+            char[] MyChar = { 'd', 'o', 'n', 'e' };
+            string fileNameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(fullPath).TrimEnd(MyChar);// 没有扩展名的文件名 “Default”
+
+            
+            int i = 0;
+            for (; i < listAll.Count; i++)
+            {
+                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i].name);
+                if (fileNameWithoutExtension == fileName)
+                {
+                    break;
+                }
+            }
+
+            listChange.Clear();
+            if (index == 1)
+            {
+                listChange.Add(listAll[i].name);
+            }
+            if (index == 2)
+            {
+                listChange.Add(listAll[i].name);
+                if (i + 1 < listAll.Count)
+                {
+                    listChange.Add(listAll[i + 1].name);
+                }
+            }
+            if (index == 4)
+            {
+                listChange.Add(listAll[i].name);
+                if (i + 1 < listAll.Count)
+                {
+                    listChange.Add(listAll[i + 1].name);
+                }
+                if (i + 2 < listAll.Count)
+                {
+                    listChange.Add(listAll[i + 2].name);
+                }
+                if (i + 3 < listAll.Count)
+                {
+                    listChange.Add(listAll[i + 3].name);
+                }
+            }
+            if (index == 8)
+            {
+                listChange.Add(listAll[i].name);
+                if (i + 1 < listAll.Count)
+                {
+                    listChange.Add(listAll[i + 1].name);
+                }
+                if (i + 2 < listAll.Count)
+                {
+                    listChange.Add(listAll[i + 2].name);
+                }
+                if (i + 3 < listAll.Count)
+                {
+                    listChange.Add(listAll[i + 3].name);
+                }
+                if (i + 4 < listAll.Count)
+                {
+                    listChange.Add(listAll[i + 4].name);
+                }
+                if (i + 5 < listAll.Count)
+                {
+                    listChange.Add(listAll[i + 5].name);
+                }
+                if (i + 6 < listAll.Count)
+                {
+                    listChange.Add(listAll[i + 6].name);
+                }
+                if (i + 7 < listAll.Count)
+                {
+                    listChange.Add(listAll[i + 7].name);
+                }
+            }
+            
+
+            //调 “调整”  窗口
+            相册排版界面.SingleDeal singleDeal = new 相册排版界面.SingleDeal(listChange,index,cur_area);
             singleDeal.ShowDialog();
             loadImageAfterDeal(3 , 1);
         }
@@ -2828,7 +2983,7 @@ namespace 相册排版界面
         
 
         
-        //鼠标拖拽移动 中展示出来的框体大小  待修改
+        //鼠标拖拽移动 中展示出来的框体大小  
         public void AcquireRectangleImage(Image source, Rectangle rect)
         {
             if (source == null || rect.IsEmpty) return;
@@ -2884,12 +3039,113 @@ namespace 相册排版界面
                 point1.Y = e.Y;
             }
         }
-
+        //鼠标 获取点击位置 判断area的值
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
+            
             m_bDown = true;
             point1.X = e.X;
             point1.Y = e.Y;
+            //-------------
+            int x = point1.X;
+            int y = point1.Y;
+
+            if (setting.index == 1 || setting.index == 2)
+            {
+                index = 1;
+                if (listCur.Count > 0)
+                {
+                    cur_area = 1;
+                }
+            }
+            if (setting.index == 3 || setting.index == 4)
+            {
+                index = 2;
+                if (y > 257)
+                {
+                    cur_area = 2;
+                }
+                else
+                {
+                    cur_area = 1;
+                }
+            }
+            if (setting.index == 5 || setting.index == 6)
+            {
+                index = 4;
+                if (y > 257)
+                {
+                    if (x < 349)
+                    {
+                        cur_area = 1;
+                    }
+                    else
+                    {
+                        cur_area = 4;
+                    }
+                }
+                else
+                {
+                    if (x < 349)
+                    {
+                        cur_area = 2;
+                    }
+                    else
+                    {
+                        cur_area = 3;
+                    }
+                }
+            }
+            if (setting.index == 7 || setting.index == 8)
+            {
+                index = 8;
+                if (x < 349)
+                {//左
+                    if (y < 128)
+                    {
+                        cur_area = 4;
+                    }
+                    if (y > 129 && y < 257)
+                    {
+                        cur_area = 3;
+                    }
+                    if (y > 257 && y < 385)
+                    {
+                        cur_area = 2;
+                    }
+                    if (y > 386)
+                    {
+                        cur_area = 1;
+                    }
+                }
+                else
+                {//右
+                    if (y < 128)
+                    {
+                        cur_area = 5;
+                    }
+                    if (y > 129 && y < 257)
+                    {
+                        cur_area = 6;
+                    }
+                    if (y > 257 && y < 385)
+                    {
+                        cur_area = 7;
+                    }
+                    if (y > 386)
+                    {
+                        cur_area = 8;
+                    }
+
+                }
+            }
+
+
+            //鼠标右键点击   测试
+            //if (e.Button == MouseButtons.Right)
+            //{
+            //    MessageBox.Show(point1.ToString(), cur_area.ToString());
+            //}
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
@@ -2897,13 +3153,16 @@ namespace 相册排版界面
             m_bDown = false;
         }
 
-        //判断 picturebox1 中的坐标来判断所处图片的矩形区域
-        private void blockWhere()
-        {
-            
-        }
 
         
+        //根据鼠标左键点击位置 判断所处图片的矩形区域 area
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            
+            //MessageBox.Show(point1.ToString());
+        }
+
+
 
         /*
          * ContextMenuTrip 
@@ -3152,8 +3411,7 @@ namespace 相册排版界面
             else
                 e.Effect = DragDropEffects.None;
         }
-
-        
+       
         public static ImageCodecInfo GetEncoder(ImageFormat format)
         {
             ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
