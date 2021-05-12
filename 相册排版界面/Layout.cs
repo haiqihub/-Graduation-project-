@@ -3077,22 +3077,26 @@ namespace 相册排版界面
                 {
                     if (x < 349)
                     {
-                        cur_area = 1;
+                        //cur_area = 1;
+                        cur_area = 3;
                     }
                     else
                     {
                         cur_area = 4;
+                        
                     }
                 }
                 else
                 {
                     if (x < 349)
                     {
-                        cur_area = 2;
+                        //cur_area = 2;
+                        cur_area = 1;
                     }
                     else
                     {
-                        cur_area = 3;
+                        //cur_area = 3;
+                        cur_area = 2;
                     }
                 }
             }
@@ -3103,7 +3107,8 @@ namespace 相册排版界面
                 {//左
                     if (y < 128)
                     {
-                        cur_area = 4;
+                        //cur_area = 4;
+                        cur_area = 1;
                     }
                     if (y > 129 && y < 257)
                     {
@@ -3111,26 +3116,31 @@ namespace 相册排版界面
                     }
                     if (y > 257 && y < 385)
                     {
-                        cur_area = 2;
+                        //cur_area = 2;
+                        cur_area = 5;
                     }
                     if (y > 386)
                     {
-                        cur_area = 1;
+                        //cur_area = 1;
+                        cur_area = 7;
                     }
                 }
                 else
                 {//右
                     if (y < 128)
                     {
-                        cur_area = 5;
+                        //cur_area = 5;
+                        cur_area = 2;
                     }
                     if (y > 129 && y < 257)
                     {
-                        cur_area = 6;
+                        //cur_area = 6;
+                        cur_area = 4;
                     }
                     if (y > 257 && y < 385)
                     {
-                        cur_area = 7;
+                        //cur_area = 7;
+                        cur_area = 6;
                     }
                     if (y > 386)
                     {

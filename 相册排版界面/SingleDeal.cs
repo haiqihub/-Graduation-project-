@@ -32,7 +32,8 @@ namespace 相册排版界面
 
         private bool m_bDown = false;
 
-        private string imgpath1, imgpath2, imgpath3, imgpath4,imgpath5,imgpath6,imgpath7, imgpath8;
+        //private string imgpath1, imgpath2, imgpath3, imgpath4,imgpath5,imgpath6,imgpath7, imgpath8;
+        private List<string>imgpath = new List<string>();
         
         //private Size size2;
         //private double m_scale11 = 1.0;
@@ -55,78 +56,95 @@ namespace 相册排版界面
             InitializeComponent();
             index = num;
             cur_area = area;
+
+            imgpath.Clear();
             for(int i = 0; i < listChange.Count; i++)
             {
                 if (index == 1)
                 {
-                    imgpath1 = listChange[i];
+                    //imgpath1 = listChange[i];
+                    imgpath.Add(listChange[i]);
                     
                 }
                 if (index == 2)
                 {
-                    imgpath1 = listChange[i];
-                    imgpath2 = null;
+                    //imgpath1 = listChange[i];
+                    //imgpath2 = null;
+                    imgpath.Add(listChange[i]);
                     if (i + 1 < listChange.Count)
                     {
-                        imgpath2 = listChange[i + 1];
+                        // imgpath2 = listChange[i + 1];
+                        imgpath.Add(listChange[i + 1]);
                     }
                 }
                 if (index == 4)
                 {
-                    imgpath1 = listChange[i];
-                    imgpath2 = null;
-                    imgpath3 = null;
-                    imgpath4 = null;
+                    //imgpath1 = listChange[i];
+                    //imgpath2 = null;
+                    //imgpath3 = null;
+                    //imgpath4 = null;
+                    imgpath.Add(listChange[i]);
                     if (i + 1 < listChange.Count)
                     {
-                        imgpath2 = listChange[i + 1];
+                        //imgpath2 = listChange[i + 1];
+                        imgpath.Add(listChange[i + 1]);
                     }
                     if (i + 2 < listChange.Count)
                     {
-                        imgpath3 = listChange[i + 2];
+                        //imgpath3 = listChange[i + 2];
+                        imgpath.Add(listChange[i + 2]);
                     }
                     if (i + 3 < listChange.Count)
                     {
-                        imgpath4 = listChange[i + 3];
+                        //imgpath4 = listChange[i + 3];
+                        imgpath.Add(listChange[i + 3]);
                     }
                 }
                 if (index == 8)
                 {
-                    imgpath1 = listChange[i];
-                    imgpath2 = null;
-                    imgpath3 = null;
-                    imgpath4 = null;
-                    imgpath5 = null;
-                    imgpath6 = null;
-                    imgpath7 = null;
-                    imgpath8 = null;
+                    //imgpath1 = listChange[i];
+                    //imgpath2 = null;
+                    //imgpath3 = null;
+                    //imgpath4 = null;
+                    //imgpath5 = null;
+                    //imgpath6 = null;
+                    //imgpath7 = null;
+                    //imgpath8 = null;
+                    imgpath.Add(listChange[i]);
                     if (i + 1 < listChange.Count)
                     {
-                        imgpath2 = listChange[i + 1];
+                        //imgpath2 = listChange[i + 1];
+                        imgpath.Add(listChange[i + 1]);
                     }
                     if (i + 2 < listChange.Count)
                     {
-                        imgpath3 = listChange[i + 2];
+                        //imgpath3 = listChange[i + 2];
+                        imgpath.Add(listChange[i + 2]);
                     }
                     if (i + 3 < listChange.Count)
                     {
-                        imgpath4 = listChange[i + 3];
+                        //imgpath4 = listChange[i + 3];
+                        imgpath.Add(listChange[i + 3]);
                     }
                     if (i + 4 < listChange.Count)
                     {
-                        imgpath5 = listChange[i + 4];
+                        //imgpath5 = listChange[i + 4];
+                        imgpath.Add(listChange[i + 4]);
                     }
                     if (i + 5 < listChange.Count)
                     {
-                        imgpath6 = listChange[i + 5];
+                        //imgpath6 = listChange[i + 5];
+                        imgpath.Add(listChange[i + 5]);
                     }
                     if (i + 6 < listChange.Count)
                     {
-                        imgpath7 = listChange[i + 6];
+                        //imgpath7 = listChange[i + 6];
+                        imgpath.Add(listChange[i + 6]);
                     }
                     if (i + 7 < listChange.Count)
                     {
-                        imgpath8 = listChange[i + 7];
+                        //imgpath8 = listChange[i + 7];
+                        imgpath.Add(listChange[i + 7]);
                     }
                 }
                 
@@ -148,9 +166,9 @@ namespace 相册排版界面
             m_bDown = false;
             point1.X = point1.Y = 0;
             point2.X = point2.Y = 0;
-            image = GetImageFromServer(imgpath1);
-            image3 = GetImageFromServer(imgpath1);
-            scaleImage(pictureBox1, imgpath1);
+            image = GetImageFromServer(imgpath[cur_area - 1]);
+            image3 = GetImageFromServer(imgpath[cur_area - 1]);
+            scaleImage(pictureBox1, imgpath[cur_area - 1]);
             AcquireRectangleImage(image, new Rectangle(point2, size));
             //picb 2
             //m_bDown11 = false;
@@ -512,35 +530,46 @@ namespace 相册排版界面
 
             this.pictureBox1.Image.Save(folderDirPath + "a.jpg");
             
-            //图片list -----------
+            //更改后的图片list -----------
             list.Clear();
             if (index == 1)
             {
-                list.Add(folderDirPath + "a.jpg");
+                //list.Add(folderDirPath + "a.jpg");
+                list.Add(imgpath[0]);
+                list[cur_area - 1] = folderDirPath + "a.jpg";
             }
             
             if (index == 2)
             {
-                list.Add(imgpath2);
-                list.Insert(cur_area - 1,folderDirPath + "a.jpg");
+                list.Add(imgpath[0]);
+                list.Add(imgpath[1]);
+                //list.Insert(cur_area - 1,folderDirPath + "a.jpg");
+                list[cur_area - 1] = folderDirPath + "a.jpg";
             }
             if (index == 4)
-            { 
-                list.Add(imgpath2);
-                list.Add(imgpath3);
-                list.Add(imgpath4);
-                list.Insert(cur_area - 1, folderDirPath + "a.jpg");
+            {
+                //list.Add(imgpath[1]);
+                //list.Add(imgpath[2]);
+                //list.Add(imgpath[3]);
+                //list.Insert(cur_area - 1, folderDirPath + "a.jpg");
+                list.Add(imgpath[0]);
+                list.Add(imgpath[1]);
+                list.Add(imgpath[2]);
+                list.Add(imgpath[3]);
+                list[cur_area - 1] = folderDirPath + "a.jpg";
             }
             if (index == 8)
             {
-                list.Add(imgpath2);
-                list.Add(imgpath3);
-                list.Add(imgpath4);
-                list.Add(imgpath5);
-                list.Add(imgpath6);
-                list.Add(imgpath7);
-                list.Add(imgpath8);
-                list.Insert(cur_area - 1, folderDirPath + "a.jpg");
+                list.Add(imgpath[0]);
+                list.Add(imgpath[1]);
+                list.Add(imgpath[2]);
+                list.Add(imgpath[3]);
+                list.Add(imgpath[4]);
+                list.Add(imgpath[5]);
+                list.Add(imgpath[6]);
+                list.Add(imgpath[7]);
+                // list.Insert(cur_area - 1, folderDirPath + "a.jpg");
+                list[cur_area - 1] = folderDirPath + "a.jpg";
             }
            
 
@@ -627,9 +656,11 @@ namespace 相册排版界面
             var ep = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, 100L);
             eps.Param[0] = ep;
 
-            int i = 1;
-            foreach (var item in list)
+            //foreach (var item in list)
+            for (int i = 0;i < list.Count;i ++)
             {
+                String item = list[i];
+                String item_o = imgpath[i];
                 Console.WriteLine(i++);
 
                 img1 = Image.FromFile(item);
@@ -663,9 +694,9 @@ namespace 相册排版界面
                 }
                 
 
-                var vv = System.IO.Path.GetFileNameWithoutExtension(item);
-                var vv2 = System.IO.Path.GetExtension(item);
-                vv2 = ".jpg";
+                var vv = System.IO.Path.GetFileNameWithoutExtension(item_o);
+                //var vv2 = System.IO.Path.GetExtension(item);
+                var vv2 = ".jpg";
 
                 Bitmap im = bitMap;
                 im.SetResolution(300, 300);
@@ -814,7 +845,7 @@ namespace 相册排版界面
                     }
                 }
 
-                var vv = System.IO.Path.GetFileNameWithoutExtension(imgpath1);
+                var vv = System.IO.Path.GetFileNameWithoutExtension(item);
                 //var vv2 = System.IO.Path.GetExtension(imgpath1);
                 var vv2 = ".jpg";
 
