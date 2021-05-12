@@ -76,8 +76,8 @@
             this.更换图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.jpg格式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pdf格式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.png格式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pdf格式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.调整图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -373,7 +373,6 @@
             this.更换当前模板ToolStripMenuItem.Name = "更换当前模板ToolStripMenuItem";
             this.更换当前模板ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.更换当前模板ToolStripMenuItem.Text = "更换当前模板";
-            this.更换当前模板ToolStripMenuItem.Click += new System.EventHandler(this.更换当前模板ToolStripMenuItem_Click);
             // 
             // 单张ToolStripMenuItem1
             // 
@@ -464,8 +463,7 @@
             this.导出ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.jpg格式ToolStripMenuItem,
             this.png格式ToolStripMenuItem,
-            this.pdf格式ToolStripMenuItem
-            });
+            this.pdf格式ToolStripMenuItem});
             this.导出ToolStripMenuItem.Name = "导出ToolStripMenuItem";
             this.导出ToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
             this.导出ToolStripMenuItem.Text = "导出相册";
@@ -473,23 +471,23 @@
             // jpg格式ToolStripMenuItem
             // 
             this.jpg格式ToolStripMenuItem.Name = "jpg格式ToolStripMenuItem";
-            this.jpg格式ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.jpg格式ToolStripMenuItem.Size = new System.Drawing.Size(151, 26);
             this.jpg格式ToolStripMenuItem.Text = "导出jpg";
             this.jpg格式ToolStripMenuItem.Click += new System.EventHandler(this.jpg格式ToolStripMenuItem_Click);
-            // 
-            // pdf格式ToolStripMenuItem
-            // 
-            this.pdf格式ToolStripMenuItem.Name = "pdf格式ToolStripMenuItem";
-            this.pdf格式ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.pdf格式ToolStripMenuItem.Text = "导出pdf";
-            this.pdf格式ToolStripMenuItem.Click += new System.EventHandler(this.pdf格式ToolStripMenuItem_Click);
             // 
             // png格式ToolStripMenuItem
             // 
             this.png格式ToolStripMenuItem.Name = "png格式ToolStripMenuItem";
-            this.png格式ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.png格式ToolStripMenuItem.Size = new System.Drawing.Size(151, 26);
             this.png格式ToolStripMenuItem.Text = "导出png";
             this.png格式ToolStripMenuItem.Click += new System.EventHandler(this.导出pngToolStripMenuItem_Click);
+            // 
+            // pdf格式ToolStripMenuItem
+            // 
+            this.pdf格式ToolStripMenuItem.Name = "pdf格式ToolStripMenuItem";
+            this.pdf格式ToolStripMenuItem.Size = new System.Drawing.Size(151, 26);
+            this.pdf格式ToolStripMenuItem.Text = "导出pdf";
+            this.pdf格式ToolStripMenuItem.Click += new System.EventHandler(this.pdf格式ToolStripMenuItem_Click);
             // 
             // pictureBox1
             // 
@@ -684,11 +682,16 @@
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "Layout";
             this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Layout";
             this.Load += new System.EventHandler(this.Layout_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Layout_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Layout_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Layout_MouseUp);
+            this.Move += new System.EventHandler(this.Layout_Move);
             this.contextMenuStrip2.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

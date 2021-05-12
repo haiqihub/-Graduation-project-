@@ -603,6 +603,7 @@ namespace 相册排版界面
             if (index == 2)
             {
                 HechengB1();
+
             }
             if (index == 4)
             {
