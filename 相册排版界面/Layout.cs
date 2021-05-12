@@ -820,30 +820,60 @@ namespace 相册排版界面
 
         private void 单张ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (listDone.Count == 0)
+            {
+                MessageBox.Show("请先打开图片，再进行操作");
+                return;
+
+            }
             select_index2 = -1;
             StartSetting(101);
         }
 
         private void 单张转90度ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (listDone.Count == 0)
+            {
+                MessageBox.Show("请先打开图片，再进行操作");
+                return;
+
+            }
             select_index2 = -1;
             StartSetting(102);
         }
 
         private void 两张合并ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (listDone.Count == 0)
+            {
+                MessageBox.Show("请先打开图片，再进行操作");
+                return;
+
+            }
             select_index2 = -1;
             StartSetting(103);
         }
 
         private void 两张合并转90度ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (listDone.Count == 0)
+            {
+                MessageBox.Show("请先打开图片，再进行操作");
+                return;
+
+            }
             select_index2 = -1;
             StartSetting(104);
         }
 
         private void 四张合并ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (listDone.Count == 0)
+            {
+                MessageBox.Show("请先打开图片，再进行操作");
+                return;
+
+            }
             select_index2 = -1;
             StartSetting(105);
         }
@@ -851,17 +881,35 @@ namespace 相册排版界面
 
         private void 四张合并转90度ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (listDone.Count == 0)
+            {
+                MessageBox.Show("请先打开图片，再进行操作");
+                return;
+
+            }
             select_index2 = -1;
             StartSetting(106);
         }
         private void 八张合并ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (listDone.Count == 0)
+            {
+                MessageBox.Show("请先打开图片，再进行操作");
+                return;
+
+            }
             select_index2 = -1;
             StartSetting(107);
         }
 
         private void 八张合并转90度ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (listDone.Count == 0)
+            {
+                MessageBox.Show("请先打开图片，再进行操作");
+                return;
+
+            }
             select_index2 = -1;
             StartSetting(108);
         }
@@ -946,6 +994,12 @@ namespace 相册排版界面
         FontSelect fontSelect = new FontSelect();
         private void 加入文字ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (listDone.Count == 0)
+            {
+                MessageBox.Show("请先打开图片，再进行操作");
+                return;
+
+            }
             fontSelect.ShowDialog(this);
 
             string fontName = fontSelect.fontName;
@@ -986,6 +1040,12 @@ namespace 相册排版界面
         
         private void 添加文本框ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (listDone.Count == 0)
+            {
+                MessageBox.Show("请先打开图片，再进行操作");
+                return;
+
+            }
             textDescription.ShowDialog(this);
             Point ab = new Point();
             ab.X = 0;
@@ -1046,84 +1106,84 @@ namespace 相册排版界面
         {
             if (listDone.Count == 0)
             {
-                MessageBox.Show("请先选择图片，再进行操作");
+                MessageBox.Show("请先打开图片，再进行操作");
                 return;
 
             }
+            MessageBox.Show("在画布中，鼠标右击选中图片，可调整单张图片");
+            //string folderDirPath = System.Environment.CurrentDirectory + "\\done\\";
 
-            string folderDirPath = System.Environment.CurrentDirectory + "\\done\\";
+            //string fullPath = listDone[cur_pos];
 
-            string fullPath = listDone[cur_pos];
-
-            //string filename = System.IO.Path.GetFileName(fullPath);//文件名  “Default.aspx”
-            string extension = System.IO.Path.GetExtension(fullPath);//扩展名 “.aspx”
-            char[] MyChar = { 'd', 'o', 'n', 'e' };
-            string fileNameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(fullPath).TrimEnd(MyChar);// 没有扩展名的文件名 “Default”
+            ////string filename = System.IO.Path.GetFileName(fullPath);//文件名  “Default.aspx”
+            //string extension = System.IO.Path.GetExtension(fullPath);//扩展名 “.aspx”
+            //char[] MyChar = { 'd', 'o', 'n', 'e' };
+            //string fileNameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(fullPath).TrimEnd(MyChar);// 没有扩展名的文件名 “Default”
 
 
-            int i = 0;
-            for (; i < listAll.Count; i++)
-            {
-                string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i].name);
-                if (fileNameWithoutExtension == fileName)
-                {
-                    break;
-                }
-            }
+            //int i = 0;
+            //for (; i < listAll.Count; i++)
+            //{
+            //    string fileName = System.IO.Path.GetFileNameWithoutExtension(listAll[i].name);
+            //    if (fileNameWithoutExtension == fileName)
+            //    {
+            //        break;
+            //    }
+            //}
 
-            string img1 = listAll[i].name;
-            string img2 = null;
-            string img3 = null;
-            string img4 = null;
-            string img5 = null;
-            string img6 = null;
-            string img7 = null;
-            string img8 = null;
+            //string img1 = listAll[i].name;
+            //string img2 = null;
+            //string img3 = null;
+            //string img4 = null;
+            //string img5 = null;
+            //string img6 = null;
+            //string img7 = null;
+            //string img8 = null;
 
-            listChange.Clear();
+            //listChange.Clear();
 
-            listChange.Add(img1);
+            //listChange.Add(img1);
 
-            if (i + 1 < listAll.Count)
-            {
-                img2 = listAll[i + 1].name;
-                listChange.Add(img2);
-            }
-            if (i + 2 < listAll.Count)
-            {
-                img3 = listAll[i + 2].name;
-                listChange.Add(img3);
-            }
-            if (i + 3 < listAll.Count)
-            {
-                img4 = listAll[i + 3].name;
-                listChange.Add(img4);
-            }
-            if (i + 4 < listAll.Count)
-            {
-                img5 = listAll[i + 4].name;
-                listChange.Add(img5);
-            }
-            if (i + 5 < listAll.Count)
-            {
-                img6 = listAll[i + 5].name;
-                listChange.Add(img6);
-            }
-            if (i + 6 < listAll.Count)
-            {
-                img7 = listAll[i + 6].name;
-                listChange.Add(img7);
-            }
-            if (i + 7 < listAll.Count)
-            {
-                img8 = listAll[i + 7].name;
-                listChange.Add(img8);
-            }
-            
-            //调 “调整”  窗口    index=0   cur_area=0
-            相册排版界面.SingleDeal singleDeal = new 相册排版界面.SingleDeal(listChange, index, cur_area);
-            singleDeal.ShowDialog();
-            loadImageAfterDeal(3, 1);
+            //if (i + 1 < listAll.Count)
+            //{
+            //    img2 = listAll[i + 1].name;
+            //    listChange.Add(img2);
+            //}
+            //if (i + 2 < listAll.Count)
+            //{
+            //    img3 = listAll[i + 2].name;
+            //    listChange.Add(img3);
+            //}
+            //if (i + 3 < listAll.Count)
+            //{
+            //    img4 = listAll[i + 3].name;
+            //    listChange.Add(img4);
+            //}
+            //if (i + 4 < listAll.Count)
+            //{
+            //    img5 = listAll[i + 4].name;
+            //    listChange.Add(img5);
+            //}
+            //if (i + 5 < listAll.Count)
+            //{
+            //    img6 = listAll[i + 5].name;
+            //    listChange.Add(img6);
+            //}
+            //if (i + 6 < listAll.Count)
+            //{
+            //    img7 = listAll[i + 6].name;
+            //    listChange.Add(img7);
+            //}
+            //if (i + 7 < listAll.Count)
+            //{
+            //    img8 = listAll[i + 7].name;
+            //    listChange.Add(img8);
+            //}
+
+            ////调 “调整”  窗口    index=0   cur_area=0
+            //相册排版界面.SingleDeal singleDeal = new 相册排版界面.SingleDeal(listChange, index, cur_area);
+            //singleDeal.ShowDialog();
+            //loadImageAfterDeal(3, 1);
         }
 
         //调整 “该张” 图片
@@ -1265,6 +1325,12 @@ namespace 相册排版界面
         
         private void 更换图片ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (listDone.Count == 0)
+            {
+                MessageBox.Show("请先打开图片，再进行操作");
+                return;
+
+            }
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Multiselect = false;//等于true表示可以选择多个文件
             dlg.DefaultExt = ".jpg";
@@ -1346,6 +1412,12 @@ namespace 相册排版界面
 
         private void jpg格式ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (listDone.Count == 0)
+            {
+                MessageBox.Show("请先打开图片，再进行操作");
+                return;
+
+            }
             try
             {
                 //打开选择文件夹对话框
@@ -1420,6 +1492,12 @@ namespace 相册排版界面
 
         private void pdf格式ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (listDone.Count == 0)
+            {
+                MessageBox.Show("请先打开图片，再进行操作");
+                return;
+
+            }
             this.saveFileDialog1.Filter = "PDF(*.pdf)|*.pdf";//设置文件类型
             saveFileDialog1.FileName = "相册 "+ DateTime.Now.ToLongDateString().ToString();//设置默认文件名
             saveFileDialog1.DefaultExt = "pdf";//设置默认格式（可以不设）
@@ -1616,6 +1694,15 @@ namespace 相册排版界面
                 bean.type = 1;
                 updateTopShow();
             }
+            else
+            {
+                if (listDone.Count == 0)
+                {
+                    MessageBox.Show("请先打开图片，再进行操作");
+                    return;
+
+                }
+            }
         }
 
         private void 单张转90度ToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -1772,6 +1859,15 @@ namespace 相册排版界面
                 bean.type = 2;
                 updateTopShow();
             }
+            else
+            {
+                if (listDone.Count == 0)
+                {
+                    MessageBox.Show("请先打开图片，再进行操作");
+                    return;
+
+                }
+            }
         }
 
         private void 两张合并ToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -1925,6 +2021,15 @@ namespace 相册排版界面
                 }
                 bean.type = 3;
                 updateTopShow();
+            }
+            else
+            {
+                if (listDone.Count == 0)
+                {
+                    MessageBox.Show("请先打开图片，再进行操作");
+                    return;
+
+                }
             }
         }
 
@@ -2081,6 +2186,15 @@ namespace 相册排版界面
                 }
                 bean.type = 4;
                 updateTopShow();
+            }
+            else
+            {
+                if (listDone.Count == 0)
+                {
+                    MessageBox.Show("请先打开图片，再进行操作");
+                    return;
+
+                }
             }
         }
 
@@ -2240,6 +2354,15 @@ namespace 相册排版界面
                 }
                 bean.type = 5;
                 updateTopShow();
+            }
+            else
+            {
+                if (listDone.Count == 0)
+                {
+                    MessageBox.Show("请先打开图片，再进行操作");
+                    return;
+
+                }
             }
             
         }
@@ -2412,6 +2535,15 @@ namespace 相册排版界面
                 }
                 bean.type = 6;
                 updateTopShow();
+            }
+            else
+            {
+                if (listDone.Count == 0)
+                {
+                    MessageBox.Show("请先打开图片，再进行操作");
+                    return;
+
+                }
             }
             
         }
@@ -2655,6 +2787,15 @@ namespace 相册排版界面
                 }
                 bean.type = 7;
                 updateTopShow();
+            }
+            else
+            {
+                if (listDone.Count == 0)
+                {
+                    MessageBox.Show("请先打开图片，再进行操作");
+                    return;
+
+                }
             }
         }
 
@@ -2954,6 +3095,15 @@ namespace 相册排版界面
                 }
                 bean.type = 8;
                 updateTopShow();
+            }
+            else
+            {
+                if (listDone.Count == 0)
+                {
+                    MessageBox.Show("请先打开图片，再进行操作");
+                    return;
+
+                }
             }
         }
 
@@ -3421,7 +3571,12 @@ namespace 相册排版界面
             else
                 e.Effect = DragDropEffects.None;
         }
-       
+
+        private void 更换当前模板ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
         public static ImageCodecInfo GetEncoder(ImageFormat format)
         {
             ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();

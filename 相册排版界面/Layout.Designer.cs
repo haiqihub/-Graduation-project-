@@ -372,6 +372,7 @@
             this.更换当前模板ToolStripMenuItem.Name = "更换当前模板ToolStripMenuItem";
             this.更换当前模板ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.更换当前模板ToolStripMenuItem.Text = "更换当前模板";
+            this.更换当前模板ToolStripMenuItem.Click += new System.EventHandler(this.更换当前模板ToolStripMenuItem_Click);
             // 
             // 单张ToolStripMenuItem1
             // 
@@ -495,7 +496,6 @@
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             this.pictureBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.left_DragDrop);
             this.pictureBox1.DragEnter += new System.Windows.Forms.DragEventHandler(this.left_DragEnter);
-            //this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
@@ -506,12 +506,12 @@
             this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.调整图片ToolStripMenuItem});
             this.contextMenuStrip3.Name = "contextMenuStrip3";
-            this.contextMenuStrip3.Size = new System.Drawing.Size(139, 28);
+            this.contextMenuStrip3.Size = new System.Drawing.Size(169, 28);
             // 
             // 调整图片ToolStripMenuItem
             // 
             this.调整图片ToolStripMenuItem.Name = "调整图片ToolStripMenuItem";
-            this.调整图片ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
+            this.调整图片ToolStripMenuItem.Size = new System.Drawing.Size(168, 24);
             this.调整图片ToolStripMenuItem.Text = "调整该张图片";
             this.调整图片ToolStripMenuItem.Click += new System.EventHandler(this.调整图片大小ToolStripMenuItem_Click);
             // 
