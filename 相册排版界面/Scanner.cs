@@ -193,22 +193,27 @@ namespace 相册排版界面
         private void 图片ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Multiselect = false;//等于true表示可以选择多个文件
-            dlg.DefaultExt = ".pdf";
-            dlg.Filter = "pdf文件|*.pdf";
+            dlg.Multiselect = true;//等于true表示可以选择多个文件
+            dlg.DefaultExt = ".png";
+            dlg.Filter = "图片|*.png";
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 list.Clear();
-                //获取用户选择的文件夹路径
-                string folderDirPath = "C:\\Users\\Dell\\Desktop\\shanghai";
+                ////获取用户选择的文件夹路径
+                //string folderDirPath = "C:\\Users\\Dell\\Desktop\\shanghai";
 
-                //获取目录与子目录
-                DirectoryInfo dir = new DirectoryInfo(folderDirPath);
-                //获取当前目录JPG文件列表 GetFiles获取指定目录中文件的名称(包括其路径)
-                FileInfo[] fileInfo = dir.GetFiles("*.jpg");
-                for (int i = 0; i < fileInfo.Length; i++)
+                ////获取目录与子目录
+                //DirectoryInfo dir = new DirectoryInfo(folderDirPath);
+                ////获取当前目录JPG文件列表 GetFiles获取指定目录中文件的名称(包括其路径)
+                //FileInfo[] fileInfo = dir.GetFiles("*.jpg");
+                //for (int i = 0; i < fileInfo.Length; i++)
+                //{
+                //    list.Add(fileInfo[i].FullName);
+                //}
+                foreach (string file in dlg.FileNames)
                 {
-                    list.Add(fileInfo[i].FullName);
+                    list.Add(file);
+                    
                 }
 
             }
