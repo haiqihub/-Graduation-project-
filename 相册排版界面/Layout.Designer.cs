@@ -77,6 +77,7 @@
             this.导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.jpg格式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pdf格式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.png格式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.调整图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -370,91 +371,91 @@
             this.八张合并ToolStripMenuItem1,
             this.八张合并转90度ToolStripMenuItem1});
             this.更换当前模板ToolStripMenuItem.Name = "更换当前模板ToolStripMenuItem";
-            this.更换当前模板ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.更换当前模板ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.更换当前模板ToolStripMenuItem.Text = "更换当前模板";
             this.更换当前模板ToolStripMenuItem.Click += new System.EventHandler(this.更换当前模板ToolStripMenuItem_Click);
             // 
             // 单张ToolStripMenuItem1
             // 
             this.单张ToolStripMenuItem1.Name = "单张ToolStripMenuItem1";
-            this.单张ToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.单张ToolStripMenuItem1.Size = new System.Drawing.Size(200, 26);
             this.单张ToolStripMenuItem1.Text = "单张";
             this.单张ToolStripMenuItem1.Click += new System.EventHandler(this.单张ToolStripMenuItem1_Click);
             // 
             // 单张转90度ToolStripMenuItem1
             // 
             this.单张转90度ToolStripMenuItem1.Name = "单张转90度ToolStripMenuItem1";
-            this.单张转90度ToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.单张转90度ToolStripMenuItem1.Size = new System.Drawing.Size(200, 26);
             this.单张转90度ToolStripMenuItem1.Text = "单张转90度";
             this.单张转90度ToolStripMenuItem1.Click += new System.EventHandler(this.单张转90度ToolStripMenuItem1_Click);
             // 
             // 两张合并ToolStripMenuItem1
             // 
             this.两张合并ToolStripMenuItem1.Name = "两张合并ToolStripMenuItem1";
-            this.两张合并ToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.两张合并ToolStripMenuItem1.Size = new System.Drawing.Size(200, 26);
             this.两张合并ToolStripMenuItem1.Text = "两张合并";
             this.两张合并ToolStripMenuItem1.Click += new System.EventHandler(this.两张合并ToolStripMenuItem1_Click);
             // 
             // 两张合并转90度ToolStripMenuItem1
             // 
             this.两张合并转90度ToolStripMenuItem1.Name = "两张合并转90度ToolStripMenuItem1";
-            this.两张合并转90度ToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.两张合并转90度ToolStripMenuItem1.Size = new System.Drawing.Size(200, 26);
             this.两张合并转90度ToolStripMenuItem1.Text = "两张合并转90度";
             this.两张合并转90度ToolStripMenuItem1.Click += new System.EventHandler(this.两张合并转90度ToolStripMenuItem1_Click);
             // 
             // 四张合并ToolStripMenuItem1
             // 
             this.四张合并ToolStripMenuItem1.Name = "四张合并ToolStripMenuItem1";
-            this.四张合并ToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.四张合并ToolStripMenuItem1.Size = new System.Drawing.Size(200, 26);
             this.四张合并ToolStripMenuItem1.Text = "四张合并";
             this.四张合并ToolStripMenuItem1.Click += new System.EventHandler(this.四张合并ToolStripMenuItem1_Click);
             // 
             // 四张合并转90度ToolStripMenuItem1
             // 
             this.四张合并转90度ToolStripMenuItem1.Name = "四张合并转90度ToolStripMenuItem1";
-            this.四张合并转90度ToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.四张合并转90度ToolStripMenuItem1.Size = new System.Drawing.Size(200, 26);
             this.四张合并转90度ToolStripMenuItem1.Text = "四张合并转90度";
             this.四张合并转90度ToolStripMenuItem1.Click += new System.EventHandler(this.四张合并转90度ToolStripMenuItem1_Click);
             // 
             // 八张合并ToolStripMenuItem1
             // 
             this.八张合并ToolStripMenuItem1.Name = "八张合并ToolStripMenuItem1";
-            this.八张合并ToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.八张合并ToolStripMenuItem1.Size = new System.Drawing.Size(200, 26);
             this.八张合并ToolStripMenuItem1.Text = "八张合并";
             this.八张合并ToolStripMenuItem1.Click += new System.EventHandler(this.八张合并ToolStripMenuItem1_Click);
             // 
             // 八张合并转90度ToolStripMenuItem1
             // 
             this.八张合并转90度ToolStripMenuItem1.Name = "八张合并转90度ToolStripMenuItem1";
-            this.八张合并转90度ToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.八张合并转90度ToolStripMenuItem1.Size = new System.Drawing.Size(200, 26);
             this.八张合并转90度ToolStripMenuItem1.Text = "八张合并转90度";
             this.八张合并转90度ToolStripMenuItem1.Click += new System.EventHandler(this.八张合并转90度ToolStripMenuItem1_Click);
             // 
             // 加入文字ToolStripMenuItem
             // 
             this.加入文字ToolStripMenuItem.Name = "加入文字ToolStripMenuItem";
-            this.加入文字ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.加入文字ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.加入文字ToolStripMenuItem.Text = "加入水印";
             this.加入文字ToolStripMenuItem.Click += new System.EventHandler(this.加入文字ToolStripMenuItem_Click);
             // 
             // 添加文本框ToolStripMenuItem
             // 
             this.添加文本框ToolStripMenuItem.Name = "添加文本框ToolStripMenuItem";
-            this.添加文本框ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.添加文本框ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.添加文本框ToolStripMenuItem.Text = "添加文本框";
             this.添加文本框ToolStripMenuItem.Click += new System.EventHandler(this.添加文本框ToolStripMenuItem_Click);
             // 
             // 调整图片大小ToolStripMenuItem
             // 
             this.调整图片大小ToolStripMenuItem.Name = "调整图片大小ToolStripMenuItem";
-            this.调整图片大小ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.调整图片大小ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.调整图片大小ToolStripMenuItem.Text = "调整图片";
             this.调整图片大小ToolStripMenuItem.Click += new System.EventHandler(this.调整图片大小ToolStripMenuItem_Click2);
             // 
             // 更换图片ToolStripMenuItem
             // 
             this.更换图片ToolStripMenuItem.Name = "更换图片ToolStripMenuItem";
-            this.更换图片ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.更换图片ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.更换图片ToolStripMenuItem.Text = "更换图片";
             this.更换图片ToolStripMenuItem.Click += new System.EventHandler(this.更换图片ToolStripMenuItem_Click);
             // 
@@ -462,7 +463,9 @@
             // 
             this.导出ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.jpg格式ToolStripMenuItem,
-            this.pdf格式ToolStripMenuItem});
+            this.png格式ToolStripMenuItem,
+            this.pdf格式ToolStripMenuItem
+            });
             this.导出ToolStripMenuItem.Name = "导出ToolStripMenuItem";
             this.导出ToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
             this.导出ToolStripMenuItem.Text = "导出相册";
@@ -470,16 +473,23 @@
             // jpg格式ToolStripMenuItem
             // 
             this.jpg格式ToolStripMenuItem.Name = "jpg格式ToolStripMenuItem";
-            this.jpg格式ToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.jpg格式ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.jpg格式ToolStripMenuItem.Text = "导出jpg";
             this.jpg格式ToolStripMenuItem.Click += new System.EventHandler(this.jpg格式ToolStripMenuItem_Click);
             // 
             // pdf格式ToolStripMenuItem
             // 
             this.pdf格式ToolStripMenuItem.Name = "pdf格式ToolStripMenuItem";
-            this.pdf格式ToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.pdf格式ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.pdf格式ToolStripMenuItem.Text = "导出pdf";
             this.pdf格式ToolStripMenuItem.Click += new System.EventHandler(this.pdf格式ToolStripMenuItem_Click);
+            // 
+            // png格式ToolStripMenuItem
+            // 
+            this.png格式ToolStripMenuItem.Name = "png格式ToolStripMenuItem";
+            this.png格式ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.png格式ToolStripMenuItem.Text = "导出png";
+            this.png格式ToolStripMenuItem.Click += new System.EventHandler(this.导出pngToolStripMenuItem_Click);
             // 
             // pictureBox1
             // 
@@ -757,5 +767,6 @@
         public System.Windows.Forms.TextBox textBox_X;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip3;
         private System.Windows.Forms.ToolStripMenuItem 调整图片ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem png格式ToolStripMenuItem;
     }
 }

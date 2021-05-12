@@ -36,12 +36,26 @@ namespace 相册排版界面
 
                     //获取目录与子目录
                     DirectoryInfo dir = new DirectoryInfo(folderDirPath);
+                    //var files = Directory.GetFiles(folderDirPath, "(*.jpg|*.png)");
                     //获取当前目录JPG文件列表 GetFiles获取指定目录中文件的名称(包括其路径)
                     FileInfo[] fileInfo = dir.GetFiles("*.jpg");
-                    for (int i = 0; i < fileInfo.Length; i++)
+                    FileInfo[] fileInfo2 = dir.GetFiles("*.png");
+                    if (fileInfo.Length > 0)
                     {
-                        list.Add(fileInfo[i].FullName);
+                        for (int i = 0; i < fileInfo.Length; i++)
+                        {
+                            list.Add(fileInfo[i].FullName);
+                        }
                     }
+                    else if(fileInfo2.Length > 0)
+                    {
+                        for (int i = 0; i < fileInfo2.Length; i++)
+                        {
+                            list.Add(fileInfo2[i].FullName);
+                        }
+                    }
+                    
+                    
                 }
                 else if (result == DialogResult.Cancel)
                 {
@@ -75,6 +89,10 @@ namespace 相册排版界面
 
         private void updateTopShow()
         {
+            if (list.Count == 0)
+            {
+                return;
+            }
             listView1.Items.Clear();
             imageList1.Images.Clear();
 

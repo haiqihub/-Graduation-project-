@@ -1444,6 +1444,57 @@ namespace 相册排版界面
                 throw msg;
             }
         }
+        private void 导出pngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listDone.Count == 0)
+            {
+                MessageBox.Show("请先打开图片，再进行操作");
+                return;
+
+            }
+            
+           
+            //打开选择文件夹对话框
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            DialogResult result = folderBrowserDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                //获取用户选择的文件夹路径
+                string folderDirPath = folderBrowserDialog.SelectedPath;
+
+                //获取目录与子目录
+                DirectoryInfo dir = new DirectoryInfo(System.Environment.CurrentDirectory + "\\done");
+                //获取当前目录JPG文件列表 GetFiles获取指定目录中文件的名称(包括其路径)
+                FileInfo[] fileInfo = dir.GetFiles("*.jpg");
+
+                
+                for (int i = 0; i < fileInfo.Length; i++)
+                {
+                    var vv = System.IO.Path.GetFileNameWithoutExtension(fileInfo[i].FullName);
+                    var vv2 = ".png";
+                    //list.Add(fileInfo[i].FullName);
+                    Image jpgimage = Image.FromFile(fileInfo[i].FullName);
+                    Bitmap bitmap = new Bitmap(jpgimage);
+                    bitmap.MakeTransparent(Color.Transparent);//透明背景 
+                    Bitmap im = bitmap;
+
+                    String imgurl = folderDirPath + "\\" + vv +  vv2;
+                    im.Save(imgurl, System.Drawing.Imaging.ImageFormat.Png);
+                    jpgimage.Dispose();
+                    bitmap.Dispose();
+                }
+                MessageBox.Show("导出成功");
+                 
+                System.Diagnostics.Process.Start("explorer.exe", folderDirPath);
+             }
+            else if (result == DialogResult.Cancel)
+            {
+                //MessageBox.Show("取消显示图片列表");
+            }
+            
+            
+
+        }
         public static int GetFilesCount(DirectoryInfo dirInfo)
         {
 
@@ -3576,6 +3627,8 @@ namespace 相册排版界面
         {
 
         }
+
+       
 
         public static ImageCodecInfo GetEncoder(ImageFormat format)
         {
