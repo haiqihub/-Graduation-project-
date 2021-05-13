@@ -3364,9 +3364,9 @@ namespace 相册排版界面
             //}
 
             //鼠标相对屏幕 拖拽功能   测试
-            p.X = MousePosition.X;
-            p.Y = MousePosition.Y;
-            MessageBox.Show(p.ToString(), drag_area.ToString());
+            //p.X = MousePosition.X;
+            //p.Y = MousePosition.Y;
+            //MessageBox.Show(p.ToString(), drag_area.ToString());
         }
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
@@ -3708,7 +3708,7 @@ namespace 相册排版界面
                     }
                 }
 
-                listChange.Clear();
+                //listChange.Clear();
                 if (index == 1)
                 {
                     listChange.Add(listAll[m].name);
@@ -3846,6 +3846,39 @@ namespace 相册排版界面
                 {
                     listDrag.Add(imgpath[0]);
                     listDrag[drag_area - 1] = path_url;
+                    //解决拖拽替换后 再右键替换 picturebox框中是原来图片的问题
+                    //同时要将替换后的图片在listCur和listAll中存成原来图片的名字。
+                    //listCur[m + drag_area - 1] = path_url;
+                    //listAll[m + drag_area - 1].name = path_url;
+
+
+                    //string Path_o = System.Environment.CurrentDirectory + "\\done";
+                    ////替换后的图片
+                    //Image img1 = null;
+                    //img1 = Image.FromFile(path_url);
+                    //Bitmap bitMap = new Bitmap(img1);
+                    
+                    ////原图片
+                    //String item = imgpath[drag_area - 1];
+                    
+                    //var vv = System.IO.Path.GetFileNameWithoutExtension(item);
+                    ////var vv2 = System.IO.Path.GetExtension(item);
+                    //var vv2 = ".jpg";
+
+                    //Bitmap im = bitMap;
+                    //im.SetResolution(300, 300);
+                    ////转成jpg
+
+                    //var jpsEncodeer = GetEncoder(ImageFormat.Jpeg);
+                    ////保存图片
+                    //String imgurl = Path1 + "\\" + vv + vv2;
+                    //im.Save(imgurl, jpsEncodeer, eps);
+
+                        
+                    //ep.Dispose();
+                    //eps.Dispose();
+
+                    //bitMap.Dispose();
 
                 }
 
@@ -3854,6 +3887,10 @@ namespace 相册排版界面
                     listDrag.Add(imgpath[0]);
                     listDrag.Add(imgpath[1]);
                     listDrag[drag_area - 1] = path_url;
+                    //解决拖拽替换后 再右键替换 picturebox框中是原来图片的问题，
+                    //同时要将替换后的图片在listCur和listAll中存成原来图片的名字。
+                    //listCur[m + drag_area - 1] = path_url;
+                    //listAll[m + drag_area - 1].name = path_url;
 
                 }
                 if (index == 4)
@@ -3863,6 +3900,9 @@ namespace 相册排版界面
                     listDrag.Add(imgpath[2]);
                     listDrag.Add(imgpath[3]);
                     listDrag[drag_area - 1] = path_url;
+                    //解决拖拽替换后 再右键替换 picturebox框中是原来图片的问题
+                    //listCur[m + drag_area - 1] = path_url;
+                    //listAll[m + drag_area - 1].name = path_url;
 
                 }
                 if (index == 8)
@@ -3876,6 +3916,9 @@ namespace 相册排版界面
                     listDrag.Add(imgpath[6]);
                     listDrag.Add(imgpath[7]);
                     listDrag[drag_area - 1] = path_url;
+                    //解决拖拽替换后 再右键替换 picturebox框中是原来图片的问题
+                    //listCur[m + drag_area - 1] = path_url;
+                    //listAll[m + drag_area - 1].name = path_url;
 
                 }
 
@@ -3915,29 +3958,30 @@ namespace 相册排版界面
             if (index == 1)
             {
                 HechengA1();
-                listCur[cur_pos] = path_url;
-                listAll[cur_pos].name = path_url;
+                
                 updateTopShow();
             }
             if (index == 2)
             {
                 HechengB1();
-                listCur[cur_pos] = path_url;
-                listAll[cur_pos].name = path_url;
+               
                 updateTopShow();
             }
             if (index == 4)
             {
                 HechengC1();
-                listCur[cur_pos] = path_url;
-                listAll[cur_pos].name = path_url;
+                ////listCur[cur_pos+drag_area - 1] = path_url;
+                ////listAll[cur_pos+drag_area - 1].name = path_url;
+                //listChange[drag_area - 1] = path_url;
+                //imgpath[drag_area - 1] = path_url;
+                //listDrag[drag_area-1] = path_url;
+                
                 updateTopShow();
             }
             if (index == 8)
             {
                 HechengD1();
-                listCur[cur_pos] = path_url;
-                listAll[cur_pos].name = path_url;
+                
                 updateTopShow();
             }
 
@@ -4009,7 +4053,8 @@ namespace 相册排版界面
             for (int i = 0; i < listDrag.Count; i++)
             {
                 String item = listDrag[i];
-                String item_o = imgpath[i];
+                //String item_o = imgpath[i];
+                String item_o = listDone[cur_pos];
                 Console.WriteLine(i++);
 
                 img1 = Image.FromFile(item);
@@ -4059,8 +4104,17 @@ namespace 相册排版界面
 
                 var jpsEncodeer = GetEncoder(ImageFormat.Jpeg);
                 //保存图片
-                String imgurl = Path1 + "\\" + vv + "done" + vv2;
+                String imgurl = Path1 + "\\" + vv  + vv2;
                 im.Save(imgurl, jpsEncodeer, eps);
+
+                //---------------
+                //listCur[cur_pos + drag_area - 1] = path_url;
+                //listAll[cur_pos + drag_area - 1].name = path_url;
+                listChange[drag_area - 1] = path_url;
+                imgpath[drag_area - 1] = path_url;
+                listDrag[drag_area - 1] = path_url;
+                //---------------
+
                 //释放资源
                 //im.Dispose();
                 //ep.Dispose();
@@ -4122,7 +4176,8 @@ namespace 相册排版界面
             for (int i = 0; i < listDrag.Count; i++)
             {
                 String item = listDrag[i];
-                String item_o = imgpath[drag_area-1];
+                //String item_o = imgpath[drag_area-1];
+                String item_o = listDone[cur_pos];
 
                 img1 = Image.FromFile(listDrag[i]);
                 img2 = null;
@@ -4212,9 +4267,18 @@ namespace 相册排版界面
                 //转成jpg
 
                 //保存图片
-                String imgurl = Path1 + "\\" + vv + "done" + vv2;
+                String imgurl = Path1 + "\\" + vv  + vv2;
                 //String imgurl = imgpath1;
                 im.Save(imgurl, jpsEncodeer, eps);
+
+                //---------------
+                //listCur[cur_pos + drag_area - 1] = path_url;
+                //listAll[cur_pos + drag_area - 1].name = path_url;
+                listChange[drag_area - 1] = path_url;
+                imgpath[drag_area - 1] = path_url;
+                listDrag[drag_area - 1] = path_url;
+                //---------------
+
                 //释放资源
                 img1.Dispose();
                 if (img2 != null)
@@ -4269,7 +4333,8 @@ namespace 相册排版界面
             for (int i = 0; i < listDrag.Count; i++)
             {
                 String item = listDrag[i];
-                String item_o = imgpath[drag_area-1];
+                //String item_o = imgpath[drag_area-1];
+                String item_o = listDone[cur_pos];
 
                 img1 = Image.FromFile(listDrag[i]);
                 img2 = null;
@@ -4448,8 +4513,16 @@ namespace 相册排版界面
                 //转成jpg
 
                 //保存图片
-                String imgurl = Path1 + "\\" + vv + "done" + vv2;
+                String imgurl = Path1 + "\\" + vv  + vv2;
                 im.Save(imgurl, jpsEncodeer, eps);
+                //---------------
+                //listCur[cur_pos+drag_area-1] = path_url;
+                //listAll[cur_pos + drag_area - 1].name = path_url;
+                listChange[drag_area - 1] = path_url;
+                imgpath[drag_area - 1] = path_url;
+                listDrag[drag_area - 1] = path_url;
+                //---------------
+
                 //释放资源
                 img1.Dispose();
                 if (img2 != null)
@@ -4522,7 +4595,8 @@ namespace 相册排版界面
             for (int i = 0; i < listDrag.Count; i++)
             {
                 String item = listDrag[i];
-                String item_o = imgpath[drag_area-1];
+                // String item_o = imgpath[drag_area-1];
+                String item_o = listDone[cur_pos];
 
                 img1 = Image.FromFile(listDrag[i]);
                 img2 = null;
@@ -4848,8 +4922,17 @@ namespace 相册排版界面
                 //转成jpg
 
                 //保存图片
-                String imgurl = Path1 + "\\" + vv + "done" + vv2;
+                String imgurl = Path1 + "\\" + vv  + vv2;
                 im.Save(imgurl, jpsEncodeer, eps);
+
+                //---------------
+                //listCur[cur_pos+drag_area-1] = path_url;
+                //listAll[cur_pos + drag_area - 1].name = path_url;
+                listChange[drag_area - 1] = path_url;
+                imgpath[drag_area - 1] = path_url;
+                listDrag[drag_area - 1] = path_url;
+                //---------------
+
                 //释放资源
                 img1.Dispose();
                 if (img2 != null)
