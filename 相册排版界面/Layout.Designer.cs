@@ -71,7 +71,7 @@
             this.八张合并ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.八张合并转90度ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.加入文字ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.添加文本框ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.添加文字ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.调整图片大小ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.更换图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -352,7 +352,7 @@
             this.编辑ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.更换当前模板ToolStripMenuItem,
             this.加入文字ToolStripMenuItem,
-            this.添加文本框ToolStripMenuItem,
+            this.添加文字ToolStripMenuItem,
             this.调整图片大小ToolStripMenuItem,
             this.更换图片ToolStripMenuItem});
             this.编辑ToolStripMenuItem.Name = "编辑ToolStripMenuItem";
@@ -371,7 +371,7 @@
             this.八张合并ToolStripMenuItem1,
             this.八张合并转90度ToolStripMenuItem1});
             this.更换当前模板ToolStripMenuItem.Name = "更换当前模板ToolStripMenuItem";
-            this.更换当前模板ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
+            this.更换当前模板ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.更换当前模板ToolStripMenuItem.Text = "更换当前模板";
             // 
             // 单张ToolStripMenuItem1
@@ -433,28 +433,28 @@
             // 加入文字ToolStripMenuItem
             // 
             this.加入文字ToolStripMenuItem.Name = "加入文字ToolStripMenuItem";
-            this.加入文字ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
+            this.加入文字ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.加入文字ToolStripMenuItem.Text = "加入水印";
             this.加入文字ToolStripMenuItem.Click += new System.EventHandler(this.加入文字ToolStripMenuItem_Click);
             // 
-            // 添加文本框ToolStripMenuItem
+            // 添加文字ToolStripMenuItem
             // 
-            this.添加文本框ToolStripMenuItem.Name = "添加文本框ToolStripMenuItem";
-            this.添加文本框ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
-            this.添加文本框ToolStripMenuItem.Text = "添加文本框";
-            this.添加文本框ToolStripMenuItem.Click += new System.EventHandler(this.添加文本框ToolStripMenuItem_Click);
+            this.添加文字ToolStripMenuItem.Name = "添加文字ToolStripMenuItem";
+            this.添加文字ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.添加文字ToolStripMenuItem.Text = "添加文字";
+            this.添加文字ToolStripMenuItem.Click += new System.EventHandler(this.添加文字ToolStripMenuItem_Click);
             // 
             // 调整图片大小ToolStripMenuItem
             // 
             this.调整图片大小ToolStripMenuItem.Name = "调整图片大小ToolStripMenuItem";
-            this.调整图片大小ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
+            this.调整图片大小ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.调整图片大小ToolStripMenuItem.Text = "调整图片";
             this.调整图片大小ToolStripMenuItem.Click += new System.EventHandler(this.调整图片大小ToolStripMenuItem_Click2);
             // 
             // 更换图片ToolStripMenuItem
             // 
             this.更换图片ToolStripMenuItem.Name = "更换图片ToolStripMenuItem";
-            this.更换图片ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
+            this.更换图片ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.更换图片ToolStripMenuItem.Text = "更换图片";
             this.更换图片ToolStripMenuItem.Click += new System.EventHandler(this.更换图片ToolStripMenuItem_Click);
             // 
@@ -766,7 +766,7 @@
         private System.Windows.Forms.ToolStripMenuItem 复制ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 剪切ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 粘贴ToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem 添加文本框ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 添加文字ToolStripMenuItem;
         public System.Windows.Forms.TextBox textBox_X;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip3;
         private System.Windows.Forms.ToolStripMenuItem 调整图片ToolStripMenuItem;

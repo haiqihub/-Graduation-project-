@@ -1043,7 +1043,7 @@ namespace 相册排版界面
             updateTopShow();
         }
         
-        private void 添加文本框ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 添加文字ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (listDone.Count == 0)
             {
@@ -1079,10 +1079,7 @@ namespace 相册排版界面
             //this.Controls.Add(tb1);
             //tb1.BringToFront();
 
-            textBox_X.Name = "textBox";
-            textBox_X.Text = content;
-            textBox_X.ForeColor = Color.FromName(fontColor);
-            textBox_X.Font = new Font(fontName, fontSize);
+            
             //留存字体绘制保存，目前有问题 计划根据picturebox坐标进行 
             g.DrawString(content, font, sbrush, new PointF(10, 10));
 
