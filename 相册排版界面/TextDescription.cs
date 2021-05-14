@@ -59,8 +59,8 @@ namespace 相册排版界面
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Layout layout = new Layout();
-            layout.Owner = this;
+            //Layout layout = new Layout();
+            //layout.Owner = this;
             if (comboBox1.SelectedItem != null)
             {
                 fontName = (string)comboBox1.SelectedItem;
@@ -76,7 +76,7 @@ namespace 相册排版界面
             }
             
 
-            (this.Owner as Layout).textBox_X.Visible = true;
+            //(this.Owner as Layout).textBox_X.Visible = true;
             this.Hide();
         }
 

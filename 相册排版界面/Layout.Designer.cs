@@ -441,7 +441,7 @@
             // 
             this.添加文字ToolStripMenuItem.Name = "添加文字ToolStripMenuItem";
             this.添加文字ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.添加文字ToolStripMenuItem.Text = "添加文字";
+            this.添加文字ToolStripMenuItem.Text = "添加描述文字";
             this.添加文字ToolStripMenuItem.Click += new System.EventHandler(this.添加文字ToolStripMenuItem_Click);
             // 
             // 调整图片大小ToolStripMenuItem
@@ -455,7 +455,7 @@
             // 
             this.更换图片ToolStripMenuItem.Name = "更换图片ToolStripMenuItem";
             this.更换图片ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.更换图片ToolStripMenuItem.Text = "更换图片";
+            this.更换图片ToolStripMenuItem.Text = "更换单页图片";
             this.更换图片ToolStripMenuItem.Click += new System.EventHandler(this.更换图片ToolStripMenuItem_Click);
             // 
             // 导出ToolStripMenuItem
@@ -471,21 +471,21 @@
             // jpg格式ToolStripMenuItem
             // 
             this.jpg格式ToolStripMenuItem.Name = "jpg格式ToolStripMenuItem";
-            this.jpg格式ToolStripMenuItem.Size = new System.Drawing.Size(151, 26);
+            this.jpg格式ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.jpg格式ToolStripMenuItem.Text = "导出jpg";
             this.jpg格式ToolStripMenuItem.Click += new System.EventHandler(this.jpg格式ToolStripMenuItem_Click);
             // 
             // png格式ToolStripMenuItem
             // 
             this.png格式ToolStripMenuItem.Name = "png格式ToolStripMenuItem";
-            this.png格式ToolStripMenuItem.Size = new System.Drawing.Size(151, 26);
+            this.png格式ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.png格式ToolStripMenuItem.Text = "导出png";
             this.png格式ToolStripMenuItem.Click += new System.EventHandler(this.导出pngToolStripMenuItem_Click);
             // 
             // pdf格式ToolStripMenuItem
             // 
             this.pdf格式ToolStripMenuItem.Name = "pdf格式ToolStripMenuItem";
-            this.pdf格式ToolStripMenuItem.Size = new System.Drawing.Size(151, 26);
+            this.pdf格式ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.pdf格式ToolStripMenuItem.Text = "导出pdf";
             this.pdf格式ToolStripMenuItem.Click += new System.EventHandler(this.pdf格式ToolStripMenuItem_Click);
             // 
@@ -662,7 +662,6 @@
             this.textBox_X.Size = new System.Drawing.Size(100, 25);
             this.textBox_X.TabIndex = 9;
             this.textBox_X.Visible = false;
-            this.textBox_X.TextChanged += new System.EventHandler(this.textChange);
             // 
             // Layout
             // 
@@ -670,7 +669,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1316, 719);
-            this.Controls.Add(this.textBox_X);
             this.Controls.Add(this.listView2);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.right);

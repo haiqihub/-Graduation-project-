@@ -1011,14 +1011,15 @@ namespace 相册排版界面
             int fontSize = fontSelect.fontSize;
             string content = fontSelect.content;
             string location = fontSelect.location;
+            string fontColor = fontSelect.fontColor;
 
             Bitmap bmp = new Bitmap(listDone[cur_pos]);
             Graphics g = Graphics.FromImage(bmp);
             Font font = new Font(fontName, fontSize);
-            SolidBrush sbrush = new SolidBrush(Color.Black);
+            SolidBrush sbrush = new SolidBrush(Color.FromName(fontColor));
             //g.DrawString(content, font, sbrush, new PointF(10, 10));
 
-            if(location=="图片上方")
+            if (location=="图片上方")
             {
                 g.DrawString(content, font, sbrush, new PointF(810, 200));
             }
@@ -1052,9 +1053,9 @@ namespace 相册排版界面
 
             }
             textDescription.ShowDialog(this);
-            Point ab = new Point();
-            ab.X = 0;
-            ab.Y = 0;
+           
+            var width = CC.A4CHANG_XS;
+            var height = CC.A4GAO_XS;
             //----------------------------
             string fontName = textDescription.fontName;
             int fontSize = textDescription.fontSize;
@@ -1065,7 +1066,7 @@ namespace 相册排版界面
             Graphics g = Graphics.FromImage(bmp);
             Font font = new Font(fontName, fontSize);
             SolidBrush sbrush = new SolidBrush(Color.FromName(fontColor));
-            
+
             //动态添加 textbox ：tb1
             //TextBox tb1 = new TextBox();
             //tb1.Name = "textBox";
@@ -1079,9 +1080,11 @@ namespace 相册排版界面
             //this.Controls.Add(tb1);
             //tb1.BringToFront();
 
-            
-            //留存字体绘制保存，目前有问题 计划根据picturebox坐标进行 
-            g.DrawString(content, font, sbrush, new PointF(10, 10));
+
+            //留存字体绘制保存
+            float x;
+            x = 854 - content.Length * 8 / 2; //x=800;
+            g.DrawString(content, font, sbrush, new PointF(x, height - setting.down * CC.A4GBILV + setting.text_photo * CC.A4GBILV));
 
             string name = listDone[cur_pos];
             name += fontIndex;
@@ -1093,16 +1096,17 @@ namespace 相册排版界面
             updateTopShow();
 
         }
+
         //textbox 适应文本长度
-        private void textChange(object sender, EventArgs e)
-        {
-            if (textBox_X.Visible)
-            {
-                int k = textBox_X.Text.Length;
-                textBox_X.Width = k * 12;
-            }
+        //private void textChange(object sender, EventArgs e)
+        //{
+        //    if (textBox_X.Visible)
+        //    {
+        //        int k = textBox_X.Text.Length;
+        //        textBox_X.Width = k * 12;
+        //    }
             
-        }
+        //}
 
         private void 调整图片大小ToolStripMenuItem_Click2(object sender, EventArgs e)
         {

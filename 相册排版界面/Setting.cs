@@ -38,6 +38,11 @@ namespace 相册排版界面
         public Layout layout;
         public SingleDeal singleDeal;
 
+        private string fontName = "宋体";
+        private int fontSize = 10;
+        private string content = "";
+        private string fontColor = "Black";
+
         public int getResult()
         {
             return result;
@@ -407,11 +412,16 @@ namespace 相册排版界面
                             img1.Width * xs,
                             height_xs);
                 }
-                //加入TextBox绘制
+                //加入文字绘制
                 if (checkFlag)
                 {
-                    //this.layout.AddDescription(index);
-                  
+                    Font font = new Font(fontName, fontSize);
+                    SolidBrush sbrush = new SolidBrush(Color.FromName(fontColor));
+                    //留存字体绘制保存
+                    float x;
+                    x = 854 - content.Length * 8 / 2; //x=800;
+                    g1.DrawString(content, font, sbrush, new PointF(x, height - down * CC.A4GBILV + text_photo * CC.A4GBILV));
+
                 }
 
 
@@ -513,6 +523,18 @@ namespace 相册排版界面
                 {
                     xs = y_xs;
                     g1.DrawImage(img1, left * CC.A4GBILV + (width_xs - img1.Width * xs) / 2, up * CC.A4GBILV, img1.Width * xs, height_xs);
+                }
+
+                //加入文字绘制
+                if (checkFlag)
+                {
+                    Font font = new Font(fontName, fontSize);
+                    SolidBrush sbrush = new SolidBrush(Color.FromName(fontColor));
+                    //留存字体绘制保存
+                    float x;
+                    x = 854 - content.Length * 8 / 2; //x=800;
+                    g1.DrawString(content, font, sbrush, new PointF(x, height - down * CC.A4GBILV + text_photo * CC.A4GBILV));
+
                 }
 
                 var vv = System.IO.Path.GetFileNameWithoutExtension(item);
@@ -662,6 +684,18 @@ namespace 相册排版界面
                                 img2.Width * xs2,
                                 height_xs2);
                     }
+                }
+
+                //加入文字绘制
+                if (checkFlag)
+                {
+                    Font font = new Font(fontName, fontSize);
+                    SolidBrush sbrush = new SolidBrush(Color.FromName(fontColor));
+                    //留存字体绘制保存
+                    float x;
+                    x = 854 - content.Length * 8 / 2; //x=800;
+                    g1.DrawString(content, font, sbrush, new PointF(x, height - down * CC.A4GBILV + text_photo * CC.A4GBILV));
+
                 }
 
                 var vv = System.IO.Path.GetFileNameWithoutExtension(item);
@@ -823,6 +857,18 @@ namespace 相册排版界面
                                 img1.Width * xs2,
                                 height_xs2);
                     }
+                }
+
+                //加入文字绘制
+                if (checkFlag)
+                {
+                    Font font = new Font(fontName, fontSize);
+                    SolidBrush sbrush = new SolidBrush(Color.FromName(fontColor));
+                    //留存字体绘制保存
+                    float x;
+                    x = 854 - content.Length * 8 / 2; //x=800;
+                    g1.DrawString(content, font, sbrush, new PointF(x, height - down * CC.A4GBILV + text_photo * CC.A4GBILV));
+
                 }
 
                 var vv = System.IO.Path.GetFileNameWithoutExtension(item);
@@ -1051,6 +1097,18 @@ namespace 相册排版界面
                                 height_xs);
                     }
                     
+                }
+
+                //加入文字绘制
+                if (checkFlag)
+                {
+                    Font font = new Font(fontName, fontSize);
+                    SolidBrush sbrush = new SolidBrush(Color.FromName(fontColor));
+                    //留存字体绘制保存
+                    float x;
+                    x = 854 - content.Length * 8 / 2; //x=800;
+                    g1.DrawString(content, font, sbrush, new PointF(x, height - down * CC.A4GBILV + text_photo * CC.A4GBILV));
+
                 }
 
                 var vv = System.IO.Path.GetFileNameWithoutExtension(item);
@@ -1283,7 +1341,17 @@ namespace 相册排版界面
 
                 }
 
+                //加入文字绘制
+                if (checkFlag)
+                {
+                    Font font = new Font(fontName, fontSize);
+                    SolidBrush sbrush = new SolidBrush(Color.FromName(fontColor));
+                    //留存字体绘制保存
+                    float x;
+                    x = 854 - content.Length * 8 / 2; //x=800;
+                    g1.DrawString(content, font, sbrush, new PointF(x, height - down * CC.A4GBILV + text_photo * CC.A4GBILV));
 
+                }
 
                 var vv = System.IO.Path.GetFileNameWithoutExtension(item);
                 var vv2 = System.IO.Path.GetExtension(item);
@@ -1673,6 +1741,18 @@ namespace 相册排版界面
                                 height_xs);
                     }
                     //top_8 = top_8 + height_xs;
+                }
+
+                //加入文字绘制
+                if (checkFlag)
+                {
+                    Font font = new Font(fontName, fontSize);
+                    SolidBrush sbrush = new SolidBrush(Color.FromName(fontColor));
+                    //留存字体绘制保存
+                    float x;
+                    x = 854 - content.Length * 8 / 2; //x=800;
+                    g1.DrawString(content, font, sbrush, new PointF(x, height - down * CC.A4GBILV + text_photo * CC.A4GBILV));
+
                 }
 
                 var vv = System.IO.Path.GetFileNameWithoutExtension(item);
@@ -2084,7 +2164,17 @@ namespace 相册排版界面
 
                 }
 
+                //加入文字绘制
+                if (checkFlag)
+                {
+                    Font font = new Font(fontName, fontSize);
+                    SolidBrush sbrush = new SolidBrush(Color.FromName(fontColor));
+                    //留存字体绘制保存
+                    float x;
+                    x = 854 - content.Length * 8 / 2; //x=800;
+                    g1.DrawString(content, font, sbrush, new PointF(x, height - down * CC.A4GBILV + text_photo * CC.A4GBILV));
 
+                }
                 var vv = System.IO.Path.GetFileNameWithoutExtension(item);
                 var vv2 = System.IO.Path.GetExtension(item);
                 vv2 = ".jpg";
@@ -2273,7 +2363,11 @@ namespace 相册排版界面
             if (checkBox1.Checked)
             {
                 相册排版界面.TextDescription textDescription = new 相册排版界面.TextDescription();
-                textDescription.ShowDialog();
+                textDescription.ShowDialog(this);
+                fontName = textDescription.fontName;
+                fontSize = textDescription.fontSize;
+                content = textDescription.content;
+                fontColor = textDescription.fontColor;
             } 
         }
 
