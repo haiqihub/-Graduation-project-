@@ -364,6 +364,34 @@ namespace 相册排版界面
         //添加文件夹
         private void 从文件夹ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            string Path1 = System.Environment.CurrentDirectory + "\\done";
+            ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
+            if (up_indexes.Count == 0)
+            {
+                //删掉之前在done文件夹中的图片
+                try
+                {
+                    DirectoryInfo dir = new DirectoryInfo(Path1);
+                    FileSystemInfo[] fileinfo = dir.GetFileSystemInfos();  //返回目录中所有文件和子目录
+                    foreach (FileSystemInfo i in fileinfo)
+                    {
+                        if (i is DirectoryInfo)            //判断是否文件夹
+                        {
+                            DirectoryInfo subdir = new DirectoryInfo(i.FullName);
+                            subdir.Delete(true);          //删除子目录和文件
+                        }
+                        else
+                        {
+                            File.Delete(i.FullName);      //删除指定文件
+                        }
+                    }
+                }
+                catch (Exception )
+                {
+                }
+
+                //return;
+            }
             try
             {
                 //打开选择文件夹对话框
@@ -371,7 +399,7 @@ namespace 相册排版界面
                 DialogResult result = folderBrowserDialog.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    listCur.Clear();
+                    //listCur.Clear();
                     //获取用户选择的文件夹路径
                     string folderDirPath = folderBrowserDialog.SelectedPath;
 
@@ -379,19 +407,45 @@ namespace 相册排版界面
                     DirectoryInfo dir = new DirectoryInfo(folderDirPath);
                     //获取当前目录JPG文件列表 GetFiles获取指定目录中文件的名称(包括其路径)
                     FileInfo[] fileInfo = dir.GetFiles("*.jpg");
+                    //---------------------加入对几拼一图片的判断----------------
+                    int add_index = 0;
+                    if (setting.index == 1 || setting.index == 2)
+                    {
+                        add_index = 1;
+                    }
+                    if (setting.index == 3 || setting.index == 4)
+                    {
+                        add_index = 2;
+                    }
+                    if (setting.index == 5 || setting.index == 6)
+                    {
+                        add_index = 4;
+                    }
+                    if (setting.index == 7 || setting.index == 8)
+                    {
+                        add_index = 8;
+                    }
+                    //----------------------------------------
                     for (int i = 0; i < fileInfo.Length; i++)
                     {
-                        //if (select_index > 0)
-                        //{
-                        //    listCur.Insert(select_index + 1, fileInfo[i].FullName);
+                        if (cur_pos >= 0)
+                        {
+                            ImageBean bean = new ImageBean();
+                            int type = setting.getType();
 
-                        //}
-                        //else
-                        //{
-                        //    listCur.Add(fileInfo[i].FullName);
-                        //    //listAll.Add(fileInfo[i].FullName);
-                        //}
-                        listCur.Add(fileInfo[i].FullName);
+                            bean.name = fileInfo[i].FullName;
+                            bean.type = type;
+
+                       
+                            listCur.Insert((cur_pos + 1) * add_index + 2, fileInfo[i].FullName);
+                            listAll.Insert((cur_pos + 1) * add_index + 2, bean);
+                        }
+                        else
+                        {
+                            listCur.Add(fileInfo[i].FullName);
+                            //listAll.Add(fileInfo[i].FullName);
+                        }
+                        //listCur.Add(fileInfo[i].FullName);
                         //listAll.Add(fileInfo[i].FullName);
                     }
 
@@ -405,51 +459,106 @@ namespace 相册排版界面
             }
         }
 
-        //添加多个文件
+        //添加多个图片
         private void 从图片ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            string Path1 = System.Environment.CurrentDirectory + "\\done";
+            ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
+            int up_index = up_indexes[0];
+            if (up_indexes.Count == 0)
+            {
+                //删掉之前在done文件夹中的图片
+                try
+                {
+                    DirectoryInfo dir = new DirectoryInfo(Path1);
+                    FileSystemInfo[] fileinfo = dir.GetFileSystemInfos();  //返回目录中所有文件和子目录
+                    foreach (FileSystemInfo i in fileinfo)
+                    {
+                        if (i is DirectoryInfo)            //判断是否文件夹
+                        {
+                            DirectoryInfo subdir = new DirectoryInfo(i.FullName);
+                            subdir.Delete(true);          //删除子目录和文件
+                        }
+                        else
+                        {
+                            File.Delete(i.FullName);      //删除指定文件
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                }
+
+                //return;
+            }
+            //添加图片操作
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Multiselect = true;//等于true表示可以选择多个文件
             dlg.DefaultExt = ".jpg";
             dlg.Filter = "图片|*.jpg";
+            //---------------------加入对几拼一图片的判断----------------
+            int add_index = 0;
+            if(setting.index==1|| setting.index == 2)
+            {
+                add_index = 1;
+            }
+            if (setting.index == 3 || setting.index == 4)
+            {
+                add_index = 2;
+            }
+            if (setting.index == 5 || setting.index == 6)
+            {
+                add_index = 4;
+            }
+            if (setting.index == 7 || setting.index == 8)
+            {
+                add_index = 8;
+            }
+            //----------------------------------------
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                listCur.Clear();
-                foreach (string file in dlg.FileNames)
-                {
-                    //if (select_index > 0)
-                    //{
-                    //    listCur.Insert(select_index + 1, file);
-
-                    //    //listDone.Insert(select_index + 1, file);
-                    //}
-                    //else
-                    //{
-                    //    listCur.Add(file);
-
-                    //}
-                    listCur.Add(file);
-                    //listAll.Add(file);
-                }
-
-                //for (int i = 0; i < dlg.FileNames.Length; i++)
+                //listCur.Clear();
+                //foreach (string file in dlg.FileNames)
                 //{
-                //    if (select_index > 0)
+                //    if (cur_pos >= 0)
                 //    {
-                //        listCur.Insert(select_index + 1, dlg.FileNames[i]);
-
+                //        listCur.Insert((cur_pos+1)*add_index+1, file);
+                //        //listDone.Insert(select_index + 1, file);
                 //    }
                 //    else
                 //    {
-                //        listCur.Add(dlg.FileNames[i]);
-                //        //listAll.Add(fileInfo[i].FullName);
+                //        listCur.Add(file);
+
                 //    }
-                //    //listCur.Add(fileInfo[i].FullName);
-                //    //listAll.Add(fileInfo[i].FullName);
+                //    //listCur.Add(file);
+                //    //listAll.Add(file);
                 //}
 
+                for (int i = 0; i < dlg.FileNames.Length; i++)
+                {
+                    if (cur_pos >= 0)
+                    {
+                        ImageBean bean = new ImageBean();
+                        int type = setting.getType();
+
+                        bean.name = dlg.FileNames[i];
+                        bean.type = type;
+                        
+                        // listCur.Insert(select_index + 1, dlg.FileNames[i]);
+                        listCur.Insert((cur_pos + 1) * add_index + 2  , dlg.FileNames[i]);
+                        listAll.Insert((cur_pos + 1) * add_index + 2 , bean);
+                    }
+                    else
+                    {
+                        listCur.Add(dlg.FileNames[i]);
+                        //listAll.Add(fileInfo[i].FullName);
+                    }
+                    //listCur.Add(fileInfo[i].FullName);
+                    //listAll.Add(fileInfo[i].FullName);
+                }
+
                 StartSetting(4);
-                //updateTopShow();
+                updateTopShow();
             }
         }
 
@@ -4048,6 +4157,48 @@ namespace 相册排版界面
             //这时后台线程已经完成，并返回了主线程，所以可以直接使用UI控件了 
         }
 
+        private void 存档ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            WriteFile("xx-yy-zz");
+
+            
+        }
+
+        private void 读档ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var file = ReadFile();
+            if (file != "")
+            {
+                var files = file.Split('-');
+                int up = int.Parse(files[0]);
+                int down = int.Parse(files[1]);
+                
+            }
+            else
+            {
+                int up = 8;
+                int down = 8;
+               
+            }
+        }
+        public void WriteFile(String file)
+        {
+            StreamWriter sw = File.CreateText("list.txt");
+            sw.WriteLine(file);                //写入一行文本
+            sw.Flush();                    //清空
+            sw.Close();                    //关闭
+        }
+        public String ReadFile()
+        {
+            if (!File.Exists("list.txt"))
+            {
+                return "";
+            }
+            StreamReader sr = File.OpenText("list.txt");
+            String files = sr.ReadLine();                  //读取一行数据
+            sr.Close();                    //释放资源
+            return files;
+        }
         public static ImageCodecInfo GetEncoder(ImageFormat format)
         {
             ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
