@@ -238,6 +238,11 @@ namespace 相册排版界面
 
         private void up_right_Click(object sender, EventArgs e)
         {
+            //ListView.SelectedIndexCollection indexes = this.listView1.SelectedIndices;
+            //if (indexes.Count > 0)
+            //{
+            //    select_index = indexes[0];
+            //}
             //原 cur_pos > listDone.Count - item_size - 1
             if (cur_pos >= (listDone.Count / item_size) * item_size && cur_pos < (listDone.Count / item_size + 1) * item_size)
             {
@@ -376,6 +381,16 @@ namespace 相册排版界面
                     FileInfo[] fileInfo = dir.GetFiles("*.jpg");
                     for (int i = 0; i < fileInfo.Length; i++)
                     {
+                        //if (select_index > 0)
+                        //{
+                        //    listCur.Insert(select_index + 1, fileInfo[i].FullName);
+
+                        //}
+                        //else
+                        //{
+                        //    listCur.Add(fileInfo[i].FullName);
+                        //    //listAll.Add(fileInfo[i].FullName);
+                        //}
                         listCur.Add(fileInfo[i].FullName);
                         //listAll.Add(fileInfo[i].FullName);
                     }
@@ -402,11 +417,39 @@ namespace 相册排版界面
                 listCur.Clear();
                 foreach (string file in dlg.FileNames)
                 {
+                    //if (select_index > 0)
+                    //{
+                    //    listCur.Insert(select_index + 1, file);
+
+                    //    //listDone.Insert(select_index + 1, file);
+                    //}
+                    //else
+                    //{
+                    //    listCur.Add(file);
+
+                    //}
                     listCur.Add(file);
                     //listAll.Add(file);
                 }
-                
+
+                //for (int i = 0; i < dlg.FileNames.Length; i++)
+                //{
+                //    if (select_index > 0)
+                //    {
+                //        listCur.Insert(select_index + 1, dlg.FileNames[i]);
+
+                //    }
+                //    else
+                //    {
+                //        listCur.Add(dlg.FileNames[i]);
+                //        //listAll.Add(fileInfo[i].FullName);
+                //    }
+                //    //listCur.Add(fileInfo[i].FullName);
+                //    //listAll.Add(fileInfo[i].FullName);
+                //}
+
                 StartSetting(4);
+                //updateTopShow();
             }
         }
 
@@ -3483,7 +3526,7 @@ namespace 相册排版界面
             }
             select_index = up_indexes[0];
             listDone.RemoveAt(select_index);
-            listCur.RemoveAt(select_index);
+            //listCur.RemoveAt(select_index);
             updateTopShow();
         }
 
@@ -3510,7 +3553,7 @@ namespace 相册排版界面
             select_index = up_indexes[0];
             img_buff = listDone[select_index];
             listDone.RemoveAt(select_index);
-            listCur.RemoveAt(select_index);
+            //listCur.RemoveAt(select_index);
             updateTopShow();
 
         }
