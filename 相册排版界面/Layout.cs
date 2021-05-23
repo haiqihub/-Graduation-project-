@@ -9,6 +9,7 @@ using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -4212,48 +4213,89 @@ namespace 相册排版界面
             //这时后台线程已经完成，并返回了主线程，所以可以直接使用UI控件了 
         }
 
+        /*
+         * 存档 读档
+         * 写入txt文件
+         */
+        string CurPath = "listCur.txt";
+        string AllPath = "listAll.txt";
+        string DonePath = "listDone.txt";
+        string LeftPath = "listLeft.txt";
+
         private void 存档ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            WriteFile("xx-yy-zz");
+            //清空原文档中的数据
+            FileStream stream = File.Open(CurPath, FileMode.OpenOrCreate, FileAccess.Write);
+            stream.Seek(0, SeekOrigin.Begin);
+            stream.SetLength(0);
+            stream.Close();
 
+            //添加新数据
+            for (int i = 0; i < listCur.Count; i++)
+            {
+                WriteFile(listCur[i] + "?", CurPath);
+            }
             
+
         }
 
         private void 读档ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var file = ReadFile();
-            if (file != "")
+            //listCur
+            var fileCur = ReadFile(CurPath);
+            if (fileCur != "")
             {
-                var files = file.Split('-');
-                int up = int.Parse(files[0]);
-                int down = int.Parse(files[1]);
-                
+                listCur.Clear();
+                string[] filesCur;
+                //files = file.Trim().Replace("\n","").Split('?');
+                filesCur = Regex.Replace(fileCur, @"\s", "").Split('?');
+                for (int i = 0; i < filesCur.Length - 1; i++)
+                {
+                    listCur.Add(filesCur[i]);
+                   // Console.WriteLine(files[i]);
+                }
+
             }
+            //listAll
+            var fileAll = ReadFile(AllPath);
+            if (fileAll != "")
+            {
+
+            }
+            //listDone
+
+            //listLeft
+
+
             else
             {
-                int up = 8;
-                int down = 8;
-               
+                MessageBox.Show("无存档记录，无法进行读档操作");
+                
             }
         }
-        public void WriteFile(String file)
+        public void WriteFile(String file,string fileName)
         {
-            StreamWriter sw = File.CreateText("list.txt");
+            //StreamWriter sw = File.CreateText(fileName);
+            StreamWriter sw = File.AppendText(fileName);    //添加文本
             sw.WriteLine(file);                //写入一行文本
             sw.Flush();                    //清空
             sw.Close();                    //关闭
         }
-        public String ReadFile()
+        public String ReadFile(string fileName)
         {
-            if (!File.Exists("list.txt"))
+            if (!File.Exists(fileName))
             {
                 return "";
             }
-            StreamReader sr = File.OpenText("list.txt");
-            String files = sr.ReadLine();                  //读取一行数据
-            sr.Close();                    //释放资源
+            //StreamReader sr = File.OpenText(fileName);
+            //String files = sr.ReadLine();    //读取一行数据
+            //sr.Close();                //释放资源
+
+            String files = File.ReadAllText(fileName);     //读取所有文本           
             return files;
         }
+
+
         public static ImageCodecInfo GetEncoder(ImageFormat format)
         {
             ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
