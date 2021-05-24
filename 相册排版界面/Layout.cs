@@ -4221,21 +4221,50 @@ namespace 相册排版界面
         string AllPath = "listAll.txt";
         string DonePath = "listDone.txt";
         string LeftPath = "listLeft.txt";
+        bool flag = false;
 
         private void 存档ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             //清空原文档中的数据
-            FileStream stream = File.Open(CurPath, FileMode.OpenOrCreate, FileAccess.Write);
-            stream.Seek(0, SeekOrigin.Begin);
-            stream.SetLength(0);
-            stream.Close();
+                //listCur.txt
+            FileStream stream1 = File.Open(CurPath, FileMode.OpenOrCreate, FileAccess.Write);
+            stream1.Seek(0, SeekOrigin.Begin);
+            stream1.SetLength(0);
+            stream1.Close();
+                //listAll.txt
+            FileStream stream2 = File.Open(AllPath, FileMode.OpenOrCreate, FileAccess.Write);
+            stream2.Seek(0, SeekOrigin.Begin);
+            stream2.SetLength(0);
+            stream2.Close();
+                //listDone.txt
+            FileStream stream3 = File.Open(DonePath, FileMode.OpenOrCreate, FileAccess.Write);
+            stream3.Seek(0, SeekOrigin.Begin);
+            stream3.SetLength(0);
+            stream3.Close();
+                //listLeft.txt
+            FileStream stream4 = File.Open(LeftPath, FileMode.OpenOrCreate, FileAccess.Write);
+            stream4.Seek(0, SeekOrigin.Begin);
+            stream4.SetLength(0);
+            stream4.Close();
 
             //添加新数据
             for (int i = 0; i < listCur.Count; i++)
             {
                 WriteFile(listCur[i] + "?", CurPath);
             }
-            
+            for (int i = 0; i < listAll.Count; i++)
+            {
+                WriteFile(listAll[i].name + "?", AllPath);
+            }
+            for (int i = 0; i < listDone.Count; i++)
+            {
+                WriteFile(listDone[i] + "?", DonePath);
+            }
+            for (int i = 0; i < listLeft.Count; i++)
+            {
+                WriteFile(listLeft[i] + "?", LeftPath);
+            }
+
 
         }
 
@@ -4245,6 +4274,7 @@ namespace 相册排版界面
             var fileCur = ReadFile(CurPath);
             if (fileCur != "")
             {
+                flag = true;
                 listCur.Clear();
                 string[] filesCur;
                 //files = file.Trim().Replace("\n","").Split('?');
@@ -4260,17 +4290,58 @@ namespace 相册排版界面
             var fileAll = ReadFile(AllPath);
             if (fileAll != "")
             {
+                flag = true;
+                listAll.Clear();
+                string[] filesAll;
+                //files = file.Trim().Replace("\n","").Split('?');
+                filesAll = Regex.Replace(fileAll, @"\s", "").Split('?');
+                for (int i = 0; i < filesAll.Length - 1; i++)
+                {
+                    ImageBean bean = new ImageBean();
+                    int type = setting.getType();
+                    bean.name = filesAll[i];
+                    bean.type = type;
 
+                    listAll.Add(bean);
+                    // Console.WriteLine(files[i]);
+                }
             }
             //listDone
+            var fileDone = ReadFile(DonePath);
+            if (fileDone != "")
+            {
+                flag = true;
+                listDone.Clear();
+                string[] filesDone;
+                //files = file.Trim().Replace("\n","").Split('?');
+                filesDone = Regex.Replace(fileDone, @"\s", "").Split('?');
+                for (int i = 0; i < filesDone.Length - 1; i++)
+                {
+                    listDone.Add(filesDone[i]);
+                    // Console.WriteLine(files[i]);
+                }
 
+            }
             //listLeft
+            var fileLeft = ReadFile(LeftPath);
+            if (fileLeft != "")
+            {
+                flag = true;
+                listLeft.Clear();
+                string[] filesLeft;
+                //files = file.Trim().Replace("\n","").Split('?');
+                filesLeft = Regex.Replace(fileLeft, @"\s", "").Split('?');
+                for (int i = 0; i < filesLeft.Length - 1; i++)
+                {
+                    listLeft.Add(filesLeft[i]);
+                    // Console.WriteLine(files[i]);
+                }
 
+            }
 
-            else
+            if(!flag)
             {
                 MessageBox.Show("无存档记录，无法进行读档操作");
-                
             }
         }
         public void WriteFile(String file,string fileName)
