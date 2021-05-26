@@ -4427,10 +4427,14 @@ namespace 相册排版界面
                             height_xs);
                 }
 
+                char[] MyChar = { 'd', 'o', 'n', 'e' };
+                //!!! 改 item_o -> item
+                var vv = System.IO.Path.GetFileNameWithoutExtension(item);
+                var vv_o = System.IO.Path.GetFileNameWithoutExtension(item_o).TrimEnd(MyChar);
 
-                var vv = System.IO.Path.GetFileNameWithoutExtension(item_o);
-                //var vv2 = System.IO.Path.GetExtension(item);
-                var vv2 = ".jpg";
+                //var vv = System.IO.Path.GetFileNameWithoutExtension(item_o);
+                var vv2 = System.IO.Path.GetExtension(item);
+                vv2 = ".jpg";
 
                 Bitmap im = bitMap;
                 im.SetResolution(300, 300);
@@ -4444,8 +4448,21 @@ namespace 相册排版界面
 
                 var jpsEncodeer = GetEncoder(ImageFormat.Jpeg);
                 //保存图片
-                String imgurl = Path1 + "\\" + vv  + vv2;
+
+                //更换的是第一张图片 drag_area=1
+                //保存图片 删除图片
+                String imgurl_o = Path1 + "\\" + vv_o + "done" + vv2;
+
+                String imgurl = Path1 + "\\" + vv + "done" + vv2;
                 im.Save(imgurl, jpsEncodeer, eps);
+                listDone[cur_pos] = imgurl;
+
+                //DeleteDir(imgurl_o);
+                File.Delete(imgurl_o);
+
+
+                //String imgurl = Path1 + "\\" + vv  + vv2;
+                //im.Save(imgurl, jpsEncodeer, eps);
 
                 //---------------
                 //listCur[cur_pos + drag_area - 1] = path_url;
@@ -4867,17 +4884,44 @@ namespace 相册排版界面
 
                 }
                 //!!!
+                char[] MyChar = { 'd', 'o', 'n', 'e' };
+                //!!! 改 item_o -> item
                 var vv = System.IO.Path.GetFileNameWithoutExtension(item);
+                var vv_o = System.IO.Path.GetFileNameWithoutExtension(item_o).TrimEnd(MyChar);
+                
                 var vv2 = System.IO.Path.GetExtension(item);
                 vv2 = ".jpg";
+
+
 
                 Bitmap im = bitMap;
                 im.SetResolution(300, 300);
                 //转成jpg
 
+                if (vv == vv_o)
+                {
+                    //更换的不是第一张图片
+                    //保存图片
+                    String imgurl = Path1 + "\\" + vv + "done" + vv2;
+                    im.Save(imgurl, jpsEncodeer, eps);
+                }
+                else
+                {
+                    //更换的是第一张图片 drag_area=1
+                    //保存图片 删除图片
+                    String imgurl_o = Path1 + "\\" + vv_o + "done" + vv2;
+
+                    String imgurl = Path1 + "\\" + vv + "done" + vv2;
+                    im.Save(imgurl, jpsEncodeer, eps);
+                    listDone[cur_pos] = imgurl;
+
+                    //DeleteDir(imgurl_o);
+                    File.Delete(imgurl_o);
+                }
+
                 //保存图片
-                String imgurl = Path1 + "\\" + vv + "done" + vv2;
-                im.Save(imgurl, jpsEncodeer, eps);
+                //String imgurl = Path1 + "\\" + vv + "done" + vv2;
+                //im.Save(imgurl, jpsEncodeer, eps);
                 //---------------
                 //listCur[cur_pos+drag_area-1] = path_url;
                 //listAll[cur_pos + drag_area - 1].name = path_url;
@@ -5276,7 +5320,11 @@ namespace 相册排版界面
                     //top_8 = top_8 + height_xs;
                 }
                 //!!!
+
+                char[] MyChar = { 'd', 'o', 'n', 'e' };
+                //!!! 改 item_o -> item
                 var vv = System.IO.Path.GetFileNameWithoutExtension(item);
+                var vv_o = System.IO.Path.GetFileNameWithoutExtension(item_o).TrimEnd(MyChar);
                 var vv2 = System.IO.Path.GetExtension(item);
                 vv2 = ".jpg";
 
@@ -5284,9 +5332,31 @@ namespace 相册排版界面
                 im.SetResolution(300, 300);
                 //转成jpg
 
+                if (vv == vv_o)
+                {
+                    //更换的不是第一张图片
+                    //保存图片
+                    String imgurl = Path1 + "\\" + vv + "done" + vv2;
+                    im.Save(imgurl, jpsEncodeer, eps);
+                }
+                else
+                {
+                    //更换的是第一张图片 drag_area=1
+                    //保存图片 删除图片
+                    String imgurl_o = Path1 + "\\" + vv_o + "done" + vv2;
+
+                    String imgurl = Path1 + "\\" + vv + "done" + vv2;
+                    im.Save(imgurl, jpsEncodeer, eps);
+                    listDone[cur_pos] = imgurl;
+
+                    //DeleteDir(imgurl_o);
+                    File.Delete(imgurl_o);
+                }
+
+
                 //保存图片
-                String imgurl = Path1 + "\\" + vv + "done" + vv2;
-                im.Save(imgurl, jpsEncodeer, eps);
+                //String imgurl = Path1 + "\\" + vv + "done" + vv2;
+                //im.Save(imgurl, jpsEncodeer, eps);
 
                 //---------------
                 //listCur[cur_pos+drag_area-1] = path_url;
