@@ -44,6 +44,7 @@ namespace 相册排版界面
         private System.Drawing.Image image = null;
 
         public static string path_url;
+        
 
         // 这个是鼠标点击地点 layout根据不同的setting.index分别判断cur_area =1,2,3,4,5,6,7,8
         //然后把这个值传给SingleDeal 在SingleDeal中把list[cur_area]对应上，只有listChange[cur_area]才变，其余不动
@@ -3901,6 +3902,8 @@ namespace 相册排版界面
                 image = GetImageFromServer(path_url);//左侧图片
                 //-------------------------------
                 //listChange
+                listChange.Clear();
+
                 string fullPath = listDone[cur_pos];
 
                 //string filename = System.IO.Path.GetFileName(fullPath);//文件名  “Default.aspx”
@@ -3917,7 +3920,6 @@ namespace 相册排版界面
                     }
                 }
 
-                //listChange.Clear();
                 if (index == 1)
                 {
                     listChange.Add(listAll[m].name);
@@ -4057,37 +4059,9 @@ namespace 相册排版界面
                     listDrag[drag_area - 1] = path_url;
                     //解决拖拽替换后 再右键替换 picturebox框中是原来图片的问题
                     //同时要将替换后的图片在listCur和listAll中存成原来图片的名字。
-                    //listCur[m + drag_area - 1] = path_url;
-                    //listAll[m + drag_area - 1].name = path_url;
-
-
-                    //string Path_o = System.Environment.CurrentDirectory + "\\done";
-                    ////替换后的图片
-                    //Image img1 = null;
-                    //img1 = Image.FromFile(path_url);
-                    //Bitmap bitMap = new Bitmap(img1);
-                    
-                    ////原图片
-                    //String item = imgpath[drag_area - 1];
-                    
-                    //var vv = System.IO.Path.GetFileNameWithoutExtension(item);
-                    ////var vv2 = System.IO.Path.GetExtension(item);
-                    //var vv2 = ".jpg";
-
-                    //Bitmap im = bitMap;
-                    //im.SetResolution(300, 300);
-                    ////转成jpg
-
-                    //var jpsEncodeer = GetEncoder(ImageFormat.Jpeg);
-                    ////保存图片
-                    //String imgurl = Path1 + "\\" + vv + vv2;
-                    //im.Save(imgurl, jpsEncodeer, eps);
-
-                        
-                    //ep.Dispose();
-                    //eps.Dispose();
-
-                    //bitMap.Dispose();
+                    //!!!
+                    listCur[m + drag_area - 1] = path_url;
+                    listAll[m + drag_area - 1].name = path_url;
 
                 }
 
@@ -4098,8 +4072,9 @@ namespace 相册排版界面
                     listDrag[drag_area - 1] = path_url;
                     //解决拖拽替换后 再右键替换 picturebox框中是原来图片的问题，
                     //同时要将替换后的图片在listCur和listAll中存成原来图片的名字。
-                    //listCur[m + drag_area - 1] = path_url;
-                    //listAll[m + drag_area - 1].name = path_url;
+                    //!!!
+                    listCur[m + drag_area - 1] = path_url;
+                    listAll[m + drag_area - 1].name = path_url;
 
                 }
                 if (index == 4)
@@ -4110,8 +4085,9 @@ namespace 相册排版界面
                     listDrag.Add(imgpath[3]);
                     listDrag[drag_area - 1] = path_url;
                     //解决拖拽替换后 再右键替换 picturebox框中是原来图片的问题
-                    //listCur[m + drag_area - 1] = path_url;
-                    //listAll[m + drag_area - 1].name = path_url;
+                    //!!!
+                    listCur[m + drag_area - 1] = path_url;
+                    listAll[m + drag_area - 1].name = path_url;
 
                 }
                 if (index == 8)
@@ -4126,8 +4102,9 @@ namespace 相册排版界面
                     listDrag.Add(imgpath[7]);
                     listDrag[drag_area - 1] = path_url;
                     //解决拖拽替换后 再右键替换 picturebox框中是原来图片的问题
-                    //listCur[m + drag_area - 1] = path_url;
-                    //listAll[m + drag_area - 1].name = path_url;
+                    //!!!
+                    listCur[m + drag_area - 1] = path_url;
+                    listAll[m + drag_area - 1].name = path_url;
 
                 }
 
@@ -4620,8 +4597,11 @@ namespace 相册排版界面
                                 height_xs2);
                     }
                 }
+                char[] MyChar = { 'd', 'o', 'n', 'e' };
+                //!!! 改 item_o -> item
+                var vv = System.IO.Path.GetFileNameWithoutExtension(item);
+                var vv_o = System.IO.Path.GetFileNameWithoutExtension(item_o).TrimEnd(MyChar);
 
-                var vv = System.IO.Path.GetFileNameWithoutExtension(item_o);
                 //var vv2 = System.IO.Path.GetExtension(imgpath1);
                 var vv2 = ".jpg";
 
@@ -4629,10 +4609,30 @@ namespace 相册排版界面
                 im.SetResolution(300, 300);
                 //转成jpg
 
+                if (vv == vv_o)
+                {
+                    //更换的不是第一张图片
+                    //保存图片
+                    String imgurl = Path1 + "\\" + vv + "done" + vv2;
+                    im.Save(imgurl, jpsEncodeer, eps);
+                }
+                else
+                {
+                    //更换的是第一张图片 drag_area=1
+                    //保存图片 删除图片
+                    String imgurl_o = Path1 + "\\" + vv_o + "done" + vv2;
+                   
+                    String imgurl = Path1 + "\\" + vv + "done" + vv2;
+                    im.Save(imgurl, jpsEncodeer, eps);
+                    listDone[cur_pos] = imgurl;
+
+                    //DeleteDir(imgurl_o);
+                    File.Delete(imgurl_o);
+                }
+
                 //保存图片
-                String imgurl = Path1 + "\\" + vv  + vv2;
-                //String imgurl = imgpath1;
-                im.Save(imgurl, jpsEncodeer, eps);
+                //String imgurl = Path1 + "\\" + vv + "done" + vv2;
+                //im.Save(imgurl, jpsEncodeer, eps);
 
                 //---------------
                 //listCur[cur_pos + drag_area - 1] = path_url;
@@ -4866,8 +4866,8 @@ namespace 相册排版界面
                     }
 
                 }
-
-                var vv = System.IO.Path.GetFileNameWithoutExtension(item_o);
+                //!!!
+                var vv = System.IO.Path.GetFileNameWithoutExtension(item);
                 var vv2 = System.IO.Path.GetExtension(item);
                 vv2 = ".jpg";
 
@@ -4876,7 +4876,7 @@ namespace 相册排版界面
                 //转成jpg
 
                 //保存图片
-                String imgurl = Path1 + "\\" + vv  + vv2;
+                String imgurl = Path1 + "\\" + vv + "done" + vv2;
                 im.Save(imgurl, jpsEncodeer, eps);
                 //---------------
                 //listCur[cur_pos+drag_area-1] = path_url;
@@ -5275,8 +5275,8 @@ namespace 相册排版界面
                     }
                     //top_8 = top_8 + height_xs;
                 }
-
-                var vv = System.IO.Path.GetFileNameWithoutExtension(item_o);
+                //!!!
+                var vv = System.IO.Path.GetFileNameWithoutExtension(item);
                 var vv2 = System.IO.Path.GetExtension(item);
                 vv2 = ".jpg";
 
@@ -5285,7 +5285,7 @@ namespace 相册排版界面
                 //转成jpg
 
                 //保存图片
-                String imgurl = Path1 + "\\" + vv  + vv2;
+                String imgurl = Path1 + "\\" + vv + "done" + vv2;
                 im.Save(imgurl, jpsEncodeer, eps);
 
                 //---------------
@@ -5345,6 +5345,31 @@ namespace 相册排版界面
             bitMap.Dispose();
         }
 
+        public static void DeleteDir(string srcPath)
+        {
+
+            try
+            {
+                DirectoryInfo dir = new DirectoryInfo(srcPath);
+                FileSystemInfo[] fileinfo = dir.GetFileSystemInfos();  //返回目录中所有文件和子目录
+                foreach (FileSystemInfo i in fileinfo)
+                {
+                    if (i is DirectoryInfo)            //判断是否文件夹
+                    {
+                        DirectoryInfo subdir = new DirectoryInfo(i.FullName);
+                        subdir.Delete(true);          //删除子目录和文件
+                    }
+                    else
+                    {
+                        File.Delete(i.FullName);      //删除指定文件
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+            }
+
+        }
 
     }
 }
