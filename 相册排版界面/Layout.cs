@@ -21,6 +21,7 @@ namespace 相册排版界面
 
         private int cur_pos = 0;
         private int cur_start = 0;
+        private int insert_cur = 0;
         //private List<string> listAll = new List<string>();
 
         private List<ImageBean> listAll = new List<ImageBean>();
@@ -370,6 +371,7 @@ namespace 相册排版界面
             ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
             if (up_indexes.Count == 0)
             {
+                //没图片时候
                 //删掉之前在done文件夹中的图片
                 try
                 {
@@ -392,7 +394,7 @@ namespace 相册排版界面
                     DialogResult result = folderBrowserDialog.ShowDialog();
                     if (result == DialogResult.OK)
                     {
-                        //listCur.Clear();
+                        listCur.Clear();
                         //获取用户选择的文件夹路径
                         string folderDirPath = folderBrowserDialog.SelectedPath;
 
@@ -405,7 +407,7 @@ namespace 相册排版界面
 
 
                             listCur.Add(fileInfo[i].FullName);
-                            //listAll.Add(fileInfo[i].FullName);
+                            //listAll.Add(fileInfo[i].FullName); 
 
                         }
                         StartSetting(3);
@@ -419,6 +421,7 @@ namespace 相册排版界面
             }
             else
             {
+                //有图片时候
                 try
                 {
                     //打开选择文件夹对话框
@@ -426,7 +429,7 @@ namespace 相册排版界面
                     DialogResult result = folderBrowserDialog.ShowDialog();
                     if (result == DialogResult.OK)
                     {
-                        //listCur.Clear();
+                        listCur.Clear();
                         //获取用户选择的文件夹路径
                         string folderDirPath = folderBrowserDialog.SelectedPath;
 
@@ -455,28 +458,28 @@ namespace 相册排版界面
                         //----------------------------------------
                         for (int i = 0; i < fileInfo.Length; i++)
                         {
+                            ImageBean bean = new ImageBean();
+                            int type = setting.getType();
+
+                            bean.name = fileInfo[i].FullName;
+                            bean.type = type;
+
                             if (cur_pos >= 0)
                             {
-                                ImageBean bean = new ImageBean();
-                                int type = setting.getType();
-
-                                bean.name = fileInfo[i].FullName;
-                                bean.type = type;
-
-
-                                listCur.Insert((cur_pos + 1) * add_index + 2, fileInfo[i].FullName);
-                                listAll.Insert((cur_pos + 1) * add_index + 2, bean);
+                                //插入位置
+                                insert_cur = (cur_pos + 1) * add_index;
+                                listCur.Add(fileInfo[i].FullName);
+                                
                             }
                             else
                             {
                                 listCur.Add(fileInfo[i].FullName);
-                                //listAll.Add(fileInfo[i].FullName);
+                               
                             }
-                            //listCur.Add(fileInfo[i].FullName);
-                            //listAll.Add(fileInfo[i].FullName);
+
                         }
 
-                        StartSetting(3);
+                        StartSetting(34);
                     }
                 }
                 catch (Exception msg)
@@ -484,6 +487,37 @@ namespace 相册排版界面
                     //报错提示 未将对象引用设置到对象的实例
                     throw msg;
                 }
+
+                //原
+                //try
+                //{
+                //    //打开选择文件夹对话框
+                //    FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+                //    DialogResult result = folderBrowserDialog.ShowDialog();
+                //    if (result == DialogResult.OK)
+                //    {
+                //        listCur.Clear();
+                //        //获取用户选择的文件夹路径
+                //        string folderDirPath = folderBrowserDialog.SelectedPath;
+
+                //        //获取目录与子目录
+                //        DirectoryInfo dir = new DirectoryInfo(folderDirPath);
+                //        //获取当前目录JPG文件列表 GetFiles获取指定目录中文件的名称(包括其路径)
+                //        FileInfo[] fileInfo = dir.GetFiles("*.jpg");
+                //        for (int i = 0; i < fileInfo.Length; i++)
+                //        {
+                //            listCur.Add(fileInfo[i].FullName);
+                //            //listAll.Add(fileInfo[i].FullName);
+                //        }
+
+                //        StartSetting(3);
+                //    }
+                //}
+                //catch (Exception msg)
+                //{
+                //    //报错提示 未将对象引用设置到对象的实例
+                //    throw msg;
+                //}
             }
             
         }
@@ -493,9 +527,15 @@ namespace 相册排版界面
         {
             string Path1 = System.Environment.CurrentDirectory + "\\done";
             ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
-            
+
+            if (up_indexes.Count > 0)
+            {
+                select_index = up_indexes[0];
+            }
+
             if (up_indexes.Count == 0)
             {
+                //没图片时候
                 //删掉之前在done文件夹中的图片
                 try
                 {
@@ -520,15 +560,12 @@ namespace 相册排版界面
                     dlgs.Filter = "图片|*.jpg";
                     if (dlgs.ShowDialog() == DialogResult.OK)
                     {
+                        listCur.Clear();
                         for (int i = 0; i < dlgs.FileNames.Length; i++)
                         {
                             
-                            
                             listCur.Add(dlgs.FileNames[i]);
-                            //listAll.Add(fileInfo[i].FullName);
                             
-                            //listCur.Add(fileInfo[i].FullName);
-                            //listAll.Add(fileInfo[i].FullName);
                         }
 
                         StartSetting(4);
@@ -545,6 +582,7 @@ namespace 相册排版界面
             }
             else
             {
+                //有图片时候
                 //添加图片操作
                 OpenFileDialog dlg = new OpenFileDialog();
                 dlg.Multiselect = true;//等于true表示可以选择多个文件
@@ -571,47 +609,30 @@ namespace 相册排版界面
                 //----------------------------------------
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    //listCur.Clear();
-                    //foreach (string file in dlg.FileNames)
-                    //{
-                    //    if (cur_pos >= 0)
-                    //    {
-                    //        listCur.Insert((cur_pos+1)*add_index+1, file);
-                    //        //listDone.Insert(select_index + 1, file);
-                    //    }
-                    //    else
-                    //    {
-                    //        listCur.Add(file);
-
-                    //    }
-                    //    //listCur.Add(file);
-                    //    //listAll.Add(file);
-                    //}
-
+                    listCur.Clear();
                     for (int i = 0; i < dlg.FileNames.Length; i++)
                     {
+                        ImageBean bean = new ImageBean();
+                        int type = setting.getType();
+
+                        bean.name = dlg.FileNames[i];
+                        bean.type = type;
+
                         if (cur_pos >= 0)
                         {
-                            ImageBean bean = new ImageBean();
-                            int type = setting.getType();
-
-                            bean.name = dlg.FileNames[i];
-                            bean.type = type;
-
-                            // listCur.Insert(select_index + 1, dlg.FileNames[i]);
-                            listCur.Insert((cur_pos + 1) * add_index + 2, dlg.FileNames[i]);
-                            listAll.Insert((cur_pos + 1) * add_index + 2, bean);
+                            insert_cur = (cur_pos + 1) * add_index;
+                            listCur.Add(dlg.FileNames[i]);
+                            
                         }
                         else
                         {
                             listCur.Add(dlg.FileNames[i]);
                             //listAll.Add(fileInfo[i].FullName);
                         }
-                        //listCur.Add(fileInfo[i].FullName);
-                        //listAll.Add(fileInfo[i].FullName);
+                        
                     }
 
-                    StartSetting(4);
+                    StartSetting(34);
                     updateTopShow();
                 }
             }
@@ -917,20 +938,37 @@ namespace 相册排版界面
                 }
             }
 
-            //3 添加文件夹 ；4 添加图片 
+            //当前无图片：3 添加文件夹 ；4 添加图片 
             if (index == 3 || index == 4)
             {
                 clearDone = false;
             }
-
-            setting.postData(listCur, index, clearDone);
-            setting.ShowDialog(this);
-            int result = setting.getResult();
-            if (result == 1)
+            //当前有图片：添加文件夹和图片
+            if(index == 34)
             {
-                int type = setting.getType();
-                loadImageAfterDeal(type, index);
+                clearDone = false;
+                setting.postData(listCur, index, clearDone);
+                setting.ShowDialog(this);
+                int result = setting.getResult();
+                if (result == 1)
+                {
+                    int type = setting.getType();
+                    loadImageAfterInsert(type, index,insert_cur,cur_pos + 1);
+                }
             }
+            else
+            {
+                setting.postData(listCur, index, clearDone);
+                setting.ShowDialog(this);
+                int result = setting.getResult();
+                if (result == 1)
+                {
+                    int type = setting.getType();
+                    loadImageAfterDeal(type, index);
+                }
+            }
+            
+
         }
 
 
@@ -997,6 +1035,11 @@ namespace 相册排版界面
                 {
                     listDone.Clear();
                 }
+                //------------
+                //if (index == 3 || index == 4)
+                //{
+                //    listDone.Clear();
+                //}
 
                 for (int i = 0; i < listCur.Count; i++)
                 {
@@ -1030,7 +1073,53 @@ namespace 相册排版界面
 
                 
         }
-        
+        //插入文件夹和照片
+        private void loadImageAfterInsert(int type, int index,int insert_cur,int insert_done)
+        {
+            //获取用户选择的文件夹路径
+            string folderDirPath = System.Environment.CurrentDirectory + "\\done";
+
+            //获取目录与子目录
+            DirectoryInfo dir = new DirectoryInfo(folderDirPath);
+            //获取当前目录JPG文件列表 GetFiles获取指定目录中文件的名称(包括其路径)
+            FileInfo[] fileInfo = dir.GetFiles("*.jpg");
+
+         
+            if (index == 1 || index == 2)
+            {
+                listDone.Clear();
+            }
+            
+            for (int i = listCur.Count - 1; i >= 0; i--)
+            {
+                ImageBean bean = new ImageBean();
+                bean.name = listCur[i];
+                bean.type = type;
+                //listAll.Add(bean);
+                listAll.Insert(insert_cur, bean);
+                
+            }
+            for (int i = listAll.Count - 1; i >= 0; i--)
+            {
+                listCur.Clear();
+                listCur.Add(listAll[i].name);
+            }
+
+            for (int i = fileInfo.Length - 1; i >= 0; i--)
+            {
+                if (!listDone.Contains(fileInfo[i].FullName))
+                {
+                    //listDone.Add(fileInfo[i].FullName);
+                    listDone.Insert(insert_done, fileInfo[i].FullName);
+                }
+            }
+
+            cur_pos = 0;
+            cur_start = 0;
+            updateTopShow();
+
+        }
+
 
         private void 单张ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -3767,6 +3856,11 @@ namespace 相册排版界面
         //处理 drag drop 事件
         private void left_DragDrop(object sender, DragEventArgs e)
         {
+            listCur.Clear();
+            for(int i = 0; i < listAll.Count; i++)
+            {
+                listCur.Add(listAll[i].name);
+            }
 
             //获取拖拽到picturebox1时的图片顺序 ：drag_area
             //-------------
