@@ -22,6 +22,7 @@ namespace 相册排版界面
         private int cur_pos = 0;
         private int cur_start = 0;
         private int insert_cur = 0;
+        private int setting_index = 0;
         //private List<string> listAll = new List<string>();
 
         private List<ImageBean> listAll = new List<ImageBean>();
@@ -130,7 +131,6 @@ namespace 相册排版界面
 
             }
 
-            //loadImage();
         }
 
         int select_index2 = -1;
@@ -663,8 +663,7 @@ namespace 相册排版界面
                     for (int i = 0; i < fileInfo.Length; i++)
                     {
                         listLeft.Add(fileInfo[i].FullName);
-                        //listCur.Add(fileInfo[i].FullName);
-                        //listAll.Add(fileInfo[i].FullName);
+                        
                     }
 
                     //StartSetting(5);
@@ -1099,9 +1098,9 @@ namespace 相册排版界面
                 listAll.Insert(insert_cur, bean);
                 
             }
-            for (int i = listAll.Count - 1; i >= 0; i--)
+            listCur.Clear();
+            for (int i = 0; i < listAll.Count; i++)
             {
-                listCur.Clear();
                 listCur.Add(listAll[i].name);
             }
 
@@ -3554,106 +3553,218 @@ namespace 相册排版界面
             //-------------
             int x = point1.X;
             int y = point1.Y;
-
-            if (setting.index == 1 || setting.index == 2)
+            if (setting_index == 0)
             {
-                index = 1;
-                if (listCur.Count > 0)
+                //没读档
+                if (setting.index == 1 || setting.index == 2)
                 {
-                    cur_area = 1;
-                }
-            }
-            if (setting.index == 3 || setting.index == 4)
-            {
-                index = 2;
-                if (y > 257)
-                {
-                    cur_area = 2;
-                }
-                else
-                {
-                    cur_area = 1;
-                }
-            }
-            if (setting.index == 5 || setting.index == 6)
-            {
-                index = 4;
-                if (y > 257)
-                {
-                    if (x < 349)
+                    index = 1;
+                    if (listCur.Count > 0)
                     {
-                        //cur_area = 1;
-                        cur_area = 3;
+                        cur_area = 1;
+                    }
+                }
+                if (setting.index == 3 || setting.index == 4)
+                {
+                    index = 2;
+                    if (y > 257)
+                    {
+                        cur_area = 2;
                     }
                     else
                     {
-                        cur_area = 4;
-                        
+                        cur_area = 1;
                     }
                 }
-                else
+                if (setting.index == 5 || setting.index == 6)
                 {
-                    if (x < 349)
+                    index = 4;
+                    if (y > 257)
                     {
-                        //cur_area = 2;
-                        cur_area = 1;
+                        if (x < 349)
+                        {
+                            //cur_area = 1;
+                            cur_area = 3;
+                        }
+                        else
+                        {
+                            cur_area = 4;
+
+                        }
                     }
                     else
                     {
-                        //cur_area = 3;
-                        cur_area = 2;
+                        if (x < 349)
+                        {
+                            //cur_area = 2;
+                            cur_area = 1;
+                        }
+                        else
+                        {
+                            //cur_area = 3;
+                            cur_area = 2;
+                        }
                     }
                 }
+                if (setting.index == 7 || setting.index == 8)
+                {
+                    index = 8;
+                    if (x < 349)
+                    {//左
+                        if (y < 128)
+                        {
+                            //cur_area = 4;
+                            cur_area = 1;
+                        }
+                        if (y > 129 && y < 257)
+                        {
+                            cur_area = 3;
+                        }
+                        if (y > 257 && y < 385)
+                        {
+                            //cur_area = 2;
+                            cur_area = 5;
+                        }
+                        if (y > 386)
+                        {
+                            //cur_area = 1;
+                            cur_area = 7;
+                        }
+                    }
+                    else
+                    {//右
+                        if (y < 128)
+                        {
+                            //cur_area = 5;
+                            cur_area = 2;
+                        }
+                        if (y > 129 && y < 257)
+                        {
+                            //cur_area = 6;
+                            cur_area = 4;
+                        }
+                        if (y > 257 && y < 385)
+                        {
+                            //cur_area = 7;
+                            cur_area = 6;
+                        }
+                        if (y > 386)
+                        {
+                            cur_area = 8;
+                        }
+
+                    }
+                }
+
+
             }
-            if (setting.index == 7 || setting.index == 8)
+            else
             {
-                index = 8;
-                if (x < 349)
-                {//左
-                    if (y < 128)
+                //读档
+
+                if (setting_index == 1 || setting_index == 2)
+                {
+                    index = 1;
+                    if (listCur.Count > 0)
                     {
-                        //cur_area = 4;
                         cur_area = 1;
                     }
-                    if (y > 129 && y < 257)
-                    {
-                        cur_area = 3;
-                    }
-                    if (y > 257 && y < 385)
-                    {
-                        //cur_area = 2;
-                        cur_area = 5;
-                    }
-                    if (y > 386)
-                    {
-                        //cur_area = 1;
-                        cur_area = 7;
-                    }
                 }
-                else
-                {//右
-                    if (y < 128)
+                if (setting_index == 3 || setting_index == 4)
+                {
+                    index = 2;
+                    if (y > 257)
                     {
-                        //cur_area = 5;
                         cur_area = 2;
                     }
-                    if (y > 129 && y < 257)
+                    else
                     {
-                        //cur_area = 6;
-                        cur_area = 4;
+                        cur_area = 1;
                     }
-                    if (y > 257 && y < 385)
-                    {
-                        //cur_area = 7;
-                        cur_area = 6;
-                    }
-                    if (y > 386)
-                    {
-                        cur_area = 8;
-                    }
-
                 }
+                if (setting_index == 5 || setting_index == 6)
+                {
+                    index = 4;
+                    if (y > 257)
+                    {
+                        if (x < 349)
+                        {
+                            //cur_area = 1;
+                            cur_area = 3;
+                        }
+                        else
+                        {
+                            cur_area = 4;
+
+                        }
+                    }
+                    else
+                    {
+                        if (x < 349)
+                        {
+                            //cur_area = 2;
+                            cur_area = 1;
+                        }
+                        else
+                        {
+                            //cur_area = 3;
+                            cur_area = 2;
+                        }
+                    }
+                }
+                if (setting_index == 7 || setting_index == 8)
+                {
+                    index = 8;
+                    if (x < 349)
+                    {//左
+                        if (y < 128)
+                        {
+                            //cur_area = 4;
+                            cur_area = 1;
+                        }
+                        if (y > 129 && y < 257)
+                        {
+                            cur_area = 3;
+                        }
+                        if (y > 257 && y < 385)
+                        {
+                            //cur_area = 2;
+                            cur_area = 5;
+                        }
+                        if (y > 386)
+                        {
+                            //cur_area = 1;
+                            cur_area = 7;
+                        }
+                    }
+                    else
+                    {//右
+                        if (y < 128)
+                        {
+                            //cur_area = 5;
+                            cur_area = 2;
+                        }
+                        if (y > 129 && y < 257)
+                        {
+                            //cur_area = 6;
+                            cur_area = 4;
+                        }
+                        if (y > 257 && y < 385)
+                        {
+                            //cur_area = 7;
+                            cur_area = 6;
+                        }
+                        if (y > 386)
+                        {
+                            cur_area = 8;
+                        }
+
+                    }
+                }
+
+
             }
+            
 
 
             //鼠标右键点击   测试
@@ -3866,106 +3977,216 @@ namespace 相册排版界面
             //-------------
             int x = MousePosition.X;
             int y = MousePosition.Y;
-
-            if (setting.index == 1 || setting.index == 2)
+            if (setting_index == 0)
             {
-                index = 1;
-                if (listCur.Count > 0)
+                //没读档
+                if (setting.index == 1 || setting.index == 2)
                 {
-                    drag_area = 1;
-                }
-            }
-            if (setting.index == 3 || setting.index == 4)
-            {
-                index = 2;
-                if (y > 499)
-                {
-                    drag_area = 2;
-                }
-                else
-                {
-                    drag_area = 1;
-                }
-            }
-            if (setting.index == 5 || setting.index == 6)
-            {
-                index = 4;
-                if (y > 499)
-                {
-                    if (x < 854)
+                    index = 1;
+                    if (listCur.Count > 0)
                     {
-                        //drag_area = 1;
-                        drag_area = 3;
+                        drag_area = 1;
+                    }
+                }
+                if (setting.index == 3 || setting.index == 4)
+                {
+                    index = 2;
+                    if (y > 499)
+                    {
+                        drag_area = 2;
                     }
                     else
                     {
-                        drag_area = 4;
-
+                        drag_area = 1;
                     }
                 }
-                else
+                if (setting.index == 5 || setting.index == 6)
                 {
-                    if (x < 854)
+                    index = 4;
+                    if (y > 499)
                     {
-                        //drag_area = 2;
-                        drag_area = 1;
+                        if (x < 854)
+                        {
+                            //drag_area = 1;
+                            drag_area = 3;
+                        }
+                        else
+                        {
+                            drag_area = 4;
+
+                        }
                     }
                     else
                     {
-                        //drag_area = 3;
-                        drag_area = 2;
+                        if (x < 854)
+                        {
+                            //drag_area = 2;
+                            drag_area = 1;
+                        }
+                        else
+                        {
+                            //drag_area = 3;
+                            drag_area = 2;
+                        }
                     }
                 }
+                if (setting.index == 7 || setting.index == 8)
+                {
+                    index = 8;
+                    if (x < 854)
+                    {//左
+                        if (y < 370)
+                        {
+                            //drag_area = 4;
+                            drag_area = 1;
+                        }
+                        if (y > 370 && y < 498)
+                        {
+                            drag_area = 3;
+                        }
+                        if (y > 499 && y < 627)
+                        {
+                            //drag_area = 2;
+                            drag_area = 5;
+                        }
+                        if (y > 627)
+                        {
+                            //drag_area = 1;
+                            drag_area = 7;
+                        }
+                    }
+                    else
+                    {//右
+                        if (y < 370)
+                        {
+                            //drag_area = 5;
+                            drag_area = 2;
+                        }
+                        if (y > 370 && y < 498)
+                        {
+                            //drag_area = 6;
+                            drag_area = 4;
+                        }
+                        if (y > 499 && y < 627)
+                        {
+                            //drag_area = 7;
+                            drag_area = 6;
+                        }
+                        if (y > 627)
+                        {
+                            drag_area = 8;
+                        }
+
+                    }
+                }
+
             }
-            if (setting.index == 7 || setting.index == 8)
+            else
             {
-                index = 8;
-                if (x < 854)
-                {//左
-                    if (y < 370)
+                //读档
+                if (setting_index == 1 || setting_index == 2)
+                {
+                    index = 1;
+                    if (listCur.Count > 0)
                     {
-                        //drag_area = 4;
                         drag_area = 1;
                     }
-                    if (y > 370 && y < 498)
-                    {
-                        drag_area = 3;
-                    }
-                    if (y > 499 && y < 627)
-                    {
-                        //drag_area = 2;
-                        drag_area = 5;
-                    }
-                    if (y > 627)
-                    {
-                        //drag_area = 1;
-                        drag_area = 7;
-                    }
                 }
-                else
-                {//右
-                    if (y < 370)
+                if (setting_index == 3 || setting_index == 4)
+                {
+                    index = 2;
+                    if (y > 499)
                     {
-                        //drag_area = 5;
                         drag_area = 2;
                     }
-                    if (y > 370 && y < 498)
+                    else
                     {
-                        //drag_area = 6;
-                        drag_area = 4;
+                        drag_area = 1;
                     }
-                    if (y > 499 && y < 627)
-                    {
-                        //drag_area = 7;
-                        drag_area = 6;
-                    }
-                    if (y > 627)
-                    {
-                        drag_area = 8;
-                    }
-
                 }
+                if (setting_index == 5 || setting_index == 6)
+                {
+                    index = 4;
+                    if (y > 499)
+                    {
+                        if (x < 854)
+                        {
+                            //drag_area = 1;
+                            drag_area = 3;
+                        }
+                        else
+                        {
+                            drag_area = 4;
+
+                        }
+                    }
+                    else
+                    {
+                        if (x < 854)
+                        {
+                            //drag_area = 2;
+                            drag_area = 1;
+                        }
+                        else
+                        {
+                            //drag_area = 3;
+                            drag_area = 2;
+                        }
+                    }
+                }
+                if (setting_index == 7 || setting_index == 8)
+                {
+                    index = 8;
+                    if (x < 854)
+                    {//左
+                        if (y < 370)
+                        {
+                            //drag_area = 4;
+                            drag_area = 1;
+                        }
+                        if (y > 370 && y < 498)
+                        {
+                            drag_area = 3;
+                        }
+                        if (y > 499 && y < 627)
+                        {
+                            //drag_area = 2;
+                            drag_area = 5;
+                        }
+                        if (y > 627)
+                        {
+                            //drag_area = 1;
+                            drag_area = 7;
+                        }
+                    }
+                    else
+                    {//右
+                        if (y < 370)
+                        {
+                            //drag_area = 5;
+                            drag_area = 2;
+                        }
+                        if (y > 370 && y < 498)
+                        {
+                            //drag_area = 6;
+                            drag_area = 4;
+                        }
+                        if (y > 499 && y < 627)
+                        {
+                            //drag_area = 7;
+                            drag_area = 6;
+                        }
+                        if (y > 627)
+                        {
+                            drag_area = 8;
+                        }
+
+                    }
+                }
+
+
             }
+            
 
             //-------------
             ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
@@ -4292,6 +4513,7 @@ namespace 相册排版界面
         string AllPath = "listAll.txt";
         string DonePath = "listDone.txt";
         string LeftPath = "listLeft.txt";
+        string IndexPath = "setting_index.txt";
         bool flag = false;
 
         private void 存档ToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -4317,7 +4539,12 @@ namespace 相册排版界面
             stream4.Seek(0, SeekOrigin.Begin);
             stream4.SetLength(0);
             stream4.Close();
-
+                //setting_index.txt
+            FileStream stream5 = File.Open(IndexPath, FileMode.OpenOrCreate, FileAccess.Write);
+            stream5.Seek(0, SeekOrigin.Begin);
+            stream5.SetLength(0);
+            stream5.Close();
+            //--------------------------------------------------------------
             //添加新数据
             for (int i = 0; i < listCur.Count; i++)
             {
@@ -4335,8 +4562,12 @@ namespace 相册排版界面
             {
                 WriteFile(listLeft[i] + "?", LeftPath);
             }
+            
+            WriteFile(setting.index.ToString() + "?", IndexPath);
+           
+            
 
-
+            MessageBox.Show("存档成功");
         }
 
         private void 读档ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -4348,8 +4579,8 @@ namespace 相册排版界面
                 flag = true;
                 listCur.Clear();
                 string[] filesCur;
-                //files = file.Trim().Replace("\n","").Split('?');
-                filesCur = Regex.Replace(fileCur, @"\s", "").Split('?');
+                filesCur = fileCur.Trim().Replace("\r", "").Replace("\n", "").Split('?');
+                //filesCur = Regex.Replace(fileCur, @"\s", "").Split('?');
                 for (int i = 0; i < filesCur.Length - 1; i++)
                 {
                     listCur.Add(filesCur[i]);
@@ -4364,8 +4595,8 @@ namespace 相册排版界面
                 flag = true;
                 listAll.Clear();
                 string[] filesAll;
-                //files = file.Trim().Replace("\n","").Split('?');
-                filesAll = Regex.Replace(fileAll, @"\s", "").Split('?');
+                filesAll = fileAll.Trim().Replace("\r", "").Replace("\n", "").Split('?');
+                //filesAll = Regex.Replace(fileAll, @"\s", "").Split('?');
                 for (int i = 0; i < filesAll.Length - 1; i++)
                 {
                     ImageBean bean = new ImageBean();
@@ -4384,14 +4615,18 @@ namespace 相册排版界面
                 flag = true;
                 listDone.Clear();
                 string[] filesDone;
-                //files = file.Trim().Replace("\n","").Split('?');
-                filesDone = Regex.Replace(fileDone, @"\s", "").Split('?');
+                filesDone = fileDone.Trim().Replace("\r", "").Replace("\n", "").Split('?');
+                //filesDone = Regex.Replace(fileDone, @"\s", "").Split('?');
                 for (int i = 0; i < filesDone.Length - 1; i++)
                 {
                     listDone.Add(filesDone[i]);
                     // Console.WriteLine(files[i]);
                 }
-
+                if (listDone.Count == 0)
+                {
+                    return;
+                }
+                updateTopShow();
             }
             //listLeft
             var fileLeft = ReadFile(LeftPath);
@@ -4400,19 +4635,43 @@ namespace 相册排版界面
                 flag = true;
                 listLeft.Clear();
                 string[] filesLeft;
-                //files = file.Trim().Replace("\n","").Split('?');
-                filesLeft = Regex.Replace(fileLeft, @"\s", "").Split('?');
+                filesLeft = fileLeft.Trim().Replace("\r","").Replace("\n", "").Split('?');
+                //filesLeft = Regex.Replace(fileLeft, @"\s", "").Split('?');
                 for (int i = 0; i < filesLeft.Length - 1; i++)
                 {
                     listLeft.Add(filesLeft[i]);
-                    // Console.WriteLine(files[i]);
+                    //Console.WriteLine("left:" + listLeft[i]);
+                }
+                if (listLeft.Count == 0)
+                {
+                    return;
+                }
+                updateLeftShow();
+
+            }
+            //setting_index.txt
+            var fileIndex = ReadFile(IndexPath);
+            if (fileIndex != "")
+            {
+                flag = true;
+                string[] filesIndex;
+                filesIndex = fileIndex.Trim().Replace("\r", "").Replace("\n", "").Split('?');
+                //filesLeft = Regex.Replace(fileLeft, @"\s", "").Split('?');
+                for (int i = 0; i < filesIndex.Length - 1; i++)
+                {
+                    setting_index = int.Parse(filesIndex[i]);
+                    //Console.WriteLine("index:" + setting_index);
                 }
 
             }
 
-            if(!flag)
+            if (!flag)
             {
                 MessageBox.Show("无存档记录，无法进行读档操作");
+            }
+            else
+            {
+                MessageBox.Show("读档完成");
             }
         }
         public void WriteFile(String file,string fileName)
