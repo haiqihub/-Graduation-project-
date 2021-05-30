@@ -4515,6 +4515,8 @@ namespace 相册排版界面
         string DonePath = "listDone.txt";
         string LeftPath = "listLeft.txt";
         string IndexPath = "setting_index.txt";
+        string srcPath = System.Environment.CurrentDirectory + "\\done";
+        string destPath = System.Environment.CurrentDirectory + "\\backup";
         bool flag = false;
 
         private void 存档ToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -4552,6 +4554,22 @@ namespace 相册排版界面
             stream5.Seek(0, SeekOrigin.Begin);
             stream5.SetLength(0);
             stream5.Close();
+                //清空backup文件夹中图片
+            DirectoryInfo dir = new DirectoryInfo(destPath);
+            FileSystemInfo[] fileinfo = dir.GetFileSystemInfos();  //返回目录中所有文件和子目录
+            foreach (FileSystemInfo i in fileinfo)
+            {
+                if (i is DirectoryInfo)            //判断是否文件夹
+                {
+                    DirectoryInfo subdir = new DirectoryInfo(i.FullName);
+                    subdir.Delete(true);          //删除子目录和文件
+                }
+                else
+                {
+                    File.Delete(i.FullName);      //删除指定文件
+                }
+            }
+
             //--------------------------------------------------------------
             //添加新数据
             for (int i = 0; i < listCur.Count; i++)
@@ -4572,9 +4590,11 @@ namespace 相册排版界面
             }
             
             WriteFile(setting.index.ToString() + "?", IndexPath);
-           
-            
 
+            //复制 done 文件夹中的图片 到 backup 文件夹
+            CopyDoneDirectory(srcPath, destPath);
+            
+            //----------------------------------
             MessageBox.Show("存档成功");
         }
 
@@ -4623,7 +4643,7 @@ namespace 相册排版界面
                 flag = true;
                 listDone.Clear();
                 string[] filesDone;
-                filesDone = fileDone.Trim().Replace("\r", "").Replace("\n", "").Split('?');
+                filesDone = fileDone.Trim().Replace("\r", "").Replace("\n", "").Replace("\\done\\", "\\backup\\").Split('?');
                 //filesDone = Regex.Replace(fileDone, @"\s", "").Split('?');
                 for (int i = 0; i < filesDone.Length - 1; i++)
                 {
@@ -4680,6 +4700,38 @@ namespace 相册排版界面
             else
             {
                 MessageBox.Show("读档完成");
+            }
+        }
+        //复制done文件夹 方便读取listdone时存在图片文件
+        public void CopyDoneDirectory(string srcPath, string destPath)
+        {
+            try
+            {
+                DirectoryInfo dir = new DirectoryInfo(srcPath);
+                FileSystemInfo[] fileinfo = dir.GetFileSystemInfos();  //获取目录下（不包含子目录）的文件和子目录
+                foreach (FileSystemInfo i in fileinfo)
+                {
+                    if (i is DirectoryInfo)     //判断是否文件夹
+                    {
+                        if (!Directory.Exists(destPath + "\\" + i.Name))
+                        {
+                            Directory.CreateDirectory(destPath + "\\" + i.Name);   //目标目录下不存在此文件夹即创建子文件夹
+                        }
+                        CopyDoneDirectory(i.FullName, destPath + "\\" + i.Name);    //递归调用复制子文件夹
+                    }
+                    else
+                    {
+                        if (!Directory.Exists(destPath))//若文件夹不存在则新建文件夹   
+                        {
+                            Directory.CreateDirectory(destPath); //新建文件夹   
+                        }
+                        File.Copy(i.FullName, destPath + "\\" + i.Name, true);      //不是文件夹即复制文件，true表示可以覆盖同名文件
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
             }
         }
         public void WriteFile(String file,string fileName)
