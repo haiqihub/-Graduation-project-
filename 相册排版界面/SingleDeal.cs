@@ -34,7 +34,9 @@ namespace 相册排版界面
 
         //private string imgpath1, imgpath2, imgpath3, imgpath4,imgpath5,imgpath6,imgpath7, imgpath8;
         private List<string>imgpath = new List<string>();
-        
+
+        private string item_n = "";
+
         //private Size size2;
         //private double m_scale11 = 1.0;
         //private int m_rotate11 = 0;
@@ -79,10 +81,6 @@ namespace 相册排版界面
                 }
                 if (index == 4)
                 {
-                    //imgpath1 = listChange[i];
-                    //imgpath2 = null;
-                    //imgpath3 = null;
-                    //imgpath4 = null;
                     imgpath.Add(listChange[i]);
                     if (i + 1 < listChange.Count)
                     {
@@ -102,14 +100,6 @@ namespace 相册排版界面
                 }
                 if (index == 8)
                 {
-                    //imgpath1 = listChange[i];
-                    //imgpath2 = null;
-                    //imgpath3 = null;
-                    //imgpath4 = null;
-                    //imgpath5 = null;
-                    //imgpath6 = null;
-                    //imgpath7 = null;
-                    //imgpath8 = null;
                     imgpath.Add(listChange[i]);
                     if (i + 1 < listChange.Count)
                     {
@@ -380,6 +370,8 @@ namespace 相册排版界面
 
                     image = GetImageFromServer(file);
                     image3 = GetImageFromServer(file);
+                    //更换后的图片路径
+                    item_n = file;
                     AcquireRectangleImage(image, new Rectangle(point2, size));
                 }
             }
@@ -514,6 +506,7 @@ namespace 相册排版界面
 
 
         //照片组
+        
         List<string> list = new List<string>();
         FirstDlg modelDlg = new FirstDlg();
         int up = 8;
@@ -527,36 +520,46 @@ namespace 相册排版界面
         private void button11_Click(object sender, EventArgs e)
         {
             string folderDirPath = System.Environment.CurrentDirectory + "\\";
-
             this.pictureBox1.Image.Save(folderDirPath + "a.jpg");
-            
+
+            //--------------------------------------
+            String item_o = imgpath[cur_area - 1];//原图
+            if (item_n == "")
+            {
+                //更换后的图
+                item_n = item_o;
+            }
+
+            //string extension = System.IO.Path.GetExtension(item);//扩展名 “.aspx”
+            //char[] MyChar = { 'd', 'o', 'n', 'e' };
+            //string fileNameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(item).TrimEnd(MyChar);// 没有扩展名的文件名 “Default”
+            //var vv2 = System.IO.Path.GetExtension(item);
+            //vv2 = ".jpg";
+            //String itemurl = folderDirPath + "\\" + fileNameWithoutExtension + vv2;
+            //this.pictureBox1.Image.Save(itemurl);
+
             //更改后的图片list -----------
             list.Clear();
             if (index == 1)
             {
-                //list.Add(folderDirPath + "a.jpg");
                 list.Add(imgpath[0]);
-                list[cur_area - 1] = folderDirPath + "a.jpg";
+                list[cur_area - 1] = item_n;
             }
             
             if (index == 2)
             {
                 list.Add(imgpath[0]);
                 list.Add(imgpath[1]);
-                //list.Insert(cur_area - 1,folderDirPath + "a.jpg");
-                list[cur_area - 1] = folderDirPath + "a.jpg";
+                list[cur_area - 1] = item_n;
+
             }
             if (index == 4)
             {
-                //list.Add(imgpath[1]);
-                //list.Add(imgpath[2]);
-                //list.Add(imgpath[3]);
-                //list.Insert(cur_area - 1, folderDirPath + "a.jpg");
                 list.Add(imgpath[0]);
                 list.Add(imgpath[1]);
                 list.Add(imgpath[2]);
                 list.Add(imgpath[3]);
-                list[cur_area - 1] = folderDirPath + "a.jpg";
+                list[cur_area - 1] = item_n;
             }
             if (index == 8)
             {
@@ -568,8 +571,7 @@ namespace 相册排版界面
                 list.Add(imgpath[5]);
                 list.Add(imgpath[6]);
                 list.Add(imgpath[7]);
-                // list.Insert(cur_area - 1, folderDirPath + "a.jpg");
-                list[cur_area - 1] = folderDirPath + "a.jpg";
+                list[cur_area - 1] = item_n;
             }
            
 
@@ -586,7 +588,7 @@ namespace 相册排版界面
             modelDlg.label1.Text = "图片处理中，请稍后......";
             modelDlg.ShowDialog(this);
             File.Delete(folderDirPath + "a.jpg");
-            //File.Delete(imgpath2);
+            
         }
 
 
@@ -632,7 +634,7 @@ namespace 相册排版界面
         {
             //这时后台线程已经完成，并返回了主线程，所以可以直接使用UI控件了 
         }
-
+        //要修改的地方 和drag差不多 应该就是覆盖写读
         public void HechengA1()
         {
             string Path1 = System.Environment.CurrentDirectory + "\\done";
@@ -661,7 +663,7 @@ namespace 相册排版界面
             for (int i = 0;i < list.Count;i ++)
             {
                 String item = list[i];
-                String item_o = imgpath[i];
+                String item_o = imgpath[0];
                 Console.WriteLine(i++);
 
                 img1 = Image.FromFile(item);
@@ -695,7 +697,7 @@ namespace 相册排版界面
                 }
                 
 
-                var vv = System.IO.Path.GetFileNameWithoutExtension(item_o);
+                var vv_o = System.IO.Path.GetFileNameWithoutExtension(item_o);
                 //var vv2 = System.IO.Path.GetExtension(item);
                 var vv2 = ".jpg";
 
@@ -711,7 +713,7 @@ namespace 相册排版界面
 
                 var jpsEncodeer = GetEncoder(ImageFormat.Jpeg);
                 //保存图片
-                String imgurl = Path1 + "\\" + vv + "done" + vv2;
+                String imgurl = Path1 + "\\" + vv_o + "done" + vv2;
                 im.Save(imgurl, jpsEncodeer, eps);
                 //释放资源
                 //im.Dispose();
@@ -766,6 +768,8 @@ namespace 相册排版界面
             for (int i = 0; i < list.Count; i++)
             {
                 String item = list[i];
+                //String item_o = imgpath[cur_area - 1];
+                String item_o = imgpath[0];
 
                 img1 = Image.FromFile(list[i]);
                 img2 = null;
@@ -845,8 +849,10 @@ namespace 相册排版界面
                                 height_xs2);
                     }
                 }
-
+                
                 var vv = System.IO.Path.GetFileNameWithoutExtension(item);
+                char[] MyChar = { 'd', 'o', 'n', 'e' };
+                var vv_o = System.IO.Path.GetFileNameWithoutExtension(item_o).TrimEnd(MyChar);
                 //var vv2 = System.IO.Path.GetExtension(imgpath1);
                 var vv2 = ".jpg";
 
@@ -854,9 +860,9 @@ namespace 相册排版界面
                 im.SetResolution(300, 300);
                 //转成jpg
 
+
                 //保存图片
-                String imgurl = Path1 + "\\" + vv + "done" + vv2;
-                //String imgurl = imgpath1;
+                String imgurl = Path1 + "\\" + vv_o + "done" + vv2;
                 im.Save(imgurl, jpsEncodeer, eps);
                 //释放资源
                 img1.Dispose();
@@ -904,6 +910,7 @@ namespace 相册排版界面
             for (int i = 0; i < list.Count; i++)
             {
                 String item = list[i];
+                String item_o = imgpath[0];
 
                 img1 = Image.FromFile(list[i]);
                 img2 = null;
@@ -1074,6 +1081,8 @@ namespace 相册排版界面
                 }
 
                 var vv = System.IO.Path.GetFileNameWithoutExtension(item);
+                char[] MyChar = { 'd', 'o', 'n', 'e' };
+                var vv_o = System.IO.Path.GetFileNameWithoutExtension(item_o).TrimEnd(MyChar);
                 var vv2 = System.IO.Path.GetExtension(item);
                 vv2 = ".jpg";
 
@@ -1082,7 +1091,7 @@ namespace 相册排版界面
                 //转成jpg
 
                 //保存图片
-                String imgurl = Path1 + "\\" + vv + "done" + vv2;
+                String imgurl = Path1 + "\\" + vv_o + "done" + vv2;
                 im.Save(imgurl, jpsEncodeer, eps);
                 //释放资源
                 img1.Dispose();
@@ -1148,6 +1157,7 @@ namespace 相册排版界面
             for (int i = 0; i < list.Count; i++)
             {
                 String item = list[i];
+                String item_o = imgpath[0];
 
                 img1 = Image.FromFile(list[i]);
                 img2 = null;
@@ -1465,6 +1475,8 @@ namespace 相册排版界面
                 }
 
                 var vv = System.IO.Path.GetFileNameWithoutExtension(item);
+                char[] MyChar = { 'd', 'o', 'n', 'e' };
+                var vv_o = System.IO.Path.GetFileNameWithoutExtension(item_o).TrimEnd(MyChar);
                 var vv2 = System.IO.Path.GetExtension(item);
                 vv2 = ".jpg";
 
@@ -1473,7 +1485,7 @@ namespace 相册排版界面
                 //转成jpg
 
                 //保存图片
-                String imgurl = Path1 + "\\" + vv + "done" + vv2;
+                String imgurl = Path1 + "\\" + vv_o + "done" + vv2;
                 im.Save(imgurl, jpsEncodeer, eps);
                 //释放资源
                 img1.Dispose();

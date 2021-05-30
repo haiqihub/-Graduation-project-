@@ -1006,7 +1006,7 @@ namespace 相册排版界面
             if (index >= 101 && index <= 108)
             {
                 listAll.Clear();
-                listDone1.Clear();
+                //listDone1.Clear();
 
                 for (int i = 0; i < listCur.Count; i++)
                 {
@@ -1016,17 +1016,24 @@ namespace 相册排版界面
                     listAll.Add(bean);
                 }
 
+                //for (int i = 0; i < fileInfo.Length; i++)
+                //{
+
+                //    listDone1.Add(fileInfo[i].FullName);
+
+                //}
                 for (int i = 0; i < fileInfo.Length; i++)
                 {
-                                    
-                    listDone1.Add(fileInfo[i].FullName);
-                        
+                    if (!listDone.Contains(fileInfo[i].FullName))
+                    {
+                        listDone.Add(fileInfo[i].FullName);
+                    }
                 }
-                
+
                 cur_pos = 0;
                 cur_start = 0;
-                updateTopShow1();
-
+                //updateTopShow1();
+                updateTopShow();
             }
             else
             {
@@ -1034,11 +1041,7 @@ namespace 相册排版界面
                 {
                     listDone.Clear();
                 }
-                //------------
-                //if (index == 3 || index == 4)
-                //{
-                //    listDone.Clear();
-                //}
+               
 
                 for (int i = 0; i < listCur.Count; i++)
                 {
@@ -1047,8 +1050,6 @@ namespace 相册排版界面
                     bean.type = type;
                     listAll.Add(bean);
                 }
-
-                //move up dir...
 
                 for (int i = 0; i < fileInfo.Length; i++)
                 {
@@ -1584,7 +1585,7 @@ namespace 相册排版界面
             //调 “调整”  窗口
             相册排版界面.SingleDeal singleDeal = new 相册排版界面.SingleDeal(listChange,index,cur_area);
             singleDeal.ShowDialog();
-            loadImageAfterDeal(3 , 1);
+            loadImageAfterDeal(3 , 3);//原(3,1) On 5.30 目前合理
         }
 
         //上方listView1的index
@@ -4518,8 +4519,15 @@ namespace 相册排版界面
 
         private void 存档ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
+            if (up_indexes.Count == 0)
+            {
+                MessageBox.Show("无可存档数据");
+                return;
+            }
+
             //清空原文档中的数据
-                //listCur.txt
+            //listCur.txt
             FileStream stream1 = File.Open(CurPath, FileMode.OpenOrCreate, FileAccess.Write);
             stream1.Seek(0, SeekOrigin.Begin);
             stream1.SetLength(0);
@@ -4653,7 +4661,7 @@ namespace 相册排版界面
             var fileIndex = ReadFile(IndexPath);
             if (fileIndex != "")
             {
-                flag = true;
+                //flag = true;
                 string[] filesIndex;
                 filesIndex = fileIndex.Trim().Replace("\r", "").Replace("\n", "").Split('?');
                 //filesLeft = Regex.Replace(fileLeft, @"\s", "").Split('?');
