@@ -1006,7 +1006,8 @@ namespace 相册排版界面
             if (index >= 101 && index <= 108)
             {
                 listAll.Clear();
-                listDone1.Clear();
+                //listDone1.Clear();
+                listDone.Clear();
 
                 for (int i = 0; i < listCur.Count; i++)
                 {
@@ -1016,24 +1017,24 @@ namespace 相册排版界面
                     listAll.Add(bean);
                 }
 
-                for (int i = 0; i < fileInfo.Length; i++)
-                {
-
-                    listDone1.Add(fileInfo[i].FullName);
-
-                }
                 //for (int i = 0; i < fileInfo.Length; i++)
                 //{
-                //    if (!listDone.Contains(fileInfo[i].FullName))
-                //    {
-                //        listDone.Add(fileInfo[i].FullName);
-                //    }
+
+                //    listDone1.Add(fileInfo[i].FullName);
+
                 //}
+                for (int i = 0; i < fileInfo.Length; i++)
+                {
+                    //if (!listDone.Contains(fileInfo[i].FullName))
+                    //{
+                        listDone.Add(fileInfo[i].FullName);
+                    //}
+                }
 
                 cur_pos = 0;
                 cur_start = 0;
-                updateTopShow1();
-                //updateTopShow();
+                //updateTopShow1();
+                updateTopShow();
             }
             else
             {
