@@ -32,6 +32,7 @@ namespace 相册排版界面
         private List<string> listDone1 = new List<string>();
         private List<string> listLeft = new List<string>();
         private List<string> listLeftDone = new List<string>();
+        private List<string> listDoneBeforeAdd = new List<string>();
         Setting setting;
 
         private Point point1, point2, point3, point4, p, point;
@@ -394,6 +395,7 @@ namespace 相册排版界面
                     DialogResult result = folderBrowserDialog.ShowDialog();
                     if (result == DialogResult.OK)
                     {
+                        
                         listCur.Clear();
                         //获取用户选择的文件夹路径
                         string folderDirPath = folderBrowserDialog.SelectedPath;
@@ -411,6 +413,7 @@ namespace 相册排版界面
 
                         }
                         StartSetting(3);
+                        //存档ToolStripMenuItem1_Click(sender, e);
                     }
                 }
                 catch (Exception)
@@ -429,7 +432,9 @@ namespace 相册排版界面
                     DialogResult result = folderBrowserDialog.ShowDialog();
                     if (result == DialogResult.OK)
                     {
+                        存档ToolStripMenuItem1_Click(sender, e);
                         listCur.Clear();
+                        
                         //获取用户选择的文件夹路径
                         string folderDirPath = folderBrowserDialog.SelectedPath;
 
@@ -470,6 +475,7 @@ namespace 相册排版界面
                                 insert_cur = (cur_pos + 1) * add_index;
                                 listCur.Add(fileInfo[i].FullName);
                                 
+
                             }
                             else
                             {
@@ -480,6 +486,7 @@ namespace 相册排版界面
                         }
 
                         StartSetting(34);
+                        
                     }
                 }
                 catch (Exception msg)
@@ -570,6 +577,7 @@ namespace 相册排版界面
 
                         StartSetting(4);
                         updateTopShow();
+                        //存档ToolStripMenuItem1_Click(sender, e);
                     }
 
 
@@ -609,7 +617,9 @@ namespace 相册排版界面
                 //----------------------------------------
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
+                    存档ToolStripMenuItem1_Click(sender, e);
                     listCur.Clear();
+                    
                     for (int i = 0; i < dlg.FileNames.Length; i++)
                     {
                         ImageBean bean = new ImageBean();
@@ -623,22 +633,54 @@ namespace 相册排版界面
                             insert_cur = (cur_pos + 1) * add_index;
                             listCur.Add(dlg.FileNames[i]);
                             
+
                         }
                         else
                         {
                             listCur.Add(dlg.FileNames[i]);
                             //listAll.Add(fileInfo[i].FullName);
+                            
                         }
                         
                     }
 
                     StartSetting(34);
                     updateTopShow();
+                    
                 }
             }
             
            
         }
+
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            读档ToolStripMenuItem_Click(sender,e);
+
+            //--------处理done文件夹中之前添加的多余的图片
+            listDoneBeforeAdd.Clear();
+            string folderDirPath = System.Environment.CurrentDirectory + "\\done";
+            //获取目录与子目录
+            DirectoryInfo dir = new DirectoryInfo(folderDirPath);
+            //获取当前目录JPG文件列表 GetFiles获取指定目录中文件的名称(包括其路径)
+            FileInfo[] fileInfo = dir.GetFiles("*.jpg");
+            for(int i = 0; i < listDone.Count; i++)
+            {
+                listDoneBeforeAdd.Add(listDone[i].Replace("\\backup\\", "\\done\\"));
+            }
+            for (int i = 0; i < fileInfo.Length; i++)
+            {
+                if (!listDoneBeforeAdd.Contains(fileInfo[i].FullName))
+                {
+                    //listDone.Add(fileInfo[i].FullName);
+                    File.Delete(fileInfo[i].FullName);
+                }
+
+
+            }
+        }
+
+
 
         //打开文件夹到左侧照片夹
         private void 打开文件夹ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -4769,7 +4811,6 @@ namespace 相册排版界面
             return null;
         }
 
-        
 
         public void HechengA1()
         {

@@ -74,6 +74,9 @@
             this.添加文字ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.调整图片大小ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.更换图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.存档ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.存档ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.读档ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.jpg格式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.png格式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -96,9 +99,7 @@
             this.listView2 = new System.Windows.Forms.ListView();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.textBox_X = new System.Windows.Forms.TextBox();
-            this.存档ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.存档ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.读档ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -157,8 +158,7 @@
             this.批量处理ToolStripMenuItem,
             this.编辑ToolStripMenuItem,
             this.存档ToolStripMenuItem,
-            this.导出ToolStripMenuItem,
-            });
+            this.导出ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Margin = new System.Windows.Forms.Padding(0, 4, 0, 4);
             this.menuStrip1.Name = "menuStrip1";
@@ -199,7 +199,8 @@
             // 
             this.添加图片ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.从文件夹ToolStripMenuItem,
-            this.从图片ToolStripMenuItem});
+            this.从图片ToolStripMenuItem,
+            this.undoToolStripMenuItem});
             this.添加图片ToolStripMenuItem.Name = "添加图片ToolStripMenuItem";
             this.添加图片ToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
             this.添加图片ToolStripMenuItem.Text = "添加图片";
@@ -463,6 +464,29 @@
             this.更换图片ToolStripMenuItem.Text = "更换单页图片";
             this.更换图片ToolStripMenuItem.Click += new System.EventHandler(this.更换图片ToolStripMenuItem_Click);
             // 
+            // 存档ToolStripMenuItem
+            // 
+            this.存档ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.存档ToolStripMenuItem1,
+            this.读档ToolStripMenuItem});
+            this.存档ToolStripMenuItem.Name = "存档ToolStripMenuItem";
+            this.存档ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.存档ToolStripMenuItem.Text = "存档";
+            // 
+            // 存档ToolStripMenuItem1
+            // 
+            this.存档ToolStripMenuItem1.Name = "存档ToolStripMenuItem1";
+            this.存档ToolStripMenuItem1.Size = new System.Drawing.Size(122, 26);
+            this.存档ToolStripMenuItem1.Text = "存档";
+            this.存档ToolStripMenuItem1.Click += new System.EventHandler(this.存档ToolStripMenuItem1_Click);
+            // 
+            // 读档ToolStripMenuItem
+            // 
+            this.读档ToolStripMenuItem.Name = "读档ToolStripMenuItem";
+            this.读档ToolStripMenuItem.Size = new System.Drawing.Size(122, 26);
+            this.读档ToolStripMenuItem.Text = "读档";
+            this.读档ToolStripMenuItem.Click += new System.EventHandler(this.读档ToolStripMenuItem_Click);
+            // 
             // 导出ToolStripMenuItem
             // 
             this.导出ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -668,28 +692,12 @@
             this.textBox_X.TabIndex = 9;
             this.textBox_X.Visible = false;
             // 
-            // 存档ToolStripMenuItem
+            // undoToolStripMenuItem
             // 
-            this.存档ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.存档ToolStripMenuItem1,
-            this.读档ToolStripMenuItem});
-            this.存档ToolStripMenuItem.Name = "存档ToolStripMenuItem";
-            this.存档ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
-            this.存档ToolStripMenuItem.Text = "存档";
-            // 
-            // 存档ToolStripMenuItem1
-            // 
-            this.存档ToolStripMenuItem1.Name = "存档ToolStripMenuItem1";
-            this.存档ToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
-            this.存档ToolStripMenuItem1.Text = "存档";
-            this.存档ToolStripMenuItem1.Click += new System.EventHandler(this.存档ToolStripMenuItem1_Click);
-            // 
-            // 读档ToolStripMenuItem
-            // 
-            this.读档ToolStripMenuItem.Name = "读档ToolStripMenuItem";
-            this.读档ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.读档ToolStripMenuItem.Text = "读档";
-            this.读档ToolStripMenuItem.Click += new System.EventHandler(this.读档ToolStripMenuItem_Click);
+            this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.undoToolStripMenuItem.Text = "Undo";
+            this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
             // Layout
             // 
@@ -800,5 +808,6 @@
         private System.Windows.Forms.ToolStripMenuItem 存档ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 存档ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 读档ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
     }
 }
