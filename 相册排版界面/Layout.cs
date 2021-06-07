@@ -664,13 +664,22 @@ namespace 相册排版界面
             DirectoryInfo dir = new DirectoryInfo(folderDirPath);
             //获取当前目录JPG文件列表 GetFiles获取指定目录中文件的名称(包括其路径)
             FileInfo[] fileInfo = dir.GetFiles("*.jpg");
-            for(int i = 0; i < listDone.Count; i++)
-            {
-                listDoneBeforeAdd.Add(listDone[i].Replace("\\backup\\", "\\done\\"));
-            }
+            //for(int i = 0; i < listDone.Count; i++)
+            //{
+            //    listDoneBeforeAdd.Add(listDone[i].Replace("\\backup\\", "\\done\\"));
+            //}
+            //for (int i = 0; i < fileInfo.Length; i++)
+            //{
+            //    if (!listDoneBeforeAdd.Contains(fileInfo[i].FullName))
+            //    {
+            //        //listDone.Add(fileInfo[i].FullName);
+            //        File.Delete(fileInfo[i].FullName);
+            //    }
+
+            //}
             for (int i = 0; i < fileInfo.Length; i++)
             {
-                if (!listDoneBeforeAdd.Contains(fileInfo[i].FullName))
+                if (!listDone.Contains(fileInfo[i].FullName))
                 {
                     //listDone.Add(fileInfo[i].FullName);
                     File.Delete(fileInfo[i].FullName);
@@ -678,6 +687,8 @@ namespace 相册排版界面
 
 
             }
+
+
         }
 
 
@@ -4679,6 +4690,23 @@ namespace 相册排版界面
                     // Console.WriteLine(files[i]);
                 }
             }
+            //清空done文件夹中图片
+            DirectoryInfo dir = new DirectoryInfo(srcPath);
+            FileSystemInfo[] fileinfo = dir.GetFileSystemInfos();  //返回目录中所有文件和子目录
+            foreach (FileSystemInfo i in fileinfo)
+            {
+                if (i is DirectoryInfo)            //判断是否文件夹
+                {
+                    DirectoryInfo subdir = new DirectoryInfo(i.FullName);
+                    subdir.Delete(true);          //删除子目录和文件
+                }
+                else
+                {
+                    File.Delete(i.FullName);      //删除指定文件
+                }
+            }
+            //复制 backup 文件夹中的图片 到 done 文件夹
+            CopyDoneDirectory(destPath, srcPath);
             //listDone
             var fileDone = ReadFile(DonePath);
             if (fileDone != "")
@@ -4686,7 +4714,8 @@ namespace 相册排版界面
                 flag = true;
                 listDone.Clear();
                 string[] filesDone;
-                filesDone = fileDone.Trim().Replace("\r", "").Replace("\n", "").Replace("\\done\\", "\\backup\\").Split('?');
+                //filesDone = fileDone.Trim().Replace("\r", "").Replace("\n", "").Replace("\\done\\", "\\backup\\").Split('?');
+                filesDone = fileDone.Trim().Replace("\r", "").Replace("\n", "").Split('?');
                 //filesDone = Regex.Replace(fileDone, @"\s", "").Split('?');
                 for (int i = 0; i < filesDone.Length - 1; i++)
                 {
