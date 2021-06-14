@@ -432,7 +432,8 @@ namespace 相册排版界面
                     DialogResult result = folderBrowserDialog.ShowDialog();
                     if (result == DialogResult.OK)
                     {
-                        存档ToolStripMenuItem1_Click(sender, e);
+                        //存档ToolStripMenuItem1_Click(sender, e); 选择文件夹已改变 不再适用
+                        Save();
                         listCur.Clear();
                         
                         //获取用户选择的文件夹路径
@@ -655,7 +656,8 @@ namespace 相册排版界面
 
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            读档ToolStripMenuItem_Click(sender,e);
+            //读档ToolStripMenuItem_Click(sender,e);改变为读取文件夹 不再适合
+            Undo();
 
             //--------处理done文件夹中之前添加的多余的图片
             listDoneBeforeAdd.Clear();
@@ -4564,13 +4566,15 @@ namespace 相册排版界面
          * 存档 读档
          * 写入txt文件
          */
-        string CurPath = "listCur.txt";
-        string AllPath = "listAll.txt";
-        string DonePath = "listDone.txt";
-        string LeftPath = "listLeft.txt";
-        string IndexPath = "setting_index.txt";
+        static string txtPath = System.Environment.CurrentDirectory + "\\message" ;
+        string CurPath = txtPath + "\\listCur.txt";
+        string AllPath = txtPath + "\\listAll.txt";
+        string DonePath = txtPath + "\\listDone.txt";
+        string LeftPath = txtPath + "\\listLeft.txt";
+        string IndexPath = txtPath + "\\setting_index.txt";
         string srcPath = System.Environment.CurrentDirectory + "\\done";
-        string destPath = System.Environment.CurrentDirectory + "\\backup";
+        //string destPath = System.Environment.CurrentDirectory + "\\backup";
+        string destPath = txtPath + "\\backup";
         bool flag = false;
 
         private void 存档ToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -4581,7 +4585,12 @@ namespace 相册排版界面
                 MessageBox.Show("无可存档数据");
                 return;
             }
-
+            //创建txtPath文件夹
+            if (!Directory.Exists(txtPath))//若文件夹不存在则新建文件夹   
+            {
+                Directory.CreateDirectory(txtPath); //新建文件夹   
+            }
+            
             //清空原文档中的数据
             //listCur.txt
             FileStream stream1 = File.Open(CurPath, FileMode.OpenOrCreate, FileAccess.Write);
@@ -4609,6 +4618,7 @@ namespace 相册排版界面
             stream5.SetLength(0);
             stream5.Close();
                 //清空backup文件夹中图片
+            CopyDoneDirectory(srcPath, destPath);
             DirectoryInfo dir = new DirectoryInfo(destPath);
             FileSystemInfo[] fileinfo = dir.GetFileSystemInfos();  //返回目录中所有文件和子目录
             foreach (FileSystemInfo i in fileinfo)
@@ -4647,12 +4657,292 @@ namespace 相册排版界面
 
             //复制 done 文件夹中的图片 到 backup 文件夹
             CopyDoneDirectory(srcPath, destPath);
-            
+            //导出存档txt文件信息
+            try
+            {
+                //打开选择文件夹对话框
+                FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+                DialogResult result = folderBrowserDialog.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    //获取用户选择的文件夹路径
+                    string folderDirPath = folderBrowserDialog.SelectedPath;
+                    CopyDoneDirectory(System.Environment.CurrentDirectory + "\\message", folderDirPath);
+                    MessageBox.Show("存档成功");
+                    //this.Dispose();
+                    //System.Diagnostics.Process.Start("explorer.exe", folderDirPath);
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    //MessageBox.Show("取消显示图片列表");
+                }
+            }
+            catch (Exception msg)
+            {
+                //报错提示 未将对象引用设置到对象的实例
+                throw msg;
+            }
+
             //----------------------------------
-            MessageBox.Show("存档成功");
+            //MessageBox.Show("存档成功");
         }
 
+        string CurPath_new;
+        string AllPath_new;
+        string DonePath_new;
+        string LeftPath_new;
+        string IndexPath_new;
+        string Backup_new;
         private void 读档ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //读取txt信息的文件夹
+            try
+            {
+                //打开选择文件夹对话框
+                FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+                DialogResult result = folderBrowserDialog.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    //获取用户选择的文件夹路径
+                    string folderDirPath = folderBrowserDialog.SelectedPath;
+                    if (File.Exists(folderDirPath + "\\listCur.txt") == false)
+                    {
+                        MessageBox.Show("您选择的文件夹不合规范，请重新检查");
+                        return;
+                    }
+                    else
+                    {
+                        CurPath_new = folderDirPath + "\\listCur.txt";
+                        AllPath_new = folderDirPath + "\\listAll.txt";
+                        DonePath_new = folderDirPath + "\\listDone.txt";
+                        LeftPath_new = folderDirPath + "\\listLeft.txt";
+                        IndexPath_new = folderDirPath + "\\setting_index.txt";
+                    }
+                    if (!Directory.Exists(folderDirPath + "\\backup"))
+                    {
+                        MessageBox.Show("您选择的文件夹不合规范，请重新检查");
+                        return;
+                    }
+                    else
+                    {
+                        Backup_new = folderDirPath + "\\backup";
+                    }
+
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    //MessageBox.Show("");
+                }
+            }
+            catch (Exception msg)
+            {
+                //报错提示 未将对象引用设置到对象的实例
+                throw msg;
+            }
+            //listCur
+            var fileCur = ReadFile(CurPath_new);
+            if (fileCur != "")
+            {
+                flag = true;
+                listCur.Clear();
+                string[] filesCur;
+                filesCur = fileCur.Trim().Replace("\r", "").Replace("\n", "").Split('?');
+                //filesCur = Regex.Replace(fileCur, @"\s", "").Split('?');
+                for (int i = 0; i < filesCur.Length - 1; i++)
+                {
+                    listCur.Add(filesCur[i]);
+                   // Console.WriteLine(files[i]);
+                }
+
+            }
+            //listAll
+            var fileAll = ReadFile(AllPath_new);
+            if (fileAll != "")
+            {
+                flag = true;
+                listAll.Clear();
+                string[] filesAll;
+                filesAll = fileAll.Trim().Replace("\r", "").Replace("\n", "").Split('?');
+                //filesAll = Regex.Replace(fileAll, @"\s", "").Split('?');
+                for (int i = 0; i < filesAll.Length - 1; i++)
+                {
+                    ImageBean bean = new ImageBean();
+                    int type = setting.getType();
+                    bean.name = filesAll[i];
+                    bean.type = type;
+
+                    listAll.Add(bean);
+                    // Console.WriteLine(files[i]);
+                }
+            }
+            //清空done文件夹中图片
+            DirectoryInfo dir = new DirectoryInfo(srcPath);
+            FileSystemInfo[] fileinfo = dir.GetFileSystemInfos();  //返回目录中所有文件和子目录
+            foreach (FileSystemInfo i in fileinfo)
+            {
+                if (i is DirectoryInfo)            //判断是否文件夹
+                {
+                    DirectoryInfo subdir = new DirectoryInfo(i.FullName);
+                    subdir.Delete(true);          //删除子目录和文件
+                }
+                else
+                {
+                    File.Delete(i.FullName);      //删除指定文件
+                }
+            }
+            //复制 backup 文件夹中的图片 到 done 文件夹
+            CopyDoneDirectory(Backup_new, srcPath);
+            //listDone
+            var fileDone = ReadFile(DonePath_new);
+            if (fileDone != "")
+            {
+                flag = true;
+                listDone.Clear();
+                string[] filesDone;
+                //filesDone = fileDone.Trim().Replace("\r", "").Replace("\n", "").Replace("\\done\\", "\\backup\\").Split('?');
+                filesDone = fileDone.Trim().Replace("\r", "").Replace("\n", "").Split('?');
+                //filesDone = Regex.Replace(fileDone, @"\s", "").Split('?');
+                for (int i = 0; i < filesDone.Length - 1; i++)
+                {
+                    listDone.Add(filesDone[i]);
+                    // Console.WriteLine(files[i]);
+                }
+                if (listDone.Count == 0)
+                {
+                    return;
+                }
+                updateTopShow();
+            }
+            //listLeft
+            var fileLeft = ReadFile(LeftPath_new);
+            if (fileLeft != "")
+            {
+                flag = true;
+                listLeft.Clear();
+                string[] filesLeft;
+                filesLeft = fileLeft.Trim().Replace("\r","").Replace("\n", "").Split('?');
+                //filesLeft = Regex.Replace(fileLeft, @"\s", "").Split('?');
+                for (int i = 0; i < filesLeft.Length - 1; i++)
+                {
+                    listLeft.Add(filesLeft[i]);
+                    //Console.WriteLine("left:" + listLeft[i]);
+                }
+                if (listLeft.Count == 0)
+                {
+                    return;
+                }
+                updateLeftShow();
+
+            }
+            //setting_index.txt
+            var fileIndex = ReadFile(IndexPath_new);
+            if (fileIndex != "")
+            {
+                //flag = true;
+                string[] filesIndex;
+                filesIndex = fileIndex.Trim().Replace("\r", "").Replace("\n", "").Split('?');
+                //filesLeft = Regex.Replace(fileLeft, @"\s", "").Split('?');
+                for (int i = 0; i < filesIndex.Length - 1; i++)
+                {
+                    setting_index = int.Parse(filesIndex[i]);
+                    //Console.WriteLine("index:" + setting_index);
+                }
+
+            }
+
+            if (!flag)
+            {
+                MessageBox.Show("无存档记录，无法进行读档操作");
+            }
+            else
+            {
+                MessageBox.Show("读档完成");
+            }
+        }
+        public void Save()
+        {
+            ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
+            if (up_indexes.Count == 0)
+            {
+                MessageBox.Show("无可存档数据");
+                return;
+            }
+            //创建txtPath文件夹
+            if (!Directory.Exists(txtPath))//若文件夹不存在则新建文件夹   
+            {
+                Directory.CreateDirectory(txtPath); //新建文件夹   
+            }
+
+            //清空原文档中的数据
+            //listCur.txt
+            FileStream stream1 = File.Open(CurPath, FileMode.OpenOrCreate, FileAccess.Write);
+            stream1.Seek(0, SeekOrigin.Begin);
+            stream1.SetLength(0);
+            stream1.Close();
+            //listAll.txt
+            FileStream stream2 = File.Open(AllPath, FileMode.OpenOrCreate, FileAccess.Write);
+            stream2.Seek(0, SeekOrigin.Begin);
+            stream2.SetLength(0);
+            stream2.Close();
+            //listDone.txt
+            FileStream stream3 = File.Open(DonePath, FileMode.OpenOrCreate, FileAccess.Write);
+            stream3.Seek(0, SeekOrigin.Begin);
+            stream3.SetLength(0);
+            stream3.Close();
+            //listLeft.txt
+            FileStream stream4 = File.Open(LeftPath, FileMode.OpenOrCreate, FileAccess.Write);
+            stream4.Seek(0, SeekOrigin.Begin);
+            stream4.SetLength(0);
+            stream4.Close();
+            //setting_index.txt
+            FileStream stream5 = File.Open(IndexPath, FileMode.OpenOrCreate, FileAccess.Write);
+            stream5.Seek(0, SeekOrigin.Begin);
+            stream5.SetLength(0);
+            stream5.Close();
+            //清空backup文件夹中图片
+            CopyDoneDirectory(srcPath, destPath);
+            DirectoryInfo dir = new DirectoryInfo(destPath);
+            FileSystemInfo[] fileinfo = dir.GetFileSystemInfos();  //返回目录中所有文件和子目录
+            foreach (FileSystemInfo i in fileinfo)
+            {
+                if (i is DirectoryInfo)            //判断是否文件夹
+                {
+                    DirectoryInfo subdir = new DirectoryInfo(i.FullName);
+                    subdir.Delete(true);          //删除子目录和文件
+                }
+                else
+                {
+                    File.Delete(i.FullName);      //删除指定文件
+                }
+            }
+
+            //--------------------------------------------------------------
+            //添加新数据
+            for (int i = 0; i < listCur.Count; i++)
+            {
+                WriteFile(listCur[i] + "?", CurPath);
+            }
+            for (int i = 0; i < listAll.Count; i++)
+            {
+                WriteFile(listAll[i].name + "?", AllPath);
+            }
+            for (int i = 0; i < listDone.Count; i++)
+            {
+                WriteFile(listDone[i] + "?", DonePath);
+            }
+            for (int i = 0; i < listLeft.Count; i++)
+            {
+                WriteFile(listLeft[i] + "?", LeftPath);
+            }
+
+            WriteFile(setting.index.ToString() + "?", IndexPath);
+
+            //复制 done 文件夹中的图片 到 backup 文件夹
+            CopyDoneDirectory(srcPath, destPath);
+            
+            MessageBox.Show("存档成功");
+        }
+        public void Undo()
         {
             //listCur
             var fileCur = ReadFile(CurPath);
@@ -4666,7 +4956,7 @@ namespace 相册排版界面
                 for (int i = 0; i < filesCur.Length - 1; i++)
                 {
                     listCur.Add(filesCur[i]);
-                   // Console.WriteLine(files[i]);
+                    // Console.WriteLine(files[i]);
                 }
 
             }
@@ -4735,7 +5025,7 @@ namespace 相册排版界面
                 flag = true;
                 listLeft.Clear();
                 string[] filesLeft;
-                filesLeft = fileLeft.Trim().Replace("\r","").Replace("\n", "").Split('?');
+                filesLeft = fileLeft.Trim().Replace("\r", "").Replace("\n", "").Split('?');
                 //filesLeft = Regex.Replace(fileLeft, @"\s", "").Split('?');
                 for (int i = 0; i < filesLeft.Length - 1; i++)
                 {
@@ -4767,11 +5057,11 @@ namespace 相册排版界面
 
             if (!flag)
             {
-                MessageBox.Show("无存档记录，无法进行读档操作");
+                MessageBox.Show("无存档记录，无法进行Undo操作");
             }
             else
             {
-                MessageBox.Show("读档完成");
+                MessageBox.Show("Undo完成");
             }
         }
         //复制done文件夹 方便读取listdone时存在图片文件
