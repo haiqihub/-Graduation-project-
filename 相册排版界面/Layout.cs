@@ -496,36 +496,7 @@ namespace 相册排版界面
                     throw msg;
                 }
 
-                //原
-                //try
-                //{
-                //    //打开选择文件夹对话框
-                //    FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-                //    DialogResult result = folderBrowserDialog.ShowDialog();
-                //    if (result == DialogResult.OK)
-                //    {
-                //        listCur.Clear();
-                //        //获取用户选择的文件夹路径
-                //        string folderDirPath = folderBrowserDialog.SelectedPath;
-
-                //        //获取目录与子目录
-                //        DirectoryInfo dir = new DirectoryInfo(folderDirPath);
-                //        //获取当前目录JPG文件列表 GetFiles获取指定目录中文件的名称(包括其路径)
-                //        FileInfo[] fileInfo = dir.GetFiles("*.jpg");
-                //        for (int i = 0; i < fileInfo.Length; i++)
-                //        {
-                //            listCur.Add(fileInfo[i].FullName);
-                //            //listAll.Add(fileInfo[i].FullName);
-                //        }
-
-                //        StartSetting(3);
-                //    }
-                //}
-                //catch (Exception msg)
-                //{
-                //    //报错提示 未将对象引用设置到对象的实例
-                //    throw msg;
-                //}
+                
             }
             
         }
@@ -618,7 +589,8 @@ namespace 相册排版界面
                 //----------------------------------------
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    存档ToolStripMenuItem1_Click(sender, e);
+                    //存档ToolStripMenuItem1_Click(sender, e); 不再适用
+                    Save();
                     listCur.Clear();
                     
                     for (int i = 0; i < dlg.FileNames.Length; i++)
@@ -1152,7 +1124,15 @@ namespace 相册排版界面
                 bean.name = listCur[i];
                 bean.type = type;
                 //listAll.Add(bean);
-                listAll.Insert(insert_cur, bean);
+                if (insert_cur > listAll.Count)
+                {
+                    listAll.Add(bean);
+                }
+                else
+                {
+                    listAll.Insert(insert_cur, bean);
+                }
+                
                 
             }
             listCur.Clear();
