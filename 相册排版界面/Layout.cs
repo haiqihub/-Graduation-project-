@@ -321,12 +321,25 @@ namespace 相册排版界面
                     //获取目录与子目录
                     DirectoryInfo dir = new DirectoryInfo(folderDirPath);
                     //获取当前目录JPG文件列表 GetFiles获取指定目录中文件的名称(包括其路径)
+
+                    //1 系统默认方式 按照ASCII码排序
                     FileInfo[] fileInfo = dir.GetFiles("*.jpg");
                     for (int i = 0; i < fileInfo.Length; i++)
                     {
                         listCur.Add(fileInfo[i].FullName);
                         //listAll.Add(fileInfo[i].FullName);
                     }
+                    //2 与1 效果相同 
+                    //foreach (FileInfo fi in dir.GetFiles("*.jpg").OrderBy(x => x.FullName.ToString()))
+                    //{
+                    //    listCur.Add(fi.FullName);
+                    //}
+                    //3 用在这里 仍旧效果相同
+                    //foreach (FileInfo fi in dir.GetFiles("*.jpg").OrderBy(x => x.FullName.Replace(x.Extension, "")))
+                    //{
+                    //    listCur.Add(fi.FullName);
+                    //}
+
                 }
                 else if (result == DialogResult.Cancel)
                 {
