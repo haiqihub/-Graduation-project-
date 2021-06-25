@@ -34,7 +34,8 @@ namespace 相册排版界面
 
         //private string imgpath1, imgpath2, imgpath3, imgpath4,imgpath5,imgpath6,imgpath7, imgpath8;
         private List<string>imgpath = new List<string>();
-
+        private List<string> imgs = new List<string>();
+        
         private string item_n = "";
 
         //private Size size2;
@@ -58,15 +59,23 @@ namespace 相册排版界面
             InitializeComponent();
             index = num;
             cur_area = area;
+            //-------------------------
+            //if (listChange.All(imgpath.Contains) && listChange.Count == imgpath.Count)
+            //{
+            //    //两个相等即没切页面
+            //}
+            //else
+            //{
+                
+            //}
 
-            imgpath.Clear();
-            for(int i = 0; i < listChange.Count; i++)
+            for (int i = 0; i < listChange.Count; i++)
             {
                 if (index == 1)
                 {
                     //imgpath1 = listChange[i];
                     imgpath.Add(listChange[i]);
-                    
+
                 }
                 if (index == 2)
                 {
@@ -137,10 +146,10 @@ namespace 相册排版界面
                         imgpath.Add(listChange[i + 7]);
                     }
                 }
-                
-                
+
+
             }
-            
+
             //picb 1
             size = new Size(pictureBox1.Width, pictureBox1.Height);
             //可调整坐标和矩形宽高达到鼠标位置的选择
@@ -524,7 +533,7 @@ namespace 相册排版界面
 
             //--------------------------------------
             String item_o = imgpath[cur_area - 1];//原图
-            if (item_n == "")
+            if (item_n == "")//如果没点击更换图片
             {
                 //更换后的图
                 item_n = item_o;
@@ -538,40 +547,58 @@ namespace 相册排版界面
             //String itemurl = folderDirPath + "\\" + fileNameWithoutExtension + vv2;
             //this.pictureBox1.Image.Save(itemurl);
 
+            //中间 夹 的 imgs
+            imgs.Clear();
+            for (int i = 0; i < imgpath.Count; i++)
+            {
+                imgs.Add(imgpath[i]);
+            }
+
             //更改后的图片list -----------
             list.Clear();
             if (index == 1)
             {
-                list.Add(imgpath[0]);
+                list.Add(imgs[0]);
                 list[cur_area - 1] = item_n;
+                //
+                imgs[cur_area - 1] = item_n;
+                //imgpath[cur_area - 1] = item_n;
             }
             
             if (index == 2)
             {
-                list.Add(imgpath[0]);
-                list.Add(imgpath[1]);
+                list.Add(imgs[0]);
+                list.Add(imgs[1]);
                 list[cur_area - 1] = item_n;
-
+                //
+                imgs[cur_area - 1] = item_n;
+                //imgpath[cur_area - 1] = item_n;
             }
             if (index == 4)
             {
-                list.Add(imgpath[0]);
-                list.Add(imgpath[1]);
-                list.Add(imgpath[2]);
-                list.Add(imgpath[3]);
+                list.Add(imgs[0]);
+                list.Add(imgs[1]);
+                list.Add(imgs[2]);
+                list.Add(imgs[3]);
                 list[cur_area - 1] = item_n;
+                //
+                imgs[cur_area - 1] = item_n;
+                //imgpath[cur_area - 1] = item_n;
             }
             if (index == 8)
             {
-                list.Add(imgpath[0]);
-                list.Add(imgpath[1]);
-                list.Add(imgpath[2]);
-                list.Add(imgpath[3]);
-                list.Add(imgpath[4]);
-                list.Add(imgpath[5]);
-                list.Add(imgpath[6]);
-                list.Add(imgpath[7]);
+                list.Add(imgs[0]);
+                list.Add(imgs[1]);
+                list.Add(imgs[2]);
+                list.Add(imgs[3]);
+                list.Add(imgs[4]);
+                list.Add(imgs[5]);
+                list.Add(imgs[6]);
+                list.Add(imgs[7]);
                 list[cur_area - 1] = item_n;
+                //
+                imgs[cur_area - 1] = item_n;
+                //imgpath[cur_area - 1] = item_n;
             }
            
 

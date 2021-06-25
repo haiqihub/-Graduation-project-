@@ -23,8 +23,13 @@ namespace 相册排版界面
         private int cur_start = 0;
         private int insert_cur = 0;
         private int setting_index = 0;
-        //private List<string> listAll = new List<string>();
-
+        //开发环境下主显示器参数
+        private int myScreenWidth = 1536;
+        private int myScreenHeight = 864;
+        //用户使用环境下主显示器参数
+        private int userScreenWidth ;
+        private int userScreenHeight ;
+        //---------------
         private List<ImageBean> listAll = new List<ImageBean>();
         private List<ImageBean> listLeftAll = new List<ImageBean>();
         private List<string> listCur = new List<string>();
@@ -3593,10 +3598,27 @@ namespace 相册排版界面
                 point1.Y = e.Y;
             }
         }
+
+
         //鼠标 获取点击位置 判断area的值  调整该张图片
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            
+
+            //if (e.Button == MouseButtons.Right)
+            //{
+            //    int iActulaWidth = Screen.PrimaryScreen.Bounds.Width;
+
+            //    int iActulaHeight = Screen.PrimaryScreen.Bounds.Height;
+            //    MessageBox.Show("宽：" + iActulaWidth + " 长：" + iActulaHeight);
+            //}
+            //else
+            //{
+            //    p.X = MousePosition.X;
+            //    p.Y = MousePosition.Y;
+            //    MessageBox.Show("鼠标坐标" + p.ToString());
+            //}
+
+            //-------------
             m_bDown = true;
             point1.X = e.X;
             point1.Y = e.Y;
@@ -3816,7 +3838,6 @@ namespace 相册排版界面
             }
             
 
-
             //鼠标右键点击   测试
             //if (e.Button == MouseButtons.Right)
             //{
@@ -3831,7 +3852,226 @@ namespace 相册排版界面
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             m_bDown = false;
-           
+            point3.X = e.X;
+            point3.Y = e.Y;
+            //-------------
+            //int x = point3.X;
+            //int y = point3.Y;
+
+            //if (setting_index == 0)
+            //{
+            //    //没读档
+            //    if (setting.index == 1 || setting.index == 2)
+            //    {
+            //        index = 1;
+            //        if (listCur.Count > 0)
+            //        {
+            //            cur_area = 1;
+            //        }
+            //    }
+            //    if (setting.index == 3 || setting.index == 4)
+            //    {
+            //        index = 2;
+            //        if (y > 257)
+            //        {
+            //            cur_area = 2;
+            //        }
+            //        else
+            //        {
+            //            cur_area = 1;
+            //        }
+            //    }
+            //    if (setting.index == 5 || setting.index == 6)
+            //    {
+            //        index = 4;
+            //        if (y > 257)
+            //        {
+            //            if (x < 349)
+            //            {
+            //                //cur_area = 1;
+            //                cur_area = 3;
+            //            }
+            //            else
+            //            {
+            //                cur_area = 4;
+
+            //            }
+            //        }
+            //        else
+            //        {
+            //            if (x < 349)
+            //            {
+            //                //cur_area = 2;
+            //                cur_area = 1;
+            //            }
+            //            else
+            //            {
+            //                //cur_area = 3;
+            //                cur_area = 2;
+            //            }
+            //        }
+            //    }
+            //    if (setting.index == 7 || setting.index == 8)
+            //    {
+            //        index = 8;
+            //        if (x < 349)
+            //        {//左
+            //            if (y < 128)
+            //            {
+            //                //cur_area = 4;
+            //                cur_area = 1;
+            //            }
+            //            if (y > 129 && y < 257)
+            //            {
+            //                cur_area = 3;
+            //            }
+            //            if (y > 257 && y < 385)
+            //            {
+            //                //cur_area = 2;
+            //                cur_area = 5;
+            //            }
+            //            if (y > 386)
+            //            {
+            //                //cur_area = 1;
+            //                cur_area = 7;
+            //            }
+            //        }
+            //        else
+            //        {//右
+            //            if (y < 128)
+            //            {
+            //                //cur_area = 5;
+            //                cur_area = 2;
+            //            }
+            //            if (y > 129 && y < 257)
+            //            {
+            //                //cur_area = 6;
+            //                cur_area = 4;
+            //            }
+            //            if (y > 257 && y < 385)
+            //            {
+            //                //cur_area = 7;
+            //                cur_area = 6;
+            //            }
+            //            if (y > 386)
+            //            {
+            //                cur_area = 8;
+            //            }
+
+            //        }
+            //    }
+
+
+            //}
+            //else
+            //{
+            //    //读档
+
+            //    if (setting_index == 1 || setting_index == 2)
+            //    {
+            //        index = 1;
+            //        if (listCur.Count > 0)
+            //        {
+            //            cur_area = 1;
+            //        }
+            //    }
+            //    if (setting_index == 3 || setting_index == 4)
+            //    {
+            //        index = 2;
+            //        if (y > 257)
+            //        {
+            //            cur_area = 2;
+            //        }
+            //        else
+            //        {
+            //            cur_area = 1;
+            //        }
+            //    }
+            //    if (setting_index == 5 || setting_index == 6)
+            //    {
+            //        index = 4;
+            //        if (y > 257)
+            //        {
+            //            if (x < 349)
+            //            {
+            //                //cur_area = 1;
+            //                cur_area = 3;
+            //            }
+            //            else
+            //            {
+            //                cur_area = 4;
+
+            //            }
+            //        }
+            //        else
+            //        {
+            //            if (x < 349)
+            //            {
+            //                //cur_area = 2;
+            //                cur_area = 1;
+            //            }
+            //            else
+            //            {
+            //                //cur_area = 3;
+            //                cur_area = 2;
+            //            }
+            //        }
+            //    }
+            //    if (setting_index == 7 || setting_index == 8)
+            //    {
+            //        index = 8;
+            //        if (x < 349)
+            //        {//左
+            //            if (y < 128)
+            //            {
+            //                //cur_area = 4;
+            //                cur_area = 1;
+            //            }
+            //            if (y > 129 && y < 257)
+            //            {
+            //                cur_area = 3;
+            //            }
+            //            if (y > 257 && y < 385)
+            //            {
+            //                //cur_area = 2;
+            //                cur_area = 5;
+            //            }
+            //            if (y > 386)
+            //            {
+            //                //cur_area = 1;
+            //                cur_area = 7;
+            //            }
+            //        }
+            //        else
+            //        {//右
+            //            if (y < 128)
+            //            {
+            //                //cur_area = 5;
+            //                cur_area = 2;
+            //            }
+            //            if (y > 129 && y < 257)
+            //            {
+            //                //cur_area = 6;
+            //                cur_area = 4;
+            //            }
+            //            if (y > 257 && y < 385)
+            //            {
+            //                //cur_area = 7;
+            //                cur_area = 6;
+            //            }
+            //            if (y > 386)
+            //            {
+            //                cur_area = 8;
+            //            }
+
+            //        }
+            //    }
+
+
+            //}
+
+            drag_area = cur_area;
+            //MessageBox.Show(point3.ToString(), drag_area.ToString());
         }
          /*
          * layout 窗体 中的鼠标移动
@@ -3846,21 +4086,24 @@ namespace 相册排版界面
         {
             if (l_bDown == true)
             {
-                point4.X -= e.X - point3.X;
-                point4.Y -= e.Y - point3.Y;
+                //point4.X -= e.X - point3.X;
+                //point4.Y -= e.Y - point3.Y;
 
-                point3.X = e.X;
-                point3.Y = e.Y;
+                //point3.X = e.X;
+                //point3.Y = e.Y;
             }
         }
 
         private void Layout_MouseDown(object sender, MouseEventArgs e)
         {
             l_bDown = true;
-            point3.X = e.X;
-            point3.Y = e.Y;
-            //鼠标点击测试坐标
-            //MessageBox.Show(point3.ToString(), cur_area.ToString());
+            //if (e.Button == MouseButtons.Left)
+            //{
+            //    p.X = MousePosition.X;
+            //    p.Y = MousePosition.Y;
+            //    MessageBox.Show("鼠标坐标" + p.ToString());
+            //}
+
         }
 
        
@@ -4027,6 +4270,9 @@ namespace 相册排版界面
             //-------------
             int x = MousePosition.X;
             int y = MousePosition.Y;
+            userScreenHeight = Screen.PrimaryScreen.Bounds.Height;
+            userScreenWidth = Screen.PrimaryScreen.Bounds.Width;
+            
             if (setting_index == 0)
             {
                 //没读档
@@ -4041,7 +4287,7 @@ namespace 相册排版界面
                 if (setting.index == 3 || setting.index == 4)
                 {
                     index = 2;
-                    if (y > 499)
+                    if (y > 499* userScreenHeight/myScreenHeight)
                     {
                         drag_area = 2;
                     }
@@ -4053,11 +4299,11 @@ namespace 相册排版界面
                 if (setting.index == 5 || setting.index == 6)
                 {
                     index = 4;
-                    if (y > 499)
+                    if (y > 499*userScreenHeight / myScreenHeight)
                     {
-                        if (x < 854)
+                        if (x < 854 * userScreenWidth / myScreenWidth)
                         {
-                            //drag_area = 1;
+                            ;
                             drag_area = 3;
                         }
                         else
@@ -4068,14 +4314,14 @@ namespace 相册排版界面
                     }
                     else
                     {
-                        if (x < 854)
+                        if (x < 854 * userScreenWidth / myScreenWidth)
                         {
-                            //drag_area = 2;
+                            
                             drag_area = 1;
                         }
                         else
                         {
-                            //drag_area = 3;
+                            
                             drag_area = 2;
                         }
                     }
@@ -4083,46 +4329,46 @@ namespace 相册排版界面
                 if (setting.index == 7 || setting.index == 8)
                 {
                     index = 8;
-                    if (x < 854)
+                    if (x < 854 * userScreenWidth / myScreenWidth)
                     {//左
-                        if (y < 370)
+                        if (y < 370 * userScreenHeight / myScreenHeight)
                         {
-                            //drag_area = 4;
+                            
                             drag_area = 1;
                         }
-                        if (y > 370 && y < 498)
+                        if (y > 370 * userScreenHeight / myScreenHeight && y < 498 * userScreenHeight / myScreenHeight)
                         {
                             drag_area = 3;
                         }
-                        if (y > 499 && y < 627)
+                        if (y > 499 * userScreenHeight / myScreenHeight && y < 627 * userScreenHeight / myScreenHeight)
                         {
-                            //drag_area = 2;
+                           
                             drag_area = 5;
                         }
-                        if (y > 627)
+                        if (y > 627 * userScreenHeight / myScreenHeight)
                         {
-                            //drag_area = 1;
+                            
                             drag_area = 7;
                         }
                     }
                     else
                     {//右
-                        if (y < 370)
+                        if (y < 370 * userScreenHeight / myScreenHeight)
                         {
-                            //drag_area = 5;
+                            
                             drag_area = 2;
                         }
-                        if (y > 370 && y < 498)
+                        if (y > 370 * userScreenHeight / myScreenHeight && y < 498 * userScreenHeight / myScreenHeight)
                         {
-                            //drag_area = 6;
+                            
                             drag_area = 4;
                         }
-                        if (y > 499 && y < 627)
+                        if (y > 499 * userScreenHeight / myScreenHeight && y < 627 * userScreenHeight / myScreenHeight)
                         {
-                            //drag_area = 7;
+                           
                             drag_area = 6;
                         }
-                        if (y > 627)
+                        if (y > 627 * userScreenHeight / myScreenHeight)
                         {
                             drag_area = 8;
                         }
@@ -4145,7 +4391,7 @@ namespace 相册排版界面
                 if (setting_index == 3 || setting_index == 4)
                 {
                     index = 2;
-                    if (y > 499)
+                    if (y > 499 * userScreenHeight / myScreenHeight)
                     {
                         drag_area = 2;
                     }
@@ -4157,11 +4403,11 @@ namespace 相册排版界面
                 if (setting_index == 5 || setting_index == 6)
                 {
                     index = 4;
-                    if (y > 499)
+                    if (y > 499 * userScreenHeight / myScreenHeight)
                     {
-                        if (x < 854)
+                        if (x < 854 * userScreenWidth / myScreenWidth)
                         {
-                            //drag_area = 1;
+                           
                             drag_area = 3;
                         }
                         else
@@ -4172,14 +4418,14 @@ namespace 相册排版界面
                     }
                     else
                     {
-                        if (x < 854)
+                        if (x < 854 * userScreenWidth / myScreenWidth)
                         {
-                            //drag_area = 2;
+                            
                             drag_area = 1;
                         }
                         else
                         {
-                            //drag_area = 3;
+                            
                             drag_area = 2;
                         }
                     }
@@ -4187,46 +4433,46 @@ namespace 相册排版界面
                 if (setting_index == 7 || setting_index == 8)
                 {
                     index = 8;
-                    if (x < 854)
+                    if (x < 854 * userScreenWidth / myScreenWidth)
                     {//左
-                        if (y < 370)
+                        if (y < 370 * userScreenHeight / myScreenHeight)
                         {
-                            //drag_area = 4;
+                            
                             drag_area = 1;
                         }
-                        if (y > 370 && y < 498)
+                        if (y > 370 * userScreenHeight / myScreenHeight && y < 498 * userScreenHeight / myScreenHeight)
                         {
                             drag_area = 3;
                         }
-                        if (y > 499 && y < 627)
+                        if (y > 499 * userScreenHeight / myScreenHeight && y < 627 * userScreenHeight / myScreenHeight)
                         {
-                            //drag_area = 2;
+                           
                             drag_area = 5;
                         }
-                        if (y > 627)
+                        if (y > 627 * userScreenHeight / myScreenHeight)
                         {
-                            //drag_area = 1;
+                            
                             drag_area = 7;
                         }
                     }
                     else
                     {//右
-                        if (y < 370)
+                        if (y < 370 * userScreenHeight / myScreenHeight)
                         {
-                            //drag_area = 5;
+                            
                             drag_area = 2;
                         }
-                        if (y > 370 && y < 498)
+                        if (y > 370 * userScreenHeight / myScreenHeight && y < 498 * userScreenHeight / myScreenHeight)
                         {
-                            //drag_area = 6;
+                            
                             drag_area = 4;
                         }
-                        if (y > 499 && y < 627)
+                        if (y > 499 * userScreenHeight / myScreenHeight && y < 627 * userScreenHeight / myScreenHeight)
                         {
-                            //drag_area = 7;
+                            
                             drag_area = 6;
                         }
-                        if (y > 627)
+                        if (y > 627 * userScreenHeight / myScreenHeight)
                         {
                             drag_area = 8;
                         }
@@ -4236,7 +4482,7 @@ namespace 相册排版界面
 
 
             }
-            
+           
 
             //-------------
             ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
@@ -4258,10 +4504,10 @@ namespace 相册排版界面
                 m_bDown = false;
 
                 //----------------------测试拖拉后的鼠标坐标
-               
+
                 //p.X = MousePosition.X;
                 //p.Y = MousePosition.Y;
-               // MessageBox.Show(p.ToString(), drag_area.ToString());
+                //MessageBox.Show(p.ToString(), drag_area.ToString());
                 //-----------------
 
                 image = GetImageFromServer(path_url);//左侧图片
