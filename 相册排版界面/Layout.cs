@@ -4303,7 +4303,6 @@ namespace 相册排版界面
                     {
                         if (x < 854 * userScreenWidth / myScreenWidth)
                         {
-                            ;
                             drag_area = 3;
                         }
                         else
@@ -4593,73 +4592,11 @@ namespace 相册排版界面
                 }
 
                 //---
-                imgpath.Clear();
+                imgpath.Clear(); //改 
                 for (int j = 0; j < listChange.Count; j++)
                 {
+                    imgpath.Add(listChange[j]);
                     
-                    if (index == 1)
-                    {
-                        imgpath.Add(listChange[j]);
-                    }
-                    if (index == 2)
-                    {
-                        imgpath.Add(listChange[j]);
-                        if (j + 1 < listChange.Count)
-                        {
-                            // imgpath2 = listChange[j + 1];
-                            imgpath.Add(listChange[j + 1]);
-                        }
-                    }
-                    if (index == 4)
-                    {
-                        imgpath.Add(listChange[j]);
-                        if (j + 1 < listChange.Count)
-                        {
-                            imgpath.Add(listChange[j + 1]);
-                        }
-                        if (j + 2 < listChange.Count)
-                        {
-                            imgpath.Add(listChange[j + 2]);
-                        }
-                        if (j + 3 < listChange.Count)
-                        {
-                            imgpath.Add(listChange[j + 3]);
-                        }
-                    }
-                    if (index == 8)
-                    {
-                        imgpath.Add(listChange[j]);
-                        if (j + 1 < listChange.Count)
-                        {
-                            imgpath.Add(listChange[j + 1]);
-                        }
-                        if (j + 2 < listChange.Count)
-                        {
-                            imgpath.Add(listChange[j + 2]);
-                        }
-                        if (j + 3 < listChange.Count)
-                        {
-                            imgpath.Add(listChange[j + 3]);
-                        }
-                        if (j + 4 < listChange.Count)
-                        {
-                            imgpath.Add(listChange[j + 4]);
-                        }
-                        if (j + 5 < listChange.Count)
-                        {
-                            imgpath.Add(listChange[j + 5]);
-                        }
-                        if (j + 6 < listChange.Count)
-                        {
-                            imgpath.Add(listChange[j + 6]);
-                        }
-                        if (j + 7 < listChange.Count)
-                        {
-                            imgpath.Add(listChange[j + 7]);
-                        }
-                    }
-
-
                 }
 
                 listDrag.Clear();
@@ -4678,44 +4615,72 @@ namespace 相册排版界面
 
                 if (index == 2)
                 {
-                    listDrag.Add(imgpath[0]);
-                    listDrag.Add(imgpath[1]);
-                    listDrag[drag_area - 1] = path_url;
-                    //解决拖拽替换后 再右键替换 picturebox框中是原来图片的问题，
-                    //同时要将替换后的图片在listCur和listAll中存成原来图片的名字。
-                    //!!!
-                    listCur[m + drag_area - 1] = path_url;
-                    listAll[m + drag_area - 1].name = path_url;
+                    //改 
+                    for (int j = 0; j < imgpath.Count; j++)
+                    {
+                        listDrag.Add(imgpath[j]);
+                    }
+
+                    if (drag_area > imgpath.Count)
+                    {
+                        MessageBox.Show("此处没有图片，不能进行拖拽操作");
+                        return;
+                    }
+                    else
+                    {
+                        listDrag[drag_area - 1] = path_url;
+                        //解决拖拽替换后 再右键替换 picturebox框中是原来图片的问题
+                        //!!!
+                        listCur[m + drag_area - 1] = path_url;
+                        listAll[m + drag_area - 1].name = path_url;
+                    }
 
                 }
                 if (index == 4)
                 {
-                    listDrag.Add(imgpath[0]);
-                    listDrag.Add(imgpath[1]);
-                    listDrag.Add(imgpath[2]);
-                    listDrag.Add(imgpath[3]);
-                    listDrag[drag_area - 1] = path_url;
-                    //解决拖拽替换后 再右键替换 picturebox框中是原来图片的问题
-                    //!!!
-                    listCur[m + drag_area - 1] = path_url;
-                    listAll[m + drag_area - 1].name = path_url;
+                    //改 
+                    for(int j = 0; j < imgpath.Count; j++)
+                    {
+                        listDrag.Add(imgpath[j]);   
+                    }
+
+                    if (drag_area > imgpath.Count)
+                    {
+                        MessageBox.Show("此处没有图片，不能进行拖拽操作");
+                        return;
+                    }
+                    else
+                    {
+                        listDrag[drag_area - 1] = path_url;
+                        //解决拖拽替换后 再右键替换 picturebox框中是原来图片的问题
+                        //!!!
+                        listCur[m + drag_area - 1] = path_url;
+                        listAll[m + drag_area - 1].name = path_url;
+                    }
+                    
 
                 }
                 if (index == 8)
                 {
-                    listDrag.Add(imgpath[0]);
-                    listDrag.Add(imgpath[1]);
-                    listDrag.Add(imgpath[2]);
-                    listDrag.Add(imgpath[3]);
-                    listDrag.Add(imgpath[4]);
-                    listDrag.Add(imgpath[5]);
-                    listDrag.Add(imgpath[6]);
-                    listDrag.Add(imgpath[7]);
-                    listDrag[drag_area - 1] = path_url;
-                    //解决拖拽替换后 再右键替换 picturebox框中是原来图片的问题
-                    //!!!
-                    listCur[m + drag_area - 1] = path_url;
-                    listAll[m + drag_area - 1].name = path_url;
+                    //改 
+                    for (int j = 0; j < imgpath.Count; j++)
+                    {
+                        listDrag.Add(imgpath[j]);
+                    }
+
+                    if (drag_area > imgpath.Count)
+                    {
+                        MessageBox.Show("此处没有图片，不能进行拖拽操作");
+                        return;
+                    }
+                    else
+                    {
+                        listDrag[drag_area - 1] = path_url;
+                        //解决拖拽替换后 再右键替换 picturebox框中是原来图片的问题
+                        //!!!
+                        listCur[m + drag_area - 1] = path_url;
+                        listAll[m + drag_area - 1].name = path_url;
+                    }
 
                 }
 

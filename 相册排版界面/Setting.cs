@@ -1196,13 +1196,13 @@ namespace 相册排版界面
                 }
                 if (i + 2 < list.Count)
                 {
-                    img3 = Image.FromFile(list[i + 2]);
-                    img3.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                    img4 = Image.FromFile(list[i + 2]);
+                    img4.RotateFlip(RotateFlipType.Rotate270FlipNone);
                 }
                 if (i + 3 < list.Count)
                 {
-                    img4 = Image.FromFile(list[i + 3]);
-                    img4.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                    img3 = Image.FromFile(list[i + 3]);
+                    img3.RotateFlip(RotateFlipType.Rotate270FlipNone);
                 }
 
                 // 将画布涂为白色(底部颜色可自行设置)
