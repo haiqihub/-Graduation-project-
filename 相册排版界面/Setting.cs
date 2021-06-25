@@ -489,7 +489,7 @@ namespace 相册排版界面
 
             foreach (var item in list)
             {
-                Thread.Sleep(1000);
+                
                 img1 = Image.FromFile(item);
 
                 img1.RotateFlip(RotateFlipType.Rotate270FlipNone);
@@ -1877,23 +1877,23 @@ namespace 相册排版界面
                 }
                 if (i + 4 < list.Count)
                 {
-                    img5 = Image.FromFile(list[i + 4]);
-                    img5.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                    img8 = Image.FromFile(list[i + 4]);
+                    img8.RotateFlip(RotateFlipType.Rotate270FlipNone);
                 }
                 if (i + 5 < list.Count)
                 {
-                    img6 = Image.FromFile(list[i + 5]);
-                    img6.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                    img7 = Image.FromFile(list[i + 5]);
+                    img7.RotateFlip(RotateFlipType.Rotate270FlipNone);
                 }
                 if (i + 6 < list.Count)
                 {
-                    img7 = Image.FromFile(list[i + 6]);
-                    img7.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                    img6 = Image.FromFile(list[i + 6]);
+                    img6.RotateFlip(RotateFlipType.Rotate270FlipNone);
                 }
                 if (i + 7 < list.Count)
                 {
-                    img8 = Image.FromFile(list[i + 7]);
-                    img8.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                    img5 = Image.FromFile(list[i + 7]);
+                    img5.RotateFlip(RotateFlipType.Rotate270FlipNone);
                 }
 
                 // 将画布涂为白色(底部颜色可自行设置)
