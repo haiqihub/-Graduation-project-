@@ -43,6 +43,7 @@
             this.添加图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.从文件夹ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.从图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.插入ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.照片夹打开ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.照片夹打开文件夹ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,7 +100,7 @@
             this.listView2 = new System.Windows.Forms.ListView();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.textBox_X = new System.Windows.Forms.TextBox();
-            this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.拖拽UndoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -200,7 +201,8 @@
             this.添加图片ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.从文件夹ToolStripMenuItem,
             this.从图片ToolStripMenuItem,
-            this.undoToolStripMenuItem});
+            this.undoToolStripMenuItem,
+            this.拖拽UndoToolStripMenuItem});
             this.添加图片ToolStripMenuItem.Name = "添加图片ToolStripMenuItem";
             this.添加图片ToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
             this.添加图片ToolStripMenuItem.Text = "添加图片";
@@ -218,6 +220,13 @@
             this.从图片ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.从图片ToolStripMenuItem.Text = "图片";
             this.从图片ToolStripMenuItem.Click += new System.EventHandler(this.从图片ToolStripMenuItem_Click);
+            // 
+            // undoToolStripMenuItem
+            // 
+            this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.undoToolStripMenuItem.Text = "添加Undo";
+            this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
             // 插入ToolStripMenuItem
             // 
@@ -692,12 +701,12 @@
             this.textBox_X.TabIndex = 9;
             this.textBox_X.Visible = false;
             // 
-            // undoToolStripMenuItem
+            // 拖拽UndoToolStripMenuItem
             // 
-            this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.undoToolStripMenuItem.Text = "Undo";
-            this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
+            this.拖拽UndoToolStripMenuItem.Name = "拖拽UndoToolStripMenuItem";
+            this.拖拽UndoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.拖拽UndoToolStripMenuItem.Text = "拖拽Undo";
+            this.拖拽UndoToolStripMenuItem.Click += new System.EventHandler(this.拖拽UndoToolStripMenuItem_Click);
             // 
             // Layout
             // 
@@ -809,5 +818,6 @@
         private System.Windows.Forms.ToolStripMenuItem 存档ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 读档ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 拖拽UndoToolStripMenuItem;
     }
 }

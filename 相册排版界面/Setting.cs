@@ -1545,7 +1545,8 @@ namespace 相册排版界面
                     float x_xs2 = width_xs2 / img2.Width;
                     float y_xs2 = height_xs2 / img2.Height;
 
-                    //top_2 = top_1 + v_middle * CC.A4GBILV;
+                    
+                    top_1 = up * CC.A4GBILV;
 
                     if (x_xs2 < y_xs2)
                     {
@@ -1603,8 +1604,8 @@ namespace 相册排版界面
                     float x_xs4 = width_xs / img4.Width;
                     float y_xs4 = height_xs / img4.Height;
 
-                    //top_4 = top_3 + v_middle * CC.A4GBILV;
-
+                    
+                    top_3 = top_1 + height_xs + v_middle * CC.A4GBILV;
                     if (x_xs4 < y_xs4)
                     {
                         xs4 = x_xs4;
@@ -1661,7 +1662,7 @@ namespace 相册排版界面
                     float x_xs6 = width_xs / img6.Width;
                     float y_xs6 = height_xs / img6.Height;
 
-                    //top_6 = top_5 + v_middle * CC.A4GBILV;
+                    top_5 = top_3 + height_xs + v_middle * CC.A4GBILV;
 
                     if (x_xs6 < y_xs6)
                     {
@@ -1681,7 +1682,7 @@ namespace 相册排版界面
                                 img6.Width * xs6,
                                 height_xs);
                     }
-                    top_7 = top_5 + height_xs + v_middle * CC.A4GBILV;
+                    
                 }
                 //7
                 if (img7 != null)
@@ -1691,7 +1692,7 @@ namespace 相册排版界面
                     float x_xs7 = width_xs / img7.Width;
                     float y_xs7 = height_xs / img7.Height;
 
-                    //top_7 = top_6 + v_middle * CC.A4GBILV;
+                    top_7 = top_5 + height_xs + v_middle * CC.A4GBILV;
 
                     if (x_xs7 < y_xs7)
                     {
@@ -1711,7 +1712,7 @@ namespace 相册排版界面
                                 img7.Width * xs7,
                                 height_xs);
                     }
-                    //top_7 = top_7 + height_xs;
+                    
                 }
                 //8
                 if (img8 != null)
@@ -1720,7 +1721,7 @@ namespace 相册排版界面
                     float x_xs8 = width_xs / img8.Width;
                     float y_xs8 = height_xs / img8.Height;
 
-                    //top_8 = top_7 + v_middle * CC.A4GBILV;
+                    top_7 = top_5 + height_xs + v_middle * CC.A4GBILV;
 
                     if (x_xs8 < y_xs8)
                     {
@@ -1740,7 +1741,7 @@ namespace 相册排版界面
                                 img8.Width * xs8,
                                 height_xs);
                     }
-                    //top_8 = top_8 + height_xs;
+                    
                 }
 
                 //加入文字绘制

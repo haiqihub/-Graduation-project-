@@ -23,6 +23,8 @@ namespace 相册排版界面
         private int cur_start = 0;
         private int insert_cur = 0;
         private int setting_index = 0;
+        private int Undo_flag = 0;
+        private int Undo_drag_flag = 0;
         //开发环境下主显示器参数
         private int myScreenWidth = 1536;
         private int myScreenHeight = 864;
@@ -154,6 +156,11 @@ namespace 相册排版界面
 
             if (select_index2 != -1)
             {
+                ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
+                if (up_indexes.Count == 0)
+                {
+                    return;
+                }
                 ChangeForeColor(listView1.Items[select_index2], false);
             }
 
@@ -431,7 +438,8 @@ namespace 相册排版界面
 
                         }
                         StartSetting(3);
-                        //存档ToolStripMenuItem1_Click(sender, e);
+                        Undo_flag = 1;
+                        
                     }
                 }
                 catch (Exception)
@@ -505,7 +513,8 @@ namespace 相册排版界面
                         }
 
                         StartSetting(34);
-                        
+                        Undo_flag = 1;
+
                     }
                 }
                 catch (Exception msg)
@@ -567,6 +576,7 @@ namespace 相册排版界面
 
                         StartSetting(4);
                         updateTopShow();
+                        Undo_flag = 1;
                         //存档ToolStripMenuItem1_Click(sender, e);
                     }
 
@@ -637,50 +647,86 @@ namespace 相册排版界面
 
                     StartSetting(34);
                     updateTopShow();
-                    
+                    Undo_flag = 1;
+
                 }
             }
             
            
         }
-
-        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 拖拽UndoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //读档ToolStripMenuItem_Click(sender,e);改变为读取文件夹 不再适合
-            Undo();
-
-            //--------处理done文件夹中之前添加的多余的图片
-            listDoneBeforeAdd.Clear();
-            string folderDirPath = System.Environment.CurrentDirectory + "\\done";
-            //获取目录与子目录
-            DirectoryInfo dir = new DirectoryInfo(folderDirPath);
-            //获取当前目录JPG文件列表 GetFiles获取指定目录中文件的名称(包括其路径)
-            FileInfo[] fileInfo = dir.GetFiles("*.jpg");
-            //for(int i = 0; i < listDone.Count; i++)
-            //{
-            //    listDoneBeforeAdd.Add(listDone[i].Replace("\\backup\\", "\\done\\"));
-            //}
-            //for (int i = 0; i < fileInfo.Length; i++)
-            //{
-            //    if (!listDoneBeforeAdd.Contains(fileInfo[i].FullName))
-            //    {
-            //        //listDone.Add(fileInfo[i].FullName);
-            //        File.Delete(fileInfo[i].FullName);
-            //    }
-
-            //}
-            for (int i = 0; i < fileInfo.Length; i++)
+            if (listDone.Count == 0)
             {
-                if (!listDone.Contains(fileInfo[i].FullName))
-                {
-                    //listDone.Add(fileInfo[i].FullName);
-                    File.Delete(fileInfo[i].FullName);
-                }
-
+                MessageBox.Show("请先打开图片，再进行操作");
+                return;
 
             }
+            if (Undo_drag_flag == 1)
+            {
+                Undo();
+                Undo_drag_flag = 0;
+            }
+            else
+            {
+                MessageBox.Show("未再次拖拽，不能进行撤销操作");
+            }
+        }
+        
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listDone.Count == 0)
+            {
+                MessageBox.Show("请先打开图片，再进行操作");
+                return;
+
+            }
+            if (Undo_flag == 1)
+            {
+                Undo();
+
+                //--------处理done文件夹中之前添加的多余的图片
+                listDoneBeforeAdd.Clear();
+                string folderDirPath = System.Environment.CurrentDirectory + "\\done";
+                //获取目录与子目录
+                DirectoryInfo dir = new DirectoryInfo(folderDirPath);
+                //获取当前目录JPG文件列表 GetFiles获取指定目录中文件的名称(包括其路径)
+                FileInfo[] fileInfo = dir.GetFiles("*.jpg");
+                //for(int i = 0; i < listDone.Count; i++)
+                //{
+                //    listDoneBeforeAdd.Add(listDone[i].Replace("\\backup\\", "\\done\\"));
+                //}
+                //for (int i = 0; i < fileInfo.Length; i++)
+                //{
+                //    if (!listDoneBeforeAdd.Contains(fileInfo[i].FullName))
+                //    {
+                //        //listDone.Add(fileInfo[i].FullName);
+                //        File.Delete(fileInfo[i].FullName);
+                //    }
+
+                //}
+                for (int i = 0; i < fileInfo.Length; i++)
+                {
+                    if (!listDone.Contains(fileInfo[i].FullName))
+                    {
+                        //listDone.Add(fileInfo[i].FullName);
+                        File.Delete(fileInfo[i].FullName);
+                    }
 
 
+                }
+                //
+                Undo_flag = 0;
+
+            }
+            else
+            {
+                MessageBox.Show("未再次添加图片，不能进行撤销操作");
+            }
+
+           
+
+            
         }
 
 
@@ -4174,7 +4220,7 @@ namespace 相册排版界面
             updateLeftShow();
         }
 
-        //上方 listview1 右键 菜单栏 复制粘贴删除剪切
+        //上方 listview1 右键 菜单栏 复制粘贴删除剪切 menustrip1
         private void 删除ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
@@ -4183,8 +4229,10 @@ namespace 相册排版界面
                 MessageBox.Show("请先选择图片，再进行操作");
                 return;
             }
-            select_index = up_indexes[0];
+            select_index = cur_pos;
+            File.Delete(listDone[select_index]);
             listDone.RemoveAt(select_index);
+            
             //listCur.RemoveAt(select_index);
             updateTopShow();
         }
@@ -4197,7 +4245,7 @@ namespace 相册排版界面
                 MessageBox.Show("请先选择图片，再进行操作");
                 return;
             }
-            select_index = up_indexes[0];
+            select_index = cur_pos;
             img_buff = listDone[select_index];
         }
 
@@ -4209,7 +4257,7 @@ namespace 相册排版界面
                 MessageBox.Show("请先选择图片，再进行操作");
                 return;
             }
-            select_index = up_indexes[0];
+            select_index = cur_pos;
             img_buff = listDone[select_index];
             listDone.RemoveAt(select_index);
             //listCur.RemoveAt(select_index);
@@ -4230,7 +4278,7 @@ namespace 相册排版界面
                 MessageBox.Show("请先选择图片，再进行操作");
                 return;
             }
-            select_index = up_indexes[0];
+            select_index = cur_pos;
             listDone.Insert(select_index+1, img_buff);
             updateTopShow();
         }
@@ -4260,6 +4308,7 @@ namespace 相册排版界面
         //处理 drag drop 事件
         private void left_DragDrop(object sender, DragEventArgs e)
         {
+           
             listCur.Clear();
             for(int i = 0; i < listAll.Count; i++)
             {
@@ -4689,7 +4738,12 @@ namespace 相册排版界面
                 return;
             }
             select_index = up_indexes[0];
-          
+            
+            //存档 当上方可以选中时存档 即可进行拖拽再存
+            if (select_index >= 0)
+            {
+                Save();
+            }
 
             if (e.Data.Equals(typeof(string)))
             {
@@ -4898,7 +4952,8 @@ namespace 相册排版界面
                 modelDlg.ShowDialog(this);
 
             }
-
+            //
+            Undo_drag_flag = 1;
         }
 
         private void left_DragEnter(object sender, DragEventArgs e)
@@ -5281,8 +5336,8 @@ namespace 相册排版界面
         }
         public void Save()
         {
-            ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
-            if (up_indexes.Count == 0)
+            //ListView.SelectedIndexCollection up_indexes = this.listView1.SelectedIndices;
+            if (listDone.Count == 0)
             {
                 MessageBox.Show("无可存档数据");
                 return;
@@ -6199,6 +6254,9 @@ namespace 相册排版界面
 
             bitMap.Dispose();
         }
+
+        
+
         public void HechengC1()
         {
             int up = setting.up;
