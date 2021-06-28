@@ -165,6 +165,7 @@ namespace 相册排版界面
             }
 
             select_index2 = cur_pos - cur_start;
+            //
             ChangeForeColor(listView1.Items[select_index2], true);
         }
         private void loadImage1()
@@ -260,7 +261,7 @@ namespace 相册排版界面
             //    select_index = indexes[0];
             //}
             //原 cur_pos > listDone.Count - item_size - 1
-            if (cur_pos >= (listDone.Count / item_size) * item_size && cur_pos < (listDone.Count / item_size + 1) * item_size)
+            if (cur_pos >= (listDone.Count / item_size) * item_size && cur_pos < (listDone.Count / item_size + 1) * item_size || cur_pos == listDone.Count - item_size )
             {
                 MessageBox.Show("当前是最后一个版面");
                 return;
